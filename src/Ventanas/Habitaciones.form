@@ -179,8 +179,8 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="&lt;html&gt;&lt;center&gt; N&lt;br&gt;I&lt;br&gt;V&lt;br&gt;E&lt;br&gt;L&lt;br&gt; &lt;br&gt;&lt;b&gt;1&lt;b&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;/center&gt;&lt;/html&gt;">
-                <Property name="tabTitle" type="java.lang.String" value="&lt;html&gt;&lt;center&gt; N&lt;br&gt;I&lt;br&gt;V&lt;br&gt;E&lt;br&gt;L&lt;br&gt; &lt;br&gt;&lt;b&gt;1&lt;b&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;/center&gt;&lt;/html&gt;"/>
+              <JTabbedPaneConstraints tabName="&lt;html&gt;&lt;center&gt; N&lt;br&gt;I&lt;br&gt;V&lt;br&gt;E&lt;br&gt;L&lt;br&gt;&lt;b&gt;1&lt;b&gt;&lt;br&gt;&lt;br&gt;&lt;/center&gt;&lt;/html&gt;">
+                <Property name="tabTitle" type="java.lang.String" value="&lt;html&gt;&lt;center&gt; N&lt;br&gt;I&lt;br&gt;V&lt;br&gt;E&lt;br&gt;L&lt;br&gt;&lt;b&gt;1&lt;b&gt;&lt;br&gt;&lt;br&gt;&lt;/center&gt;&lt;/html&gt;"/>
               </JTabbedPaneConstraints>
             </Constraint>
           </Constraints>
@@ -524,8 +524,8 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="&lt;html&gt;&lt;center&gt; N&lt;br&gt;I&lt;br&gt;V&lt;br&gt;E&lt;br&gt;L&lt;br&gt; &lt;br&gt;&lt;b&gt;2&lt;b&gt;&lt;br&gt;&lt;/center&gt;&lt;/html&gt;">
-                <Property name="tabTitle" type="java.lang.String" value="&lt;html&gt;&lt;center&gt; N&lt;br&gt;I&lt;br&gt;V&lt;br&gt;E&lt;br&gt;L&lt;br&gt; &lt;br&gt;&lt;b&gt;2&lt;b&gt;&lt;br&gt;&lt;/center&gt;&lt;/html&gt;"/>
+              <JTabbedPaneConstraints tabName="&lt;html&gt;&lt;center&gt; N&lt;br&gt;I&lt;br&gt;V&lt;br&gt;E&lt;br&gt;L&lt;br&gt; &lt;b&gt;2&lt;b&gt;&lt;br&gt;&lt;/center&gt;&lt;/html&gt;">
+                <Property name="tabTitle" type="java.lang.String" value="&lt;html&gt;&lt;center&gt; N&lt;br&gt;I&lt;br&gt;V&lt;br&gt;E&lt;br&gt;L&lt;br&gt; &lt;b&gt;2&lt;b&gt;&lt;br&gt;&lt;/center&gt;&lt;/html&gt;"/>
               </JTabbedPaneConstraints>
             </Constraint>
           </Constraints>
