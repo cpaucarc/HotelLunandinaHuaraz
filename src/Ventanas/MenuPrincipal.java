@@ -4,6 +4,7 @@ package Ventanas;
 import java.awt.Color;
 import javax.swing.JOptionPane;
 import Ventanas.*;
+import Clases.Control;
 
 public class MenuPrincipal extends javax.swing.JFrame {
     
@@ -15,6 +16,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
     public MenuPrincipal() {
         initComponents();
         this.setExtendedState(6);
+        if(Control.cargo.equals("Recepcionista")){
+            lbadministracion.setVisible(false);
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -334,6 +338,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     /*LABEL DE LOGOUT*/
     private void lbLogOutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbLogOutMouseClicked
         datosUsuario.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_lbLogOutMouseClicked
     private void lbLogOutMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbLogOutMouseEntered
         pnLogOut.setBackground(new Color(248,177,57));

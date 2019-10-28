@@ -4,6 +4,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import Clases.Control;
 
 public class DatosUsuario extends javax.swing.JFrame {
     
@@ -14,7 +15,8 @@ public class DatosUsuario extends javax.swing.JFrame {
         initComponents();
         btModificar.setEnabled(false);
         this.setLocationRelativeTo(null);
-        
+        lbCargo.setText(Control.cargo);
+        lbUser.setText(Control.usuario);
     }
 
     
@@ -68,7 +70,7 @@ public class DatosUsuario extends javax.swing.JFrame {
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Lunandina/logoSession.png"))); // NOI18N
         jPanel4.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, -1, 46));
 
-        jButton1.setBackground(new java.awt.Color(187, 62, 52));
+        jButton1.setBackground(new java.awt.Color(255, 59, 48));
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/iconCerrarSesion.png"))); // NOI18N
@@ -76,6 +78,11 @@ public class DatosUsuario extends javax.swing.JFrame {
         jButton1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton1.setFocusPainted(false);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         jPanel4.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 3, 160, 40));
 
         getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1060, 46));
@@ -357,6 +364,17 @@ public class DatosUsuario extends javax.swing.JFrame {
             pw2 = false;
         }
     }//GEN-LAST:event_lbVisible2MouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        int rsta = JOptionPane.showConfirmDialog(null, "Salir?","", JOptionPane.YES_NO_OPTION);
+        if(rsta == 0){
+            Control.cargo = "";
+            Control.usuario = "";
+            this.dispose();
+            LoginAcceso la = new LoginAcceso();
+            la.setVisible(true);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
