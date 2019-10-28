@@ -5,6 +5,9 @@ import java.awt.event.KeyListener;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import Clases.Control;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+import java.awt.event.WindowStateListener;
 
 public class DatosUsuario extends javax.swing.JFrame {
     
@@ -17,6 +20,19 @@ public class DatosUsuario extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         lbCargo.setText(Control.cargo);
         lbUser.setText(Control.usuario);
+        this.addWindowListener(new WindowListener() {
+            @Override public void windowOpened(WindowEvent e) {}
+            @Override public void windowClosing(WindowEvent e) {}
+            @Override public void windowClosed(WindowEvent e) {
+                System.out.println("Se cerró");
+                MenuPrincipal mp=new MenuPrincipal();
+                mp.setVisible(true);
+            }
+            @Override public void windowIconified(WindowEvent e) {}
+            @Override public void windowDeiconified(WindowEvent e) {}
+            @Override public void windowActivated(WindowEvent e) {}
+            @Override public void windowDeactivated(WindowEvent e) {}
+        });
     }
 
     
@@ -172,19 +188,19 @@ public class DatosUsuario extends javax.swing.JFrame {
         jPanel1.add(pnDatosPersonales, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 510, 260));
 
         pnCredenciales.setBackground(new java.awt.Color(248, 177, 57));
-        pnCredenciales.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 59, 48), 1, true), "Modificar Credenciales de Acceso", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(255, 59, 48))); // NOI18N
+        pnCredenciales.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 59, 48), 1, true), "Modificar Credenciales de Acceso", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 12), new java.awt.Color(255, 59, 48))); // NOI18N
         pnCredenciales.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         label8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         label8.setForeground(new java.awt.Color(255, 59, 48));
         label8.setText("Nuevo Nombre de Usuario");
-        pnCredenciales.add(label8, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 60, 170, 30));
+        pnCredenciales.add(label8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 180, 30));
 
         label9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         label9.setForeground(new java.awt.Color(255, 59, 48));
         label9.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         label9.setText("Nueva Contraseña");
-        pnCredenciales.add(label9, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 140, 170, 30));
+        pnCredenciales.add(label9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 180, 30));
 
         username.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         username.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -208,7 +224,7 @@ public class DatosUsuario extends javax.swing.JFrame {
         label10.setForeground(new java.awt.Color(255, 59, 48));
         label10.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         label10.setText("Repita Nueva Contraseña");
-        pnCredenciales.add(label10, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 220, 170, 30));
+        pnCredenciales.add(label10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 180, 30));
 
         pw2Oculto.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         pw2Oculto.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -258,7 +274,7 @@ public class DatosUsuario extends javax.swing.JFrame {
         jPanel1.add(pnCredenciales, new org.netbeans.lib.awtextra.AbsoluteConstraints(541, 20, 510, 390));
 
         pnDatosUsuario.setBackground(new java.awt.Color(248, 177, 57));
-        pnDatosUsuario.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(23, 23, 23), 1, true), "Usuario actual", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(23, 23, 23)), "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(23, 23, 23))); // NOI18N
+        pnDatosUsuario.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(23, 23, 23), 1, true), "Usuario actual", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 12), new java.awt.Color(23, 23, 23)), "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 12), new java.awt.Color(23, 23, 23))); // NOI18N
         pnDatosUsuario.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -366,11 +382,11 @@ public class DatosUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_lbVisible2MouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        int rsta = JOptionPane.showConfirmDialog(null, "Salir?","", JOptionPane.YES_NO_OPTION);
+        int rsta = JOptionPane.showConfirmDialog(null, "¿Desea salir del programa?","Advertencia", JOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE);
         if(rsta == 0){
             Control.cargo = "";
             Control.usuario = "";
-            this.dispose();
+            this.setVisible(false);
             LoginAcceso la = new LoginAcceso();
             la.setVisible(true);
         }

@@ -73,11 +73,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lbLogOutMouseClicked(evt);
             }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                lbLogOutMouseEntered(evt);
-            }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 lbLogOutMouseExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lbLogOutMouseEntered(evt);
             }
         });
         pnLogOut.add(lbLogOut, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 76, 46));
@@ -212,16 +212,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
         panelEventos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel4.setBackground(new java.awt.Color(248, 177, 57));
-        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(23, 23, 23)), "Reservaciones para hoy", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(23, 23, 23)), "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(23, 23, 23))); // NOI18N
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(23, 23, 23)), "Reservaciones para hoy", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(23, 23, 23)), "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 12), new java.awt.Color(23, 23, 23))); // NOI18N
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"31-01-1995", "Elver Galarva", "165"},
-                {"20-12-2016", "Elsa Pato", "168"},
-                {"25-10-2018", "Susana Oria", "169"},
-                {"20-06-2008", "Alan Brito", "215"},
-                {"20-13-2019", "Debora Meltrozo", "218"}
+
             },
             new String [] {
                 "Fecha Reserva", "Nombre Cliente", "N° Habitacion"
@@ -342,6 +338,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     /*LABEL DE LOGOUT*/
     private void lbLogOutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbLogOutMouseClicked
         datosUsuario.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_lbLogOutMouseClicked
     private void lbLogOutMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbLogOutMouseEntered
         pnLogOut.setBackground(new Color(248,177,57));

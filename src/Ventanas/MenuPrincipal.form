@@ -95,8 +95,8 @@
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lbLogOutMouseClicked"/>
-            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lbLogOutMouseEntered"/>
             <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lbLogOutMouseExited"/>
+            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lbLogOutMouseEntered"/>
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -433,28 +433,10 @@
                 <Component class="javax.swing.JTable" name="tabla">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="3" rowCount="5">
-                        <Column editable="true" title="Fecha Reserva" type="java.lang.Object">
-                          <Data value="31-01-1995"/>
-                          <Data value="20-12-2016"/>
-                          <Data value="25-10-2018"/>
-                          <Data value="20-06-2008"/>
-                          <Data value="20-13-2019"/>
-                        </Column>
-                        <Column editable="true" title="Nombre Cliente" type="java.lang.Object">
-                          <Data value="Elver Galarva"/>
-                          <Data value="Elsa Pato"/>
-                          <Data value="Susana Oria"/>
-                          <Data value="Alan Brito"/>
-                          <Data value="Debora Meltrozo"/>
-                        </Column>
-                        <Column editable="true" title="N&#xb0; Habitacion" type="java.lang.Object">
-                          <Data value="165"/>
-                          <Data value="168"/>
-                          <Data value="169"/>
-                          <Data value="215"/>
-                          <Data value="218"/>
-                        </Column>
+                      <Table columnCount="3" rowCount="0">
+                        <Column editable="true" title="Fecha Reserva" type="java.lang.Object"/>
+                        <Column editable="true" title="Nombre Cliente" type="java.lang.Object"/>
+                        <Column editable="true" title="N&#xb0; Habitacion" type="java.lang.Object"/>
                       </Table>
                     </Property>
                     <Property name="selectionBackground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
