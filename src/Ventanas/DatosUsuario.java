@@ -87,26 +87,26 @@ public class DatosUsuario extends javax.swing.JFrame {
 
         getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1060, 46));
 
-        jPanel1.setBackground(new java.awt.Color(23, 23, 23));
+        jPanel1.setBackground(new java.awt.Color(248, 177, 57));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        pnDatosPersonales.setBackground(new java.awt.Color(23, 23, 23));
-        pnDatosPersonales.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(248, 177, 57), 1, true), "Datos personales del usuario", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 12), new java.awt.Color(248, 177, 57))); // NOI18N
+        pnDatosPersonales.setBackground(new java.awt.Color(248, 177, 57));
+        pnDatosPersonales.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(23, 23, 23), 1, true), "Datos personales del usuario", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 12), new java.awt.Color(23, 23, 23))); // NOI18N
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(248, 177, 57));
+        jLabel1.setForeground(new java.awt.Color(23, 23, 23));
         jLabel1.setText("DNI");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(248, 177, 57));
+        jLabel2.setForeground(new java.awt.Color(23, 23, 23));
         jLabel2.setText("Apellido Paterno");
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(248, 177, 57));
+        jLabel3.setForeground(new java.awt.Color(23, 23, 23));
         jLabel3.setText("Apellido Materno");
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(248, 177, 57));
+        jLabel4.setForeground(new java.awt.Color(23, 23, 23));
         jLabel4.setText("Nombres");
 
         lbAPaterno.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -139,7 +139,7 @@ public class DatosUsuario extends javax.swing.JFrame {
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE))
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 0, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(pnDatosPersonalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lbAMaterno, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbDNI, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -171,7 +171,7 @@ public class DatosUsuario extends javax.swing.JFrame {
 
         jPanel1.add(pnDatosPersonales, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 510, 260));
 
-        pnCredenciales.setBackground(new java.awt.Color(23, 23, 23));
+        pnCredenciales.setBackground(new java.awt.Color(248, 177, 57));
         pnCredenciales.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 59, 48), 1, true), "Modificar Credenciales de Acceso", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(255, 59, 48))); // NOI18N
         pnCredenciales.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -257,12 +257,12 @@ public class DatosUsuario extends javax.swing.JFrame {
 
         jPanel1.add(pnCredenciales, new org.netbeans.lib.awtextra.AbsoluteConstraints(541, 20, 510, 390));
 
-        pnDatosUsuario.setBackground(new java.awt.Color(23, 23, 23));
-        pnDatosUsuario.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(248, 177, 57), 1, true), "Usuario actual", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(248, 177, 57)), "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(248, 177, 57))); // NOI18N
+        pnDatosUsuario.setBackground(new java.awt.Color(248, 177, 57));
+        pnDatosUsuario.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(23, 23, 23), 1, true), "Usuario actual", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(23, 23, 23)), "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(23, 23, 23))); // NOI18N
         pnDatosUsuario.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(248, 177, 57));
+        jLabel7.setForeground(new java.awt.Color(23, 23, 23));
         jLabel7.setText("Usuario");
         pnDatosUsuario.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, -1, -1));
 
@@ -272,7 +272,7 @@ public class DatosUsuario extends javax.swing.JFrame {
         pnDatosUsuario.add(lbUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 40, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(248, 177, 57));
+        jLabel5.setForeground(new java.awt.Color(23, 23, 23));
         jLabel5.setText("Cargo");
         pnDatosUsuario.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, 100, -1));
 

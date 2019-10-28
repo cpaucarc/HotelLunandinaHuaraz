@@ -190,7 +190,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         lbAlojamiento.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         lbAlojamiento.setForeground(new java.awt.Color(255, 255, 255));
         lbAlojamiento.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbAlojamiento.setText("ALOJAMIENTO");
+        lbAlojamiento.setText("HABITACIONES");
         lbAlojamiento.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
         lbAlojamiento.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lbAlojamiento.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -286,7 +286,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
      /*LABEL DE ALOJAMIENTO*/
     private void lbAlojamientoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbAlojamientoMouseClicked
-        // TODO add your handling code here:
+        Habitaciones hab=new Habitaciones();
+        hab.setVisible(true);
     }//GEN-LAST:event_lbAlojamientoMouseClicked
     private void lbAlojamientoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbAlojamientoMouseEntered
         pnAlojamiento.setBackground(new Color(248,177,57));
@@ -303,7 +304,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
      /*LABEL DE RESERVA*/
     private void lbReservaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbReservaMouseClicked
-        // TODO add your handling code here:
+        
+        FrmReserva reserv=new  FrmReserva();
+        reserv.setVisible(true);
     }//GEN-LAST:event_lbReservaMouseClicked
     private void lbReservaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbReservaMouseEntered
         pnReserva.setBackground(new Color(248,177,57));
@@ -320,7 +323,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     /*LABEL DE REPORTES*/
     private void lbReporteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbReporteMouseClicked
-        // TODO add your handling code here:
+        JFrameFactura fac=new JFrameFactura();
+        fac.setVisible(true);
     }//GEN-LAST:event_lbReporteMouseClicked
     private void lbReporteMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbReporteMouseEntered
         pnReportes.setBackground(new Color(248,177,57));
@@ -338,7 +342,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
     /*LABEL DE LOGOUT*/
     private void lbLogOutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbLogOutMouseClicked
         datosUsuario.setVisible(true);
-        this.dispose();
     }//GEN-LAST:event_lbLogOutMouseClicked
     private void lbLogOutMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbLogOutMouseEntered
         pnLogOut.setBackground(new Color(248,177,57));
@@ -353,7 +356,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     /*LABEL DE SERVICIOS*/
     private void lbServicioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbServicioMouseClicked
-        // TODO add your handling code here:
+        JFServiciosLUNANDINA serv=new JFServiciosLUNANDINA();
+        serv.setVisible(true);        
     }//GEN-LAST:event_lbServicioMouseClicked
     private void lbServicioMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbServicioMouseEntered
         pnServicios.setBackground(new Color(248,177,57));
