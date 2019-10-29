@@ -44,6 +44,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
         btValidar = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        btValidar1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         panelImagenes = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
@@ -57,7 +60,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Lunandina/Recurso 3.png"))); // NOI18N
         jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        panelMenu.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 480, 46));
+        panelMenu.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, 320, 46));
 
         getContentPane().add(panelMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 640, 46));
 
@@ -88,7 +91,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         pnReportes.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lbReporte.setBackground(new java.awt.Color(13, 39, 70));
-        lbReporte.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        lbReporte.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 15)); // NOI18N
         lbReporte.setForeground(new java.awt.Color(255, 255, 255));
         lbReporte.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbReporte.setText("REPORTES");
@@ -113,7 +116,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         pnAdministracion.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lbadministracion.setBackground(new java.awt.Color(13, 39, 70));
-        lbadministracion.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        lbadministracion.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 15)); // NOI18N
         lbadministracion.setForeground(new java.awt.Color(255, 255, 255));
         lbadministracion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbadministracion.setText("ADMINISTRACION");
@@ -137,7 +140,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         pnServicios.setBackground(new java.awt.Color(13, 39, 70));
         pnServicios.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lbServicio.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        lbServicio.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 15)); // NOI18N
         lbServicio.setForeground(new java.awt.Color(255, 255, 255));
         lbServicio.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbServicio.setText("SERVICIOS");
@@ -162,7 +165,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         pnReserva.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lbReserva.setBackground(new java.awt.Color(153, 255, 153));
-        lbReserva.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        lbReserva.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 15)); // NOI18N
         lbReserva.setForeground(new java.awt.Color(255, 255, 255));
         lbReserva.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbReserva.setText("RESERVAS");
@@ -187,7 +190,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         pnAlojamiento.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lbAlojamiento.setBackground(new java.awt.Color(13, 39, 70));
-        lbAlojamiento.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        lbAlojamiento.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 15)); // NOI18N
         lbAlojamiento.setForeground(new java.awt.Color(255, 255, 255));
         lbAlojamiento.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbAlojamiento.setText("HABITACIONES");
@@ -212,9 +215,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
         panelEventos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel4.setBackground(new java.awt.Color(248, 177, 57));
-        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(23, 23, 23)), "Reservaciones para hoy", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(23, 23, 23)), "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 12), new java.awt.Color(23, 23, 23))); // NOI18N
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(23, 23, 23)), "RESERVACIONES PARA HOY", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Leelawadee UI Semilight", 1, 12), new java.awt.Color(23, 23, 23)), "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(23, 23, 23))); // NOI18N
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        tabla.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -226,28 +230,51 @@ public class MenuPrincipal extends javax.swing.JFrame {
         tabla.setSelectionBackground(new java.awt.Color(0, 122, 255));
         jScrollPane1.setViewportView(tabla);
 
-        jPanel4.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 490, 460));
+        jPanel4.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 460, 360));
 
-        btValidar.setBackground(new java.awt.Color(0, 122, 255));
-        btValidar.setFont(new java.awt.Font("Microsoft YaHei Light", 1, 14)); // NOI18N
-        btValidar.setForeground(new java.awt.Color(255, 255, 255));
-        btValidar.setText("Validar Alojamiento");
+        btValidar.setBackground(new java.awt.Color(255, 255, 255));
+        btValidar.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 12)); // NOI18N
+        btValidar.setForeground(new java.awt.Color(23, 23, 23));
+        btValidar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/lista.png"))); // NOI18N
+        btValidar.setText("Administrar Reservas");
         btValidar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btValidar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btValidarActionPerformed(evt);
             }
         });
-        jPanel4.add(btValidar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 510, 490, 40));
+        jPanel4.add(btValidar, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 480, 190, 40));
 
-        panelEventos.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 522, 570));
+        jLabel3.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/buscar.png"))); // NOI18N
+        jLabel3.setText("Buscar");
+        jPanel4.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(85, 40, 100, 30));
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
+        jTextField1.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
+        jPanel4.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(185, 40, 250, 30));
+
+        btValidar1.setBackground(new java.awt.Color(0, 122, 255));
+        btValidar1.setFont(new java.awt.Font("Leelawadee UI Semilight", 1, 12)); // NOI18N
+        btValidar1.setForeground(new java.awt.Color(255, 255, 255));
+        btValidar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/check.png"))); // NOI18N
+        btValidar1.setText("Validar Alojamiento");
+        btValidar1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btValidar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btValidar1ActionPerformed(evt);
+            }
+        });
+        jPanel4.add(btValidar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 480, 250, 40));
+
+        panelEventos.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 520, 550));
+
+        jLabel2.setFont(new java.awt.Font("Leelawadee UI", 1, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(23, 23, 23));
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("MENÚ PRINCIPAL");
-        panelEventos.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 40, -1, -1));
+        panelEventos.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(165, 30, 250, 40));
 
-        getContentPane().add(panelEventos, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 40, 580, 730));
+        getContentPane().add(panelEventos, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 46, 580, 700));
 
         panelImagenes.setBackground(new java.awt.Color(23, 23, 23));
         panelImagenes.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -258,7 +285,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jLabel12.setText("IMAGENES Y ANIMACIONES AQUI");
         panelImagenes.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 290, 430, 120));
 
-        getContentPane().add(panelImagenes, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 790, 730));
+        getContentPane().add(panelImagenes, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 46, 790, 700));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -270,13 +297,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private void lbadministracionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbadministracionMouseEntered
         pnAdministracion.setBackground(new Color(248,177,57));
         lbadministracion.setForeground(new Color(23,23,23));
-        lbadministracion.setFont(new java.awt.Font("Arial", 1, 14));
+        lbadministracion.setFont(new java.awt.Font("Leelawadee UI Semilight", 1, 16));
         lbadministracion.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(248,177,57)));
     }//GEN-LAST:event_lbadministracionMouseEntered
     private void lbadministracionMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbadministracionMouseExited
         pnAdministracion.setBackground(new Color(13, 39, 70));
         lbadministracion.setForeground(new Color(255,255,255));
-        lbadministracion.setFont(new java.awt.Font("Arial", 0, 14));
+        lbadministracion.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 15));
         lbadministracion.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
     }//GEN-LAST:event_lbadministracionMouseExited
 
@@ -288,13 +315,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private void lbAlojamientoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbAlojamientoMouseEntered
         pnAlojamiento.setBackground(new Color(248,177,57));
         lbAlojamiento.setForeground(new Color(23,23,23));
-        lbAlojamiento.setFont(new java.awt.Font("Arial", 1, 14));
+        lbAlojamiento.setFont(new java.awt.Font("Leelawadee UI Semilight", 1, 16));
         lbAlojamiento.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(248,177,57)));
     }//GEN-LAST:event_lbAlojamientoMouseEntered
     private void lbAlojamientoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbAlojamientoMouseExited
         pnAlojamiento.setBackground(new Color(13, 39, 70));
         lbAlojamiento.setForeground(new Color(255,255,255));        
-        lbAlojamiento.setFont(new java.awt.Font("Arial", 0, 14));
+        lbAlojamiento.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 15));
         lbAlojamiento.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
     }//GEN-LAST:event_lbAlojamientoMouseExited
 
@@ -307,13 +334,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private void lbReservaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbReservaMouseEntered
         pnReserva.setBackground(new Color(248,177,57));
         lbReserva.setForeground(new Color(23,23,23));
-        lbReserva.setFont(new java.awt.Font("Arial", 1, 14));
+        lbReserva.setFont(new java.awt.Font("Leelawadee UI Semilight", 1, 16));
         lbReserva.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(248,177,57)));
     }//GEN-LAST:event_lbReservaMouseEntered
     private void lbReservaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbReservaMouseExited
         pnReserva.setBackground(new Color(13, 39, 70));
         lbReserva.setForeground(new Color(255,255,255));
-        lbReserva.setFont(new java.awt.Font("Arial", 0, 14));
+        lbReserva.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 15));
         lbReserva.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
     }//GEN-LAST:event_lbReservaMouseExited
 
@@ -325,13 +352,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private void lbReporteMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbReporteMouseEntered
         pnReportes.setBackground(new Color(248,177,57));
         lbReporte.setForeground(new Color(23,23,23));
-        lbReporte.setFont(new java.awt.Font("Arial", 1, 14));
+        lbReporte.setFont(new java.awt.Font("Leelawadee UI Semilight", 1, 16));
         lbReporte.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(248,177,57)));
     }//GEN-LAST:event_lbReporteMouseEntered
     private void lbReporteMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbReporteMouseExited
         pnReportes.setBackground(new Color(13, 39, 70));
         lbReporte.setForeground(new Color(255,255,255));
-        lbReporte.setFont(new java.awt.Font("Arial", 0, 14));
+        lbReporte.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 15));
         lbReporte.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
     }//GEN-LAST:event_lbReporteMouseExited
 
@@ -359,19 +386,23 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private void lbServicioMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbServicioMouseEntered
         pnServicios.setBackground(new Color(248,177,57));
         lbServicio.setForeground(new Color(23,23,23));
-        lbServicio.setFont(new java.awt.Font("Arial", 1, 14));
+        lbServicio.setFont(new java.awt.Font("Leelawadee UI Semilight", 1, 16));
         lbServicio.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(248,177,57)));
     }//GEN-LAST:event_lbServicioMouseEntered
     private void lbServicioMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbServicioMouseExited
         pnServicios.setBackground(new Color(13, 39, 70));
         lbServicio.setForeground(new Color(255,255,255));
-        lbServicio.setFont(new java.awt.Font("Arial", 0, 14));
+        lbServicio.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 15));
         lbServicio.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
     }//GEN-LAST:event_lbServicioMouseExited
 
     private void btValidarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btValidarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btValidarActionPerformed
+
+    private void btValidar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btValidar1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btValidar1ActionPerformed
     
     /**
      * @param args the command line arguments
@@ -410,11 +441,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btValidar;
+    private javax.swing.JButton btValidar1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lbAlojamiento;
     private javax.swing.JLabel lbLogOut;
     private javax.swing.JLabel lbReporte;

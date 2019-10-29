@@ -187,11 +187,11 @@ public class RegistroEmpleado extends javax.swing.JFrame {
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/buscar.png"))); // NOI18N
         jLabel10.setText("Buscar");
-        jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(139, 30, 90, 30));
+        jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(139, 40, 90, 30));
 
         jTextField7.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
         jTextField7.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jPanel2.add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(229, 30, 400, 30));
+        jPanel2.add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(229, 40, 400, 30));
 
         jPanel6.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 784, 610));
 
