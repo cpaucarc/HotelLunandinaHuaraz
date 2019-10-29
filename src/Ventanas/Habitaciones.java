@@ -192,7 +192,7 @@ public class Habitaciones extends javax.swing.JFrame {
         pnInfo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(23, 23, 23));
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(248, 177, 57)), "Datos de Habitacion", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 12), new java.awt.Color(248, 177, 57))); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(248, 177, 57)), "Datos de Habitacion", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(248, 177, 57))); // NOI18N
 
         jLabel4.setBackground(new java.awt.Color(255, 255, 255));
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -399,7 +399,7 @@ public class Habitaciones extends javax.swing.JFrame {
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Lunandina/nivel1.png"))); // NOI18N
         pnPiso1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 40, 220));
 
-        jTabbedPane1.addTab("<html><center> N<br>I<br>V<br>E<br>L<br><b>1<b><br><br></center></html>", pnPiso1);
+        jTabbedPane1.addTab("<html><center> N<br>I<br>V<br>E<br>L<br> <br><b>1<b><br><br><br></center></html>", pnPiso1);
 
         pnPiso2.setBackground(new java.awt.Color(23, 23, 23));
         pnPiso2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -568,7 +568,7 @@ public class Habitaciones extends javax.swing.JFrame {
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Lunandina/nivel2.png"))); // NOI18N
         pnPiso2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 40, 220));
 
-        jTabbedPane1.addTab("<html><center> N<br>I<br>V<br>E<br>L<br> <b>2<b><br></center></html>", pnPiso2);
+        jTabbedPane1.addTab("<html><center> N<br>I<br>V<br>E<br>L<br> <br><b>2<b><br></center></html>", pnPiso2);
 
         getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 46, 1366, 300));
         jTabbedPane1.getAccessibleContext().setAccessibleName("<html><center>I<br>N<br>I<br>C<br>I<br>O</center></html>");
