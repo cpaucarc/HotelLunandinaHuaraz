@@ -56,19 +56,19 @@ public class LoginAcceso extends javax.swing.JFrame {
         });
         jPanel2.add(lbVerContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 220, -1, -1));
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Contraseña");
         jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(55, 200, 200, 20));
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Nombre de Usuario");
         jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(55, 100, 200, 20));
 
-        username.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        username.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
         username.setForeground(new java.awt.Color(23, 23, 23));
         username.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         username.addActionListener(new java.awt.event.ActionListener() {
@@ -78,7 +78,7 @@ public class LoginAcceso extends javax.swing.JFrame {
         });
         jPanel2.add(username, new org.netbeans.lib.awtextra.AbsoluteConstraints(55, 120, 200, 30));
 
-        btIngresar.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        btIngresar.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 18)); // NOI18N
         btIngresar.setForeground(new java.awt.Color(23, 23, 23));
         btIngresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/login.png"))); // NOI18N
         btIngresar.setText("Ingresar");
@@ -89,11 +89,12 @@ public class LoginAcceso extends javax.swing.JFrame {
         });
         jPanel2.add(btIngresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(55, 315, 200, 40));
 
-        pwOculto.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        pwOculto.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
         pwOculto.setForeground(new java.awt.Color(23, 23, 23));
         pwOculto.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jPanel2.add(pwOculto, new org.netbeans.lib.awtextra.AbsoluteConstraints(55, 220, 200, 30));
 
+        pwVisible.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
         pwVisible.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jPanel2.add(pwVisible, new org.netbeans.lib.awtextra.AbsoluteConstraints(55, 220, 200, 30));
 

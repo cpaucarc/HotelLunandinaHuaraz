@@ -1,134 +1,421 @@
 package Ventanas;
 
+import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 public class Habitaciones extends javax.swing.JFrame {
 
-    //Object[] pnHabitacionP1 = {pn100};
-    
+    /* ESTADO POSIBLES DE LAS HABITACIONES */
+    public static String Disponible = "Disponible";
+    public static String Ocupado = "Ocupado";
+    public static String Reservado = "Reservado";
+    public static String Mantenimiento = "Mantenimiento";
+
+    //Solo para pruebas, se cambiara con DB -- Demuestra el estado de cada habitacion
+    public static String[] EstadoHab = {Disponible, Disponible, Ocupado, Mantenimiento, Reservado, Mantenimiento, Ocupado, Reservado,
+        Ocupado, Mantenimiento, Reservado, Disponible, Disponible, Ocupado, Mantenimiento, Reservado};
+
+    /* COLORES PARA FONDO DE PANEL DE HABITACION, NORMAL*/
+    public static Color Disp = new Color(40, 167, 69);
+    public static Color Ocup = new Color(220, 53, 69);
+    public static Color Resev = new Color(255, 193, 7);
+    public static Color Mant = new Color(23, 162, 184);
+
+    /* COLORES PARA FONDO DE PANEL DE HABITACION, HOVER*/
+    public static Color hover_Disp = new Color(136, 206, 82);
+    public static Color hover_Ocup = new Color(234, 82, 62);
+    public static Color hover_Resev = new Color(255, 185, 83);
+    public static Color hover_Mant = new Color(111, 168, 183);
+
     public Habitaciones() {
         initComponents();
         this.setExtendedState(6);
-        ClickLbhabitacion();
+        //ClickLbhabitacion();
+        //System.out.println(pn100.getBackground().toString());
+        for (int i = 0; i < 16; i++) {
+            panel_Hab[i].setBackground(Color.white);
+        }
+        for (int i = 0; i < 16; i++) {
+            switch (EstadoHab[i]) {
+                case "Disponible":
+                    System.out.println(panel_Hab[i].getBackground().toString());
+                    panel_Hab[i].setBackground(Disp);
+                    break;
+                case "Ocupado":
+                    panel_Hab[i].setBackground(Ocup);
+                    break;
+                case "Reservado":
+                    panel_Hab[i].setBackground(Resev);
+                    break;
+                case "Mantenimiento":
+                    panel_Hab[i].setBackground(Mant);
+                    break;
+                default:
+                    panel_Hab[i].setBackground(Color.white);
+                    break;
+            }
+        }
     }
 
-    public void ClickLbhabitacion(){
+    public void ClickLbhabitacion() {
         lb100.addMouseListener(new MouseListener() {
-            @Override public void mouseClicked(MouseEvent e) { lbAux.setText(lb100.getText()); }
-            @Override public void mousePressed(MouseEvent e) {}
-            @Override public void mouseReleased(MouseEvent e) {}
-            @Override public void mouseEntered(MouseEvent e) {}
-            @Override public void mouseExited(MouseEvent e) {}
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                lbAux.setText(lb100.getText());
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+            }
         });
         lb101.addMouseListener(new MouseListener() {
-            @Override public void mouseClicked(MouseEvent e) { lbAux.setText(lb101.getText()); }
-            @Override public void mousePressed(MouseEvent e) {}
-            @Override public void mouseReleased(MouseEvent e) {}
-            @Override public void mouseEntered(MouseEvent e) {}
-            @Override public void mouseExited(MouseEvent e) {}
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                lbAux.setText(lb101.getText());
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+            }
         });
         lb102.addMouseListener(new MouseListener() {
-            @Override public void mouseClicked(MouseEvent e) { lbAux.setText(lb102.getText()); }
-            @Override public void mousePressed(MouseEvent e) {}
-            @Override public void mouseReleased(MouseEvent e) {}
-            @Override public void mouseEntered(MouseEvent e) {}
-            @Override public void mouseExited(MouseEvent e) {}
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                lbAux.setText(lb102.getText());
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+            }
         });
         lb103.addMouseListener(new MouseListener() {
-            @Override public void mouseClicked(MouseEvent e) { lbAux.setText(lb103.getText()); }
-            @Override public void mousePressed(MouseEvent e) {}
-            @Override public void mouseReleased(MouseEvent e) {}
-            @Override public void mouseEntered(MouseEvent e) {}
-            @Override public void mouseExited(MouseEvent e) {}
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                lbAux.setText(lb103.getText());
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+            }
         });
         lb104.addMouseListener(new MouseListener() {
-            @Override public void mouseClicked(MouseEvent e) { lbAux.setText(lb104.getText()); }
-            @Override public void mousePressed(MouseEvent e) {}
-            @Override public void mouseReleased(MouseEvent e) {}
-            @Override public void mouseEntered(MouseEvent e) {}
-            @Override public void mouseExited(MouseEvent e) {}
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                lbAux.setText(lb104.getText());
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+            }
         });
         lb105.addMouseListener(new MouseListener() {
-            @Override public void mouseClicked(MouseEvent e) { lbAux.setText(lb105.getText()); }
-            @Override public void mousePressed(MouseEvent e) {}
-            @Override public void mouseReleased(MouseEvent e) {}
-            @Override public void mouseEntered(MouseEvent e) {}
-            @Override public void mouseExited(MouseEvent e) {}
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                lbAux.setText(lb105.getText());
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+            }
         });
         lb106.addMouseListener(new MouseListener() {
-            @Override public void mouseClicked(MouseEvent e) { lbAux.setText(lb106.getText()); }
-            @Override public void mousePressed(MouseEvent e) {}
-            @Override public void mouseReleased(MouseEvent e) {}
-            @Override public void mouseEntered(MouseEvent e) {}
-            @Override public void mouseExited(MouseEvent e) {}
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                lbAux.setText(lb106.getText());
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+            }
         });
         lb107.addMouseListener(new MouseListener() {
-            @Override public void mouseClicked(MouseEvent e) { lbAux.setText(lb107.getText()); }
-            @Override public void mousePressed(MouseEvent e) {}
-            @Override public void mouseReleased(MouseEvent e) {}
-            @Override public void mouseEntered(MouseEvent e) {}
-            @Override public void mouseExited(MouseEvent e) {}
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                lbAux.setText(lb107.getText());
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+            }
         });
         /* NIVEL 2 */
         lb200.addMouseListener(new MouseListener() {
-            @Override public void mouseClicked(MouseEvent e) { lbAux.setText(lb200.getText()); }
-            @Override public void mousePressed(MouseEvent e) {}
-            @Override public void mouseReleased(MouseEvent e) {}
-            @Override public void mouseEntered(MouseEvent e) {}
-            @Override public void mouseExited(MouseEvent e) {}
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                lbAux.setText(lb200.getText());
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+            }
         });
         lb201.addMouseListener(new MouseListener() {
-            @Override public void mouseClicked(MouseEvent e) { lbAux.setText(lb201.getText()); }
-            @Override public void mousePressed(MouseEvent e) {}
-            @Override public void mouseReleased(MouseEvent e) {}
-            @Override public void mouseEntered(MouseEvent e) {}
-            @Override public void mouseExited(MouseEvent e) {}
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                lbAux.setText(lb201.getText());
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+            }
         });
         lb202.addMouseListener(new MouseListener() {
-            @Override public void mouseClicked(MouseEvent e) { lbAux.setText(lb202.getText()); }
-            @Override public void mousePressed(MouseEvent e) {}
-            @Override public void mouseReleased(MouseEvent e) {}
-            @Override public void mouseEntered(MouseEvent e) {}
-            @Override public void mouseExited(MouseEvent e) {}
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                lbAux.setText(lb202.getText());
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+            }
         });
         lb203.addMouseListener(new MouseListener() {
-            @Override public void mouseClicked(MouseEvent e) { lbAux.setText(lb203.getText()); }
-            @Override public void mousePressed(MouseEvent e) {}
-            @Override public void mouseReleased(MouseEvent e) {}
-            @Override public void mouseEntered(MouseEvent e) {}
-            @Override public void mouseExited(MouseEvent e) {}
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                lbAux.setText(lb203.getText());
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+            }
         });
         lb204.addMouseListener(new MouseListener() {
-            @Override public void mouseClicked(MouseEvent e) { lbAux.setText(lb204.getText()); }
-            @Override public void mousePressed(MouseEvent e) {}
-            @Override public void mouseReleased(MouseEvent e) {}
-            @Override public void mouseEntered(MouseEvent e) {}
-            @Override public void mouseExited(MouseEvent e) {}
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                lbAux.setText(lb204.getText());
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+            }
         });
         lb205.addMouseListener(new MouseListener() {
-            @Override public void mouseClicked(MouseEvent e) { lbAux.setText(lb205.getText()); }
-            @Override public void mousePressed(MouseEvent e) {}
-            @Override public void mouseReleased(MouseEvent e) {}
-            @Override public void mouseEntered(MouseEvent e) {}
-            @Override public void mouseExited(MouseEvent e) {}
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                lbAux.setText(lb205.getText());
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+            }
         });
         lb206.addMouseListener(new MouseListener() {
-            @Override public void mouseClicked(MouseEvent e) { lbAux.setText(lb206.getText()); }
-            @Override public void mousePressed(MouseEvent e) {}
-            @Override public void mouseReleased(MouseEvent e) {}
-            @Override public void mouseEntered(MouseEvent e) {}
-            @Override public void mouseExited(MouseEvent e) {}
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                lbAux.setText(lb206.getText());
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+            }
         });
         lb207.addMouseListener(new MouseListener() {
-            @Override public void mouseClicked(MouseEvent e) { lbAux.setText(lb207.getText()); }
-            @Override public void mousePressed(MouseEvent e) {}
-            @Override public void mouseReleased(MouseEvent e) {}
-            @Override public void mouseEntered(MouseEvent e) {}
-            @Override public void mouseExited(MouseEvent e) {}
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                lbAux.setText(lb207.getText());
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+            }
         });
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -136,9 +423,27 @@ public class Habitaciones extends javax.swing.JFrame {
         pnTitulo = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         pnInfo = new javax.swing.JPanel();
-        jPanel1 = new javax.swing.JPanel();
+        pnDatosHab = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         lbAux = new javax.swing.JLabel();
+        lbAux3 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        lbAux4 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        pnCliente = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        lbAux2 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        lbAux5 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        lbAux6 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        lbAux7 = new javax.swing.JLabel();
+        lbAux8 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        pnServicios = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tablaServicios = new javax.swing.JTable();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         pnPiso1 = new javax.swing.JPanel();
         pn100 = new javax.swing.JPanel();
@@ -184,48 +489,136 @@ public class Habitaciones extends javax.swing.JFrame {
         pnTitulo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Lunandina/logoHabitaciones.png"))); // NOI18N
-        pnTitulo.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, -1, 46));
+        pnTitulo.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 7, -1, 40));
 
         getContentPane().add(pnTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1366, -1));
 
         pnInfo.setBackground(new java.awt.Color(23, 23, 23));
         pnInfo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(23, 23, 23));
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(248, 177, 57)), "Datos de Habitacion", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(248, 177, 57))); // NOI18N
+        pnDatosHab.setBackground(new java.awt.Color(23, 23, 23));
+        pnDatosHab.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(248, 177, 57)), "DATOS DE LA HABITACIÓN", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Leelawadee UI Semilight", 1, 12), new java.awt.Color(248, 177, 57))); // NOI18N
+        pnDatosHab.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel4.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("HABITACION ");
+        jLabel4.setText("PRECIO");
+        pnDatosHab.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 110, 30));
 
-        lbAux.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lbAux.setFont(new java.awt.Font("Leelawadee UI Semilight", 1, 14)); // NOI18N
         lbAux.setForeground(new java.awt.Color(255, 255, 255));
+        lbAux.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        pnDatosHab.add(lbAux, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 190, 200, 30));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lbAux, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(440, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(lbAux, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(245, Short.MAX_VALUE))
-        );
+        lbAux3.setFont(new java.awt.Font("Leelawadee UI Semilight", 1, 14)); // NOI18N
+        lbAux3.setForeground(new java.awt.Color(255, 255, 255));
+        lbAux3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        pnDatosHab.add(lbAux3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 50, 200, 30));
 
-        pnInfo.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 630, 310));
+        jLabel7.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel7.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("N° HABITACION ");
+        pnDatosHab.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 45, 110, 30));
 
-        getContentPane().add(pnInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 348, 1366, 420));
+        lbAux4.setFont(new java.awt.Font("Leelawadee UI Semilight", 1, 14)); // NOI18N
+        lbAux4.setForeground(new java.awt.Color(255, 255, 255));
+        lbAux4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        pnDatosHab.add(lbAux4, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 120, 200, 30));
+
+        jLabel8.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel8.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setText("TIPO");
+        pnDatosHab.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, 110, 30));
+
+        pnInfo.add(pnDatosHab, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 380, 270));
+
+        pnCliente.setBackground(new java.awt.Color(23, 23, 23));
+        pnCliente.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(248, 177, 57)), "DATOS DEL CLIENTE", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Leelawadee UI Semilight", 1, 12), new java.awt.Color(248, 177, 57))); // NOI18N
+        pnCliente.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel6.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel6.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("NOMBRES");
+        pnCliente.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, 100, 30));
+
+        lbAux2.setFont(new java.awt.Font("Leelawadee UI Semilight", 1, 14)); // NOI18N
+        lbAux2.setForeground(new java.awt.Color(255, 255, 255));
+        lbAux2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        pnCliente.add(lbAux2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 260, 250, 30));
+
+        jLabel9.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel9.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setText("DNI");
+        pnCliente.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 100, 30));
+
+        lbAux5.setFont(new java.awt.Font("Leelawadee UI Semilight", 1, 14)); // NOI18N
+        lbAux5.setForeground(new java.awt.Color(255, 255, 255));
+        lbAux5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        pnCliente.add(lbAux5, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 40, 250, 30));
+
+        jLabel10.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel10.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel10.setText("APELLIDOS");
+        pnCliente.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 95, 100, 30));
+
+        lbAux6.setFont(new java.awt.Font("Leelawadee UI Semilight", 1, 14)); // NOI18N
+        lbAux6.setForeground(new java.awt.Color(255, 255, 255));
+        lbAux6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        pnCliente.add(lbAux6, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 95, 250, 30));
+
+        jLabel11.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel11.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel11.setText("E-MAIL");
+        pnCliente.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, 100, 30));
+
+        lbAux7.setFont(new java.awt.Font("Leelawadee UI Semilight", 1, 14)); // NOI18N
+        lbAux7.setForeground(new java.awt.Color(255, 255, 255));
+        lbAux7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        pnCliente.add(lbAux7, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 150, 250, 30));
+
+        lbAux8.setFont(new java.awt.Font("Leelawadee UI Semilight", 1, 14)); // NOI18N
+        lbAux8.setForeground(new java.awt.Color(255, 255, 255));
+        lbAux8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        pnCliente.add(lbAux8, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 205, 250, 30));
+
+        jLabel12.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel12.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel12.setText("PROCEDENCIA");
+        pnCliente.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 205, 100, 30));
+
+        pnInfo.add(pnCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 20, 430, 330));
+
+        pnServicios.setBackground(new java.awt.Color(23, 23, 23));
+        pnServicios.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(248, 177, 57)), "SERVICIOS RECIBIDOS", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Leelawadee UI Semilight", 1, 12), new java.awt.Color(248, 177, 57))); // NOI18N
+        pnServicios.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        tablaServicios.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
+        tablaServicios.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(tablaServicios);
+
+        pnServicios.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 326, 270));
+
+        pnInfo.add(pnServicios, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 20, 386, 330));
+
+        getContentPane().add(pnInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 345, 1366, 380));
 
         jTabbedPane1.setBackground(new java.awt.Color(13, 39, 70));
         jTabbedPane1.setTabLayoutPolicy(javax.swing.JTabbedPane.SCROLL_TAB_LAYOUT);
@@ -613,10 +1006,17 @@ public class Habitaciones extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel lb100;
     private javax.swing.JLabel lb101;
@@ -635,25 +1035,44 @@ public class Habitaciones extends javax.swing.JFrame {
     private javax.swing.JLabel lb206;
     private javax.swing.JLabel lb207;
     private javax.swing.JLabel lbAux;
-    private javax.swing.JPanel pn100;
-    private javax.swing.JPanel pn101;
-    private javax.swing.JPanel pn102;
-    private javax.swing.JPanel pn103;
-    private javax.swing.JPanel pn104;
-    private javax.swing.JPanel pn105;
-    private javax.swing.JPanel pn106;
-    private javax.swing.JPanel pn107;
-    private javax.swing.JPanel pn200;
-    private javax.swing.JPanel pn201;
-    private javax.swing.JPanel pn202;
-    private javax.swing.JPanel pn203;
-    private javax.swing.JPanel pn204;
-    private javax.swing.JPanel pn205;
-    private javax.swing.JPanel pn206;
-    private javax.swing.JPanel pn207;
+    private javax.swing.JLabel lbAux2;
+    private javax.swing.JLabel lbAux3;
+    private javax.swing.JLabel lbAux4;
+    private javax.swing.JLabel lbAux5;
+    private javax.swing.JLabel lbAux6;
+    private javax.swing.JLabel lbAux7;
+    private javax.swing.JLabel lbAux8;
+    public static javax.swing.JPanel pn100;
+    public static javax.swing.JPanel pn101;
+    public static javax.swing.JPanel pn102;
+    public static javax.swing.JPanel pn103;
+    public static javax.swing.JPanel pn104;
+    public static javax.swing.JPanel pn105;
+    public static javax.swing.JPanel pn106;
+    public static javax.swing.JPanel pn107;
+    public static javax.swing.JPanel pn200;
+    public static javax.swing.JPanel pn201;
+    public static javax.swing.JPanel pn202;
+    public static javax.swing.JPanel pn203;
+    public static javax.swing.JPanel pn204;
+    public static javax.swing.JPanel pn205;
+    public static javax.swing.JPanel pn206;
+    public static javax.swing.JPanel pn207;
+    private javax.swing.JPanel pnCliente;
+    private javax.swing.JPanel pnDatosHab;
     private javax.swing.JPanel pnInfo;
     private javax.swing.JPanel pnPiso1;
     private javax.swing.JPanel pnPiso2;
+    private javax.swing.JPanel pnServicios;
     private javax.swing.JPanel pnTitulo;
+    private javax.swing.JTable tablaServicios;
     // End of variables declaration//GEN-END:variables
+
+    /* ARRAY PARA ALMACENAR LOS PANELES QUE REPRESENTA A CADA HABITACION */
+    public static JPanel[] panel_Hab = {pn100, pn101, pn102, pn103, pn104, pn105, pn106, pn107,
+        pn200, pn201, pn202, pn203, pn204, pn205, pn206, pn207};
+    /* ARRAY PARA ALMACENAR LOS LABELS QUE REPRESENTA A CADA HABITACION */
+    public JLabel[] label_Hab = {lb100, lb101, lb102, lb103, lb104, lb105, lb106, lb107,
+        lb200, lb201, lb202, lb203, lb204, lb205, lb206, lb207};
+
 }

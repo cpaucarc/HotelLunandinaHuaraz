@@ -251,6 +251,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jPanel4.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(85, 40, 100, 30));
 
         jTextField1.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
+        jTextField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jPanel4.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(185, 40, 250, 30));
 
         btValidar1.setBackground(new java.awt.Color(0, 122, 255));

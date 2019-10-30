@@ -58,6 +58,12 @@ public class DatosUsuario extends javax.swing.JFrame {
         lbAMaterno = new javax.swing.JLabel();
         lbNombres = new javax.swing.JLabel();
         lbDNI = new javax.swing.JLabel();
+        pnDatosUsuario = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        lbUser = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        lbCargo = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
         pnCredenciales = new javax.swing.JPanel();
         label8 = new javax.swing.JLabel();
         label9 = new javax.swing.JLabel();
@@ -70,11 +76,6 @@ public class DatosUsuario extends javax.swing.JFrame {
         lbVisible1 = new javax.swing.JLabel();
         pw2Visible = new javax.swing.JTextField();
         pw1Visible = new javax.swing.JTextField();
-        pnDatosUsuario = new javax.swing.JPanel();
-        jLabel7 = new javax.swing.JLabel();
-        lbUser = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        lbCargo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -87,7 +88,7 @@ public class DatosUsuario extends javax.swing.JFrame {
         jPanel4.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, -1, 46));
 
         jButton1.setBackground(new java.awt.Color(255, 59, 48));
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButton1.setFont(new java.awt.Font("Leelawadee UI", 1, 14)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/iconCerrarSesion.png"))); // NOI18N
         jButton1.setText("Cerrar Sesión");
@@ -99,143 +100,140 @@ public class DatosUsuario extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel4.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 3, 160, 40));
+        jPanel4.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 5, 150, 36));
 
-        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1060, 46));
+        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1100, 46));
 
         jPanel1.setBackground(new java.awt.Color(248, 177, 57));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         pnDatosPersonales.setBackground(new java.awt.Color(248, 177, 57));
-        pnDatosPersonales.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(23, 23, 23), 1, true), "Datos personales del usuario", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 12), new java.awt.Color(23, 23, 23))); // NOI18N
+        pnDatosPersonales.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(23, 23, 23), 1, true), "DATOS PERSONALES DEL USUARIO", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Leelawadee UI Semilight", 1, 12), new java.awt.Color(23, 23, 23))); // NOI18N
+        pnDatosPersonales.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(23, 23, 23));
         jLabel1.setText("DNI");
+        pnDatosPersonales.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 100, 30));
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(23, 23, 23));
-        jLabel2.setText("Apellido Paterno");
+        jLabel2.setText("A. PATERNO");
+        pnDatosPersonales.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, 100, 30));
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(23, 23, 23));
-        jLabel3.setText("Apellido Materno");
+        jLabel3.setText("A. MATERNO");
+        pnDatosPersonales.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, 100, 30));
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(23, 23, 23));
-        jLabel4.setText("Nombres");
+        jLabel4.setText("NOMBRES");
+        pnDatosPersonales.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, 100, 30));
 
-        lbAPaterno.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        lbAPaterno.setForeground(new java.awt.Color(255, 255, 255));
-        lbAPaterno.setText("APELLIDO PATERNO");
+        lbAPaterno.setFont(new java.awt.Font("Leelawadee UI Semilight", 1, 14)); // NOI18N
+        lbAPaterno.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbAPaterno.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        pnDatosPersonales.add(lbAPaterno, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 80, 250, 30));
 
-        lbAMaterno.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        lbAMaterno.setForeground(new java.awt.Color(255, 255, 255));
-        lbAMaterno.setText("APELLIDO MATERNO");
+        lbAMaterno.setFont(new java.awt.Font("Leelawadee UI Semilight", 1, 14)); // NOI18N
+        lbAMaterno.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbAMaterno.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        pnDatosPersonales.add(lbAMaterno, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 130, 250, 30));
 
-        lbNombres.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        lbNombres.setForeground(new java.awt.Color(255, 255, 255));
-        lbNombres.setText("NOMBRES");
+        lbNombres.setFont(new java.awt.Font("Leelawadee UI Semilight", 1, 14)); // NOI18N
+        lbNombres.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbNombres.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        pnDatosPersonales.add(lbNombres, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 180, 250, 30));
 
-        lbDNI.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        lbDNI.setForeground(new java.awt.Color(255, 255, 255));
-        lbDNI.setText("DNI");
+        lbDNI.setFont(new java.awt.Font("Leelawadee UI Semilight", 1, 14)); // NOI18N
+        lbDNI.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbDNI.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        pnDatosPersonales.add(lbDNI, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 30, 250, 30));
 
-        javax.swing.GroupLayout pnDatosPersonalesLayout = new javax.swing.GroupLayout(pnDatosPersonales);
-        pnDatosPersonales.setLayout(pnDatosPersonalesLayout);
-        pnDatosPersonalesLayout.setHorizontalGroup(
-            pnDatosPersonalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnDatosPersonalesLayout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addGroup(pnDatosPersonalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnDatosPersonalesLayout.createSequentialGroup()
-                        .addGroup(pnDatosPersonalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE))
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(pnDatosPersonalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbAMaterno, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbDNI, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbNombres, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbAPaterno, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(39, 39, 39))
-        );
-        pnDatosPersonalesLayout.setVerticalGroup(
-            pnDatosPersonalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnDatosPersonalesLayout.createSequentialGroup()
-                .addGap(41, 41, 41)
-                .addGroup(pnDatosPersonalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(lbAPaterno))
-                .addGap(34, 34, 34)
-                .addGroup(pnDatosPersonalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(lbAMaterno))
-                .addGap(29, 29, 29)
-                .addGroup(pnDatosPersonalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(lbNombres))
-                .addGap(32, 32, 32)
-                .addGroup(pnDatosPersonalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(lbDNI))
-                .addContainerGap(34, Short.MAX_VALUE))
-        );
+        jPanel1.add(pnDatosPersonales, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, 450, 240));
 
-        jPanel1.add(pnDatosPersonales, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 510, 260));
+        pnDatosUsuario.setBackground(new java.awt.Color(248, 177, 57));
+        pnDatosUsuario.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "DATOS DEL USUARIO ACTUAL", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Leelawadee UI Semilight", 1, 12), new java.awt.Color(23, 23, 23))); // NOI18N
+        pnDatosUsuario.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        pnCredenciales.setBackground(new java.awt.Color(248, 177, 57));
-        pnCredenciales.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 59, 48), 1, true), "Modificar Credenciales de Acceso", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 12), new java.awt.Color(255, 59, 48))); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(23, 23, 23));
+        jLabel7.setText("USUARIO");
+        pnDatosUsuario.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 100, 30));
+
+        lbUser.setFont(new java.awt.Font("Leelawadee UI Semilight", 1, 14)); // NOI18N
+        lbUser.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbUser.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        pnDatosUsuario.add(lbUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 30, 250, 30));
+
+        jLabel5.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(23, 23, 23));
+        jLabel5.setText("CARGO");
+        pnDatosUsuario.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, 100, 30));
+
+        lbCargo.setFont(new java.awt.Font("Leelawadee UI Semilight", 1, 14)); // NOI18N
+        lbCargo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbCargo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        pnDatosUsuario.add(lbCargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 80, 250, 30));
+
+        jPanel1.add(pnDatosUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 450, 140));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 46, 510, 480));
+
+        jPanel2.setBackground(new java.awt.Color(23, 23, 23));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        pnCredenciales.setBackground(new java.awt.Color(23, 23, 23));
+        pnCredenciales.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 59, 48), 1, true), "MODIFICAR CREDENCIALES DE ACCESO", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 12), new java.awt.Color(255, 59, 48))); // NOI18N
         pnCredenciales.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        label8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        label8.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         label8.setForeground(new java.awt.Color(255, 59, 48));
-        label8.setText("Nuevo Nombre de Usuario");
-        pnCredenciales.add(label8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 180, 30));
+        label8.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        label8.setText("<html>NUEVO NOMBRE<br>DE USUARIO</html>");
+        pnCredenciales.add(label8, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 50, 120, 30));
 
-        label9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        label9.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         label9.setForeground(new java.awt.Color(255, 59, 48));
-        label9.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        label9.setText("Nueva Contraseña");
-        pnCredenciales.add(label9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 180, 30));
+        label9.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        label9.setText("<html>NUEVA<br>CONTRASEÑA</html>");
+        pnCredenciales.add(label9, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 130, 120, 30));
 
-        username.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        username.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
         username.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         username.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 usernameKeyTyped(evt);
             }
         });
-        pnCredenciales.add(username, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 60, 240, 30));
+        pnCredenciales.add(username, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 50, 240, 30));
 
-        pw1Oculto.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        pw1Oculto.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
         pw1Oculto.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         pw1Oculto.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 pw1OcultoKeyTyped(evt);
             }
         });
-        pnCredenciales.add(pw1Oculto, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 140, 240, 30));
+        pnCredenciales.add(pw1Oculto, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 130, 240, 30));
 
-        label10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        label10.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         label10.setForeground(new java.awt.Color(255, 59, 48));
-        label10.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        label10.setText("Repita Nueva Contraseña");
-        pnCredenciales.add(label10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 180, 30));
+        label10.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        label10.setText("<html>REPITA LA NUEVA<br>CONTRASEÑA</html>");
+        pnCredenciales.add(label10, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 210, 120, 30));
 
-        pw2Oculto.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        pw2Oculto.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
         pw2Oculto.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         pw2Oculto.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 pw2OcultoKeyTyped(evt);
             }
         });
-        pnCredenciales.add(pw2Oculto, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 220, 240, 30));
+        pnCredenciales.add(pw2Oculto, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 210, 240, 30));
 
-        btModificar.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+        btModificar.setFont(new java.awt.Font("Leelawadee UI Semilight", 1, 12)); // NOI18N
         btModificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/edit.png"))); // NOI18N
         btModificar.setText("Modificar Credenciales");
         btModificar.addActionListener(new java.awt.event.ActionListener() {
@@ -243,7 +241,7 @@ public class DatosUsuario extends javax.swing.JFrame {
                 btModificarActionPerformed(evt);
             }
         });
-        pnCredenciales.add(btModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(135, 300, 240, -1));
+        pnCredenciales.add(btModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(145, 310, 240, 35));
 
         lbVisible2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/visible.png"))); // NOI18N
         lbVisible2.setToolTipText("Mostrar contraseña");
@@ -253,7 +251,7 @@ public class DatosUsuario extends javax.swing.JFrame {
                 lbVisible2MouseClicked(evt);
             }
         });
-        pnCredenciales.add(lbVisible2, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 220, -1, 30));
+        pnCredenciales.add(lbVisible2, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 210, -1, 30));
 
         lbVisible1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/visible.png"))); // NOI18N
         lbVisible1.setToolTipText("Mostrar contraseña");
@@ -263,43 +261,19 @@ public class DatosUsuario extends javax.swing.JFrame {
                 lbVisible1MouseClicked(evt);
             }
         });
-        pnCredenciales.add(lbVisible1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 140, -1, 30));
+        pnCredenciales.add(lbVisible1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 130, -1, 30));
 
+        pw2Visible.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
         pw2Visible.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        pnCredenciales.add(pw2Visible, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 220, 240, 30));
+        pnCredenciales.add(pw2Visible, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 210, 240, 30));
 
+        pw1Visible.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
         pw1Visible.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        pnCredenciales.add(pw1Visible, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 140, 240, 30));
+        pnCredenciales.add(pw1Visible, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 130, 240, 30));
 
-        jPanel1.add(pnCredenciales, new org.netbeans.lib.awtextra.AbsoluteConstraints(541, 20, 510, 390));
+        jPanel2.add(pnCredenciales, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 530, 410));
 
-        pnDatosUsuario.setBackground(new java.awt.Color(248, 177, 57));
-        pnDatosUsuario.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(23, 23, 23), 1, true), "Usuario actual", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 12), new java.awt.Color(23, 23, 23)), "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 12), new java.awt.Color(23, 23, 23))); // NOI18N
-        pnDatosUsuario.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(23, 23, 23));
-        jLabel7.setText("Usuario");
-        pnDatosUsuario.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, -1, -1));
-
-        lbUser.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        lbUser.setForeground(new java.awt.Color(255, 255, 255));
-        lbUser.setText("NOMBRE DE USUARIO");
-        pnDatosUsuario.add(lbUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 40, -1, -1));
-
-        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(23, 23, 23));
-        jLabel5.setText("Cargo");
-        pnDatosUsuario.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, 100, -1));
-
-        lbCargo.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        lbCargo.setForeground(new java.awt.Color(255, 255, 255));
-        lbCargo.setText("CARGO");
-        pnDatosUsuario.add(lbCargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 80, 250, -1));
-
-        jPanel1.add(pnDatosUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 510, 120));
-
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 38, 1060, 430));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 46, 590, 480));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -438,6 +412,7 @@ public class DatosUsuario extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JLabel label10;
     private javax.swing.JLabel label8;
