@@ -1,7 +1,13 @@
 package Ventanas;
 
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
+import javax.swing.plaf.basic.BasicInternalFrameUI;
+
 public class Reportes extends javax.swing.JFrame {
 
+    Facturas facturas=new Facturas();
+    
+    
     public Reportes() {
         initComponents();
         this.setExtendedState(6);
@@ -24,7 +30,8 @@ public class Reportes extends javax.swing.JFrame {
         lbAnual = new javax.swing.JLabel();
         pnMensual = new javax.swing.JPanel();
         lbMensual = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        desktop = new javax.swing.JDesktopPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -156,18 +163,23 @@ public class Reportes extends javax.swing.JFrame {
 
         jPanel2.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 350, 460, 200));
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(844, 46, 522, 674));
+        jLabel1.setText("jLabel1");
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 650, -1, -1));
 
-        jPanel3.setBackground(new java.awt.Color(187, 62, 52));
-        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 46, 844, 674));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(844, 46, 522, 674));
+        getContentPane().add(desktop, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 46, 844, 674));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     /* FACTURA */
     private void lbFacturaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbFacturaMouseClicked
-        // TODO add your handling code here:
+        desktop.add(facturas);
+        facturas.show();
+        BasicInternalFrameUI bi = (BasicInternalFrameUI)facturas.getUI();
+        bi.setNorthPane(null);
+        //BasicInternalFrameTitlePane titlePane = (BasicInternalFrameTitlePane) ((BasicInternalFrameUI) facturas.getUI()).getNorthPane();
+        //facturas.remove(titlePane);
     }//GEN-LAST:event_lbFacturaMouseClicked
     private void lbFacturaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbFacturaMouseEntered
         // TODO add your handling code here://255,193,7
@@ -246,10 +258,11 @@ public class Reportes extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JDesktopPane desktop;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JLabel lbAnual;
     private javax.swing.JLabel lbBoleta;
