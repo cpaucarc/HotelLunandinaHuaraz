@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Ventanas;
 
 import Clases.Control;
@@ -12,13 +8,11 @@ import Clases.Control;
  */
 public class FrmReserva extends javax.swing.JFrame {
 
-    /**
-     * Creates new form FrmReserva
-     */
     public FrmReserva() {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setExtendedState(6);
+        lbUserActual.setText(Control.usuario);
     }
 
     /**
@@ -64,6 +58,8 @@ public class FrmReserva extends javax.swing.JFrame {
         jDateChooser2 = new com.toedter.calendar.JDateChooser();
         jPanel4 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        lbUserActual = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -285,6 +281,16 @@ public class FrmReserva extends javax.swing.JFrame {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Lunandina/logoReserva.png"))); // NOI18N
         jPanel4.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 7, -1, 40));
 
+        lbUserActual.setFont(new java.awt.Font("Leelawadee UI Semilight", 1, 16)); // NOI18N
+        lbUserActual.setForeground(new java.awt.Color(255, 255, 255));
+        lbUserActual.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lbUserActual.setText("jLabel13");
+        jPanel4.add(lbUserActual, new org.netbeans.lib.awtextra.AbsoluteConstraints(1145, 0, 150, 46));
+
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/userActual.png"))); // NOI18N
+        jPanel4.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(1306, 0, 30, 46));
+
         getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1366, 46));
 
         jPanel5.setBackground(new java.awt.Color(248, 177, 57));
@@ -427,6 +433,7 @@ public class FrmReserva extends javax.swing.JFrame {
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private com.toedter.calendar.JDateChooser jDateChooser2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabelDNI10;
     private javax.swing.JLabel jLabelDNI11;
     private javax.swing.JLabel jLabelDNI12;
@@ -460,5 +467,6 @@ public class FrmReserva extends javax.swing.JFrame {
     private javax.swing.JTextField jtxtdni5;
     private javax.swing.JTextField jtxtdni8;
     private javax.swing.JTextField jtxtdni9;
+    private javax.swing.JLabel lbUserActual;
     // End of variables declaration//GEN-END:variables
 }

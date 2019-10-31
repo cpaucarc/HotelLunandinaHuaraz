@@ -23,8 +23,7 @@ public class JFServiciosLUNANDINA extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setExtendedState(6);
         inicializarJTable();
-//        this.setIconImage(new ImageIcon(getClass().getResource("/ImagenesLunan/mesero.png")).getImage());
-//        this.setDefaultCloseOperation(JFrameReserva.HIDE_ON_CLOSE);
+        lbUserActual.setText(Control.usuario);
     }
 
     public void inicializarJTable() {
@@ -78,6 +77,8 @@ public class JFServiciosLUNANDINA extends javax.swing.JFrame {
         jButton7 = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
+        lbUserActual = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -189,25 +190,21 @@ public class JFServiciosLUNANDINA extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Leelawadee UI Semilight", 1, 14)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("jLabel1");
         jLabel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel4.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 250, 200, 30));
 
         jLabel2.setFont(new java.awt.Font("Leelawadee UI Semilight", 1, 14)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("jLabel1");
         jLabel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel4.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 85, 200, 30));
 
         jLabel6.setFont(new java.awt.Font("Leelawadee UI Semilight", 1, 14)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("jLabel1");
         jLabel6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel4.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 140, 200, 30));
 
         jLabel7.setFont(new java.awt.Font("Leelawadee UI Semilight", 1, 14)); // NOI18N
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel7.setText("jLabel1");
         jLabel7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel4.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 195, 200, 30));
 
@@ -252,6 +249,16 @@ public class JFServiciosLUNANDINA extends javax.swing.JFrame {
 
         jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Lunandina/logoServicios.png"))); // NOI18N
         jPanel5.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 7, -1, 40));
+
+        lbUserActual.setFont(new java.awt.Font("Leelawadee UI Semilight", 1, 16)); // NOI18N
+        lbUserActual.setForeground(new java.awt.Color(255, 255, 255));
+        lbUserActual.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lbUserActual.setText("jLabel13");
+        jPanel5.add(lbUserActual, new org.netbeans.lib.awtextra.AbsoluteConstraints(1145, 0, 150, 46));
+
+        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/userActual.png"))); // NOI18N
+        jPanel5.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(1306, 0, 30, 46));
 
         getContentPane().add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1366, 46));
 
@@ -444,6 +451,7 @@ public class JFServiciosLUNANDINA extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -464,6 +472,7 @@ public class JFServiciosLUNANDINA extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
+    private javax.swing.JLabel lbUserActual;
     private javax.swing.JTable tbServicio;
     private javax.swing.JTextField txbuscar;
     private javax.swing.JTextField txtNumhabit;

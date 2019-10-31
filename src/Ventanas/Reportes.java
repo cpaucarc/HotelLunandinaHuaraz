@@ -2,15 +2,18 @@ package Ventanas;
 
 import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
+import Clases.Control;
 
 public class Reportes extends javax.swing.JFrame {
 
-    Facturas facturas=new Facturas();
+    Facturas factura=new Facturas();
+    Boletas boleta=new Boletas();
     
     
     public Reportes() {
         initComponents();
         this.setExtendedState(6);
+        lbUserActual.setText(Control.usuario);
     }
 
     @SuppressWarnings("unchecked")
@@ -19,6 +22,8 @@ public class Reportes extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
+        lbUserActual = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         pnComprobante = new javax.swing.JPanel();
         pnBoleta = new javax.swing.JPanel();
@@ -33,7 +38,7 @@ public class Reportes extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         desktop = new javax.swing.JDesktopPane();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(13, 39, 70));
@@ -41,6 +46,16 @@ public class Reportes extends javax.swing.JFrame {
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Lunandina/logoReportes.png"))); // NOI18N
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 7, -1, 40));
+
+        lbUserActual.setFont(new java.awt.Font("Leelawadee UI Semilight", 1, 16)); // NOI18N
+        lbUserActual.setForeground(new java.awt.Color(255, 255, 255));
+        lbUserActual.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lbUserActual.setText("jLabel13");
+        jPanel1.add(lbUserActual, new org.netbeans.lib.awtextra.AbsoluteConstraints(1145, 0, 150, 46));
+
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/userActual.png"))); // NOI18N
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(1306, 0, 30, 46));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1366, 46));
 
@@ -163,7 +178,7 @@ public class Reportes extends javax.swing.JFrame {
 
         jPanel2.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 350, 460, 200));
 
-        jLabel1.setText("jLabel1");
+        jLabel1.setText("Referencia");
         jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 650, -1, -1));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(844, 46, 522, 674));
@@ -174,15 +189,19 @@ public class Reportes extends javax.swing.JFrame {
 
     /* FACTURA */
     private void lbFacturaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbFacturaMouseClicked
-        desktop.add(facturas);
-        facturas.show();
-        BasicInternalFrameUI bi = (BasicInternalFrameUI)facturas.getUI();
-        bi.setNorthPane(null);
+        desktop.removeAll();
+        desktop.repaint();
+        desktop.add(factura);
+        factura.setSize(844,674);
+        factura.show();
+        
+        //BasicInternalFrameUI bi = (BasicInternalFrameUI)facturas.getUI();
+        //bi.setNorthPane(null);
+        
         //BasicInternalFrameTitlePane titlePane = (BasicInternalFrameTitlePane) ((BasicInternalFrameUI) facturas.getUI()).getNorthPane();
         //facturas.remove(titlePane);
     }//GEN-LAST:event_lbFacturaMouseClicked
     private void lbFacturaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbFacturaMouseEntered
-        // TODO add your handling code here://255,193,7
         pnFactura.setBackground(new java.awt.Color(255,193,7));
     }//GEN-LAST:event_lbFacturaMouseEntered
     private void lbFacturaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbFacturaMouseExited
@@ -191,7 +210,11 @@ public class Reportes extends javax.swing.JFrame {
 
     /* BOLETA DE VENTA */
     private void lbBoletaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbBoletaMouseClicked
-        // TODO add your handling code here:
+        desktop.removeAll();
+        desktop.repaint();
+        desktop.add(boleta);
+        boleta.setSize(844,674);
+        boleta.show();
     }//GEN-LAST:event_lbBoletaMouseClicked
     private void lbBoletaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbBoletaMouseEntered
         pnBoleta.setBackground(new java.awt.Color(255,193,7));
@@ -261,6 +284,7 @@ public class Reportes extends javax.swing.JFrame {
     private javax.swing.JDesktopPane desktop;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
@@ -268,6 +292,7 @@ public class Reportes extends javax.swing.JFrame {
     private javax.swing.JLabel lbBoleta;
     private javax.swing.JLabel lbFactura;
     private javax.swing.JLabel lbMensual;
+    private javax.swing.JLabel lbUserActual;
     private javax.swing.JPanel pnAnual;
     private javax.swing.JPanel pnBoleta;
     private javax.swing.JPanel pnComprobante;

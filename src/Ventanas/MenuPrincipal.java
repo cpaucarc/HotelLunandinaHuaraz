@@ -10,6 +10,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
     
     /* Ventanas externas */
     DatosUsuario datosUsuario=new DatosUsuario();
+    RegistroEmpleado empleado=new RegistroEmpleado();
+    Reportes reporte=new Reportes();
     /* Ventanas externas */
     
     
@@ -293,7 +295,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
      /*LABEL DE ADMINISTRACION*/
     private void lbadministracionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbadministracionMouseClicked
-        // TODO add your handling code here:
+        //this.setVisible(false);
+        empleado.setVisible(true);
     }//GEN-LAST:event_lbadministracionMouseClicked
     private void lbadministracionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbadministracionMouseEntered
         pnAdministracion.setBackground(new Color(248,177,57));
@@ -328,7 +331,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
      /*LABEL DE RESERVA*/
     private void lbReservaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbReservaMouseClicked
-        
         FrmReserva reserv=new  FrmReserva();
         reserv.setVisible(true);
     }//GEN-LAST:event_lbReservaMouseClicked
@@ -347,8 +349,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     /*LABEL DE REPORTES*/
     private void lbReporteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbReporteMouseClicked
-        JFrameFactura fac=new JFrameFactura();
-        fac.setVisible(true);
+        //this.setVisible(false);
+        reporte.setVisible(true);
     }//GEN-LAST:event_lbReporteMouseClicked
     private void lbReporteMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbReporteMouseEntered
         pnReportes.setBackground(new Color(248,177,57));
