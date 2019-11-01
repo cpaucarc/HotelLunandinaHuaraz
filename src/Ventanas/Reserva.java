@@ -2,17 +2,20 @@
 package Ventanas;
 
 import Clases.Control;
+import java.awt.Color;
 /**
  *
  * @author CLINTON
  */
-public class FrmReserva extends javax.swing.JFrame {
+public class Reserva extends javax.swing.JFrame {
 
-    public FrmReserva() {
+    public Reserva() {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setExtendedState(6);
         lbUserActual.setText(Control.usuario);
+        tabla.getTableHeader().setOpaque(true);
+        tabla.getTableHeader().setBackground(new Color(248,177,57));
     }
 
     /**
@@ -63,17 +66,16 @@ public class FrmReserva extends javax.swing.JFrame {
         jPanel5 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabla = new javax.swing.JTable();
         jLabelDNI16 = new javax.swing.JLabel();
         jtxtdni9 = new javax.swing.JTextField();
+        jDateChooser3 = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel2.setBackground(new java.awt.Color(248, 177, 57));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(248, 177, 57));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)), "DATOS DEL CLIENTE", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Leelawadee UI Semilight", 1, 12))); // NOI18N
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -81,8 +83,8 @@ public class FrmReserva extends javax.swing.JFrame {
         jLabelDNI2.setText("DNI");
         jPanel1.add(jLabelDNI2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 25, 120, 30));
 
-        jtxtdni.setBackground(new java.awt.Color(255, 255, 204));
         jtxtdni.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
+        jtxtdni.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jtxtdni.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jtxtdniKeyTyped(evt);
@@ -96,8 +98,8 @@ public class FrmReserva extends javax.swing.JFrame {
         jLabelDNI3.setToolTipText("");
         jPanel1.add(jLabelDNI3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 75, 120, 30));
 
-        jtxtdni1.setBackground(new java.awt.Color(255, 255, 204));
         jtxtdni1.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
+        jtxtdni1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jtxtdni1.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jtxtdni1KeyTyped(evt);
@@ -105,8 +107,8 @@ public class FrmReserva extends javax.swing.JFrame {
         });
         jPanel1.add(jtxtdni1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 75, 280, 30));
 
-        jtxtdni2.setBackground(new java.awt.Color(255, 255, 204));
         jtxtdni2.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
+        jtxtdni2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jtxtdni2.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jtxtdni2KeyTyped(evt);
@@ -122,8 +124,8 @@ public class FrmReserva extends javax.swing.JFrame {
         jLabelDNI5.setText("TELEFONO");
         jPanel1.add(jLabelDNI5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 225, 120, 30));
 
-        jtxtdni3.setBackground(new java.awt.Color(255, 255, 204));
         jtxtdni3.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
+        jtxtdni3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jtxtdni3.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jtxtdni3KeyTyped(evt);
@@ -131,8 +133,8 @@ public class FrmReserva extends javax.swing.JFrame {
         });
         jPanel1.add(jtxtdni3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 175, 280, 30));
 
-        jtxtdni4.setBackground(new java.awt.Color(255, 255, 204));
         jtxtdni4.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
+        jtxtdni4.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jtxtdni4.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jtxtdni4KeyTyped(evt);
@@ -148,8 +150,8 @@ public class FrmReserva extends javax.swing.JFrame {
         jLabelDNI7.setText("E-MAIL");
         jPanel1.add(jLabelDNI7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 325, 120, 30));
 
-        jtxtdni5.setBackground(new java.awt.Color(255, 255, 204));
         jtxtdni5.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
+        jtxtdni5.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jtxtdni5.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jtxtdni5KeyTyped(evt);
@@ -163,8 +165,8 @@ public class FrmReserva extends javax.swing.JFrame {
         jLabelDNI12.setToolTipText("");
         jPanel1.add(jLabelDNI12, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 125, 120, 30));
 
-        jtxtdni10.setBackground(new java.awt.Color(255, 255, 204));
         jtxtdni10.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
+        jtxtdni10.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jtxtdni10.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jtxtdni10KeyTyped(evt);
@@ -174,17 +176,16 @@ public class FrmReserva extends javax.swing.JFrame {
 
         jPanel2.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 461, 375));
 
-        jPanel3.setBackground(new java.awt.Color(248, 177, 57));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)), "DATOS DE A HABITACION", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Leelawadee UI Semilight", 1, 12))); // NOI18N
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabelDNI9.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
         jLabelDNI9.setText("N° HABITACIÓN");
-        jPanel3.add(jLabelDNI9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 25, 120, 30));
+        jPanel3.add(jLabelDNI9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 75, 120, 30));
 
         jLabelDNI10.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
         jLabelDNI10.setText("TIPO HABITACIÓN");
-        jPanel3.add(jLabelDNI10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 75, 120, 30));
+        jPanel3.add(jLabelDNI10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 25, 120, 30));
 
         jLabelDNI14.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
         jLabelDNI14.setText("COSTO:");
@@ -251,7 +252,6 @@ public class FrmReserva extends javax.swing.JFrame {
         });
         jPanel2.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(381, 575, 110, 55));
 
-        jPanel7.setBackground(new java.awt.Color(248, 177, 57));
         jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)), "FECHA", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Leelawadee UI Semilight", 1, 12))); // NOI18N
         jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -263,11 +263,9 @@ public class FrmReserva extends javax.swing.JFrame {
         jLabelDNI11.setText("F. SALIDA");
         jPanel7.add(jLabelDNI11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 75, 120, 30));
 
-        jDateChooser1.setBackground(new java.awt.Color(248, 177, 57));
         jDateChooser1.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
         jPanel7.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 75, 156, 30));
 
-        jDateChooser2.setBackground(new java.awt.Color(248, 177, 57));
         jDateChooser2.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
         jPanel7.add(jDateChooser2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 25, 156, 30));
 
@@ -293,17 +291,14 @@ public class FrmReserva extends javax.swing.JFrame {
 
         getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1366, 46));
 
-        jPanel5.setBackground(new java.awt.Color(248, 177, 57));
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel6.setBackground(new java.awt.Color(248, 177, 57));
         jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)), "RESERVAS REGISTRADAS", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Leelawadee UI Semilight", 1, 12))); // NOI18N
         jPanel6.setForeground(new java.awt.Color(255, 255, 255));
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTable1.setBackground(new java.awt.Color(255, 255, 204));
-        jTable1.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabla.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
+        tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -314,8 +309,9 @@ public class FrmReserva extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jTable1.setGridColor(new java.awt.Color(0, 0, 0));
-        jScrollPane1.setViewportView(jTable1);
+        tabla.setGridColor(new java.awt.Color(0, 0, 0));
+        tabla.setSelectionBackground(new java.awt.Color(0, 122, 255));
+        jScrollPane1.setViewportView(tabla);
 
         jPanel6.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 724, 490));
 
@@ -323,16 +319,19 @@ public class FrmReserva extends javax.swing.JFrame {
         jLabelDNI16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelDNI16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/buscar.png"))); // NOI18N
         jLabelDNI16.setText("Buscar");
-        jPanel6.add(jLabelDNI16, new org.netbeans.lib.awtextra.AbsoluteConstraints(167, 40, 100, 30));
+        jPanel6.add(jLabelDNI16, new org.netbeans.lib.awtextra.AbsoluteConstraints(57, 40, 90, 30));
 
-        jtxtdni9.setBackground(new java.awt.Color(255, 255, 204));
         jtxtdni9.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
+        jtxtdni9.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jtxtdni9.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jtxtdni9KeyTyped(evt);
             }
         });
-        jPanel6.add(jtxtdni9, new org.netbeans.lib.awtextra.AbsoluteConstraints(267, 40, 350, 30));
+        jPanel6.add(jtxtdni9, new org.netbeans.lib.awtextra.AbsoluteConstraints(147, 40, 350, 30));
+
+        jDateChooser3.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
+        jPanel6.add(jDateChooser3, new org.netbeans.lib.awtextra.AbsoluteConstraints(527, 40, 200, 30));
 
         jPanel5.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 784, 620));
 
@@ -406,21 +405,23 @@ public class FrmReserva extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmReserva.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Reserva.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmReserva.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Reserva.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmReserva.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Reserva.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmReserva.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Reserva.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmReserva().setVisible(true);
+                new Reserva().setVisible(true);
             }
         });
     }
@@ -432,6 +433,7 @@ public class FrmReserva extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBox2;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private com.toedter.calendar.JDateChooser jDateChooser2;
+    private com.toedter.calendar.JDateChooser jDateChooser3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabelDNI10;
@@ -456,7 +458,6 @@ public class FrmReserva extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JButton jbuttoncrear;
     private javax.swing.JTextField jtxtdni;
     private javax.swing.JTextField jtxtdni1;
@@ -468,5 +469,6 @@ public class FrmReserva extends javax.swing.JFrame {
     private javax.swing.JTextField jtxtdni8;
     private javax.swing.JTextField jtxtdni9;
     private javax.swing.JLabel lbUserActual;
+    private javax.swing.JTable tabla;
     // End of variables declaration//GEN-END:variables
 }

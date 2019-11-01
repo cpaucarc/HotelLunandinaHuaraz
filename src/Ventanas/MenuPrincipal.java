@@ -213,10 +213,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         getContentPane().add(pnAlojamiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 0, 125, 46));
 
-        panelEventos.setBackground(new java.awt.Color(248, 177, 57));
         panelEventos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel4.setBackground(new java.awt.Color(248, 177, 57));
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(23, 23, 23)), "RESERVACIONES PARA HOY", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Leelawadee UI Semilight", 1, 12), new java.awt.Color(23, 23, 23)), "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(23, 23, 23))); // NOI18N
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -234,7 +232,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jPanel4.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 460, 360));
 
-        btValidar.setBackground(new java.awt.Color(255, 255, 255));
+        btValidar.setBackground(new java.awt.Color(144, 101, 168));
         btValidar.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 12)); // NOI18N
         btValidar.setForeground(new java.awt.Color(23, 23, 23));
         btValidar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/lista.png"))); // NOI18N
@@ -256,7 +254,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jTextField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jPanel4.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(185, 40, 250, 30));
 
-        btValidar1.setBackground(new java.awt.Color(0, 122, 255));
+        btValidar1.setBackground(new java.awt.Color(23, 162, 184));
         btValidar1.setFont(new java.awt.Font("Leelawadee UI Semilight", 1, 12)); // NOI18N
         btValidar1.setForeground(new java.awt.Color(255, 255, 255));
         btValidar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/check.png"))); // NOI18N
@@ -299,10 +297,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
         empleado.setVisible(true);
     }//GEN-LAST:event_lbadministracionMouseClicked
     private void lbadministracionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbadministracionMouseEntered
-        pnAdministracion.setBackground(new Color(248,177,57));
+        pnAdministracion.setBackground(Control.color_Body);
         lbadministracion.setForeground(new Color(23,23,23));
         lbadministracion.setFont(new java.awt.Font("Leelawadee UI Semilight", 1, 16));
-        lbadministracion.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(248,177,57)));
+        lbadministracion.setBorder(javax.swing.BorderFactory.createLineBorder(Control.color_Body));
     }//GEN-LAST:event_lbadministracionMouseEntered
     private void lbadministracionMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbadministracionMouseExited
         pnAdministracion.setBackground(new Color(13, 39, 70));
@@ -317,10 +315,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
         hab.setVisible(true);
     }//GEN-LAST:event_lbAlojamientoMouseClicked
     private void lbAlojamientoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbAlojamientoMouseEntered
-        pnAlojamiento.setBackground(new Color(248,177,57));
+        pnAlojamiento.setBackground(Control.color_Body);
         lbAlojamiento.setForeground(new Color(23,23,23));
         lbAlojamiento.setFont(new java.awt.Font("Leelawadee UI Semilight", 1, 16));
-        lbAlojamiento.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(248,177,57)));
+        lbAlojamiento.setBorder(javax.swing.BorderFactory.createLineBorder(Control.color_Body));
     }//GEN-LAST:event_lbAlojamientoMouseEntered
     private void lbAlojamientoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbAlojamientoMouseExited
         pnAlojamiento.setBackground(new Color(13, 39, 70));
@@ -331,14 +329,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
      /*LABEL DE RESERVA*/
     private void lbReservaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbReservaMouseClicked
-        FrmReserva reserv=new  FrmReserva();
+        Reserva reserv=new  Reserva();
         reserv.setVisible(true);
     }//GEN-LAST:event_lbReservaMouseClicked
     private void lbReservaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbReservaMouseEntered
-        pnReserva.setBackground(new Color(248,177,57));
+        pnReserva.setBackground(Control.color_Body);
         lbReserva.setForeground(new Color(23,23,23));
         lbReserva.setFont(new java.awt.Font("Leelawadee UI Semilight", 1, 16));
-        lbReserva.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(248,177,57)));
+        lbReserva.setBorder(javax.swing.BorderFactory.createLineBorder(Control.color_Body));
     }//GEN-LAST:event_lbReservaMouseEntered
     private void lbReservaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbReservaMouseExited
         pnReserva.setBackground(new Color(13, 39, 70));
@@ -353,10 +351,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
         reporte.setVisible(true);
     }//GEN-LAST:event_lbReporteMouseClicked
     private void lbReporteMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbReporteMouseEntered
-        pnReportes.setBackground(new Color(248,177,57));
+        pnReportes.setBackground(Control.color_Body);
         lbReporte.setForeground(new Color(23,23,23));
         lbReporte.setFont(new java.awt.Font("Leelawadee UI Semilight", 1, 16));
-        lbReporte.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(248,177,57)));
+        lbReporte.setBorder(javax.swing.BorderFactory.createLineBorder(Control.color_Body));
     }//GEN-LAST:event_lbReporteMouseEntered
     private void lbReporteMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbReporteMouseExited
         pnReportes.setBackground(new Color(13, 39, 70));
@@ -371,9 +369,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_lbLogOutMouseClicked
     private void lbLogOutMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbLogOutMouseEntered
-        pnLogOut.setBackground(new Color(248,177,57));
+        pnLogOut.setBackground(Control.color_Body);
         lbLogOut.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/userLog_B.png")));
-        lbLogOut.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(248,177,57)));
+        lbLogOut.setBorder(javax.swing.BorderFactory.createLineBorder(Control.color_Body));
     }//GEN-LAST:event_lbLogOutMouseEntered
     private void lbLogOutMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbLogOutMouseExited
         pnLogOut.setBackground(new Color(13, 39, 70));
@@ -383,14 +381,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     /*LABEL DE SERVICIOS*/
     private void lbServicioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbServicioMouseClicked
-        JFServiciosLUNANDINA serv=new JFServiciosLUNANDINA();
+        Servicios serv=new Servicios();
         serv.setVisible(true);        
     }//GEN-LAST:event_lbServicioMouseClicked
     private void lbServicioMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbServicioMouseEntered
-        pnServicios.setBackground(new Color(248,177,57));
+        pnServicios.setBackground(Control.color_Body);
         lbServicio.setForeground(new Color(23,23,23));
         lbServicio.setFont(new java.awt.Font("Leelawadee UI Semilight", 1, 16));
-        lbServicio.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(248,177,57)));
+        lbServicio.setBorder(javax.swing.BorderFactory.createLineBorder(Control.color_Body));
     }//GEN-LAST:event_lbServicioMouseEntered
     private void lbServicioMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbServicioMouseExited
         pnServicios.setBackground(new Color(13, 39, 70));

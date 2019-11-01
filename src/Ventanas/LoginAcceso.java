@@ -44,7 +44,6 @@ public class LoginAcceso extends javax.swing.JFrame {
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 494, 450));
 
-        jPanel2.setBackground(new java.awt.Color(248, 177, 57));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lbVerContra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/visible.png"))); // NOI18N
@@ -57,13 +56,13 @@ public class LoginAcceso extends javax.swing.JFrame {
         jPanel2.add(lbVerContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 220, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setForeground(new java.awt.Color(23, 23, 23));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Contraseña");
         jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(55, 200, 200, 20));
 
         jLabel3.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setForeground(new java.awt.Color(23, 23, 23));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Nombre de Usuario");
         jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(55, 100, 200, 20));
@@ -78,6 +77,7 @@ public class LoginAcceso extends javax.swing.JFrame {
         });
         jPanel2.add(username, new org.netbeans.lib.awtextra.AbsoluteConstraints(55, 120, 200, 30));
 
+        btIngresar.setBackground(new java.awt.Color(248, 177, 57));
         btIngresar.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 18)); // NOI18N
         btIngresar.setForeground(new java.awt.Color(23, 23, 23));
         btIngresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/login.png"))); // NOI18N
