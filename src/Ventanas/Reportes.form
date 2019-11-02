@@ -86,6 +86,11 @@
       </SubComponents>
     </Container>
     <Container class="javax.swing.JPanel" name="jPanel2">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+        </Property>
+      </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
           <AbsoluteConstraints x="844" y="46" width="522" height="674"/>
@@ -98,6 +103,9 @@
       <SubComponents>
         <Container class="javax.swing.JPanel" name="pnComprobante">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                 <TitledBorder title="COMPROBANTES DE VENTA">
@@ -106,7 +114,7 @@
                       <Color PropertyName="color" blue="17" green="17" red="17" type="rgb"/>
                     </LineBorder>
                   </Border>
-                  <Font PropertyName="font" name="Leelawadee UI Semilight" size="12" style="1"/>
+                  <Font PropertyName="font" name="Arial" size="12" style="1"/>
                 </TitledBorder>
               </Border>
             </Property>
@@ -147,7 +155,7 @@
                 <Component class="javax.swing.JLabel" name="lbBoleta">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Leelawadee UI Semilight" size="14" style="1"/>
+                      <Font name="Arial" size="12" style="1"/>
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="0"/>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -199,7 +207,7 @@
                 <Component class="javax.swing.JLabel" name="lbFactura">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Leelawadee UI Semilight" size="14" style="1"/>
+                      <Font name="Arial" size="12" style="1"/>
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="0"/>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -229,6 +237,9 @@
         </Container>
         <Container class="javax.swing.JPanel" name="pnIngresos">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                 <TitledBorder title="INGRESOS">
@@ -237,7 +248,7 @@
                       <Color PropertyName="color" blue="17" green="17" red="17" type="rgb"/>
                     </LineBorder>
                   </Border>
-                  <Font PropertyName="font" name="Leelawadee UI Semilight" size="12" style="1"/>
+                  <Font PropertyName="font" name="Arial" size="12" style="1"/>
                 </TitledBorder>
               </Border>
             </Property>
@@ -278,7 +289,7 @@
                 <Component class="javax.swing.JLabel" name="lbMensual">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Leelawadee UI Semilight" size="12" style="1"/>
+                      <Font name="Arial" size="12" style="1"/>
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="0"/>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -330,7 +341,7 @@
                 <Component class="javax.swing.JLabel" name="lbAnual">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Leelawadee UI Semilight" size="12" style="1"/>
+                      <Font name="Arial" size="12" style="1"/>
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="0"/>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -360,6 +371,9 @@
         </Container>
         <Container class="javax.swing.JPanel" name="pnOtros">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                 <TitledBorder title="OTROS">
@@ -368,7 +382,7 @@
                       <Color PropertyName="color" blue="17" green="17" red="17" type="rgb"/>
                     </LineBorder>
                   </Border>
-                  <Font PropertyName="font" name="Leelawadee UI Semilight" size="12" style="1"/>
+                  <Font PropertyName="font" name="Arial" size="12" style="1"/>
                 </TitledBorder>
               </Border>
             </Property>
@@ -409,7 +423,7 @@
                 <Component class="javax.swing.JLabel" name="lbMensual1">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Leelawadee UI Semilight" size="12" style="1"/>
+                      <Font name="Arial" size="12" style="1"/>
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="0"/>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -461,7 +475,7 @@
                 <Component class="javax.swing.JLabel" name="lbAnual1">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Leelawadee UI Semilight" size="12" style="1"/>
+                      <Font name="Arial" size="12" style="1"/>
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="0"/>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -513,7 +527,7 @@
                 <Component class="javax.swing.JLabel" name="lbMensual2">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Leelawadee UI Semilight" size="12" style="1"/>
+                      <Font name="Arial" size="12" style="1"/>
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="0"/>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -565,7 +579,7 @@
                 <Component class="javax.swing.JLabel" name="lbMensual3">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Leelawadee UI Semilight" size="12" style="1"/>
+                      <Font name="Arial" size="12" style="1"/>
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="0"/>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">

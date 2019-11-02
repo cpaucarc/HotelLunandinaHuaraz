@@ -68,6 +68,8 @@ public class Habitaciones extends javax.swing.JFrame {
                 panel_Hab[i].setBounds((292 * k + 132), 170, 160, 90);
             }
             
+            panel_Hab[i].setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+            
             if (i < 8){
                 pnPiso1.add(panel_Hab[i]);
             } else {
@@ -96,13 +98,13 @@ public class Habitaciones extends javax.swing.JFrame {
             }
         }
     }
-    public void AddLabelInPanel(){
+    public void AddLabelInPanel(){ //Añade el numero de habitacion
         for (int i=0; i<16; i++){
             label_Hab[i] = new JLabel();
             if(i<8){
-                label_Hab[i].setText("10"+i);
+                label_Hab[i].setText("20"+(i+1));
             }else{
-                label_Hab[i].setText("20"+(i-8));
+                label_Hab[i].setText("30"+(i-8+1));
             }
             label_Hab[i].setBounds(10,10,78,70);
             label_Hab[i].setFont(new java.awt.Font("Arial Black", 0, 36)); // NOI18N
@@ -208,13 +210,16 @@ public class Habitaciones extends javax.swing.JFrame {
 
         getContentPane().add(pnTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1366, -1));
 
+        jTabbedPane1.setBackground(new java.awt.Color(255, 255, 255));
         jTabbedPane1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(23, 23, 23)));
         jTabbedPane1.setTabLayoutPolicy(javax.swing.JTabbedPane.SCROLL_TAB_LAYOUT);
         jTabbedPane1.setTabPlacement(javax.swing.JTabbedPane.LEFT);
-        jTabbedPane1.setFont(new java.awt.Font("Leelawadee UI", 0, 14)); // NOI18N
+        jTabbedPane1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+
+        pnPiso1.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Lunandina/nivel1.png"))); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Lunandina/nivel2.png"))); // NOI18N
 
         javax.swing.GroupLayout pnPiso1Layout = new javax.swing.GroupLayout(pnPiso1);
         pnPiso1.setLayout(pnPiso1Layout);
@@ -233,10 +238,12 @@ public class Habitaciones extends javax.swing.JFrame {
                 .addGap(43, 43, 43))
         );
 
-        jTabbedPane1.addTab("<html><center>N<br>I<br>V<br>E<br>L<br><b>1<b><br></center></html>", pnPiso1);
+        jTabbedPane1.addTab("<html><center>N<br>I<br>V<br>E<br>L<br><br><b>2<b><br></center></html>", pnPiso1);
+
+        pnPiso2.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Lunandina/nivel2.png"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Lunandina/nivel3.png"))); // NOI18N
 
         javax.swing.GroupLayout pnPiso2Layout = new javax.swing.GroupLayout(pnPiso2);
         pnPiso2.setLayout(pnPiso2Layout);
@@ -253,19 +260,21 @@ public class Habitaciones extends javax.swing.JFrame {
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jTabbedPane1.addTab("<html><center>N<br>I<br>V<br>E<br>L<br><br><b>2<b><br></center></html>", pnPiso2);
+        jTabbedPane1.addTab("<html><center>N<br>I<br>V<br>E<br>L<br><br><b>3<b><br></center></html>", pnPiso2);
 
         getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 46, 1366, 300));
         jTabbedPane1.getAccessibleContext().setAccessibleName("<html><center>I<br>N<br>I<br>C<br>I<br>O</center></html>");
 
+        pnInfo.setBackground(new java.awt.Color(255, 255, 255));
         pnInfo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        pnDatosHab.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "DATOS DE LA HABITACIÓN", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Leelawadee UI Semilight", 1, 12))); // NOI18N
+        pnDatosHab.setBackground(new java.awt.Color(255, 255, 255));
+        pnDatosHab.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "DATOS DE LA HABITACIÓN", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 12))); // NOI18N
         pnDatosHab.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel4.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel4.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
-        jLabel4.setText("PRECIO");
+        jLabel4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel4.setText("Precio");
         pnDatosHab.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, 110, 30));
 
         lbNumHab.setFont(new java.awt.Font("Leelawadee UI Semilight", 1, 14)); // NOI18N
@@ -274,8 +283,8 @@ public class Habitaciones extends javax.swing.JFrame {
         pnDatosHab.add(lbNumHab, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 40, 200, 30));
 
         jLabel7.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel7.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
-        jLabel7.setText("N° HABITACION ");
+        jLabel7.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel7.setText("N° de Habitacion");
         pnDatosHab.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 110, 30));
 
         lbTipoHab.setFont(new java.awt.Font("Leelawadee UI Semilight", 1, 14)); // NOI18N
@@ -284,27 +293,35 @@ public class Habitaciones extends javax.swing.JFrame {
         pnDatosHab.add(lbTipoHab, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 95, 200, 30));
 
         jLabel8.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel8.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
-        jLabel8.setText("TIPO");
+        jLabel8.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel8.setText("Tipo Habitacion");
         pnDatosHab.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 95, 110, 30));
 
+        jButton1.setBackground(new java.awt.Color(111, 168, 183));
+        jButton1.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/pdf.png"))); // NOI18N
         jButton1.setText("Generar Comprobante");
-        pnDatosHab.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 205, 320, 30));
+        pnDatosHab.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 205, 320, 35));
 
         txPrecio.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txPrecio.setSelectionColor(new java.awt.Color(0, 122, 255));
         pnDatosHab.add(txPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 150, 200, 30));
 
-        jButton2.setText("Check-Out");
-        pnDatosHab.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, 320, 30));
+        jButton2.setBackground(new java.awt.Color(234, 82, 62));
+        jButton2.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/exit.png"))); // NOI18N
+        jButton2.setText("Check - Out");
+        pnDatosHab.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, 320, 35));
 
         pnInfo.add(pnDatosHab, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 380, 330));
 
-        pnCliente.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "DATOS DEL CLIENTE", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Leelawadee UI Semilight", 1, 12))); // NOI18N
+        pnCliente.setBackground(new java.awt.Color(255, 255, 255));
+        pnCliente.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "DATOS DEL CLIENTE", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 12))); // NOI18N
         pnCliente.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel6.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel6.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
-        jLabel6.setText("NOMBRES");
+        jLabel6.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel6.setText("Nombres");
         pnCliente.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, 100, 30));
 
         lbEMail.setFont(new java.awt.Font("Leelawadee UI Semilight", 1, 14)); // NOI18N
@@ -313,7 +330,7 @@ public class Habitaciones extends javax.swing.JFrame {
         pnCliente.add(lbEMail, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 260, 250, 30));
 
         jLabel9.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel9.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
+        jLabel9.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel9.setText("DNI");
         pnCliente.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 100, 30));
 
@@ -323,8 +340,8 @@ public class Habitaciones extends javax.swing.JFrame {
         pnCliente.add(lbDNI, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 40, 250, 30));
 
         jLabel10.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel10.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
-        jLabel10.setText("APELLIDOS");
+        jLabel10.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel10.setText("Apellidos");
         pnCliente.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 95, 100, 30));
 
         lbApellidos.setFont(new java.awt.Font("Leelawadee UI Semilight", 1, 14)); // NOI18N
@@ -333,8 +350,8 @@ public class Habitaciones extends javax.swing.JFrame {
         pnCliente.add(lbApellidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 95, 250, 30));
 
         jLabel11.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel11.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
-        jLabel11.setText("E-MAIL");
+        jLabel11.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel11.setText("E-mail");
         pnCliente.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, 100, 30));
 
         lbNombres.setFont(new java.awt.Font("Leelawadee UI Semilight", 1, 14)); // NOI18N
@@ -348,13 +365,14 @@ public class Habitaciones extends javax.swing.JFrame {
         pnCliente.add(lbProcedencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 205, 250, 30));
 
         jLabel12.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel12.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
-        jLabel12.setText("PROCEDENCIA");
+        jLabel12.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel12.setText("Procedencia");
         pnCliente.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 205, 100, 30));
 
         pnInfo.add(pnCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 20, 430, 330));
 
-        pnServicios.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "SERVICIOS RECIBIDOS", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Leelawadee UI Semilight", 1, 12))); // NOI18N
+        pnServicios.setBackground(new java.awt.Color(255, 255, 255));
+        pnServicios.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "SERVICIOS RECIBIDOS", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 12))); // NOI18N
         pnServicios.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tablaServicios.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
@@ -374,13 +392,12 @@ public class Habitaciones extends javax.swing.JFrame {
 
         pnServicios.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 326, 205));
 
-        jLabel13.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
+        jLabel13.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel13.setText("Total  S/.");
         pnServicios.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, 108, 30));
 
         jLabel14.setFont(new java.awt.Font("Leelawadee UI Semilight", 1, 14)); // NOI18N
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel14.setText("jLabel14");
         jLabel14.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         pnServicios.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(138, 260, 218, 30));
 

@@ -28,6 +28,7 @@ public class Reserva extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel2 = new javax.swing.JPanel();
+        lbLimpiar = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabelDNI2 = new javax.swing.JLabel();
         jtxtdni = new javax.swing.JTextField();
@@ -39,8 +40,6 @@ public class Reserva extends javax.swing.JFrame {
         jtxtdni3 = new javax.swing.JTextField();
         jtxtdni4 = new javax.swing.JTextField();
         jLabelDNI6 = new javax.swing.JLabel();
-        jLabelDNI7 = new javax.swing.JLabel();
-        jtxtdni5 = new javax.swing.JTextField();
         jLabelDNI12 = new javax.swing.JLabel();
         jtxtdni10 = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
@@ -74,117 +73,118 @@ public class Reserva extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        lbLimpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/limpiar.png"))); // NOI18N
+        lbLimpiar.setToolTipText("Limpiar formularios");
+        lbLimpiar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel2.add(lbLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(461, 0, -1, -1));
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)), "DATOS DEL CLIENTE", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Leelawadee UI Semilight", 1, 12))); // NOI18N
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabelDNI2.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
+        jLabelDNI2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabelDNI2.setText("DNI");
-        jPanel1.add(jLabelDNI2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 25, 120, 30));
+        jPanel1.add(jLabelDNI2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 120, 30));
 
         jtxtdni.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
         jtxtdni.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jtxtdni.setSelectionColor(new java.awt.Color(0, 122, 255));
         jtxtdni.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jtxtdniKeyTyped(evt);
             }
         });
-        jPanel1.add(jtxtdni, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 25, 280, 30));
+        jPanel1.add(jtxtdni, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 30, 280, 30));
 
         jLabelDNI3.setBackground(new java.awt.Color(255, 255, 255));
-        jLabelDNI3.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
-        jLabelDNI3.setText("A. PATERNO");
+        jLabelDNI3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabelDNI3.setText("A. Paterno");
         jLabelDNI3.setToolTipText("");
-        jPanel1.add(jLabelDNI3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 75, 120, 30));
+        jPanel1.add(jLabelDNI3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 85, 120, 30));
 
         jtxtdni1.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
         jtxtdni1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jtxtdni1.setSelectionColor(new java.awt.Color(0, 122, 255));
         jtxtdni1.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jtxtdni1KeyTyped(evt);
             }
         });
-        jPanel1.add(jtxtdni1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 75, 280, 30));
+        jPanel1.add(jtxtdni1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 85, 280, 30));
 
         jtxtdni2.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
         jtxtdni2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jtxtdni2.setSelectionColor(new java.awt.Color(0, 122, 255));
         jtxtdni2.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jtxtdni2KeyTyped(evt);
             }
         });
-        jPanel1.add(jtxtdni2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 125, 280, 30));
+        jPanel1.add(jtxtdni2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 140, 280, 30));
 
-        jLabelDNI4.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
-        jLabelDNI4.setText("NOMBRES");
-        jPanel1.add(jLabelDNI4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 175, 120, 30));
+        jLabelDNI4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabelDNI4.setText("Nombres");
+        jPanel1.add(jLabelDNI4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 195, 120, 30));
 
-        jLabelDNI5.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
-        jLabelDNI5.setText("TELEFONO");
-        jPanel1.add(jLabelDNI5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 225, 120, 30));
+        jLabelDNI5.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabelDNI5.setText("Procedencia");
+        jPanel1.add(jLabelDNI5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, 120, 30));
 
         jtxtdni3.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
         jtxtdni3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jtxtdni3.setSelectionColor(new java.awt.Color(0, 122, 255));
         jtxtdni3.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jtxtdni3KeyTyped(evt);
             }
         });
-        jPanel1.add(jtxtdni3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 175, 280, 30));
+        jPanel1.add(jtxtdni3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 195, 280, 30));
 
         jtxtdni4.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
         jtxtdni4.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jtxtdni4.setSelectionColor(new java.awt.Color(0, 122, 255));
         jtxtdni4.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jtxtdni4KeyTyped(evt);
             }
         });
-        jPanel1.add(jtxtdni4, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 225, 280, 30));
+        jPanel1.add(jtxtdni4, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 250, 280, 30));
 
-        jLabelDNI6.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
-        jLabelDNI6.setText("PROCEDENCIA");
-        jPanel1.add(jLabelDNI6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 275, 120, 30));
-
-        jLabelDNI7.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
-        jLabelDNI7.setText("E-MAIL");
-        jPanel1.add(jLabelDNI7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 325, 120, 30));
-
-        jtxtdni5.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
-        jtxtdni5.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jtxtdni5.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jtxtdni5KeyTyped(evt);
-            }
-        });
-        jPanel1.add(jtxtdni5, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 325, 280, 30));
+        jLabelDNI6.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabelDNI6.setText("E-mail");
+        jPanel1.add(jLabelDNI6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 305, 120, 30));
 
         jLabelDNI12.setBackground(new java.awt.Color(255, 255, 255));
-        jLabelDNI12.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
-        jLabelDNI12.setText("A. MATERNO");
+        jLabelDNI12.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabelDNI12.setText("A. Materno");
         jLabelDNI12.setToolTipText("");
-        jPanel1.add(jLabelDNI12, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 125, 120, 30));
+        jPanel1.add(jLabelDNI12, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 120, 30));
 
         jtxtdni10.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
         jtxtdni10.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jtxtdni10.setSelectionColor(new java.awt.Color(0, 122, 255));
         jtxtdni10.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jtxtdni10KeyTyped(evt);
             }
         });
-        jPanel1.add(jtxtdni10, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 275, 280, 30));
+        jPanel1.add(jtxtdni10, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 305, 280, 30));
 
-        jPanel2.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 461, 375));
+        jPanel2.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 461, 365));
 
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)), "DATOS DE A HABITACION", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Leelawadee UI Semilight", 1, 12))); // NOI18N
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabelDNI9.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
-        jLabelDNI9.setText("N° HABITACIÓN");
-        jPanel3.add(jLabelDNI9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 75, 120, 30));
+        jLabelDNI9.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabelDNI9.setText("N° de Habitacion");
+        jPanel3.add(jLabelDNI9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 75, 120, 30));
 
-        jLabelDNI10.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
-        jLabelDNI10.setText("TIPO HABITACIÓN");
+        jLabelDNI10.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabelDNI10.setText("Tipo Habitacion");
         jPanel3.add(jLabelDNI10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 25, 120, 30));
 
         jLabelDNI14.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
@@ -214,7 +214,7 @@ public class Reserva extends javax.swing.JFrame {
         jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 535, 336, 120));
 
         jbuttoncrear.setBackground(new java.awt.Color(0, 153, 153));
-        jbuttoncrear.setFont(new java.awt.Font("Leelawadee UI Semilight", 1, 12)); // NOI18N
+        jbuttoncrear.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jbuttoncrear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/agregar.png"))); // NOI18N
         jbuttoncrear.setText("Registrar");
         jbuttoncrear.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -227,7 +227,7 @@ public class Reserva extends javax.swing.JFrame {
         jPanel2.add(jbuttoncrear, new org.netbeans.lib.awtextra.AbsoluteConstraints(381, 430, 110, 55));
 
         jButton2.setBackground(new java.awt.Color(0, 153, 153));
-        jButton2.setFont(new java.awt.Font("Leelawadee UI Semilight", 1, 12)); // NOI18N
+        jButton2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/modificar.png"))); // NOI18N
         jButton2.setText("Modificar");
         jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -240,7 +240,7 @@ public class Reserva extends javax.swing.JFrame {
         jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(381, 495, 110, 55));
 
         jButton3.setBackground(new java.awt.Color(0, 153, 153));
-        jButton3.setFont(new java.awt.Font("Leelawadee UI Semilight", 1, 12)); // NOI18N
+        jButton3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/eliminar.png"))); // NOI18N
         jButton3.setText("Eliminar");
         jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -252,20 +252,24 @@ public class Reserva extends javax.swing.JFrame {
         });
         jPanel2.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(381, 575, 110, 55));
 
+        jPanel7.setBackground(new java.awt.Color(255, 255, 255));
         jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)), "FECHA", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Leelawadee UI Semilight", 1, 12))); // NOI18N
         jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabelDNI8.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
-        jLabelDNI8.setText("F. ENTRADA ");
+        jLabelDNI8.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabelDNI8.setText("F. Entrada");
         jPanel7.add(jLabelDNI8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 25, 120, 30));
 
-        jLabelDNI11.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
-        jLabelDNI11.setText("F. SALIDA");
+        jLabelDNI11.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabelDNI11.setText("F. Salida");
         jPanel7.add(jLabelDNI11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 75, 120, 30));
 
+        jDateChooser1.setBackground(new java.awt.Color(255, 255, 255));
         jDateChooser1.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
         jPanel7.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 75, 156, 30));
 
+        jDateChooser2.setBackground(new java.awt.Color(255, 255, 255));
+        jDateChooser2.setAutoscrolls(true);
         jDateChooser2.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
         jPanel7.add(jDateChooser2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 25, 156, 30));
 
@@ -291,8 +295,10 @@ public class Reserva extends javax.swing.JFrame {
 
         getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1366, 46));
 
+        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jPanel6.setBackground(new java.awt.Color(255, 255, 255));
         jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)), "RESERVAS REGISTRADAS", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Leelawadee UI Semilight", 1, 12))); // NOI18N
         jPanel6.setForeground(new java.awt.Color(255, 255, 255));
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -315,7 +321,7 @@ public class Reserva extends javax.swing.JFrame {
 
         jPanel6.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 724, 490));
 
-        jLabelDNI16.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
+        jLabelDNI16.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabelDNI16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelDNI16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/buscar.png"))); // NOI18N
         jLabelDNI16.setText("Buscar");
@@ -323,6 +329,7 @@ public class Reserva extends javax.swing.JFrame {
 
         jtxtdni9.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
         jtxtdni9.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jtxtdni9.setSelectionColor(new java.awt.Color(0, 122, 255));
         jtxtdni9.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jtxtdni9KeyTyped(evt);
@@ -330,6 +337,7 @@ public class Reserva extends javax.swing.JFrame {
         });
         jPanel6.add(jtxtdni9, new org.netbeans.lib.awtextra.AbsoluteConstraints(147, 40, 350, 30));
 
+        jDateChooser3.setBackground(new java.awt.Color(255, 255, 255));
         jDateChooser3.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
         jPanel6.add(jDateChooser3, new org.netbeans.lib.awtextra.AbsoluteConstraints(527, 40, 200, 30));
 
@@ -356,14 +364,6 @@ public class Reserva extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jtxtdni3KeyTyped
 
-    private void jtxtdni4KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtdni4KeyTyped
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtxtdni4KeyTyped
-
-    private void jtxtdni5KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtdni5KeyTyped
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtxtdni5KeyTyped
-
     private void jtxtdni8KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtdni8KeyTyped
         // TODO add your handling code here:
     }//GEN-LAST:event_jtxtdni8KeyTyped
@@ -387,6 +387,10 @@ public class Reserva extends javax.swing.JFrame {
     private void jtxtdni10KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtdni10KeyTyped
         // TODO add your handling code here:
     }//GEN-LAST:event_jtxtdni10KeyTyped
+
+    private void jtxtdni4KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtdni4KeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtxtdni4KeyTyped
 
     /**
      * @param args the command line arguments
@@ -447,7 +451,6 @@ public class Reserva extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelDNI4;
     private javax.swing.JLabel jLabelDNI5;
     private javax.swing.JLabel jLabelDNI6;
-    private javax.swing.JLabel jLabelDNI7;
     private javax.swing.JLabel jLabelDNI8;
     private javax.swing.JLabel jLabelDNI9;
     private javax.swing.JPanel jPanel1;
@@ -465,9 +468,9 @@ public class Reserva extends javax.swing.JFrame {
     private javax.swing.JTextField jtxtdni2;
     private javax.swing.JTextField jtxtdni3;
     private javax.swing.JTextField jtxtdni4;
-    private javax.swing.JTextField jtxtdni5;
     private javax.swing.JTextField jtxtdni8;
     private javax.swing.JTextField jtxtdni9;
+    private javax.swing.JLabel lbLimpiar;
     private javax.swing.JLabel lbUserActual;
     private javax.swing.JTable tabla;
     // End of variables declaration//GEN-END:variables

@@ -68,16 +68,18 @@ public class Reportes extends javax.swing.JFrame {
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1366, 46));
 
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        pnComprobante.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(23, 23, 23)), "COMPROBANTES DE VENTA", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Leelawadee UI Semilight", 1, 12))); // NOI18N
+        pnComprobante.setBackground(new java.awt.Color(255, 255, 255));
+        pnComprobante.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(23, 23, 23)), "COMPROBANTES DE VENTA", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 12))); // NOI18N
         pnComprobante.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         pnBoleta.setBackground(new java.awt.Color(204, 204, 204));
         pnBoleta.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(23, 23, 23)));
         pnBoleta.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lbBoleta.setFont(new java.awt.Font("Leelawadee UI Semilight", 1, 14)); // NOI18N
+        lbBoleta.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         lbBoleta.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbBoleta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/boleta.png"))); // NOI18N
         lbBoleta.setText("BOLETA DE VENTA");
@@ -103,7 +105,7 @@ public class Reportes extends javax.swing.JFrame {
         pnFactura.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(23, 23, 23)));
         pnFactura.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lbFactura.setFont(new java.awt.Font("Leelawadee UI Semilight", 1, 14)); // NOI18N
+        lbFactura.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         lbFactura.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbFactura.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/factura.png"))); // NOI18N
         lbFactura.setText("FACTURA");
@@ -127,14 +129,15 @@ public class Reportes extends javax.swing.JFrame {
 
         jPanel2.add(pnComprobante, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 25, 460, 150));
 
-        pnIngresos.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(23, 23, 23)), "INGRESOS", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Leelawadee UI Semilight", 1, 12))); // NOI18N
+        pnIngresos.setBackground(new java.awt.Color(255, 255, 255));
+        pnIngresos.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(23, 23, 23)), "INGRESOS", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 12))); // NOI18N
         pnIngresos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         pnMensual.setBackground(new java.awt.Color(204, 204, 204));
         pnMensual.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(23, 23, 23)));
         pnMensual.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lbMensual.setFont(new java.awt.Font("Leelawadee UI Semilight", 1, 12)); // NOI18N
+        lbMensual.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         lbMensual.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbMensual.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/dineroMensual.png"))); // NOI18N
         lbMensual.setText("INGRESOS MENSUALES");
@@ -160,7 +163,7 @@ public class Reportes extends javax.swing.JFrame {
         pnAnual.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(23, 23, 23)));
         pnAnual.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lbAnual.setFont(new java.awt.Font("Leelawadee UI Semilight", 1, 12)); // NOI18N
+        lbAnual.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         lbAnual.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbAnual.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/dineroAnual.png"))); // NOI18N
         lbAnual.setText("INGRESOS ANUALES");
@@ -184,14 +187,15 @@ public class Reportes extends javax.swing.JFrame {
 
         jPanel2.add(pnIngresos, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 205, 460, 150));
 
-        pnOtros.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(23, 23, 23)), "OTROS", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Leelawadee UI Semilight", 1, 12))); // NOI18N
+        pnOtros.setBackground(new java.awt.Color(255, 255, 255));
+        pnOtros.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(23, 23, 23)), "OTROS", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 12))); // NOI18N
         pnOtros.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         pnMensual1.setBackground(new java.awt.Color(204, 204, 204));
         pnMensual1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(23, 23, 23)));
         pnMensual1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lbMensual1.setFont(new java.awt.Font("Leelawadee UI Semilight", 1, 12)); // NOI18N
+        lbMensual1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         lbMensual1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbMensual1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/dineroMensual.png"))); // NOI18N
         lbMensual1.setText("INGRESOS MENSUALES");
@@ -217,7 +221,7 @@ public class Reportes extends javax.swing.JFrame {
         pnAnual1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(23, 23, 23)));
         pnAnual1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lbAnual1.setFont(new java.awt.Font("Leelawadee UI Semilight", 1, 12)); // NOI18N
+        lbAnual1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         lbAnual1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbAnual1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/dineroAnual.png"))); // NOI18N
         lbAnual1.setText("INGRESOS ANUALES");
@@ -243,7 +247,7 @@ public class Reportes extends javax.swing.JFrame {
         pnMensual2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(23, 23, 23)));
         pnMensual2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lbMensual2.setFont(new java.awt.Font("Leelawadee UI Semilight", 1, 12)); // NOI18N
+        lbMensual2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         lbMensual2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbMensual2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/dineroMensual.png"))); // NOI18N
         lbMensual2.setText("INGRESOS MENSUALES");
@@ -269,7 +273,7 @@ public class Reportes extends javax.swing.JFrame {
         pnMensual3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(23, 23, 23)));
         pnMensual3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lbMensual3.setFont(new java.awt.Font("Leelawadee UI Semilight", 1, 12)); // NOI18N
+        lbMensual3.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         lbMensual3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbMensual3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/dineroMensual.png"))); // NOI18N
         lbMensual3.setText("INGRESOS MENSUALES");
