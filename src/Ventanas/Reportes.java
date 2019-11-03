@@ -8,6 +8,8 @@ public class Reportes extends javax.swing.JFrame {
 
     Facturas factura=new Facturas();
     Boletas boleta=new Boletas();
+    IngresosMensuales inMensual=new IngresosMensuales();
+    IngresosAnuales inAnual =new IngresosAnuales();
     
     
     public Reportes() {
@@ -36,15 +38,14 @@ public class Reportes extends javax.swing.JFrame {
         pnAnual = new javax.swing.JPanel();
         lbAnual = new javax.swing.JLabel();
         pnOtros = new javax.swing.JPanel();
-        pnMensual1 = new javax.swing.JPanel();
-        lbMensual1 = new javax.swing.JLabel();
-        pnAnual1 = new javax.swing.JPanel();
-        lbAnual1 = new javax.swing.JLabel();
-        pnMensual2 = new javax.swing.JPanel();
-        lbMensual2 = new javax.swing.JLabel();
-        pnMensual3 = new javax.swing.JPanel();
-        lbMensual3 = new javax.swing.JLabel();
-        referencia = new javax.swing.JLabel();
+        pnLugar = new javax.swing.JPanel();
+        lbLugar = new javax.swing.JLabel();
+        pnServicio = new javax.swing.JPanel();
+        lbServicio = new javax.swing.JLabel();
+        pnCliente = new javax.swing.JPanel();
+        lbCliente = new javax.swing.JLabel();
+        pnAlojamiento = new javax.swing.JPanel();
+        lbAlojamiento = new javax.swing.JLabel();
         desktop = new javax.swing.JDesktopPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -191,114 +192,111 @@ public class Reportes extends javax.swing.JFrame {
         pnOtros.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(23, 23, 23)), "OTROS", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 12))); // NOI18N
         pnOtros.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        pnMensual1.setBackground(new java.awt.Color(204, 204, 204));
-        pnMensual1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(23, 23, 23)));
-        pnMensual1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        pnLugar.setBackground(new java.awt.Color(204, 204, 204));
+        pnLugar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(23, 23, 23)));
+        pnLugar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lbMensual1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        lbMensual1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbMensual1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/dineroMensual.png"))); // NOI18N
-        lbMensual1.setText("INGRESOS MENSUALES");
-        lbMensual1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lbMensual1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        lbMensual1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        lbMensual1.addMouseListener(new java.awt.event.MouseAdapter() {
+        lbLugar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        lbLugar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbLugar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/procedencia50.png"))); // NOI18N
+        lbLugar.setText("LUGAR DE PROCEDENCIA");
+        lbLugar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lbLugar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        lbLugar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        lbLugar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lbMensual1MouseClicked(evt);
+                lbLugarMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                lbMensual1MouseEntered(evt);
+                lbLugarMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                lbMensual1MouseExited(evt);
+                lbLugarMouseExited(evt);
             }
         });
-        pnMensual1.add(lbMensual1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 150, 80));
+        pnLugar.add(lbLugar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 150, 80));
 
-        pnOtros.add(pnMensual1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 35, 150, 80));
+        pnOtros.add(pnLugar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 35, 150, 80));
 
-        pnAnual1.setBackground(new java.awt.Color(204, 204, 204));
-        pnAnual1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(23, 23, 23)));
-        pnAnual1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        pnServicio.setBackground(new java.awt.Color(204, 204, 204));
+        pnServicio.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(23, 23, 23)));
+        pnServicio.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lbAnual1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        lbAnual1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbAnual1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/dineroAnual.png"))); // NOI18N
-        lbAnual1.setText("INGRESOS ANUALES");
-        lbAnual1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lbAnual1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        lbAnual1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        lbAnual1.addMouseListener(new java.awt.event.MouseAdapter() {
+        lbServicio.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        lbServicio.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbServicio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/servicio.png"))); // NOI18N
+        lbServicio.setText("SERVICIOS");
+        lbServicio.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lbServicio.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        lbServicio.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        lbServicio.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lbAnual1MouseClicked(evt);
+                lbServicioMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                lbAnual1MouseEntered(evt);
+                lbServicioMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                lbAnual1MouseExited(evt);
+                lbServicioMouseExited(evt);
             }
         });
-        pnAnual1.add(lbAnual1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 150, 80));
+        pnServicio.add(lbServicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 150, 80));
 
-        pnOtros.add(pnAnual1, new org.netbeans.lib.awtextra.AbsoluteConstraints(261, 35, 150, 80));
+        pnOtros.add(pnServicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(261, 35, 150, 80));
 
-        pnMensual2.setBackground(new java.awt.Color(204, 204, 204));
-        pnMensual2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(23, 23, 23)));
-        pnMensual2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        pnCliente.setBackground(new java.awt.Color(204, 204, 204));
+        pnCliente.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(23, 23, 23)));
+        pnCliente.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lbMensual2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        lbMensual2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbMensual2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/dineroMensual.png"))); // NOI18N
-        lbMensual2.setText("INGRESOS MENSUALES");
-        lbMensual2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lbMensual2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        lbMensual2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        lbMensual2.addMouseListener(new java.awt.event.MouseAdapter() {
+        lbCliente.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        lbCliente.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/userLog_B.png"))); // NOI18N
+        lbCliente.setText("CLIENTE");
+        lbCliente.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lbCliente.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        lbCliente.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        lbCliente.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lbMensual2MouseClicked(evt);
+                lbClienteMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                lbMensual2MouseEntered(evt);
+                lbClienteMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                lbMensual2MouseExited(evt);
+                lbClienteMouseExited(evt);
             }
         });
-        pnMensual2.add(lbMensual2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 150, 80));
+        pnCliente.add(lbCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 150, 80));
 
-        pnOtros.add(pnMensual2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, 150, 80));
+        pnOtros.add(pnCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, 150, 80));
 
-        pnMensual3.setBackground(new java.awt.Color(204, 204, 204));
-        pnMensual3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(23, 23, 23)));
-        pnMensual3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        pnAlojamiento.setBackground(new java.awt.Color(204, 204, 204));
+        pnAlojamiento.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(23, 23, 23)));
+        pnAlojamiento.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lbMensual3.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        lbMensual3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbMensual3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/dineroMensual.png"))); // NOI18N
-        lbMensual3.setText("INGRESOS MENSUALES");
-        lbMensual3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lbMensual3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        lbMensual3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        lbMensual3.addMouseListener(new java.awt.event.MouseAdapter() {
+        lbAlojamiento.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        lbAlojamiento.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbAlojamiento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/hotel.png"))); // NOI18N
+        lbAlojamiento.setText("ALOJAMIENTO");
+        lbAlojamiento.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lbAlojamiento.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        lbAlojamiento.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        lbAlojamiento.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lbMensual3MouseClicked(evt);
+                lbAlojamientoMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                lbMensual3MouseEntered(evt);
+                lbAlojamientoMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                lbMensual3MouseExited(evt);
+                lbAlojamientoMouseExited(evt);
             }
         });
-        pnMensual3.add(lbMensual3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 150, 80));
+        pnAlojamiento.add(lbAlojamiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 150, 80));
 
-        pnOtros.add(pnMensual3, new org.netbeans.lib.awtextra.AbsoluteConstraints(261, 150, 150, 80));
+        pnOtros.add(pnAlojamiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(261, 150, 150, 80));
 
         jPanel2.add(pnOtros, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 385, 460, 265));
-
-        referencia.setText("Referencia");
-        jPanel2.add(referencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 650, -1, -1));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(844, 46, 522, 674));
         getContentPane().add(desktop, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 46, 844, 674));
@@ -344,7 +342,11 @@ public class Reportes extends javax.swing.JFrame {
 
     /* INGRESOS MENSUALES */
     private void lbMensualMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbMensualMouseClicked
-        // TODO add your handling code here:
+        desktop.removeAll();
+        desktop.repaint();
+        desktop.add(inMensual);
+        inMensual.setSize(844,674);
+        inMensual.show();
     }//GEN-LAST:event_lbMensualMouseClicked
     private void lbMensualMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbMensualMouseEntered
         pnMensual.setBackground(new java.awt.Color(248, 177, 57));
@@ -355,7 +357,11 @@ public class Reportes extends javax.swing.JFrame {
 
     /* INGRESOS ANUALES */
     private void lbAnualMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbAnualMouseClicked
-        // TODO add your handling code here:
+        desktop.removeAll();
+        desktop.repaint();
+        desktop.add(inAnual);
+        inAnual.setSize(844,674);
+        inAnual.show();
     }//GEN-LAST:event_lbAnualMouseClicked
     private void lbAnualMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbAnualMouseEntered
         pnAnual.setBackground(new java.awt.Color(248, 177, 57));
@@ -364,53 +370,49 @@ public class Reportes extends javax.swing.JFrame {
         pnAnual.setBackground(new java.awt.Color(204,204,204));
     }//GEN-LAST:event_lbAnualMouseExited
 
-    private void lbAnual1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbAnual1MouseClicked
+    /* SERVICIOS */
+    private void lbServicioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbServicioMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_lbAnual1MouseClicked
+    }//GEN-LAST:event_lbServicioMouseClicked
+    private void lbServicioMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbServicioMouseEntered
+        pnServicio.setBackground(new java.awt.Color(248, 177, 57));
+    }//GEN-LAST:event_lbServicioMouseEntered
+    private void lbServicioMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbServicioMouseExited
+        pnServicio.setBackground(new java.awt.Color(204,204,204));
+    }//GEN-LAST:event_lbServicioMouseExited
 
-    private void lbAnual1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbAnual1MouseEntered
+    /* LUGAR DE PROCEDENCIA */
+    private void lbLugarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbLugarMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_lbAnual1MouseEntered
+    }//GEN-LAST:event_lbLugarMouseClicked
+    private void lbLugarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbLugarMouseEntered
+        pnLugar.setBackground(new java.awt.Color(248, 177, 57));
+    }//GEN-LAST:event_lbLugarMouseEntered
+    private void lbLugarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbLugarMouseExited
+        pnLugar.setBackground(new java.awt.Color(204,204,204));
+    }//GEN-LAST:event_lbLugarMouseExited
 
-    private void lbAnual1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbAnual1MouseExited
+    /* CLIENTES */
+    private void lbClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbClienteMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_lbAnual1MouseExited
+    }//GEN-LAST:event_lbClienteMouseClicked
+    private void lbClienteMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbClienteMouseEntered
+        pnCliente.setBackground(new java.awt.Color(248, 177, 57));
+    }//GEN-LAST:event_lbClienteMouseEntered
+    private void lbClienteMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbClienteMouseExited
+        pnCliente.setBackground(new java.awt.Color(204,204,204));
+    }//GEN-LAST:event_lbClienteMouseExited
 
-    private void lbMensual1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbMensual1MouseClicked
+    /* ALOJAMIENTOS */
+    private void lbAlojamientoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbAlojamientoMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_lbMensual1MouseClicked
-
-    private void lbMensual1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbMensual1MouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_lbMensual1MouseEntered
-
-    private void lbMensual1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbMensual1MouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_lbMensual1MouseExited
-
-    private void lbMensual2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbMensual2MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_lbMensual2MouseClicked
-
-    private void lbMensual2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbMensual2MouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_lbMensual2MouseEntered
-
-    private void lbMensual2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbMensual2MouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_lbMensual2MouseExited
-
-    private void lbMensual3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbMensual3MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_lbMensual3MouseClicked
-
-    private void lbMensual3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbMensual3MouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_lbMensual3MouseEntered
-
-    private void lbMensual3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbMensual3MouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_lbMensual3MouseExited
+    }//GEN-LAST:event_lbAlojamientoMouseClicked
+    private void lbAlojamientoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbAlojamientoMouseEntered
+        pnAlojamiento.setBackground(new java.awt.Color(248, 177, 57));
+    }//GEN-LAST:event_lbAlojamientoMouseEntered
+    private void lbAlojamientoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbAlojamientoMouseExited
+        pnAlojamiento.setBackground(new java.awt.Color(204,204,204));
+    }//GEN-LAST:event_lbAlojamientoMouseExited
 
     /**
      * @param args the command line arguments
@@ -453,26 +455,25 @@ public class Reportes extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel lbAlojamiento;
     private javax.swing.JLabel lbAnual;
-    private javax.swing.JLabel lbAnual1;
     private javax.swing.JLabel lbBoleta;
+    private javax.swing.JLabel lbCliente;
     private javax.swing.JLabel lbFactura;
+    private javax.swing.JLabel lbLugar;
     private javax.swing.JLabel lbMensual;
-    private javax.swing.JLabel lbMensual1;
-    private javax.swing.JLabel lbMensual2;
-    private javax.swing.JLabel lbMensual3;
+    private javax.swing.JLabel lbServicio;
     private javax.swing.JLabel lbUserActual;
+    private javax.swing.JPanel pnAlojamiento;
     private javax.swing.JPanel pnAnual;
-    private javax.swing.JPanel pnAnual1;
     private javax.swing.JPanel pnBoleta;
+    private javax.swing.JPanel pnCliente;
     private javax.swing.JPanel pnComprobante;
     private javax.swing.JPanel pnFactura;
     private javax.swing.JPanel pnIngresos;
+    private javax.swing.JPanel pnLugar;
     private javax.swing.JPanel pnMensual;
-    private javax.swing.JPanel pnMensual1;
-    private javax.swing.JPanel pnMensual2;
-    private javax.swing.JPanel pnMensual3;
     private javax.swing.JPanel pnOtros;
-    private javax.swing.JLabel referencia;
+    private javax.swing.JPanel pnServicio;
     // End of variables declaration//GEN-END:variables
 }

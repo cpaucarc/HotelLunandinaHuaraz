@@ -6,12 +6,15 @@
     </Component>
   </NonVisualComponents>
   <Properties>
+    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+    </Property>
     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
       <Border info="null"/>
     </Property>
     <Property name="closable" type="boolean" value="true"/>
     <Property name="maximizable" type="boolean" value="true"/>
-    <Property name="title" type="java.lang.String" value="Boletas de Venta"/>
+    <Property name="title" type="java.lang.String" value="Ingresos Anuales"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -67,7 +70,7 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="30" y="30" width="784" height="200"/>
+              <AbsoluteConstraints x="30" y="30" width="784" height="180"/>
             </Constraint>
           </Constraints>
 
@@ -96,6 +99,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Arial" size="14" style="0"/>
                 </Property>
+                <Property name="horizontalAlignment" type="int" value="0"/>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/Imagenes/Recursos/dinero.png"/>
                 </Property>
@@ -103,23 +107,7 @@
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="107" y="140" width="150" height="30"/>
-                </Constraint>
-              </Constraints>
-            </Component>
-            <Component class="javax.swing.JLabel" name="jLabel3">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Arial" size="14" style="0"/>
-                </Property>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/Imagenes/Recursos/numero.png"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="N&#xb0; Boleta"/>
-              </Properties>
-              <Constraints>
-                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="414" y="30" width="120" height="30"/>
+                  <AbsoluteConstraints x="474" y="40" width="150" height="30"/>
                 </Constraint>
               </Constraints>
             </Component>
@@ -129,13 +117,13 @@
                   <Font name="Arial" size="14" style="0"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/Imagenes/Recursos/calendario.png"/>
+                  <Image iconType="3" name="/Imagenes/Recursos/procedencia.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Fecha"/>
+                <Property name="text" type="java.lang.String" value="Procedencia"/>
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="414" y="85" width="120" height="30"/>
+                  <AbsoluteConstraints x="50" y="75" width="120" height="30"/>
                 </Constraint>
               </Constraints>
             </Component>
@@ -154,7 +142,7 @@
               </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="170" y="30" width="200" height="30"/>
+                  <AbsoluteConstraints x="170" y="75" width="200" height="30"/>
                 </Constraint>
               </Constraints>
             </Component>
@@ -170,38 +158,7 @@
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="377" y="140" width="150" height="30"/>
-                </Constraint>
-              </Constraints>
-            </Component>
-            <Component class="javax.swing.JTextField" name="jTextField3">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Leelawadee UI Semilight" size="14" style="0"/>
-                </Property>
-                <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="selectionColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="7a" red="0" type="rgb"/>
-                </Property>
-              </Properties>
-              <Constraints>
-                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="534" y="30" width="200" height="30"/>
-                </Constraint>
-              </Constraints>
-            </Component>
-            <Component class="com.toedter.calendar.JDateChooser" name="jDateChooser1">
-              <Properties>
-                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                </Property>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Leelawadee UI Semilight" size="14" style="0"/>
-                </Property>
-              </Properties>
-              <Constraints>
-                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="534" y="85" width="200" height="30"/>
+                  <AbsoluteConstraints x="534" y="95" width="150" height="30"/>
                 </Constraint>
               </Constraints>
             </Component>
@@ -220,7 +177,7 @@
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="257" y="140" width="120" height="30"/>
+                  <AbsoluteConstraints x="414" y="75" width="120" height="30"/>
                 </Constraint>
               </Constraints>
             </Component>
@@ -239,23 +196,7 @@
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="527" y="140" width="120" height="30"/>
-                </Constraint>
-              </Constraints>
-            </Component>
-            <Component class="javax.swing.JTextField" name="jTextField4">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Leelawadee UI Semilight" size="14" style="0"/>
-                </Property>
-                <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="selectionColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="7a" red="0" type="rgb"/>
-                </Property>
-              </Properties>
-              <Constraints>
-                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="170" y="85" width="200" height="30"/>
+                  <AbsoluteConstraints x="414" y="120" width="120" height="30"/>
                 </Constraint>
               </Constraints>
             </Component>
@@ -265,13 +206,39 @@
                   <Font name="Arial" size="14" style="0"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/Imagenes/Recursos/procedencia.png"/>
+                  <Image iconType="3" name="/Imagenes/Recursos/calendario.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Procedencia"/>
+                <Property name="text" type="java.lang.String" value="A&#xf1;o"/>
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="50" y="85" width="120" height="30"/>
+                  <AbsoluteConstraints x="50" y="120" width="70" height="30"/>
+                </Constraint>
+              </Constraints>
+            </Component>
+            <Component class="javax.swing.JTextField" name="jTextField3">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Leelawadee UI Semilight" size="14" style="0"/>
+                </Property>
+                <Property name="horizontalAlignment" type="int" value="0"/>
+                <Property name="selectionColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="7a" red="0" type="rgb"/>
+                </Property>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField3ActionPerformed"/>
+              </Events>
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                  <AbsoluteConstraints x="170" y="30" width="200" height="30"/>
+                </Constraint>
+              </Constraints>
+            </Component>
+            <Component class="com.toedter.calendar.JYearChooser" name="jYearChooser1">
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                  <AbsoluteConstraints x="170" y="120" width="100" height="30"/>
                 </Constraint>
               </Constraints>
             </Component>
@@ -284,7 +251,7 @@
             </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                <TitledBorder title="BOLETAS DE VENTA REGISTRADAS">
+                <TitledBorder title="INGRESOS REGISTRADOS">
                   <Border PropertyName="innerBorder" info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
                     <LineBorder/>
                   </Border>
@@ -295,7 +262,7 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="30" y="270" width="784" height="354"/>
+              <AbsoluteConstraints x="30" y="250" width="784" height="374"/>
             </Constraint>
           </Constraints>
 
@@ -309,7 +276,7 @@
               </AuxValues>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="50" y="40" width="684" height="214"/>
+                  <AbsoluteConstraints x="50" y="40" width="684" height="234"/>
                 </Constraint>
               </Constraints>
 
@@ -321,45 +288,45 @@
                       <Font name="Leelawadee UI Semilight" size="14" style="0"/>
                     </Property>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="6" rowCount="4">
-                        <Column editable="true" title="N&#xb0; Boleta" type="java.lang.Object">
-                          <Data value="0001"/>
-                          <Data value="0002"/>
-                          <Data value="0003"/>
-                          <Data value="null"/>
-                        </Column>
+                      <Table columnCount="5" rowCount="5">
                         <Column editable="true" title="Fecha" type="java.lang.Object">
-                          <Data value="22-10-2015"/>
-                          <Data value="23-10-2016"/>
-                          <Data value="23-12-2018"/>
-                          <Data value="null"/>
+                          <Data value="22-10-2018"/>
+                          <Data value="23-10-2018"/>
+                          <Data value="23-10-2018"/>
+                          <Data value="23-10-2018"/>
+                          <Data value="24-10-2018"/>
                         </Column>
                         <Column editable="true" title="Monto Total" type="java.lang.Object">
                           <Data value="200.00"/>
                           <Data value="225.50"/>
                           <Data value="185.00"/>
-                          <Data value="null"/>
+                          <Data value="100.00"/>
+                          <Data value="130.00"/>
                         </Column>
                         <Column editable="true" title="Cliente" type="java.lang.Object">
                           <Data value="[Nombre de cliente aqui]"/>
                           <Data value="[Nombre de cliente aqui]"/>
                           <Data value="[Nombre de cliente aqui]"/>
-                          <Data value="null"/>
+                          <Data value="[Nombre de cliente aqui]"/>
+                          <Data value="[Nombre de cliente aqui]"/>
                         </Column>
                         <Column editable="true" title="Procedencia" type="java.lang.Object">
                           <Data value="Huaraz"/>
                           <Data value="Casma"/>
                           <Data value="Lima"/>
-                          <Data value="null"/>
+                          <Data value="Huaraz"/>
+                          <Data value="Lima"/>
                         </Column>
                         <Column editable="true" title="Usuario" type="java.lang.Object">
                           <Data value="victor"/>
                           <Data value="victor"/>
                           <Data value="victor"/>
-                          <Data value="null"/>
+                          <Data value="victor"/>
+                          <Data value="victor"/>
                         </Column>
                       </Table>
                     </Property>
+                    <Property name="enabled" type="boolean" value="false"/>
                     <Property name="selectionBackground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="ff" green="7a" red="0" type="rgb"/>
                     </Property>
@@ -385,7 +352,52 @@
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="584" y="270" width="150" height="40"/>
+                  <AbsoluteConstraints x="584" y="290" width="150" height="40"/>
+                </Constraint>
+              </Constraints>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel6">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Arial" size="16" style="0"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Total  S/."/>
+              </Properties>
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                  <AbsoluteConstraints x="50" y="290" width="70" height="40"/>
+                </Constraint>
+              </Constraints>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel3">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Leelawadee UI Semilight" size="14" style="1"/>
+                </Property>
+                <Property name="horizontalAlignment" type="int" value="0"/>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                  <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                    <LineBorder/>
+                  </Border>
+                </Property>
+              </Properties>
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                  <AbsoluteConstraints x="120" y="290" width="150" height="40"/>
+                </Constraint>
+              </Constraints>
+            </Component>
+            <Component class="javax.swing.JLabel" name="lbA&#xf1;o">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Arial" size="14" style="1"/>
+                </Property>
+                <Property name="horizontalAlignment" type="int" value="0"/>
+                <Property name="text" type="java.lang.String" value="jLabel7"/>
+              </Properties>
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                  <AbsoluteConstraints x="317" y="10" width="150" height="30"/>
                 </Constraint>
               </Constraints>
             </Component>

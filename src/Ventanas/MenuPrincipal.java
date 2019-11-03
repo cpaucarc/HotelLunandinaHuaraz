@@ -335,7 +335,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
      /*LABEL DE RESERVA*/
     private void lbReservaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbReservaMouseClicked
-        Reserva reserv=new  Reserva();
+        Reservas reserv=new  Reservas();
         reserv.setVisible(true);
     }//GEN-LAST:event_lbReservaMouseClicked
     private void lbReservaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbReservaMouseEntered
