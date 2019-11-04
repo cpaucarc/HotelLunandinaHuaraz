@@ -1,4 +1,3 @@
-
 package Ventanas;
 
 import java.awt.Color;
@@ -6,29 +5,75 @@ import javax.swing.JOptionPane;
 import Ventanas.*;
 import Clases.Control;
 
+/* importaciones para animar label */
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import java.util.Timer;
+import java.util.TimerTask;
+
+/* fin importaciones para animar label */
 public class MenuPrincipal extends javax.swing.JFrame {
-    
+
     /* Ventanas externas */
-    DatosUsuario datosUsuario=new DatosUsuario();
-    RegistroEmpleado empleado=new RegistroEmpleado();
-    Reportes reporte=new Reportes();
-    /* Ventanas externas */
-    
-    
+    RegistroEmpleado empleado = new RegistroEmpleado();
+    Reportes reporte = new Reportes();
+    Habitaciones habitacion=new Habitaciones();
+    Reservas reserva=new Reservas();
+    Alojamiento alojamiento=new Alojamiento();
+    Servicios servicio=new Servicios();
+    DatosUsuario datosUsuario = new DatosUsuario();
+    /* Fin Ventanas externas */
+
+ /* Variables para controlar animacion de label */
+    public int contador = 0;
+    int velocidad = 5; //seconds
+    Timer timer;
+    TimerTask tarea;
+    int velmil = velocidad * 1000;
+    Icon iconoxLabel;
+
+    /* Fin variables para controlar animacion de label */
+
     public MenuPrincipal() {
         initComponents();
         this.setExtendedState(6);
-        if(Control.cargo.equals("Recepcionista")){
+        if (Control.cargo.equals("Recepcionista")) {
             lbadministracion.setVisible(false);
+            lbReporte.setVisible(false);
         }
+
+        /* Controlador de animaciones*/
+        tarea = new TimerTask() {
+            @Override
+            public void run() {
+                switch (contador) {
+                    case 0:
+                        contador = 1;
+                        iconoxLabel = new ImageIcon(getClass().getResource("/Imagenes/Transicion/Hotel.jpg"));
+                        lbAnimacion.setIcon(iconoxLabel);
+                        break;
+                    case 1:
+                        contador = 2;
+                        iconoxLabel = new ImageIcon(getClass().getResource("/Imagenes/Transicion/Servicios.jpg"));
+                        lbAnimacion.setIcon(iconoxLabel);
+                        break;
+                    case 2:
+                        contador = 0;
+                        iconoxLabel = new ImageIcon(getClass().getResource("/Imagenes/Transicion/Cuartos.jpg"));
+                        lbAnimacion.setIcon(iconoxLabel);
+                        break;
+                }
+            }
+        };
+        timer = new Timer();
+        timer.scheduleAtFixedRate(tarea, velmil, velmil);
+        /* Fin controlador de animaciones*/
     }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        panelMenu = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         pnLogOut = new javax.swing.JPanel();
         lbLogOut = new javax.swing.JLabel();
         pnReportes = new javax.swing.JPanel();
@@ -37,11 +82,15 @@ public class MenuPrincipal extends javax.swing.JFrame {
         lbadministracion = new javax.swing.JLabel();
         pnServicios = new javax.swing.JPanel();
         lbServicio = new javax.swing.JLabel();
+        pnAloj = new javax.swing.JPanel();
+        lbAloj = new javax.swing.JLabel();
         pnReserva = new javax.swing.JPanel();
         lbReserva = new javax.swing.JLabel();
-        pnAlojamiento = new javax.swing.JPanel();
-        lbAlojamiento = new javax.swing.JLabel();
-        panelEventos = new javax.swing.JPanel();
+        pnHab = new javax.swing.JPanel();
+        lbHab = new javax.swing.JLabel();
+        panelMenu = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        pnPrincipal = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
@@ -52,20 +101,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
         panelImagenes = new javax.swing.JPanel();
-        jLabel12 = new javax.swing.JLabel();
+        lbAnimacion = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        panelMenu.setBackground(new java.awt.Color(13, 39, 70));
-        panelMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Lunandina/Recurso 3.png"))); // NOI18N
-        jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        panelMenu.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, 320, 46));
-
-        getContentPane().add(panelMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 640, 46));
 
         pnLogOut.setBackground(new java.awt.Color(13, 39, 70));
         pnLogOut.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -113,7 +152,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         pnReportes.add(lbReporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 125, 46));
 
-        getContentPane().add(pnReportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(1165, 0, 125, 46));
+        getContentPane().add(pnReportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(665, 0, 125, 46));
 
         pnAdministracion.setBackground(new java.awt.Color(13, 39, 70));
         pnAdministracion.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -138,7 +177,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         pnAdministracion.add(lbadministracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 150, 46));
 
-        getContentPane().add(pnAdministracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 0, 150, 46));
+        getContentPane().add(pnAdministracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(515, 0, 150, 46));
 
         pnServicios.setBackground(new java.awt.Color(13, 39, 70));
         pnServicios.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -162,7 +201,32 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         pnServicios.add(lbServicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 125, 46));
 
-        getContentPane().add(pnServicios, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 0, 125, 46));
+        getContentPane().add(pnServicios, new org.netbeans.lib.awtextra.AbsoluteConstraints(1165, 0, 125, 46));
+
+        pnAloj.setBackground(new java.awt.Color(13, 39, 70));
+        pnAloj.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lbAloj.setBackground(new java.awt.Color(153, 255, 153));
+        lbAloj.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
+        lbAloj.setForeground(new java.awt.Color(255, 255, 255));
+        lbAloj.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbAloj.setText("ALOJAMIENTO");
+        lbAloj.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        lbAloj.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lbAloj.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbAlojMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lbAlojMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lbAlojMouseExited(evt);
+            }
+        });
+        pnAloj.add(lbAloj, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 125, 46));
+
+        getContentPane().add(pnAloj, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 0, 125, 46));
 
         pnReserva.setBackground(new java.awt.Color(13, 39, 70));
         pnReserva.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -189,33 +253,43 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         getContentPane().add(pnReserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(915, 0, 125, 46));
 
-        pnAlojamiento.setBackground(new java.awt.Color(13, 39, 70));
-        pnAlojamiento.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        pnHab.setBackground(new java.awt.Color(13, 39, 70));
+        pnHab.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lbAlojamiento.setBackground(new java.awt.Color(13, 39, 70));
-        lbAlojamiento.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
-        lbAlojamiento.setForeground(new java.awt.Color(255, 255, 255));
-        lbAlojamiento.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbAlojamiento.setText("HABITACIONES");
-        lbAlojamiento.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-        lbAlojamiento.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lbAlojamiento.addMouseListener(new java.awt.event.MouseAdapter() {
+        lbHab.setBackground(new java.awt.Color(13, 39, 70));
+        lbHab.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
+        lbHab.setForeground(new java.awt.Color(255, 255, 255));
+        lbHab.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbHab.setText("HABITACIONES");
+        lbHab.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        lbHab.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lbHab.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lbAlojamientoMouseClicked(evt);
+                lbHabMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                lbAlojamientoMouseEntered(evt);
+                lbHabMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                lbAlojamientoMouseExited(evt);
+                lbHabMouseExited(evt);
             }
         });
-        pnAlojamiento.add(lbAlojamiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 125, 46));
+        pnHab.add(lbHab, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 125, 46));
 
-        getContentPane().add(pnAlojamiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 0, 125, 46));
+        getContentPane().add(pnHab, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 0, 125, 46));
 
-        panelEventos.setBackground(new java.awt.Color(255, 255, 255));
-        panelEventos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        panelMenu.setBackground(new java.awt.Color(13, 39, 70));
+        panelMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Lunandina/Recurso 3.png"))); // NOI18N
+        jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        panelMenu.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, 320, 46));
+
+        getContentPane().add(panelMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 515, 46));
+
+        pnPrincipal.setBackground(new java.awt.Color(255, 255, 255));
+        pnPrincipal.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "RESERVACIONES  PARA  HOY", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 12), new java.awt.Color(23, 23, 23))); // NOI18N
@@ -273,98 +347,95 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jPanel4.add(btValidar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 480, 250, 40));
         jPanel4.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(185, 72, -1, -1));
 
-        panelEventos.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 520, 550));
+        pnPrincipal.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 520, 550));
 
         jLabel2.setFont(new java.awt.Font("Leelawadee UI", 1, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(23, 23, 23));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("MENÚ PRINCIPAL");
-        panelEventos.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(165, 30, 250, 40));
+        pnPrincipal.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(165, 30, 250, 40));
 
-        getContentPane().add(panelEventos, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 46, 580, 700));
+        getContentPane().add(pnPrincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 46, 580, 700));
 
         panelImagenes.setBackground(new java.awt.Color(23, 23, 23));
         panelImagenes.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel12.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(248, 177, 57));
-        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel12.setText("IMAGENES Y ANIMACIONES AQUI");
-        panelImagenes.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 290, 430, 120));
+        lbAnimacion.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
+        lbAnimacion.setForeground(new java.awt.Color(248, 177, 57));
+        lbAnimacion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbAnimacion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Transicion/Cuartos.jpg"))); // NOI18N
+        panelImagenes.add(lbAnimacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 790, 700));
 
         getContentPane().add(panelImagenes, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 46, 790, 700));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-     /*LABEL DE ADMINISTRACION*/
+    /*LABEL DE ADMINISTRACION*/
     private void lbadministracionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbadministracionMouseClicked
         //this.setVisible(false);
         empleado.setVisible(true);
     }//GEN-LAST:event_lbadministracionMouseClicked
     private void lbadministracionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbadministracionMouseEntered
         pnAdministracion.setBackground(Control.color_Body);
-        lbadministracion.setForeground(new Color(23,23,23));
+        lbadministracion.setForeground(new Color(23, 23, 23));
         lbadministracion.setFont(new java.awt.Font("Arial", 1, 16));
         lbadministracion.setBorder(javax.swing.BorderFactory.createLineBorder(Control.color_Body));
     }//GEN-LAST:event_lbadministracionMouseEntered
     private void lbadministracionMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbadministracionMouseExited
         pnAdministracion.setBackground(new Color(13, 39, 70));
-        lbadministracion.setForeground(new Color(255,255,255));
+        lbadministracion.setForeground(new Color(255, 255, 255));
         lbadministracion.setFont(new java.awt.Font("Arial", 0, 15));
         lbadministracion.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
     }//GEN-LAST:event_lbadministracionMouseExited
 
-     /*LABEL DE ALOJAMIENTO*/
-    private void lbAlojamientoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbAlojamientoMouseClicked
-        Habitaciones hab=new Habitaciones();
-        hab.setVisible(true);
-    }//GEN-LAST:event_lbAlojamientoMouseClicked
-    private void lbAlojamientoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbAlojamientoMouseEntered
-        pnAlojamiento.setBackground(Control.color_Body);
-        lbAlojamiento.setForeground(new Color(23,23,23));
-        lbAlojamiento.setFont(new java.awt.Font("Arial", 1, 16));
-        lbAlojamiento.setBorder(javax.swing.BorderFactory.createLineBorder(Control.color_Body));
-    }//GEN-LAST:event_lbAlojamientoMouseEntered
-    private void lbAlojamientoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbAlojamientoMouseExited
-        pnAlojamiento.setBackground(new Color(13, 39, 70));
-        lbAlojamiento.setForeground(new Color(255,255,255));        
-        lbAlojamiento.setFont(new java.awt.Font("Arial", 0, 15));
-        lbAlojamiento.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-    }//GEN-LAST:event_lbAlojamientoMouseExited
+    /*LABEL DE ALOJAMIENTO*/
+    private void lbHabMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbHabMouseClicked
+        habitacion.setVisible(true);
+    }//GEN-LAST:event_lbHabMouseClicked
+    private void lbHabMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbHabMouseEntered
+        pnHab.setBackground(Control.color_Body);
+        lbHab.setForeground(new Color(23, 23, 23));
+        lbHab.setFont(new java.awt.Font("Arial", 1, 16));
+        lbHab.setBorder(javax.swing.BorderFactory.createLineBorder(Control.color_Body));
+    }//GEN-LAST:event_lbHabMouseEntered
+    private void lbHabMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbHabMouseExited
+        pnHab.setBackground(new Color(13, 39, 70));
+        lbHab.setForeground(new Color(255, 255, 255));
+        lbHab.setFont(new java.awt.Font("Arial", 0, 15));
+        lbHab.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+    }//GEN-LAST:event_lbHabMouseExited
 
-     /*LABEL DE RESERVA*/
+    /*LABEL DE RESERVA*/
     private void lbReservaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbReservaMouseClicked
-        Reservas reserv=new  Reservas();
-        reserv.setVisible(true);
+        reserva.setVisible(true);
     }//GEN-LAST:event_lbReservaMouseClicked
     private void lbReservaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbReservaMouseEntered
         pnReserva.setBackground(Control.color_Body);
-        lbReserva.setForeground(new Color(23,23,23));
+        lbReserva.setForeground(new Color(23, 23, 23));
         lbReserva.setFont(new java.awt.Font("Arial", 1, 16));
         lbReserva.setBorder(javax.swing.BorderFactory.createLineBorder(Control.color_Body));
     }//GEN-LAST:event_lbReservaMouseEntered
     private void lbReservaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbReservaMouseExited
         pnReserva.setBackground(new Color(13, 39, 70));
-        lbReserva.setForeground(new Color(255,255,255));
+        lbReserva.setForeground(new Color(255, 255, 255));
         lbReserva.setFont(new java.awt.Font("Arial", 0, 15));
         lbReserva.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
     }//GEN-LAST:event_lbReservaMouseExited
 
     /*LABEL DE REPORTES*/
     private void lbReporteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbReporteMouseClicked
-        //this.setVisible(false);
         reporte.setVisible(true);
     }//GEN-LAST:event_lbReporteMouseClicked
     private void lbReporteMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbReporteMouseEntered
         pnReportes.setBackground(Control.color_Body);
-        lbReporte.setForeground(new Color(23,23,23));
+        lbReporte.setForeground(new Color(23, 23, 23));
         lbReporte.setFont(new java.awt.Font("Arial", 1, 16));
         lbReporte.setBorder(javax.swing.BorderFactory.createLineBorder(Control.color_Body));
     }//GEN-LAST:event_lbReporteMouseEntered
     private void lbReporteMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbReporteMouseExited
         pnReportes.setBackground(new Color(13, 39, 70));
-        lbReporte.setForeground(new Color(255,255,255));
+        lbReporte.setForeground(new Color(255, 255, 255));
         lbReporte.setFont(new java.awt.Font("Arial", 0, 15));
         lbReporte.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
     }//GEN-LAST:event_lbReporteMouseExited
@@ -387,18 +458,17 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     /*LABEL DE SERVICIOS*/
     private void lbServicioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbServicioMouseClicked
-        Servicios serv=new Servicios();
-        serv.setVisible(true);        
+        servicio.setVisible(true);
     }//GEN-LAST:event_lbServicioMouseClicked
     private void lbServicioMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbServicioMouseEntered
         pnServicios.setBackground(Control.color_Body);
-        lbServicio.setForeground(new Color(23,23,23));
+        lbServicio.setForeground(new Color(23, 23, 23));
         lbServicio.setFont(new java.awt.Font("Arial", 1, 16));
         lbServicio.setBorder(javax.swing.BorderFactory.createLineBorder(Control.color_Body));
     }//GEN-LAST:event_lbServicioMouseEntered
     private void lbServicioMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbServicioMouseExited
         pnServicios.setBackground(new Color(13, 39, 70));
-        lbServicio.setForeground(new Color(255,255,255));
+        lbServicio.setForeground(new Color(255, 255, 255));
         lbServicio.setFont(new java.awt.Font("Arial", 0, 15));
         lbServicio.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
     }//GEN-LAST:event_lbServicioMouseExited
@@ -410,7 +480,24 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private void btValidar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btValidar1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btValidar1ActionPerformed
-    
+
+    /* ALOJAMIENTO */
+    private void lbAlojMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbAlojMouseClicked
+        alojamiento.setVisible(true);
+    }//GEN-LAST:event_lbAlojMouseClicked
+    private void lbAlojMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbAlojMouseEntered
+        pnAloj.setBackground(Control.color_Body);
+        lbAloj.setForeground(new Color(23, 23, 23));
+        lbAloj.setFont(new java.awt.Font("Arial", 1, 16));
+        lbAloj.setBorder(javax.swing.BorderFactory.createLineBorder(Control.color_Body));
+    }//GEN-LAST:event_lbAlojMouseEntered
+    private void lbAlojMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbAlojMouseExited
+        pnAloj.setBackground(new Color(13, 39, 70));
+        lbAloj.setForeground(new Color(255, 255, 255));
+        lbAloj.setFont(new java.awt.Font("Arial", 0, 15));
+        lbAloj.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+    }//GEN-LAST:event_lbAlojMouseExited
+
     /**
      * @param args the command line arguments
      */
@@ -450,25 +537,27 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btValidar;
     private javax.swing.JButton btValidar1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JLabel lbAlojamiento;
+    private javax.swing.JLabel lbAloj;
+    private javax.swing.JLabel lbAnimacion;
+    private javax.swing.JLabel lbHab;
     private javax.swing.JLabel lbLogOut;
     private javax.swing.JLabel lbReporte;
     private javax.swing.JLabel lbReserva;
     private javax.swing.JLabel lbServicio;
     private javax.swing.JLabel lbadministracion;
-    private javax.swing.JPanel panelEventos;
     private javax.swing.JPanel panelImagenes;
     private javax.swing.JPanel panelMenu;
     private javax.swing.JPanel pnAdministracion;
-    private javax.swing.JPanel pnAlojamiento;
+    private javax.swing.JPanel pnAloj;
+    private javax.swing.JPanel pnHab;
     private javax.swing.JPanel pnLogOut;
+    private javax.swing.JPanel pnPrincipal;
     private javax.swing.JPanel pnReportes;
     private javax.swing.JPanel pnReserva;
     private javax.swing.JPanel pnServicios;

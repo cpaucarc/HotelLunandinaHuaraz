@@ -119,6 +119,7 @@ public class Reservas extends javax.swing.JFrame {
         pnTipoCliente.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)), "TIPO DE CLIENTE ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 12))); // NOI18N
         pnTipoCliente.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        btClientePersona.setBackground(new java.awt.Color(111, 168, 183));
         btClientePersona.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btClientePersona.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/persona.png"))); // NOI18N
         btClientePersona.setText("PERSONA");
@@ -129,6 +130,7 @@ public class Reservas extends javax.swing.JFrame {
         });
         pnTipoCliente.add(btClientePersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 40, 150, 40));
 
+        btClienteEmpresa.setBackground(new java.awt.Color(144, 101, 168));
         btClienteEmpresa.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btClienteEmpresa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/empresa.png"))); // NOI18N
         btClienteEmpresa.setText("EMPRESA");

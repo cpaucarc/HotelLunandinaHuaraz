@@ -76,6 +76,7 @@ public class DatosUsuario extends javax.swing.JFrame {
         lbVisible1 = new javax.swing.JLabel();
         pw2Visible = new javax.swing.JTextField();
         pw1Visible = new javax.swing.JTextField();
+        lbStatus = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -118,17 +119,17 @@ public class DatosUsuario extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(23, 23, 23));
-        jLabel2.setText("A. PATERNO");
+        jLabel2.setText("A. Paterno");
         pnDatosPersonales.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, 100, 30));
 
         jLabel3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(23, 23, 23));
-        jLabel3.setText("A. MATERNO");
+        jLabel3.setText("A. Materno");
         pnDatosPersonales.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, 100, 30));
 
         jLabel4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(23, 23, 23));
-        jLabel4.setText("NOMBRES");
+        jLabel4.setText("Nombres");
         pnDatosPersonales.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, 100, 30));
 
         lbAPaterno.setFont(new java.awt.Font("Leelawadee UI Semilight", 1, 14)); // NOI18N
@@ -159,7 +160,7 @@ public class DatosUsuario extends javax.swing.JFrame {
 
         jLabel7.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(23, 23, 23));
-        jLabel7.setText("USUARIO");
+        jLabel7.setText("Usuario");
         pnDatosUsuario.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 100, 30));
 
         lbUser.setFont(new java.awt.Font("Leelawadee UI Semilight", 1, 14)); // NOI18N
@@ -169,7 +170,7 @@ public class DatosUsuario extends javax.swing.JFrame {
 
         jLabel5.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(23, 23, 23));
-        jLabel5.setText("CARGO");
+        jLabel5.setText("Cargo");
         pnDatosUsuario.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, 100, 30));
 
         lbCargo.setFont(new java.awt.Font("Leelawadee UI Semilight", 1, 14)); // NOI18N
@@ -181,22 +182,22 @@ public class DatosUsuario extends javax.swing.JFrame {
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 46, 510, 480));
 
-        jPanel2.setBackground(new java.awt.Color(204, 204, 204));
+        jPanel2.setBackground(new java.awt.Color(215, 215, 215));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        pnCredenciales.setBackground(new java.awt.Color(204, 204, 204));
+        pnCredenciales.setBackground(new java.awt.Color(215, 215, 215));
         pnCredenciales.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), "MODIFICAR CREDENCIALES DE ACCESO", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 12))); // NOI18N
         pnCredenciales.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         label8.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         label8.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        label8.setText("<html>NUEVO NOMBRE<br>DE USUARIO</html>");
-        pnCredenciales.add(label8, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 50, 120, 30));
+        label8.setText("Nuevo nombre de  usuario");
+        pnCredenciales.add(label8, new org.netbeans.lib.awtextra.AbsoluteConstraints(35, 50, 180, 30));
 
         label9.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         label9.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        label9.setText("<html>NUEVA<br>CONTRASEÑA</html>");
-        pnCredenciales.add(label9, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 130, 120, 30));
+        label9.setText("Nueva contraseña");
+        pnCredenciales.add(label9, new org.netbeans.lib.awtextra.AbsoluteConstraints(35, 130, 120, 30));
 
         username.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
         username.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -218,8 +219,8 @@ public class DatosUsuario extends javax.swing.JFrame {
 
         label10.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         label10.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        label10.setText("<html>REPITA LA NUEVA<br>CONTRASEÑA</html>");
-        pnCredenciales.add(label10, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 210, 120, 30));
+        label10.setText("Repita nueva contraseña");
+        pnCredenciales.add(label10, new org.netbeans.lib.awtextra.AbsoluteConstraints(35, 210, 170, 30));
 
         pw2Oculto.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
         pw2Oculto.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -267,6 +268,7 @@ public class DatosUsuario extends javax.swing.JFrame {
         pw1Visible.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
         pw1Visible.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         pnCredenciales.add(pw1Visible, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 130, 240, 30));
+        pnCredenciales.add(lbStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 50, 30, 30));
 
         jPanel2.add(pnCredenciales, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 530, 410));
 
@@ -353,7 +355,7 @@ public class DatosUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_lbVisible2MouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        int rsta = JOptionPane.showConfirmDialog(null, "¿Desea salir del programa?","Advertencia", JOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE);
+        int rsta = JOptionPane.showConfirmDialog(null, "¿Desea cerrar la sesión actual?","Advertencia", JOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE);
         if(rsta == 0){
             Control.cargo = "";
             Control.usuario = "";
@@ -419,6 +421,7 @@ public class DatosUsuario extends javax.swing.JFrame {
     private javax.swing.JLabel lbCargo;
     private javax.swing.JLabel lbDNI;
     private javax.swing.JLabel lbNombres;
+    private javax.swing.JLabel lbStatus;
     private javax.swing.JLabel lbUser;
     private javax.swing.JLabel lbVisible1;
     private javax.swing.JLabel lbVisible2;
