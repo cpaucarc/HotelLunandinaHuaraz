@@ -1,9 +1,9 @@
 
 package Ventanas;
 
-public class IngresosMensuales extends javax.swing.JInternalFrame {
+public class ReporteAloj extends javax.swing.JInternalFrame {
 
-    public IngresosMensuales() {
+    public ReporteAloj() {
         initComponents();
     }
 
@@ -31,12 +31,11 @@ public class IngresosMensuales extends javax.swing.JInternalFrame {
         jButton1 = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        lbMes = new javax.swing.JLabel();
 
         setBorder(null);
         setClosable(true);
         setMaximizable(true);
-        setTitle("Ingresos Mensuales");
+        setTitle("Alojamiento");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -151,11 +150,6 @@ public class IngresosMensuales extends javax.swing.JInternalFrame {
         jLabel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 290, 150, 40));
 
-        lbMes.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        lbMes.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbMes.setText("Octubre - 2019");
-        jPanel3.add(lbMes, new org.netbeans.lib.awtextra.AbsoluteConstraints(317, 10, 150, 30));
-
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, 784, 374));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 844, 654));
@@ -193,6 +187,5 @@ public class IngresosMensuales extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private com.toedter.calendar.JYearChooser jYearChooser1;
-    private javax.swing.JLabel lbMes;
     // End of variables declaration//GEN-END:variables
 }

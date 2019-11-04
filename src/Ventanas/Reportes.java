@@ -10,7 +10,10 @@ public class Reportes extends javax.swing.JFrame {
     Boletas boleta=new Boletas();
     IngresosMensuales inMensual=new IngresosMensuales();
     IngresosAnuales inAnual =new IngresosAnuales();
-    
+    LugarProcedencia lugar=new LugarProcedencia();
+    ReporteServicios servicio=new ReporteServicios();
+    ReporteClientes cliente=new ReporteClientes();
+    ReporteAloj alojamiento=new ReporteAloj();
     
     public Reportes() {
         initComponents();
@@ -372,7 +375,11 @@ public class Reportes extends javax.swing.JFrame {
 
     /* SERVICIOS */
     private void lbServicioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbServicioMouseClicked
-        // TODO add your handling code here:
+        desktop.removeAll();
+        desktop.repaint();
+        desktop.add(servicio);
+        servicio.setSize(844,674);
+        servicio.show();
     }//GEN-LAST:event_lbServicioMouseClicked
     private void lbServicioMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbServicioMouseEntered
         pnServicio.setBackground(new java.awt.Color(248, 177, 57));
@@ -383,7 +390,11 @@ public class Reportes extends javax.swing.JFrame {
 
     /* LUGAR DE PROCEDENCIA */
     private void lbLugarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbLugarMouseClicked
-        // TODO add your handling code here:
+        desktop.removeAll();
+        desktop.repaint();
+        desktop.add(lugar);
+        lugar.setSize(844,674);
+        lugar.show();
     }//GEN-LAST:event_lbLugarMouseClicked
     private void lbLugarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbLugarMouseEntered
         pnLugar.setBackground(new java.awt.Color(248, 177, 57));
@@ -394,7 +405,11 @@ public class Reportes extends javax.swing.JFrame {
 
     /* CLIENTES */
     private void lbClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbClienteMouseClicked
-        // TODO add your handling code here:
+        desktop.removeAll();
+        desktop.repaint();
+        desktop.add(cliente);
+        cliente.setSize(844,674);
+        cliente.show();
     }//GEN-LAST:event_lbClienteMouseClicked
     private void lbClienteMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbClienteMouseEntered
         pnCliente.setBackground(new java.awt.Color(248, 177, 57));
@@ -405,7 +420,12 @@ public class Reportes extends javax.swing.JFrame {
 
     /* ALOJAMIENTOS */
     private void lbAlojamientoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbAlojamientoMouseClicked
-        // TODO add your handling code here:
+        // TODO add your handling code here:alojamiento
+        desktop.removeAll();
+        desktop.repaint();
+        desktop.add(alojamiento);
+        alojamiento.setSize(844,674);
+        alojamiento.show();
     }//GEN-LAST:event_lbAlojamientoMouseClicked
     private void lbAlojamientoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbAlojamientoMouseEntered
         pnAlojamiento.setBackground(new java.awt.Color(248, 177, 57));

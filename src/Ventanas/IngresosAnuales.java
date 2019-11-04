@@ -114,11 +114,11 @@ public class IngresosAnuales extends javax.swing.JInternalFrame {
         jTable1.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"22-10-2018", "200.00", "[Nombre de cliente aqui]", "Huaraz", "victor"},
-                {"23-10-2018", "225.50", "[Nombre de cliente aqui]", "Casma", "victor"},
-                {"23-10-2018", "185.00", "[Nombre de cliente aqui]", "Lima", "victor"},
-                {"23-10-2018", "100.00", "[Nombre de cliente aqui]", "Huaraz", "victor"},
-                {"24-10-2018", "130.00", "[Nombre de cliente aqui]", "Lima", "victor"}
+                {"22-10-2019", "200.00", "[Nombre de cliente aqui]", "Huaraz", "victor"},
+                {"23-10-2019", "225.50", "[Nombre de cliente aqui]", "Casma", "victor"},
+                {"23-10-2019", "185.00", "[Nombre de cliente aqui]", "Lima", "victor"},
+                {"23-10-2019", "100.00", "[Nombre de cliente aqui]", "Huaraz", "victor"},
+                {"24-10-2019", "130.00", "[Nombre de cliente aqui]", "Lima", "victor"}
             },
             new String [] {
                 "Fecha", "Monto Total", "Cliente", "Procedencia", "Usuario"
@@ -148,7 +148,7 @@ public class IngresosAnuales extends javax.swing.JInternalFrame {
 
         lbAño.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lbAño.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbAño.setText("jLabel7");
+        lbAño.setText("2019");
         jPanel3.add(lbAño, new org.netbeans.lib.awtextra.AbsoluteConstraints(317, 10, 150, 30));
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, 784, 374));

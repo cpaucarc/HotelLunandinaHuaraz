@@ -142,7 +142,7 @@ public class Habitaciones extends javax.swing.JFrame {
             lbt.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/individual.png")));
             lbt.setBounds(108, 10, 42, 30);
             //Bath
-            lbb.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/icons8_bath_40px.png")));
+            //lbb.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/icons8_bath_40px.png")));
             lbb.setBounds(108, 50, 42, 30);
             panel_Hab[i].add(lbt);
             panel_Hab[i].add(lbb);

@@ -1,9 +1,9 @@
 
 package Ventanas;
 
-public class IngresosMensuales extends javax.swing.JInternalFrame {
+public class ReporteClientes extends javax.swing.JInternalFrame {
 
-    public IngresosMensuales() {
+    public ReporteClientes() {
         initComponents();
     }
 
@@ -21,10 +21,7 @@ public class IngresosMensuales extends javax.swing.JInternalFrame {
         jTextField2 = new javax.swing.JTextField();
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jLabel5 = new javax.swing.JLabel();
         jTextField3 = new javax.swing.JTextField();
-        jYearChooser1 = new com.toedter.calendar.JYearChooser();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -36,7 +33,7 @@ public class IngresosMensuales extends javax.swing.JInternalFrame {
         setBorder(null);
         setClosable(true);
         setMaximizable(true);
-        setTitle("Ingresos Mensuales");
+        setTitle("Clientes");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -49,7 +46,7 @@ public class IngresosMensuales extends javax.swing.JInternalFrame {
         jLabel1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/nombre.png"))); // NOI18N
         jLabel1.setText("Cliente");
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 30, 120, 30));
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, 120, 30));
 
         jLabel2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -60,7 +57,7 @@ public class IngresosMensuales extends javax.swing.JInternalFrame {
         jLabel4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/procedencia.png"))); // NOI18N
         jLabel4.setText("Procedencia");
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 75, 120, 30));
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 120, 120, 30));
 
         jTextField1.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
         jTextField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -70,7 +67,7 @@ public class IngresosMensuales extends javax.swing.JInternalFrame {
                 jTextField1ActionPerformed(evt);
             }
         });
-        jPanel2.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 75, 200, 30));
+        jPanel2.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 120, 200, 30));
 
         jTextField2.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
         jTextField2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -89,16 +86,6 @@ public class IngresosMensuales extends javax.swing.JInternalFrame {
         jRadioButton2.setText("Mayor que ...");
         jPanel2.add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(414, 120, 120, 30));
 
-        jComboBox1.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" }));
-        jComboBox1.setSelectedIndex(9);
-        jPanel2.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 120, 110, 30));
-
-        jLabel5.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/calendario.png"))); // NOI18N
-        jLabel5.setText("Mes");
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 120, 70, 30));
-
         jTextField3.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
         jTextField3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField3.setSelectionColor(new java.awt.Color(0, 122, 255));
@@ -107,8 +94,7 @@ public class IngresosMensuales extends javax.swing.JInternalFrame {
                 jTextField3ActionPerformed(evt);
             }
         });
-        jPanel2.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 30, 200, 30));
-        jPanel2.add(jYearChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 120, 80, 30));
+        jPanel2.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 40, 200, 30));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 784, 180));
 
@@ -119,14 +105,14 @@ public class IngresosMensuales extends javax.swing.JInternalFrame {
         jTable1.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"22-10-2018", "200.00", "[Nombre de cliente aqui]", "Huaraz", "victor"},
-                {"23-10-2018", "225.50", "[Nombre de cliente aqui]", "Casma", "victor"},
-                {"23-10-2018", "185.00", "[Nombre de cliente aqui]", "Lima", "victor"},
-                {"23-10-2018", "100.00", "[Nombre de cliente aqui]", "Huaraz", "victor"},
-                {"24-10-2018", "130.00", "[Nombre de cliente aqui]", "Lima", "victor"}
+                {"22-01-2018", "[Nombre de cliente aqui]", "Casma", "200.00", "victor"},
+                {"23-05-2018", "[Nombre de cliente aqui]", "Casma", "225.50", "victor"},
+                {"04-07-2018", "[Nombre de cliente aqui]", "Casma", "185.00", "victor"},
+                {"27-07-2018", "[Nombre de cliente aqui]", "Casma", "100.00", "victor"},
+                {"24-10-2018", "[Nombre de cliente aqui]", "Casma", "130.00", "victor"}
             },
             new String [] {
-                "Fecha", "Monto Total", "Cliente", "Procedencia", "Usuario"
+                "Fecha", "Cliente", "Procedencia", "Monto Total", "Usuario"
             }
         ));
         jTable1.setEnabled(false);
@@ -153,8 +139,8 @@ public class IngresosMensuales extends javax.swing.JInternalFrame {
 
         lbMes.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lbMes.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbMes.setText("Octubre - 2019");
-        jPanel3.add(lbMes, new org.netbeans.lib.awtextra.AbsoluteConstraints(317, 10, 150, 30));
+        lbMes.setText("[Nombre de cliente aqui]");
+        jPanel3.add(lbMes, new org.netbeans.lib.awtextra.AbsoluteConstraints(297, 10, 220, 30));
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, 784, 374));
 
@@ -175,12 +161,10 @@ public class IngresosMensuales extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup gDinero;
     private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -192,7 +176,6 @@ public class IngresosMensuales extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
-    private com.toedter.calendar.JYearChooser jYearChooser1;
     private javax.swing.JLabel lbMes;
     // End of variables declaration//GEN-END:variables
 }

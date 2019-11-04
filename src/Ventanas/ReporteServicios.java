@@ -1,9 +1,9 @@
 
 package Ventanas;
 
-public class IngresosMensuales extends javax.swing.JInternalFrame {
+public class ReporteServicios extends javax.swing.JInternalFrame {
 
-    public IngresosMensuales() {
+    public ReporteServicios() {
         initComponents();
     }
 
@@ -17,7 +17,6 @@ public class IngresosMensuales extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
@@ -25,6 +24,7 @@ public class IngresosMensuales extends javax.swing.JInternalFrame {
         jLabel5 = new javax.swing.JLabel();
         jTextField3 = new javax.swing.JTextField();
         jYearChooser1 = new com.toedter.calendar.JYearChooser();
+        jComboBox2 = new javax.swing.JComboBox<>();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -36,7 +36,7 @@ public class IngresosMensuales extends javax.swing.JInternalFrame {
         setBorder(null);
         setClosable(true);
         setMaximizable(true);
-        setTitle("Ingresos Mensuales");
+        setTitle("Servicios prestados");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -58,19 +58,9 @@ public class IngresosMensuales extends javax.swing.JInternalFrame {
         jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(474, 40, 150, 30));
 
         jLabel4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/procedencia.png"))); // NOI18N
-        jLabel4.setText("Procedencia");
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/servicio_32.png"))); // NOI18N
+        jLabel4.setText("Servicio");
         jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 75, 120, 30));
-
-        jTextField1.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
-        jTextField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField1.setSelectionColor(new java.awt.Color(0, 122, 255));
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
-            }
-        });
-        jPanel2.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 75, 200, 30));
 
         jTextField2.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
         jTextField2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -110,6 +100,9 @@ public class IngresosMensuales extends javax.swing.JInternalFrame {
         jPanel2.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 30, 200, 30));
         jPanel2.add(jYearChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 120, 80, 30));
 
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Desayuno", "Lavanderia" }));
+        jPanel2.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 75, 200, 30));
+
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 784, 180));
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
@@ -119,14 +112,14 @@ public class IngresosMensuales extends javax.swing.JInternalFrame {
         jTable1.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"22-10-2018", "200.00", "[Nombre de cliente aqui]", "Huaraz", "victor"},
-                {"23-10-2018", "225.50", "[Nombre de cliente aqui]", "Casma", "victor"},
-                {"23-10-2018", "185.00", "[Nombre de cliente aqui]", "Lima", "victor"},
-                {"23-10-2018", "100.00", "[Nombre de cliente aqui]", "Huaraz", "victor"},
-                {"24-10-2018", "130.00", "[Nombre de cliente aqui]", "Lima", "victor"}
+                {"22-10-2018", "Desayuno", "1", "[Nombre de cliente aqui]", "10.00", "victor"},
+                {"23-10-2018", "Desayuno", "2", "[Nombre de cliente aqui]", "20.00", "victor"},
+                {"23-10-2018", "Desayuno", "1", "[Nombre de cliente aqui]", "10.00", "victor"},
+                {"23-10-2018", "Desayuno", "1", "[Nombre de cliente aqui]", "10.00", "victor"},
+                {"24-10-2018", "Desayuno", "3", "[Nombre de cliente aqui]", "30.00", "victor"}
             },
             new String [] {
-                "Fecha", "Monto Total", "Cliente", "Procedencia", "Usuario"
+                "Fecha", "Servicio", "Cantidad", "Cliente", "Monto Total", "Usuario"
             }
         ));
         jTable1.setEnabled(false);
@@ -148,12 +141,13 @@ public class IngresosMensuales extends javax.swing.JInternalFrame {
 
         jLabel3.setFont(new java.awt.Font("Leelawadee UI Semilight", 1, 14)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("80");
         jLabel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 290, 150, 40));
 
         lbMes.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lbMes.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbMes.setText("Octubre - 2019");
+        lbMes.setText("Desayuno");
         jPanel3.add(lbMes, new org.netbeans.lib.awtextra.AbsoluteConstraints(317, 10, 150, 30));
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, 784, 374));
@@ -162,10 +156,6 @@ public class IngresosMensuales extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
         // TODO add your handling code here:
@@ -176,6 +166,7 @@ public class IngresosMensuales extends javax.swing.JInternalFrame {
     private javax.swing.ButtonGroup gDinero;
     private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -189,7 +180,6 @@ public class IngresosMensuales extends javax.swing.JInternalFrame {
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private com.toedter.calendar.JYearChooser jYearChooser1;
