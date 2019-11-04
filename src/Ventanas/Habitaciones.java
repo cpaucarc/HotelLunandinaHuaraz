@@ -17,7 +17,7 @@ public class Habitaciones extends javax.swing.JFrame {
     public static String Mantenimiento = "Mantenimiento";
 
     //Solo para pruebas, se cambiara con DB -- Demuestra el estado de cada habitacion
-    public static String[] EstadoHab = {Disponible, Disponible, Ocupado, Mantenimiento, Reservado, Mantenimiento, Ocupado, Reservado,
+    public static String[] EstadoHab = {Ocupado, Disponible, Ocupado, Mantenimiento, Reservado, Mantenimiento, Ocupado, Reservado,
         Ocupado, Mantenimiento, Reservado, Disponible, Disponible, Ocupado, Mantenimiento, Reservado};
 
     /* COLORES PARA FONDO DE PANEL DE HABITACION, NORMAL*/
