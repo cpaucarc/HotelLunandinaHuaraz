@@ -5,6 +5,8 @@ import javax.swing.JOptionPane;
 
 public class LoginAcceso extends javax.swing.JFrame {
 
+    String user, password;
+    MenuPrincipal mp = new MenuPrincipal();
     public boolean psw = false;
     /* usuario y password para pruebas temporales, se cambiara con DB*/
     String[] userArray = {"consuelo", "victor"};
@@ -141,7 +143,6 @@ public class LoginAcceso extends javax.swing.JFrame {
     }//GEN-LAST:event_lbVerContraMouseClicked
 
     private void btIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btIngresarActionPerformed
-        String user, password;
         user = username.getText();
         password = pwOculto.getText();
 
@@ -149,19 +150,15 @@ public class LoginAcceso extends javax.swing.JFrame {
             Control.usuario = user;
             Control.cargo = "Administrador";
             this.dispose();
-            MenuPrincipal mp = new MenuPrincipal();
+            mp.setVisible(true);
+        } else if (user.equals(userArray[1]) && password.equals(passArray[1])) { //User: victor, Password: 1234, Cargo: Recepcionista
+            Control.usuario = user;
+            Control.cargo = "Recepcionista";
+            this.dispose();
             mp.setVisible(true);
         } else {
-            if (user.equals(userArray[1]) && password.equals(passArray[1])) { //User: victor, Password: 1234, Cargo: Recepcionista
-                Control.usuario = user;
-                Control.cargo = "Recepcionista";
-                this.dispose();
-                MenuPrincipal mp = new MenuPrincipal();
-                mp.setVisible(true);
-            } else {
-                JOptionPane.showMessageDialog(null, "Credenciales incorrectas");
-                pwOculto.grabFocus();
-            }
+            JOptionPane.showMessageDialog(null, "Credenciales incorrectas");
+            pwOculto.grabFocus();
         }
     }//GEN-LAST:event_btIngresarActionPerformed
 

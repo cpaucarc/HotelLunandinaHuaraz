@@ -2,7 +2,7 @@ package Ventanas;
 
 import Clases.Design;
 import javax.swing.ImageIcon;
-import javax.swing.UIManager;
+import javax.swing.UIManager;  
 import java.awt.*;
 
 /**
@@ -13,12 +13,11 @@ public class FrmSplash extends javax.swing.JFrame implements Runnable {
 
     int num = 0;
     Thread hilo;
-    Design design=new Design();
+    Design design = new Design();
 
     public FrmSplash() {
-        this.setUndecorated(true);//para quitar el borde de la ventana
-        //design.MoverFrame(jPanel1, this);
         initComponents();
+        //design.MoverFrame(jPanel1, this);
         this.setLocationRelativeTo(null);
         JProBarCargar.setStringPainted(true);
         JProBarCargar.setForeground(Color.BLACK);//color de la letra 10%
@@ -27,6 +26,8 @@ public class FrmSplash extends javax.swing.JFrame implements Runnable {
 //        this.setIconImage(new ImageIcon(getClass().getResource("/imagenes/Hotel.jpg")).getImage());
         hilo = new Thread(this);
         hilo.start();
+        this.setUndecorated(true);//para quitar el borde de la ventana
+
     }
 
     private void Llena_Barra() {
@@ -91,26 +92,12 @@ public class FrmSplash extends javax.swing.JFrame implements Runnable {
             java.util.logging.Logger.getLogger(FrmSplash.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
+
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmSplash().setVisible(true);
+                new FrmSplash().setVisible(true);                
             }
         });
     }
@@ -121,6 +108,7 @@ public class FrmSplash extends javax.swing.JFrame implements Runnable {
     private javax.swing.JPanel pnMain;
     // End of variables declaration//GEN-END:variables
 
+    
     @Override
     public void run() {
         try {
