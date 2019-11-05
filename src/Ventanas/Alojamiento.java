@@ -127,7 +127,7 @@ public class Alojamiento extends javax.swing.JFrame {
                 btClientePersonaActionPerformed(evt);
             }
         });
-        pnTipoCliente.add(btClientePersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 40, 150, 40));
+        pnTipoCliente.add(btClientePersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 35, 150, 50));
 
         btClienteEmpresa.setBackground(new java.awt.Color(144, 101, 168));
         btClienteEmpresa.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -138,7 +138,7 @@ public class Alojamiento extends javax.swing.JFrame {
                 btClienteEmpresaActionPerformed(evt);
             }
         });
-        pnTipoCliente.add(btClienteEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(261, 40, 150, 40));
+        pnTipoCliente.add(btClienteEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(261, 35, 150, 50));
 
         jPanel2.add(pnTipoCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 25, 461, 120));
 
@@ -366,10 +366,10 @@ public class Alojamiento extends javax.swing.JFrame {
         jLabelDNI15.setText("S/.");
         pnHabitacion.add(jLabelDNI15, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 181, -1, -1));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "205", "207", "305", "306" }));
         pnHabitacion.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 75, 156, 30));
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Indivudual", "Doble", "Triple", "Matrimonial", "Matrimonial Lunandina" }));
         pnHabitacion.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 25, 156, 30));
 
         jPanel2.add(pnHabitacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 535, 336, 120));
