@@ -18,10 +18,10 @@ public class LugarProcedencia extends javax.swing.JInternalFrame {
         jComboBox1 = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
         jYearChooser1 = new com.toedter.calendar.JYearChooser();
+        jButton1 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         lbMes = new javax.swing.JLabel();
@@ -65,6 +65,13 @@ public class LugarProcedencia extends javax.swing.JInternalFrame {
         jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, 70, 30));
         jPanel2.add(jYearChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 100, 80, 30));
 
+        jButton1.setBackground(new java.awt.Color(111, 168, 183));
+        jButton1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/pdf.png"))); // NOI18N
+        jButton1.setText("Imprimir");
+        jButton1.setBorder(null);
+        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(584, 90, 150, 40));
+
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 784, 160));
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
@@ -89,13 +96,6 @@ public class LugarProcedencia extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(jTable1);
 
         jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, 684, 254));
-
-        jButton1.setBackground(new java.awt.Color(111, 168, 183));
-        jButton1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/pdf.png"))); // NOI18N
-        jButton1.setText("Imprimir");
-        jButton1.setBorder(null);
-        jPanel3.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(584, 310, 150, 40));
 
         jLabel6.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         jLabel6.setText("Total  S/.");

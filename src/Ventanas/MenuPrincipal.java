@@ -4,6 +4,9 @@ import java.awt.Color;
 import javax.swing.JOptionPane;
 import Ventanas.*;
 import Clases.Control;
+import java.awt.Menu;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
 /* importaciones para animar label */
 import javax.swing.Icon;
@@ -68,6 +71,22 @@ public class MenuPrincipal extends javax.swing.JFrame {
         timer = new Timer();
         timer.scheduleAtFixedRate(tarea, velmil, velmil);
         /* Fin controlador de animaciones*/
+        /* Controlar el evento de cierre de ventana */
+        this.addWindowListener(new WindowListener() {
+            @Override public void windowOpened(WindowEvent e) {}
+            @Override public void windowClosing(WindowEvent e) {
+                //int rsta = JOptionPane.showConfirmDialog(null, "¿Desea cerrar la aplicación?","Advertencia", JOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE);
+                //if(rsta == 0){
+                //    System.exit(0);
+                //}
+            }
+            @Override public void windowClosed(WindowEvent e) {}
+            @Override public void windowIconified(WindowEvent e) {}
+            @Override public void windowDeiconified(WindowEvent e) {}
+            @Override public void windowActivated(WindowEvent e) {}
+            @Override public void windowDeactivated(WindowEvent e) {}
+        });
+        /* Controlar el evento de cierre de ventana */
     }
 
     @SuppressWarnings("unchecked")

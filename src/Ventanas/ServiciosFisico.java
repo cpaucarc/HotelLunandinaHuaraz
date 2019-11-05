@@ -125,7 +125,7 @@ public class ServiciosFisico extends javax.swing.JFrame {
         pnMain.add(btBoleta, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 440, 120, 65));
 
         lbReiniciar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbReiniciar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/modificar.png"))); // NOI18N
+        lbReiniciar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/reiniciar.png"))); // NOI18N
         lbReiniciar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lbReiniciar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {

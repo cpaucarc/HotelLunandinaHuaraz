@@ -258,7 +258,7 @@ public class Servicios extends javax.swing.JFrame {
         lbLimpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/limpiar.png"))); // NOI18N
         lbLimpiar.setToolTipText("Limpiar formularios");
         lbLimpiar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel1.add(lbLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 5, -1, -1));
+        jPanel1.add(lbLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 0, -1, -1));
 
         btEliminar.setBackground(new java.awt.Color(234, 82, 62));
         btEliminar.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
@@ -322,14 +322,14 @@ public class Servicios extends javax.swing.JFrame {
         jPanel1.add(pnTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 390, 120));
 
         lbReiniciar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbReiniciar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/modificar.png"))); // NOI18N
+        lbReiniciar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/reiniciar.png"))); // NOI18N
         lbReiniciar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lbReiniciar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lbReiniciarMouseClicked(evt);
             }
         });
-        jPanel1.add(lbReiniciar, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 5, 30, 30));
+        jPanel1.add(lbReiniciar, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 0, 30, 30));
 
         pnEmpresa.setBackground(new java.awt.Color(255, 255, 255));
         pnEmpresa.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "DATOS DEL USUARIO", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 12))); // NOI18N

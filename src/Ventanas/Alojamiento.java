@@ -99,7 +99,7 @@ public class Alojamiento extends javax.swing.JFrame {
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lbReiniciar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbReiniciar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/modificar.png"))); // NOI18N
+        lbReiniciar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/reiniciar.png"))); // NOI18N
         lbReiniciar.setToolTipText("Reiniciar");
         lbReiniciar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lbReiniciar.addMouseListener(new java.awt.event.MouseAdapter() {
