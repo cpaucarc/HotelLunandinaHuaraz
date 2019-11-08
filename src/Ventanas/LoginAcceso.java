@@ -1,21 +1,23 @@
 package Ventanas;
 
 import Clases.Control;
+import Clases.Design;
 import javax.swing.JOptionPane;
 
 public class LoginAcceso extends javax.swing.JFrame {
-
-    String user, password;
-    MenuPrincipal mp = new MenuPrincipal();
+    
+    static Design design=new Design();
     public boolean psw = false;
     /* usuario y password para pruebas temporales, se cambiara con DB*/
     String[] userArray = {"consuelo", "victor"};
     String[] passArray = {"root", "1234"};
+    
 
     public LoginAcceso() {
         initComponents();
         this.setLocationRelativeTo(null);
         pwVisible.setVisible(false);
+        username.grabFocus();
     }
 
     @SuppressWarnings("unchecked")
@@ -143,19 +145,22 @@ public class LoginAcceso extends javax.swing.JFrame {
     }//GEN-LAST:event_lbVerContraMouseClicked
 
     private void btIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btIngresarActionPerformed
+        String user, password;
         user = username.getText();
         password = pwOculto.getText();
 
         if (user.equals(userArray[0]) && password.equals(passArray[0])) { //User: consuelo, Password: root, Cargo: Administrador
             Control.usuario = user;
             Control.cargo = "Administrador";
+            MenuPrincipal mp = new MenuPrincipal();
+            mp.show();
             this.dispose();
-            mp.setVisible(true);
         } else if (user.equals(userArray[1]) && password.equals(passArray[1])) { //User: victor, Password: 1234, Cargo: Recepcionista
             Control.usuario = user;
             Control.cargo = "Recepcionista";
+            MenuPrincipal mp = new MenuPrincipal();
+            mp.show();
             this.dispose();
-            mp.setVisible(true);
         } else {
             JOptionPane.showMessageDialog(null, "Credenciales incorrectas");
             pwOculto.grabFocus();
@@ -191,7 +196,8 @@ public class LoginAcceso extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
+            public void run() {                
+                design.Nimbus();
                 new LoginAcceso().setVisible(true);
             }
         });

@@ -26,7 +26,7 @@ public class FrmSplash extends javax.swing.JFrame implements Runnable {
 //        this.setIconImage(new ImageIcon(getClass().getResource("/imagenes/Hotel.jpg")).getImage());
         hilo = new Thread(this);
         hilo.start();
-        this.setUndecorated(true);//para quitar el borde de la ventana
+        //this.setUndecorated(true);//para quitar el borde de la ventana
 
     }
 
