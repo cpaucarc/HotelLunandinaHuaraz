@@ -39,7 +39,6 @@ public class Habitaciones extends javax.swing.JFrame {
 
     public Habitaciones() {
         initComponents();
-        this.setExtendedState(6);
         AddPaneles(); //añadimos los paneles a los pnPiso1 y pnPiso2, segun corresponda
         AddColorPaneles(); //Asignamos el color segun el estado de la habitacion
         AddLabelInPanel(); //Añadimos label con numeor de habitacion a paneles
@@ -155,8 +154,10 @@ public class Habitaciones extends javax.swing.JFrame {
 
         pnTitulo = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         lbUserActual = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        lbMinimizar = new javax.swing.JLabel();
+        lbCerrar = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         pnPiso1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
@@ -190,6 +191,7 @@ public class Habitaciones extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         pnTitulo.setBackground(new java.awt.Color(13, 39, 70));
@@ -198,15 +200,45 @@ public class Habitaciones extends javax.swing.JFrame {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Lunandina/logoHabitaciones.png"))); // NOI18N
         pnTitulo.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 7, -1, 40));
 
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/userActual.png"))); // NOI18N
-        pnTitulo.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(1306, 0, 30, 46));
-
         lbUserActual.setFont(new java.awt.Font("Leelawadee UI Semilight", 1, 16)); // NOI18N
         lbUserActual.setForeground(new java.awt.Color(255, 255, 255));
         lbUserActual.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lbUserActual.setText("jLabel13");
-        pnTitulo.add(lbUserActual, new org.netbeans.lib.awtextra.AbsoluteConstraints(1145, 0, 150, 46));
+        pnTitulo.add(lbUserActual, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 0, 120, 46));
+
+        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/userActual.png"))); // NOI18N
+        pnTitulo.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(1200, 0, 30, 46));
+
+        lbMinimizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/minimizar1.png"))); // NOI18N
+        lbMinimizar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lbMinimizar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbMinimizarMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lbMinimizarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lbMinimizarMouseExited(evt);
+            }
+        });
+        pnTitulo.add(lbMinimizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1280, 8, 30, 30));
+
+        lbCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/cerrar1.png"))); // NOI18N
+        lbCerrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lbCerrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbCerrarMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lbCerrarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lbCerrarMouseExited(evt);
+            }
+        });
+        pnTitulo.add(lbCerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1310, 8, 30, 30));
 
         getContentPane().add(pnTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1366, -1));
 
@@ -403,10 +435,34 @@ public class Habitaciones extends javax.swing.JFrame {
 
         pnInfo.add(pnServicios, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 20, 386, 330));
 
-        getContentPane().add(pnInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 346, 1366, 380));
+        getContentPane().add(pnInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 346, 1366, 400));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void lbMinimizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbMinimizarMouseClicked
+        this.setExtendedState(ICONIFIED);
+    }//GEN-LAST:event_lbMinimizarMouseClicked
+
+    private void lbMinimizarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbMinimizarMouseEntered
+        lbMinimizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/minimizar2.png")));
+    }//GEN-LAST:event_lbMinimizarMouseEntered
+
+    private void lbMinimizarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbMinimizarMouseExited
+        lbMinimizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/minimizar1.png")));
+    }//GEN-LAST:event_lbMinimizarMouseExited
+
+    private void lbCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbCerrarMouseClicked
+        this.dispose();
+    }//GEN-LAST:event_lbCerrarMouseClicked
+
+    private void lbCerrarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbCerrarMouseEntered
+        lbCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/cerrar2.png")));
+    }//GEN-LAST:event_lbCerrarMouseEntered
+
+    private void lbCerrarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbCerrarMouseExited
+        lbCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/cerrar1.png")));
+    }//GEN-LAST:event_lbCerrarMouseExited
 
     /**
      * @param args the command line arguments
@@ -452,10 +508,10 @@ public class Habitaciones extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -463,8 +519,10 @@ public class Habitaciones extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel lbApellidos;
+    private javax.swing.JLabel lbCerrar;
     private javax.swing.JLabel lbDNI;
     private javax.swing.JLabel lbEMail;
+    private javax.swing.JLabel lbMinimizar;
     private javax.swing.JLabel lbNombres;
     private javax.swing.JLabel lbNumHab;
     private javax.swing.JLabel lbProcedencia;

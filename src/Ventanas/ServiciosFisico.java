@@ -284,7 +284,7 @@ public class ServiciosFisico extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(13, 39, 70));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lbCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/close_40.png"))); // NOI18N
+        lbCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/cerrar1.png"))); // NOI18N
         lbCerrar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lbCerrarMouseClicked(evt);
@@ -315,10 +315,10 @@ public class ServiciosFisico extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_lbCerrarMouseClicked
     private void lbCerrarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbCerrarMouseEntered
-        lbCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/closeR_40.png")));
+        lbCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/cerrar2.png")));
     }//GEN-LAST:event_lbCerrarMouseEntered
     private void lbCerrarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbCerrarMouseExited
-        lbCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/close_40.png")));
+        lbCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/cerrar1.png")));
     }//GEN-LAST:event_lbCerrarMouseExited
 
     private void txtpreciounit2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtpreciounit2KeyTyped

@@ -15,6 +15,7 @@ public class LoginAcceso extends javax.swing.JFrame {
 
     public LoginAcceso() {
         initComponents();
+        design.MoverFrame(jPanel1, this);
         this.setLocationRelativeTo(null);
         pwVisible.setVisible(false);
         username.grabFocus();
@@ -36,8 +37,11 @@ public class LoginAcceso extends javax.swing.JFrame {
         pwVisible = new javax.swing.JTextField();
         jComboBox1 = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
+        lbCerrar = new javax.swing.JLabel();
+        lbMinimizar = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(13, 39, 70));
@@ -117,6 +121,36 @@ public class LoginAcceso extends javax.swing.JFrame {
         jLabel4.setText("Nombre de Usuario");
         jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 150, 200, 20));
 
+        lbCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/cerrar3.png"))); // NOI18N
+        lbCerrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lbCerrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbCerrarMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lbCerrarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lbCerrarMouseExited(evt);
+            }
+        });
+        jPanel2.add(lbCerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 8, 30, 30));
+
+        lbMinimizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/minimizar3.png"))); // NOI18N
+        lbMinimizar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lbMinimizar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbMinimizarMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lbMinimizarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lbMinimizarMouseExited(evt);
+            }
+        });
+        jPanel2.add(lbMinimizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 8, 30, 30));
+
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 0, 310, 450));
 
         pack();
@@ -153,19 +187,39 @@ public class LoginAcceso extends javax.swing.JFrame {
             Control.usuario = user;
             Control.cargo = "Administrador";
             MenuPrincipal mp = new MenuPrincipal();
-            mp.show();
+            mp.setVisible(true);
             this.dispose();
         } else if (user.equals(userArray[1]) && password.equals(passArray[1])) { //User: victor, Password: 1234, Cargo: Recepcionista
             Control.usuario = user;
             Control.cargo = "Recepcionista";
             MenuPrincipal mp = new MenuPrincipal();
-            mp.show();
+            mp.setVisible(true);
             this.dispose();
         } else {
             JOptionPane.showMessageDialog(null, "Credenciales incorrectas");
             pwOculto.grabFocus();
         }
     }//GEN-LAST:event_btIngresarActionPerformed
+
+    private void lbCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbCerrarMouseClicked
+        System.exit(0);
+    }//GEN-LAST:event_lbCerrarMouseClicked
+    private void lbCerrarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbCerrarMouseEntered
+        lbCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/cerrar2.png")));
+    }//GEN-LAST:event_lbCerrarMouseEntered
+    private void lbCerrarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbCerrarMouseExited
+        lbCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/cerrar3.png")));
+    }//GEN-LAST:event_lbCerrarMouseExited
+
+    private void lbMinimizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbMinimizarMouseClicked
+        this.setExtendedState(ICONIFIED);
+    }//GEN-LAST:event_lbMinimizarMouseClicked
+    private void lbMinimizarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbMinimizarMouseEntered
+        lbMinimizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/minimizar2.png")));
+    }//GEN-LAST:event_lbMinimizarMouseEntered
+    private void lbMinimizarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbMinimizarMouseExited
+        lbMinimizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/minimizar3.png")));
+    }//GEN-LAST:event_lbMinimizarMouseExited
 
     /**
      * @param args the command line arguments
@@ -212,6 +266,8 @@ public class LoginAcceso extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel lbCerrar;
+    private javax.swing.JLabel lbMinimizar;
     private javax.swing.JLabel lbVerContra;
     private javax.swing.JPasswordField pwOculto;
     private javax.swing.JTextField pwVisible;

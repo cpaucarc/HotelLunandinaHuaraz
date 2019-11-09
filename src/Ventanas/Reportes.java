@@ -15,9 +15,11 @@ public class Reportes extends javax.swing.JFrame {
     ReporteClientes cliente=new ReporteClientes();
     ReporteAloj alojamiento=new ReporteAloj();
     
+    int ancho = 844;
+    int alto = 750;
+    
     public Reportes() {
         initComponents();
-        this.setExtendedState(6);
         lbUserActual.setText(Control.usuario);
     }
 
@@ -28,7 +30,9 @@ public class Reportes extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         lbUserActual = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        lbMinimizar = new javax.swing.JLabel();
+        lbCerrar = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         pnComprobante = new javax.swing.JPanel();
         pnBoleta = new javax.swing.JPanel();
@@ -52,6 +56,7 @@ public class Reportes extends javax.swing.JFrame {
         desktop = new javax.swing.JDesktopPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(13, 39, 70));
@@ -64,11 +69,41 @@ public class Reportes extends javax.swing.JFrame {
         lbUserActual.setForeground(new java.awt.Color(255, 255, 255));
         lbUserActual.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lbUserActual.setText("jLabel13");
-        jPanel1.add(lbUserActual, new org.netbeans.lib.awtextra.AbsoluteConstraints(1145, 0, 150, 46));
+        jPanel1.add(lbUserActual, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 0, 120, 46));
 
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/userActual.png"))); // NOI18N
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(1306, 0, 30, 46));
+        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/userActual.png"))); // NOI18N
+        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(1200, 0, 30, 46));
+
+        lbMinimizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/minimizar1.png"))); // NOI18N
+        lbMinimizar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lbMinimizar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbMinimizarMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lbMinimizarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lbMinimizarMouseExited(evt);
+            }
+        });
+        jPanel1.add(lbMinimizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1280, 8, 30, 30));
+
+        lbCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/cerrar1.png"))); // NOI18N
+        lbCerrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lbCerrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbCerrarMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lbCerrarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lbCerrarMouseExited(evt);
+            }
+        });
+        jPanel1.add(lbCerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1310, 8, 30, 30));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1366, 46));
 
@@ -301,8 +336,8 @@ public class Reportes extends javax.swing.JFrame {
 
         jPanel2.add(pnOtros, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 385, 460, 265));
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(844, 46, 522, 674));
-        getContentPane().add(desktop, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 46, 844, 674));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(844, 46, 522, 700));
+        getContentPane().add(desktop, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 46, 844, 700));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -312,7 +347,7 @@ public class Reportes extends javax.swing.JFrame {
         desktop.removeAll();
         desktop.repaint();
         desktop.add(factura);
-        factura.setSize(844,674);
+        factura.setSize(ancho,alto);
         factura.show();
         
         //BasicInternalFrameUI bi = (BasicInternalFrameUI)facturas.getUI();
@@ -333,7 +368,7 @@ public class Reportes extends javax.swing.JFrame {
         desktop.removeAll();
         desktop.repaint();
         desktop.add(boleta);
-        boleta.setSize(844,674);
+        boleta.setSize(ancho,alto);
         boleta.show();
     }//GEN-LAST:event_lbBoletaMouseClicked
     private void lbBoletaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbBoletaMouseEntered
@@ -348,7 +383,7 @@ public class Reportes extends javax.swing.JFrame {
         desktop.removeAll();
         desktop.repaint();
         desktop.add(inMensual);
-        inMensual.setSize(844,674);
+        inMensual.setSize(ancho,alto);
         inMensual.show();
     }//GEN-LAST:event_lbMensualMouseClicked
     private void lbMensualMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbMensualMouseEntered
@@ -363,7 +398,7 @@ public class Reportes extends javax.swing.JFrame {
         desktop.removeAll();
         desktop.repaint();
         desktop.add(inAnual);
-        inAnual.setSize(844,674);
+        inAnual.setSize(ancho,alto);
         inAnual.show();
     }//GEN-LAST:event_lbAnualMouseClicked
     private void lbAnualMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbAnualMouseEntered
@@ -378,7 +413,7 @@ public class Reportes extends javax.swing.JFrame {
         desktop.removeAll();
         desktop.repaint();
         desktop.add(servicio);
-        servicio.setSize(844,674);
+        servicio.setSize(ancho,alto);
         servicio.show();
     }//GEN-LAST:event_lbServicioMouseClicked
     private void lbServicioMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbServicioMouseEntered
@@ -393,7 +428,7 @@ public class Reportes extends javax.swing.JFrame {
         desktop.removeAll();
         desktop.repaint();
         desktop.add(lugar);
-        lugar.setSize(844,674);
+        lugar.setSize(ancho,alto);
         lugar.show();
     }//GEN-LAST:event_lbLugarMouseClicked
     private void lbLugarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbLugarMouseEntered
@@ -408,7 +443,7 @@ public class Reportes extends javax.swing.JFrame {
         desktop.removeAll();
         desktop.repaint();
         desktop.add(cliente);
-        cliente.setSize(844,674);
+        cliente.setSize(ancho,alto);
         cliente.show();
     }//GEN-LAST:event_lbClienteMouseClicked
     private void lbClienteMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbClienteMouseEntered
@@ -424,7 +459,7 @@ public class Reportes extends javax.swing.JFrame {
         desktop.removeAll();
         desktop.repaint();
         desktop.add(alojamiento);
-        alojamiento.setSize(844,674);
+        alojamiento.setSize(ancho,alto);
         alojamiento.show();
     }//GEN-LAST:event_lbAlojamientoMouseClicked
     private void lbAlojamientoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbAlojamientoMouseEntered
@@ -433,6 +468,30 @@ public class Reportes extends javax.swing.JFrame {
     private void lbAlojamientoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbAlojamientoMouseExited
         pnAlojamiento.setBackground(new java.awt.Color(204,204,204));
     }//GEN-LAST:event_lbAlojamientoMouseExited
+
+    private void lbMinimizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbMinimizarMouseClicked
+        this.setExtendedState(ICONIFIED);
+    }//GEN-LAST:event_lbMinimizarMouseClicked
+
+    private void lbMinimizarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbMinimizarMouseEntered
+        lbMinimizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/minimizar2.png")));
+    }//GEN-LAST:event_lbMinimizarMouseEntered
+
+    private void lbMinimizarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbMinimizarMouseExited
+        lbMinimizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/minimizar1.png")));
+    }//GEN-LAST:event_lbMinimizarMouseExited
+
+    private void lbCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbCerrarMouseClicked
+        this.dispose();
+    }//GEN-LAST:event_lbCerrarMouseClicked
+
+    private void lbCerrarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbCerrarMouseEntered
+        lbCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/cerrar2.png")));
+    }//GEN-LAST:event_lbCerrarMouseEntered
+
+    private void lbCerrarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbCerrarMouseExited
+        lbCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/cerrar1.png")));
+    }//GEN-LAST:event_lbCerrarMouseExited
 
     /**
      * @param args the command line arguments
@@ -471,17 +530,19 @@ public class Reportes extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane desktop;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lbAlojamiento;
     private javax.swing.JLabel lbAnual;
     private javax.swing.JLabel lbBoleta;
+    private javax.swing.JLabel lbCerrar;
     private javax.swing.JLabel lbCliente;
     private javax.swing.JLabel lbFactura;
     private javax.swing.JLabel lbLugar;
     private javax.swing.JLabel lbMensual;
+    private javax.swing.JLabel lbMinimizar;
     private javax.swing.JLabel lbServicio;
     private javax.swing.JLabel lbUserActual;
     private javax.swing.JPanel pnAlojamiento;

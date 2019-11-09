@@ -5,7 +5,6 @@ public class RegistroEmpleado extends javax.swing.JFrame {
 
     public RegistroEmpleado() {
         initComponents();
-        this.setExtendedState(6);
         lbUserActual.setText(Control.usuario);
     }
 
@@ -17,6 +16,8 @@ public class RegistroEmpleado extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         lbUserActual = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
+        lbMinimizar = new javax.swing.JLabel();
+        lbCerrar = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -48,7 +49,8 @@ public class RegistroEmpleado extends javax.swing.JFrame {
         jTextField7 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1100, 556));
+        setUndecorated(true);
+        setPreferredSize(new java.awt.Dimension(1366, 750));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel4.setBackground(new java.awt.Color(13, 39, 70));
@@ -61,11 +63,41 @@ public class RegistroEmpleado extends javax.swing.JFrame {
         lbUserActual.setForeground(new java.awt.Color(255, 255, 255));
         lbUserActual.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lbUserActual.setText("jLabel13");
-        jPanel4.add(lbUserActual, new org.netbeans.lib.awtextra.AbsoluteConstraints(1145, 0, 150, 46));
+        jPanel4.add(lbUserActual, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 0, 120, 46));
 
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/userActual.png"))); // NOI18N
-        jPanel4.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(1306, 0, 30, 46));
+        jPanel4.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(1200, 0, 30, 46));
+
+        lbMinimizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/minimizar1.png"))); // NOI18N
+        lbMinimizar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lbMinimizar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbMinimizarMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lbMinimizarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lbMinimizarMouseExited(evt);
+            }
+        });
+        jPanel4.add(lbMinimizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1280, 8, 30, 30));
+
+        lbCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/cerrar1.png"))); // NOI18N
+        lbCerrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lbCerrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbCerrarMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lbCerrarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lbCerrarMouseExited(evt);
+            }
+        });
+        jPanel4.add(lbCerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1310, 8, 30, 30));
 
         getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1366, 46));
 
@@ -175,7 +207,7 @@ public class RegistroEmpleado extends javax.swing.JFrame {
         jLabel11.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jPanel5.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(461, 5, -1, -1));
 
-        getContentPane().add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 46, 521, 730));
+        getContentPane().add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 46, 521, 700));
 
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -213,7 +245,7 @@ public class RegistroEmpleado extends javax.swing.JFrame {
 
         jPanel6.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 784, 610));
 
-        getContentPane().add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(521, 46, 845, 720));
+        getContentPane().add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(521, 46, 845, 700));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -225,6 +257,26 @@ public class RegistroEmpleado extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void lbMinimizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbMinimizarMouseClicked
+        this.setExtendedState(ICONIFIED);
+    }//GEN-LAST:event_lbMinimizarMouseClicked
+    private void lbMinimizarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbMinimizarMouseEntered
+        lbMinimizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/minimizar2.png")));
+    }//GEN-LAST:event_lbMinimizarMouseEntered
+    private void lbMinimizarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbMinimizarMouseExited
+        lbMinimizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/minimizar1.png")));
+    }//GEN-LAST:event_lbMinimizarMouseExited
+
+    private void lbCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbCerrarMouseClicked
+        this.dispose();
+    }//GEN-LAST:event_lbCerrarMouseClicked
+    private void lbCerrarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbCerrarMouseEntered
+        lbCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/cerrar2.png")));
+    }//GEN-LAST:event_lbCerrarMouseEntered
+    private void lbCerrarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbCerrarMouseExited
+        lbCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/cerrar1.png")));
+    }//GEN-LAST:event_lbCerrarMouseExited
 
     /**
      * @param args the command line arguments
@@ -293,6 +345,8 @@ public class RegistroEmpleado extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
+    private javax.swing.JLabel lbCerrar;
+    private javax.swing.JLabel lbMinimizar;
     private javax.swing.JLabel lbUserActual;
     private javax.swing.JSeparator sepDni;
     // End of variables declaration//GEN-END:variables

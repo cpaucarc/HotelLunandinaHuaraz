@@ -5,6 +5,7 @@ import java.awt.event.KeyListener;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import Clases.Control;
+import Clases.Design;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.awt.event.WindowStateListener;
@@ -13,26 +14,15 @@ public class DatosUsuario extends javax.swing.JFrame {
     
     public boolean pw1 = false; //controlador para visiblidad de campo de password 1
     public boolean pw2 = false; //controlador para visiblidad de campo de password 1
+    Design design = new Design();
     
     public DatosUsuario() {
         initComponents();
+        design.MoverFrame(jPanel4, this);
         btModificar.setEnabled(false);
         this.setLocationRelativeTo(null);
         lbCargo.setText(Control.cargo);
-        lbUser.setText(Control.usuario);
-        this.addWindowListener(new WindowListener() {
-            @Override public void windowOpened(WindowEvent e) {}
-            @Override public void windowClosing(WindowEvent e) {}
-            @Override public void windowClosed(WindowEvent e) {
-                System.out.println("Se cerró");
-                MenuPrincipal mp=new MenuPrincipal();
-                mp.setVisible(true);
-            }
-            @Override public void windowIconified(WindowEvent e) {}
-            @Override public void windowDeiconified(WindowEvent e) {}
-            @Override public void windowActivated(WindowEvent e) {}
-            @Override public void windowDeactivated(WindowEvent e) {}
-        });
+        lbUser.setText(Control.usuario);        
     }
 
     
@@ -48,6 +38,8 @@ public class DatosUsuario extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        lbMinimizar = new javax.swing.JLabel();
+        lbCerrar = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         pnDatosPersonales = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -79,6 +71,7 @@ public class DatosUsuario extends javax.swing.JFrame {
         lbStatus = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setUndecorated(true);
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -101,7 +94,37 @@ public class DatosUsuario extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel4.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 5, 150, 36));
+        jPanel4.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 5, 150, 36));
+
+        lbMinimizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/minimizar1.png"))); // NOI18N
+        lbMinimizar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lbMinimizar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbMinimizarMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lbMinimizarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lbMinimizarMouseExited(evt);
+            }
+        });
+        jPanel4.add(lbMinimizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 8, 30, 30));
+
+        lbCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/cerrar1.png"))); // NOI18N
+        lbCerrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lbCerrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbCerrarMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lbCerrarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lbCerrarMouseExited(evt);
+            }
+        });
+        jPanel4.add(lbCerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 8, 30, 30));
 
         getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1100, 46));
 
@@ -365,6 +388,31 @@ public class DatosUsuario extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void lbMinimizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbMinimizarMouseClicked
+        this.setExtendedState(ICONIFIED);
+    }//GEN-LAST:event_lbMinimizarMouseClicked
+
+    private void lbMinimizarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbMinimizarMouseEntered
+        lbMinimizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/minimizar2.png")));
+    }//GEN-LAST:event_lbMinimizarMouseEntered
+
+    private void lbMinimizarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbMinimizarMouseExited
+        lbMinimizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/minimizar1.png")));
+    }//GEN-LAST:event_lbMinimizarMouseExited
+
+    private void lbCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbCerrarMouseClicked
+        this.dispose();
+        new MenuPrincipal().setVisible(true);
+    }//GEN-LAST:event_lbCerrarMouseClicked
+
+    private void lbCerrarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbCerrarMouseEntered
+        lbCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/cerrar2.png")));
+    }//GEN-LAST:event_lbCerrarMouseEntered
+
+    private void lbCerrarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbCerrarMouseExited
+        lbCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/cerrar1.png")));
+    }//GEN-LAST:event_lbCerrarMouseExited
+
     /**
      * @param args the command line arguments
      */
@@ -419,7 +467,9 @@ public class DatosUsuario extends javax.swing.JFrame {
     private javax.swing.JLabel lbAMaterno;
     private javax.swing.JLabel lbAPaterno;
     private javax.swing.JLabel lbCargo;
+    private javax.swing.JLabel lbCerrar;
     private javax.swing.JLabel lbDNI;
+    private javax.swing.JLabel lbMinimizar;
     private javax.swing.JLabel lbNombres;
     private javax.swing.JLabel lbStatus;
     private javax.swing.JLabel lbUser;

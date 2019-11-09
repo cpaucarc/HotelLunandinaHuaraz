@@ -158,7 +158,7 @@ public class Boletas extends javax.swing.JInternalFrame {
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 270, 784, 354));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 844, 654));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 844, 720));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

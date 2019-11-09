@@ -5,7 +5,7 @@ import java.awt.Color;
 
 public class Control {
     
-    public static String usuario = "";
+    public static String usuario = "Username";
     public static String cargo = "";
     
     /*CONTROL DE COLOR DE INTERFAZ*/

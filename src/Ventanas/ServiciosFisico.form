@@ -671,7 +671,7 @@
         <Component class="javax.swing.JLabel" name="lbCerrar">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/Imagenes/Recursos/close_40.png"/>
+              <Image iconType="3" name="/Imagenes/Recursos/cerrar1.png"/>
             </Property>
           </Properties>
           <Events>
