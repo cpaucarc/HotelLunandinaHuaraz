@@ -55,6 +55,7 @@ public class DatosUsuario extends javax.swing.JFrame {
         lbUser = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         lbCargo = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         pnCredenciales = new javax.swing.JPanel();
         label8 = new javax.swing.JLabel();
@@ -202,6 +203,9 @@ public class DatosUsuario extends javax.swing.JFrame {
         pnDatosUsuario.add(lbCargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 80, 250, 30));
 
         jPanel1.add(pnDatosUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 450, 140));
+
+        jLabel8.setText("v22");
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 460, -1, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 46, 510, 480));
 
@@ -458,6 +462,7 @@ public class DatosUsuario extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;

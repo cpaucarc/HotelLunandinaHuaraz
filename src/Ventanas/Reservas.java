@@ -3,6 +3,8 @@ package Ventanas;
 
 import Clases.Control;
 import java.awt.Color;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 /**
  *
  * @author CLINTON
@@ -11,6 +13,7 @@ public class Reservas extends javax.swing.JFrame {
 
     public Reservas() {
         initComponents();
+        btValidar.setEnabled(false);
         this.setLocationRelativeTo(null);
         lbUserActual.setText(Control.usuario);
         tabla.getTableHeader().setOpaque(true);
@@ -25,6 +28,20 @@ public class Reservas extends javax.swing.JFrame {
         btRegistrar.setVisible(false);
         btModificar.setVisible(false);
         btEliminar.setVisible(false);
+        //Listener de tabla
+        tabla.addMouseListener(new MouseListener() {
+            @Override public void mouseClicked(MouseEvent e) {
+                if(tabla.getSelectedRow()>-1){
+                    btValidar.setEnabled(true);
+                }else{
+                    btValidar.setEnabled(false);                    
+                }
+            }
+            @Override public void mousePressed(MouseEvent e) {}
+            @Override public void mouseReleased(MouseEvent e) {}
+            @Override public void mouseEntered(MouseEvent e) {}
+            @Override public void mouseExited(MouseEvent e) {}
+        });
     }
 
     /**
@@ -93,6 +110,7 @@ public class Reservas extends javax.swing.JFrame {
         jLabelDNI16 = new javax.swing.JLabel();
         jtxtdni9 = new javax.swing.JTextField();
         jDateChooser3 = new com.toedter.calendar.JDateChooser();
+        btValidar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -438,20 +456,20 @@ public class Reservas extends javax.swing.JFrame {
         tabla.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Fecha Reserva", "Fecha Entrada", "Fecha Salida", "N° Habitacion", "Tipo Habitacion", "DNI/RUC", "Cliente", "Procedencia"
             }
         ));
         tabla.setGridColor(new java.awt.Color(0, 0, 0));
         tabla.setSelectionBackground(new java.awt.Color(0, 122, 255));
         jScrollPane1.setViewportView(tabla);
 
-        jPanel6.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 724, 490));
+        jPanel6.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 744, 440));
 
         jLabelDNI16.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabelDNI16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -473,7 +491,13 @@ public class Reservas extends javax.swing.JFrame {
         jDateChooser3.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
         jPanel6.add(jDateChooser3, new org.netbeans.lib.awtextra.AbsoluteConstraints(527, 40, 200, 30));
 
-        jPanel5.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 25, 784, 620));
+        btValidar.setBackground(new java.awt.Color(255, 185, 83));
+        btValidar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btValidar.setText("Validar alojamiento");
+        btValidar.setBorder(null);
+        jPanel6.add(btValidar, new org.netbeans.lib.awtextra.AbsoluteConstraints(584, 560, 160, 30));
+
+        jPanel5.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 25, 784, 630));
 
         getContentPane().add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(521, 46, 845, 700));
 
@@ -649,6 +673,7 @@ public class Reservas extends javax.swing.JFrame {
     private javax.swing.JButton btEliminar;
     private javax.swing.JButton btModificar;
     private javax.swing.JButton btRegistrar;
+    private javax.swing.JButton btValidar;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private com.toedter.calendar.JDateChooser jDateChooser3;

@@ -126,7 +126,7 @@ public class ReporteClientes extends javax.swing.JInternalFrame {
         jTable1.setSelectionBackground(new java.awt.Color(0, 122, 255));
         jScrollPane1.setViewportView(jTable1);
 
-        jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, 684, 234));
+        jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 724, 234));
 
         jLabel6.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         jLabel6.setText("Total  S/.");

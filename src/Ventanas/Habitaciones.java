@@ -170,9 +170,7 @@ public class Habitaciones extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         lbTipoHab = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         txPrecio = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
         pnCliente = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         lbEMail = new javax.swing.JLabel();
@@ -189,6 +187,8 @@ public class Habitaciones extends javax.swing.JFrame {
         tablaServicios = new javax.swing.JTable();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -329,23 +329,11 @@ public class Habitaciones extends javax.swing.JFrame {
         jLabel8.setText("Tipo Habitacion");
         pnDatosHab.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 95, 110, 30));
 
-        jButton1.setBackground(new java.awt.Color(111, 168, 183));
-        jButton1.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/pdf.png"))); // NOI18N
-        jButton1.setText("Generar Comprobante");
-        pnDatosHab.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 205, 320, 35));
-
         txPrecio.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txPrecio.setSelectionColor(new java.awt.Color(0, 122, 255));
         pnDatosHab.add(txPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 150, 200, 30));
 
-        jButton2.setBackground(new java.awt.Color(234, 82, 62));
-        jButton2.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/exit.png"))); // NOI18N
-        jButton2.setText("Check - Out");
-        pnDatosHab.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, 320, 35));
-
-        pnInfo.add(pnDatosHab, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 380, 330));
+        pnInfo.add(pnDatosHab, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 380, 220));
 
         pnCliente.setBackground(new java.awt.Color(255, 255, 255));
         pnCliente.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "DATOS DEL CLIENTE", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 12))); // NOI18N
@@ -434,6 +422,20 @@ public class Habitaciones extends javax.swing.JFrame {
         pnServicios.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(138, 260, 218, 30));
 
         pnInfo.add(pnServicios, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 20, 386, 330));
+
+        jButton2.setBackground(new java.awt.Color(234, 82, 62));
+        jButton2.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/exit.png"))); // NOI18N
+        jButton2.setText("Check - Out");
+        jButton2.setBorder(null);
+        pnInfo.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 315, 320, 35));
+
+        jButton1.setBackground(new java.awt.Color(111, 168, 183));
+        jButton1.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/pdf.png"))); // NOI18N
+        jButton1.setText("Generar Comprobante");
+        jButton1.setBorder(null);
+        pnInfo.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 260, 320, 35));
 
         getContentPane().add(pnInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 346, 1366, 400));
 

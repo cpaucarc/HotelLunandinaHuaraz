@@ -434,7 +434,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private void lbHabMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbHabMouseEntered
         pnHab.setBackground(Control.color_Body);
         lbHab.setForeground(new Color(23, 23, 23));
-        lbHab.setFont(new java.awt.Font(fuente, 1, tamG));
+        lbHab.setFont(new java.awt.Font(fuente, 1, tamP));
     }//GEN-LAST:event_lbHabMouseEntered
     private void lbHabMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbHabMouseExited
         pnHab.setBackground(new Color(13, 39, 70));

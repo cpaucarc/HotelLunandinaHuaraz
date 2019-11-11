@@ -131,7 +131,7 @@ public class Facturas extends javax.swing.JInternalFrame {
         jTable1.setSelectionBackground(new java.awt.Color(0, 122, 255));
         jScrollPane1.setViewportView(jTable1);
 
-        jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, 684, 214));
+        jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 724, 214));
 
         jButton1.setBackground(new java.awt.Color(111, 168, 183));
         jButton1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N

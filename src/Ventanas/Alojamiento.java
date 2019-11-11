@@ -437,20 +437,20 @@ public class Alojamiento extends javax.swing.JFrame {
         tabla.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Fecha Entrada", "Fecha Salida", "N° Habitacion", "Tipo Habitacion", "DNI/RUC", "Cliente", "Procedencia"
             }
         ));
         tabla.setGridColor(new java.awt.Color(0, 0, 0));
         tabla.setSelectionBackground(new java.awt.Color(0, 122, 255));
         jScrollPane1.setViewportView(tabla);
 
-        jPanel6.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 724, 490));
+        jPanel6.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 744, 490));
 
         jLabelDNI16.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabelDNI16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);

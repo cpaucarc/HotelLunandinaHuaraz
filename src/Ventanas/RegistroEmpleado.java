@@ -30,7 +30,6 @@ public class RegistroEmpleado extends javax.swing.JFrame {
         jTextField4 = new javax.swing.JTextField();
         jTextField5 = new javax.swing.JTextField();
         jTextField6 = new javax.swing.JTextField();
-        sepDni = new javax.swing.JSeparator();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
         jButton1 = new javax.swing.JButton();
@@ -157,7 +156,6 @@ public class RegistroEmpleado extends javax.swing.JFrame {
         jTextField6.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField6.setSelectionColor(new java.awt.Color(0, 122, 255));
         jPanel1.add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(151, 255, 280, 30));
-        jPanel1.add(sepDni, new org.netbeans.lib.awtextra.AbsoluteConstraints(151, 67, 280, -1));
         jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 130, -1, -1));
         jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 180, -1, -1));
 
@@ -224,7 +222,7 @@ public class RegistroEmpleado extends javax.swing.JFrame {
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "DNI", "Apellidos", "Nombres", "Email", "Telefono", "Cargo"
+                "DNI", "Apellidos", "Nombres", "Email", "Cargo", "Nombre Usuario"
             }
         ));
         jTable1.setSelectionBackground(new java.awt.Color(0, 122, 255));
@@ -348,6 +346,5 @@ public class RegistroEmpleado extends javax.swing.JFrame {
     private javax.swing.JLabel lbCerrar;
     private javax.swing.JLabel lbMinimizar;
     private javax.swing.JLabel lbUserActual;
-    private javax.swing.JSeparator sepDni;
     // End of variables declaration//GEN-END:variables
 }

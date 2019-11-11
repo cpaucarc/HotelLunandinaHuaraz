@@ -30,12 +30,10 @@ public class LoginAcceso extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         lbVerContra = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         username = new javax.swing.JTextField();
         btIngresar = new javax.swing.JButton();
         pwOculto = new javax.swing.JPasswordField();
         pwVisible = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
         lbCerrar = new javax.swing.JLabel();
         lbMinimizar = new javax.swing.JLabel();
@@ -64,19 +62,13 @@ public class LoginAcceso extends javax.swing.JFrame {
                 lbVerContraMouseClicked(evt);
             }
         });
-        jPanel2.add(lbVerContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 240, -1, -1));
+        jPanel2.add(lbVerContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 205, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(102, 102, 102));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Contraseña");
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 220, 200, 20));
-
-        jLabel3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Nombre de Usuario");
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(55, 80, 200, 20));
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(55, 185, 200, 20));
 
         username.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
         username.setForeground(new java.awt.Color(23, 23, 23));
@@ -87,7 +79,7 @@ public class LoginAcceso extends javax.swing.JFrame {
                 usernameActionPerformed(evt);
             }
         });
-        jPanel2.add(username, new org.netbeans.lib.awtextra.AbsoluteConstraints(55, 170, 200, 30));
+        jPanel2.add(username, new org.netbeans.lib.awtextra.AbsoluteConstraints(55, 110, 200, 30));
 
         btIngresar.setBackground(new java.awt.Color(248, 177, 57));
         btIngresar.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
@@ -105,21 +97,17 @@ public class LoginAcceso extends javax.swing.JFrame {
         pwOculto.setForeground(new java.awt.Color(23, 23, 23));
         pwOculto.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         pwOculto.setSelectionColor(new java.awt.Color(0, 122, 255));
-        jPanel2.add(pwOculto, new org.netbeans.lib.awtextra.AbsoluteConstraints(55, 240, 200, 30));
+        jPanel2.add(pwOculto, new org.netbeans.lib.awtextra.AbsoluteConstraints(55, 205, 200, 30));
 
         pwVisible.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
         pwVisible.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jPanel2.add(pwVisible, new org.netbeans.lib.awtextra.AbsoluteConstraints(55, 240, 200, 30));
-
-        jComboBox1.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador", "Recepcionista" }));
-        jPanel2.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(55, 100, 200, 30));
+        jPanel2.add(pwVisible, new org.netbeans.lib.awtextra.AbsoluteConstraints(55, 205, 200, 30));
 
         jLabel4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(102, 102, 102));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Nombre de Usuario");
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 150, 200, 20));
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(55, 90, 200, 20));
 
         lbCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/cerrar3.png"))); // NOI18N
         lbCerrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -259,10 +247,8 @@ public class LoginAcceso extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btIngresar;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
