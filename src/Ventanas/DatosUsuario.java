@@ -204,7 +204,7 @@ public class DatosUsuario extends javax.swing.JFrame {
 
         jPanel1.add(pnDatosUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 450, 140));
 
-        jLabel8.setText("v22");
+        jLabel8.setText("v23");
         jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 460, -1, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 46, 510, 480));

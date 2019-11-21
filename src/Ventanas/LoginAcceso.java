@@ -1,11 +1,13 @@
 package Ventanas;
 
 import Clases.Control;
+import Clases.Controlador;
 import Clases.Design;
 import javax.swing.JOptionPane;
 
 public class LoginAcceso extends javax.swing.JFrame {
     
+    Controlador control=new Controlador();
     static Design design=new Design();
     public boolean psw = false;
     /* usuario y password para pruebas temporales, se cambiara con DB*/
@@ -19,6 +21,7 @@ public class LoginAcceso extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         pwVisible.setVisible(false);
         username.grabFocus();
+        control.LlenarCombo(cbo, "select * from cargos", 2);
     }
 
     @SuppressWarnings("unchecked")
@@ -37,6 +40,7 @@ public class LoginAcceso extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         lbCerrar = new javax.swing.JLabel();
         lbMinimizar = new javax.swing.JLabel();
+        cbo = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -138,6 +142,9 @@ public class LoginAcceso extends javax.swing.JFrame {
             }
         });
         jPanel2.add(lbMinimizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 8, 30, 30));
+
+        cbo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jPanel2.add(cbo, new org.netbeans.lib.awtextra.AbsoluteConstraints(48, 396, 180, -1));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 0, 310, 450));
 
@@ -247,6 +254,7 @@ public class LoginAcceso extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btIngresar;
+    private javax.swing.JComboBox<String> cbo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;

@@ -1,13 +1,23 @@
 package Ventanas;
 
 import Clases.Control;
-public class RegistroEmpleado extends javax.swing.JFrame {
+import Clases.Controlador;
+import javax.swing.JOptionPane;
 
+public class RegistroEmpleado extends javax.swing.JFrame {
+    
+    Controlador control=new Controlador();
+    
     public RegistroEmpleado() {
         initComponents();
         lbUserActual.setText(Control.usuario);
+        control.LlenarCombo(cbEstado, "SELECT * FROM estadoempleado", 2);
+        control.LlenarCombo(cbCargo, "SELECT * FROM cargos", 2);
     }
 
+    public void Limpiar(){
+        
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -25,27 +35,27 @@ public class RegistroEmpleado extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
+        txdni = new javax.swing.JTextField();
+        txappat = new javax.swing.JTextField();
+        txapmat = new javax.swing.JTextField();
+        txnomb = new javax.swing.JTextField();
+        txmail = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cbCargo = new javax.swing.JComboBox<>();
         jLabel9 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        cbEstado = new javax.swing.JComboBox<>();
         jLabel11 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel10 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
+        txbuscar = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -127,35 +137,35 @@ public class RegistroEmpleado extends javax.swing.JFrame {
         jLabel6.setText("Email");
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 255, 120, 31));
 
-        jTextField2.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
-        jTextField2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField2.setSelectionColor(new java.awt.Color(0, 122, 255));
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        txdni.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
+        txdni.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txdni.setSelectionColor(new java.awt.Color(0, 122, 255));
+        txdni.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                txdniActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(151, 35, 280, 30));
+        jPanel1.add(txdni, new org.netbeans.lib.awtextra.AbsoluteConstraints(151, 35, 280, 30));
 
-        jTextField3.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
-        jTextField3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField3.setSelectionColor(new java.awt.Color(0, 122, 255));
-        jPanel1.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(151, 90, 280, 30));
+        txappat.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
+        txappat.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txappat.setSelectionColor(new java.awt.Color(0, 122, 255));
+        jPanel1.add(txappat, new org.netbeans.lib.awtextra.AbsoluteConstraints(151, 90, 280, 30));
 
-        jTextField4.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
-        jTextField4.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField4.setSelectionColor(new java.awt.Color(0, 122, 255));
-        jPanel1.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(151, 145, 280, 30));
+        txapmat.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
+        txapmat.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txapmat.setSelectionColor(new java.awt.Color(0, 122, 255));
+        jPanel1.add(txapmat, new org.netbeans.lib.awtextra.AbsoluteConstraints(151, 145, 280, 30));
 
-        jTextField5.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
-        jTextField5.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField5.setSelectionColor(new java.awt.Color(0, 122, 255));
-        jPanel1.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(151, 200, 280, 30));
+        txnomb.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
+        txnomb.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txnomb.setSelectionColor(new java.awt.Color(0, 122, 255));
+        jPanel1.add(txnomb, new org.netbeans.lib.awtextra.AbsoluteConstraints(151, 200, 280, 30));
 
-        jTextField6.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
-        jTextField6.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField6.setSelectionColor(new java.awt.Color(0, 122, 255));
-        jPanel1.add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(151, 255, 280, 30));
+        txmail.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
+        txmail.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txmail.setSelectionColor(new java.awt.Color(0, 122, 255));
+        jPanel1.add(txmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(151, 255, 280, 30));
         jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 130, -1, -1));
         jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 180, -1, -1));
 
@@ -165,6 +175,11 @@ public class RegistroEmpleado extends javax.swing.JFrame {
         jButton1.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/agregar.png"))); // NOI18N
         jButton1.setText("Registrar Empleado");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         jPanel5.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 605, -1, 40));
 
         jButton2.setBackground(new java.awt.Color(255, 185, 83));
@@ -186,17 +201,17 @@ public class RegistroEmpleado extends javax.swing.JFrame {
         jLabel7.setText("Estado");
         jPanel3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 84, 120, 30));
 
-        jComboBox1.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Recepcionista" }));
-        jPanel3.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(151, 27, 280, -1));
+        cbCargo.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
+        cbCargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Recepcionista" }));
+        jPanel3.add(cbCargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(151, 27, 280, -1));
 
         jLabel9.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel9.setText("Cargo");
         jPanel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 27, 120, 30));
 
-        jComboBox2.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo" }));
-        jPanel3.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(151, 84, 280, -1));
+        cbEstado.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
+        cbEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo" }));
+        jPanel3.add(cbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(151, 84, 280, -1));
 
         jPanel5.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 409, 461, 141));
 
@@ -236,10 +251,10 @@ public class RegistroEmpleado extends javax.swing.JFrame {
         jLabel10.setText("Buscar");
         jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(139, 40, 90, 30));
 
-        jTextField7.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
-        jTextField7.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField7.setSelectionColor(new java.awt.Color(0, 122, 255));
-        jPanel2.add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(229, 40, 400, 30));
+        txbuscar.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
+        txbuscar.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txbuscar.setSelectionColor(new java.awt.Color(0, 122, 255));
+        jPanel2.add(txbuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(229, 40, 400, 30));
 
         jPanel6.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 784, 610));
 
@@ -248,9 +263,9 @@ public class RegistroEmpleado extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void txdniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txdniActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_txdniActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
@@ -275,6 +290,20 @@ public class RegistroEmpleado extends javax.swing.JFrame {
     private void lbCerrarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbCerrarMouseExited
         lbCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/cerrar1.png")));
     }//GEN-LAST:event_lbCerrarMouseExited
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        //sp_empleado`(in evt int, dni varchar(8), appat varchar(50), apmat varchar(50), nombres varchar(50), 
+						//mail varchar(50), carg varchar(50), estad varchar(50))
+        JOptionPane.showMessageDialog(null, 
+                control.DevolverRegistroDto("call sp_empleado(1,'"+
+                        txdni.getText()+"','"+
+                        txappat.getText()+"','"+
+                        txapmat.getText()+"','"+
+                        txnomb.getText()+"','"+
+                        txmail.getText()+"','"+
+                        cbCargo.getSelectedItem().toString() + "','"+
+                        cbEstado.getSelectedItem().toString() + "')", 1));
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -312,10 +341,10 @@ public class RegistroEmpleado extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> cbCargo;
+    private javax.swing.JComboBox<String> cbEstado;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -337,14 +366,14 @@ public class RegistroEmpleado extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
     private javax.swing.JLabel lbCerrar;
     private javax.swing.JLabel lbMinimizar;
     private javax.swing.JLabel lbUserActual;
+    private javax.swing.JTextField txapmat;
+    private javax.swing.JTextField txappat;
+    private javax.swing.JTextField txbuscar;
+    private javax.swing.JTextField txdni;
+    private javax.swing.JTextField txmail;
+    private javax.swing.JTextField txnomb;
     // End of variables declaration//GEN-END:variables
 }
