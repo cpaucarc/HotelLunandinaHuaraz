@@ -96,10 +96,8 @@ public class Servicios extends javax.swing.JFrame {
         pnServicio = new javax.swing.JPanel();
         cboservicio = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         txtpreciounit = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
-        txtpreciounit1 = new javax.swing.JTextField();
         btFisico = new javax.swing.JButton();
         btEliminar = new javax.swing.JButton();
         btEditar = new javax.swing.JButton();
@@ -329,15 +327,11 @@ public class Servicios extends javax.swing.JFrame {
 
         cboservicio.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
         cboservicio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Desayuno", "Lavanderia", "Boletos" }));
-        pnServicio.add(cboservicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 20, 200, 30));
+        pnServicio.add(cboservicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 40, 200, 30));
 
         jLabel5.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel5.setText("Servicio");
-        pnServicio.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 120, 30));
-
-        jLabel3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel3.setText("Cantidad");
-        pnServicio.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 120, 30));
+        pnServicio.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 120, 30));
 
         txtpreciounit.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
         txtpreciounit.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -347,21 +341,11 @@ public class Servicios extends javax.swing.JFrame {
                 txtpreciounitKeyTyped(evt);
             }
         });
-        pnServicio.add(txtpreciounit, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 120, 200, 30));
+        pnServicio.add(txtpreciounit, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 110, 200, 30));
 
         jLabel15.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel15.setText("Precio  S/.");
-        pnServicio.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, 120, 30));
-
-        txtpreciounit1.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
-        txtpreciounit1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtpreciounit1.setSelectionColor(new java.awt.Color(0, 122, 255));
-        txtpreciounit1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtpreciounit1KeyTyped(evt);
-            }
-        });
-        pnServicio.add(txtpreciounit1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 70, 200, 30));
+        pnServicio.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, 120, 30));
 
         pnA.add(pnServicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 350, 390, 170));
 
@@ -518,10 +502,6 @@ public class Servicios extends javax.swing.JFrame {
     private void btGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btGuardarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btGuardarActionPerformed
-
-    private void txtpreciounit1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtpreciounit1KeyTyped
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtpreciounit1KeyTyped
 
     private void btPersonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPersonaActionPerformed
         pnTipo.setVisible(false);
@@ -779,7 +759,6 @@ public class Servicios extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -809,6 +788,5 @@ public class Servicios extends javax.swing.JFrame {
     private javax.swing.JTextField txRUC;
     private javax.swing.JTextField txbuscar;
     private javax.swing.JTextField txtpreciounit;
-    private javax.swing.JTextField txtpreciounit1;
     // End of variables declaration//GEN-END:variables
 }

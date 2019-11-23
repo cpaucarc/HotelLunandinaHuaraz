@@ -2,21 +2,59 @@ package Ventanas;
 
 import Clases.Control;
 import Clases.Controlador;
+import Clases.Design;
+import Clases.Textos;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 public class RegistroEmpleado extends javax.swing.JFrame {
     
     Controlador control=new Controlador();
+    Design ds=new Design();
+    DefaultTableModel modelo=new DefaultTableModel();
     
     public RegistroEmpleado() {
         initComponents();
         lbUserActual.setText(Control.usuario);
         control.LlenarCombo(cbEstado, "SELECT * FROM estadoempleado", 2);
         control.LlenarCombo(cbCargo, "SELECT * FROM cargos", 2);
-    }
-
-    public void Limpiar(){
+        modelo.setColumnIdentifiers(new String[]{"DNI", "APELLIDOS", "NOMBRES", "E-MAIL", "CARGO", "ESTADO","USUARIO"});
+        tabla.setModel(modelo);
+        ds.Centrar_Tabla(tabla);
+        MostrarResultados();
         
+        cbEstado.setEnabled(false);
+        cbEstado.setSelectedIndex(0);
+        btModificar.setEnabled(false);
+    }
+    public void Seleccionar(){
+        txdni.setText(tabla.getValueAt(tabla.getSelectedRow(), 0).toString());
+        txappat.setText(tabla.getValueAt(tabla.getSelectedRow(), 1).toString().split(" ")[0]);
+        txapmat.setText(tabla.getValueAt(tabla.getSelectedRow(), 1).toString().split(" ")[1]);
+        txnomb.setText(tabla.getValueAt(tabla.getSelectedRow(), 2).toString());        
+        txmail.setText(tabla.getValueAt(tabla.getSelectedRow(), 3).toString());
+        cbCargo.setSelectedItem(tabla.getValueAt(tabla.getSelectedRow(), 4).toString());
+        cbEstado.setSelectedItem(tabla.getValueAt(tabla.getSelectedRow(), 5).toString());
+    }
+    public void Limpiar(){
+        txdni.setText("");
+        txappat.setText("");
+        txapmat.setText("");
+        txnomb.setText("");
+        txmail.setText("");
+        cbCargo.setSelectedIndex(-1);
+        cbEstado.setSelectedIndex(0);
+    }
+    public void MostrarResultados(){
+        String consulta = "select * from vw_empleados where "
+                + "dni like '%"+txbuscar.getText()+"%' or "
+                + "apellidos like '%"+txbuscar.getText()+"%' or "
+                + "nombres like '%"+txbuscar.getText()+"%' or "
+                + "mail like '%"+txbuscar.getText()+"%' or "
+                + "cargo like '%"+txbuscar.getText()+"%' or "
+                + "estado like '%"+txbuscar.getText()+"%' or "
+                + "username like '%"+txbuscar.getText()+"%'";
+        control.LlenarJtable(modelo, consulta, 7);
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -35,17 +73,17 @@ public class RegistroEmpleado extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        txdni = new javax.swing.JTextField();
         txappat = new javax.swing.JTextField();
         txapmat = new javax.swing.JTextField();
         txnomb = new javax.swing.JTextField();
         txmail = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        txdni = new javax.swing.JTextField();
+        btRegistrar = new javax.swing.JButton();
+        btModificar = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
-        jLabel7 = new javax.swing.JLabel();
+        lbEstado = new javax.swing.JLabel();
         cbCargo = new javax.swing.JComboBox<>();
         jLabel9 = new javax.swing.JLabel();
         cbEstado = new javax.swing.JComboBox<>();
@@ -53,7 +91,7 @@ public class RegistroEmpleado extends javax.swing.JFrame {
         jPanel6 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabla = new javax.swing.JTable();
         jLabel10 = new javax.swing.JLabel();
         txbuscar = new javax.swing.JTextField();
 
@@ -137,16 +175,6 @@ public class RegistroEmpleado extends javax.swing.JFrame {
         jLabel6.setText("Email");
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 255, 120, 31));
 
-        txdni.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
-        txdni.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txdni.setSelectionColor(new java.awt.Color(0, 122, 255));
-        txdni.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txdniActionPerformed(evt);
-            }
-        });
-        jPanel1.add(txdni, new org.netbeans.lib.awtextra.AbsoluteConstraints(151, 35, 280, 30));
-
         txappat.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
         txappat.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txappat.setSelectionColor(new java.awt.Color(0, 122, 255));
@@ -169,37 +197,46 @@ public class RegistroEmpleado extends javax.swing.JFrame {
         jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 130, -1, -1));
         jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 180, -1, -1));
 
+        txdni.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txdni.setSelectionColor(new java.awt.Color(0, 122, 255));
+        txdni.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txdniKeyTyped(evt);
+            }
+        });
+        jPanel1.add(txdni, new org.netbeans.lib.awtextra.AbsoluteConstraints(151, 35, 280, 30));
+
         jPanel5.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 461, 344));
 
-        jButton1.setBackground(new java.awt.Color(136, 206, 82));
-        jButton1.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/agregar.png"))); // NOI18N
-        jButton1.setText("Registrar Empleado");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btRegistrar.setBackground(new java.awt.Color(136, 206, 82));
+        btRegistrar.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
+        btRegistrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/agregar.png"))); // NOI18N
+        btRegistrar.setText("Registrar Empleado");
+        btRegistrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btRegistrarActionPerformed(evt);
             }
         });
-        jPanel5.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 605, -1, 40));
+        jPanel5.add(btRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 605, -1, 40));
 
-        jButton2.setBackground(new java.awt.Color(255, 185, 83));
-        jButton2.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/modificar.png"))); // NOI18N
-        jButton2.setText("Modificar Datos");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btModificar.setBackground(new java.awt.Color(255, 185, 83));
+        btModificar.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
+        btModificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/modificar.png"))); // NOI18N
+        btModificar.setText("Modificar Datos");
+        btModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btModificarActionPerformed(evt);
             }
         });
-        jPanel5.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(291, 605, 170, 40));
+        jPanel5.add(btModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(291, 605, 170, 40));
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0))), "DATOS DEL EMPLEO", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 12), new java.awt.Color(23, 23, 23))); // NOI18N
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel7.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel7.setText("Estado");
-        jPanel3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 84, 120, 30));
+        lbEstado.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        lbEstado.setText("Estado");
+        jPanel3.add(lbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 84, 120, 30));
 
         cbCargo.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
         cbCargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Recepcionista" }));
@@ -218,6 +255,11 @@ public class RegistroEmpleado extends javax.swing.JFrame {
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/limpiar.png"))); // NOI18N
         jLabel11.setToolTipText("Limpiar formularios");
         jLabel11.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel11.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel11MouseClicked(evt);
+            }
+        });
         jPanel5.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(461, 5, -1, -1));
 
         getContentPane().add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 46, 521, 700));
@@ -229,8 +271,8 @@ public class RegistroEmpleado extends javax.swing.JFrame {
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0))), "EMPLEADOS REGISTRADOS", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 12), new java.awt.Color(23, 23, 23))); // NOI18N
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTable1.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 13)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabla.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 13)); // NOI18N
+        tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -240,8 +282,13 @@ public class RegistroEmpleado extends javax.swing.JFrame {
                 "DNI", "Apellidos", "Nombres", "Email", "Cargo", "Nombre Usuario"
             }
         ));
-        jTable1.setSelectionBackground(new java.awt.Color(0, 122, 255));
-        jScrollPane1.setViewportView(jTable1);
+        tabla.setSelectionBackground(new java.awt.Color(0, 122, 255));
+        tabla.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tabla);
 
         jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 724, 500));
 
@@ -254,6 +301,11 @@ public class RegistroEmpleado extends javax.swing.JFrame {
         txbuscar.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
         txbuscar.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txbuscar.setSelectionColor(new java.awt.Color(0, 122, 255));
+        txbuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txbuscarKeyTyped(evt);
+            }
+        });
         jPanel2.add(txbuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(229, 40, 400, 30));
 
         jPanel6.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 784, 610));
@@ -263,13 +315,30 @@ public class RegistroEmpleado extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txdniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txdniActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txdniActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void btModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btModificarActionPerformed
+        if(txdni.getText().length()==8 && txappat.getText().length()>0 && txapmat.getText().length()>0 && 
+                txnomb.getText().length()>0 && txmail.getText().length()>0 &&
+                cbCargo.getSelectedIndex()>-1 && cbEstado.getSelectedIndex()>-1){
+            JOptionPane.showMessageDialog(null, 
+                control.DevolverRegistroDto("call proc_empleado(2,'"+
+                        txdni.getText()+"','"+
+                        txappat.getText()+"','"+
+                        txapmat.getText()+"','"+
+                        txnomb.getText()+"','"+
+                        txmail.getText()+"','"+
+                        cbCargo.getSelectedItem().toString() + "','"+
+                        cbEstado.getSelectedItem().toString() + "')", 1));
+            Limpiar();
+            MostrarResultados();
+            
+            cbEstado.setEnabled(false);        
+            txdni.setEditable(true);
+            btModificar.setEnabled(false);
+            btRegistrar.setEnabled(true);
+        }else{
+            JOptionPane.showMessageDialog(null, "Faltan datos por rellenar","Advertencia", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_btModificarActionPerformed
 
     private void lbMinimizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbMinimizarMouseClicked
         this.setExtendedState(ICONIFIED);
@@ -291,19 +360,50 @@ public class RegistroEmpleado extends javax.swing.JFrame {
         lbCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/cerrar1.png")));
     }//GEN-LAST:event_lbCerrarMouseExited
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        //sp_empleado`(in evt int, dni varchar(8), appat varchar(50), apmat varchar(50), nombres varchar(50), 
-						//mail varchar(50), carg varchar(50), estad varchar(50))
-        JOptionPane.showMessageDialog(null, 
-                control.DevolverRegistroDto("call sp_empleado(1,'"+
+    private void btRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRegistrarActionPerformed
+        if(txdni.getText().length()==8 && txappat.getText().length()>0 && txapmat.getText().length()>0 && 
+                txnomb.getText().length()>0 && txmail.getText().length()>0 &&
+                cbCargo.getSelectedIndex()>-1 && cbEstado.getSelectedIndex()>-1){
+            JOptionPane.showMessageDialog(null, 
+                control.DevolverRegistroDto("call proc_empleado(1,'"+
                         txdni.getText()+"','"+
                         txappat.getText()+"','"+
                         txapmat.getText()+"','"+
                         txnomb.getText()+"','"+
                         txmail.getText()+"','"+
                         cbCargo.getSelectedItem().toString() + "','"+
-                        cbEstado.getSelectedItem().toString() + "')", 1));
-    }//GEN-LAST:event_jButton1ActionPerformed
+                        cbEstado.getItemAt(0) + "')", 1));
+            Limpiar();
+            MostrarResultados();
+        }else{
+            JOptionPane.showMessageDialog(null, "Faltan datos por rellenar","Advertencia", JOptionPane.WARNING_MESSAGE);
+        }        
+    }//GEN-LAST:event_btRegistrarActionPerformed
+
+    private void txbuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txbuscarKeyTyped
+        MostrarResultados();
+    }//GEN-LAST:event_txbuscarKeyTyped
+
+    private void txdniKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txdniKeyTyped
+        Textos.Numeros(evt);
+        Textos.LimiteCaracter(evt, txdni, 8);
+    }//GEN-LAST:event_txdniKeyTyped
+
+    private void jLabel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseClicked
+        Limpiar();
+        cbEstado.setEnabled(false);        
+        txdni.setEditable(true);
+        btModificar.setEnabled(false);
+        btRegistrar.setEnabled(true);
+    }//GEN-LAST:event_jLabel11MouseClicked
+
+    private void tablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMouseClicked
+        cbEstado.setEnabled(true);
+        txdni.setEditable(false);
+        btModificar.setEnabled(true);
+        btRegistrar.setEnabled(false);
+        Seleccionar();
+    }//GEN-LAST:event_tablaMouseClicked
 
     /**
      * @param args the command line arguments
@@ -341,10 +441,10 @@ public class RegistroEmpleado extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btModificar;
+    private javax.swing.JButton btRegistrar;
     private javax.swing.JComboBox<String> cbCargo;
     private javax.swing.JComboBox<String> cbEstado;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -354,7 +454,6 @@ public class RegistroEmpleado extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -365,10 +464,11 @@ public class RegistroEmpleado extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lbCerrar;
+    private javax.swing.JLabel lbEstado;
     private javax.swing.JLabel lbMinimizar;
     private javax.swing.JLabel lbUserActual;
+    private javax.swing.JTable tabla;
     private javax.swing.JTextField txapmat;
     private javax.swing.JTextField txappat;
     private javax.swing.JTextField txbuscar;

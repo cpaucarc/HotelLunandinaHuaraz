@@ -7,9 +7,13 @@ import java.awt.event.MouseListener;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import Clases.Control;
+import Clases.Controlador;
 
 public class Habitaciones extends javax.swing.JFrame {
 
+    /**/
+    Controlador control=new Controlador();
+    /**/
     /* ESTADO POSIBLES DE LAS HABITACIONES */
     public static String Disponible = "Disponible";
     public static String Ocupado = "Ocupado";
@@ -17,9 +21,9 @@ public class Habitaciones extends javax.swing.JFrame {
     public static String Mantenimiento = "Mantenimiento";
 
     //Solo para pruebas, se cambiara con DB -- Demuestra el estado de cada habitacion
-    public static String[] EstadoHab = {Ocupado, Disponible, Ocupado, Mantenimiento, Reservado, Mantenimiento, Ocupado, Reservado,
-        Ocupado, Mantenimiento, Reservado, Disponible, Disponible, Ocupado, Mantenimiento, Reservado};
-
+//    public static String[] EstadoHab = {Ocupado, Disponible, Ocupado, Mantenimiento, Reservado, Mantenimiento, Ocupado, Reservado,
+//        Ocupado, Mantenimiento, Reservado, Disponible, Disponible, Ocupado, Mantenimiento, Reservado};
+    public static String[] EstadoHab = new String[16];
     /* COLORES PARA FONDO DE PANEL DE HABITACION, NORMAL*/
     public static Color Disp = new Color(40, 167, 69);
     public static Color Ocup = new Color(220, 53, 69);
@@ -39,19 +43,30 @@ public class Habitaciones extends javax.swing.JFrame {
 
     public Habitaciones() {
         initComponents();
-        AddPaneles(); //añadimos los paneles a los pnPiso1 y pnPiso2, segun corresponda
-        AddColorPaneles(); //Asignamos el color segun el estado de la habitacion
-        AddLabelInPanel(); //Añadimos label con numeor de habitacion a paneles
-        AddIcon();  //Añadimos icono de tipo y icono de baño propio
+        //AddPaneles(); //añadimos los paneles a los pnPiso1 y pnPiso2, segun corresponda
+        RecuperarInfoDB();
+        //AddColorPaneles(); //Asignamos el color segun el estado de la habitacion
+        //AddLabelInPanel(); //Añadimos label con numeor de habitacion a paneles
+        //AddIcon();  //Añadimos icono de tipo y icono de baño propio
         //ClickLbhabitacion();  
         lbUserActual.setText(Control.usuario);
     }
 
+    public void RecuperarInfoDB(){
+        /* recuperamos los estados de las habitaciones */
+        AddPaneles();
+        for(int i=0; i<16; i++){
+            EstadoHab[i] = control.DevolverRegistroDto("SELECT estado FROM vw_habitacion WHERE id = "+(i++), 1);
+        }
+        /* recuperamos los estados de las habitaciones */
+        AddColorPaneles();
+        AddLabelInPanel();
+    }
     public void AddPaneles() {
         for (int i = 0; i < 16; i++) {
             panel_Hab[i] = new JPanel();  //Inicializamos los paneles
             panel_Hab[i].setLayout(null);
-            int k = i;
+            int k = i; //solo es auxiliar para realizar operaciones
 
             if (i >= 4 && i < 8){ //Piso 1 y fila 2            
                 k = i - 4;
@@ -76,7 +91,7 @@ public class Habitaciones extends javax.swing.JFrame {
             }
         }
     }
-    public void AddColorPaneles(){
+    public void AddColorPaneles(){ //REC: Primero, desde la DB recoger el estado y almacenarlo en EstadoHab[]
         for (int i = 0; i < 16; i++) {
             switch (EstadoHab[i]) {
                 case "Disponible":
@@ -100,11 +115,14 @@ public class Habitaciones extends javax.swing.JFrame {
     public void AddLabelInPanel(){ //Añade el numero de habitacion
         for (int i=0; i<16; i++){
             label_Hab[i] = new JLabel();
+            label_Hab[i].setText(control.DevolverRegistroDto("SELECT numero FROM vw_habitacion WHERE id = "+(i++), 1));
+            /*
             if(i<8){
                 label_Hab[i].setText("20"+(i+1));
             }else{
                 label_Hab[i].setText("30"+(i-8+1));
             }
+            */
             label_Hab[i].setBounds(10,10,78,70);
             label_Hab[i].setFont(new java.awt.Font("Arial Black", 0, 36)); // NOI18N
             label_Hab[i].setForeground(new java.awt.Color(23, 23, 23));
@@ -138,7 +156,7 @@ public class Habitaciones extends javax.swing.JFrame {
             JLabel lbb = new  JLabel();
             //Tipo de habitacion
             lbt.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-            lbt.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/individual.png")));
+            lbt.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/ml.png")));
             lbt.setBounds(108, 10, 42, 30);
             //Bath
             //lbb.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/icons8_bath_40px.png")));

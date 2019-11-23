@@ -25,10 +25,10 @@ public class Conexion {
        usu="root";
        contraseña="1234";
        host="localhost";
-       db="bdlunandina";    
+       db="hotel_lunandina";    
         String url="jdbc:mysql://"+host+"/"+db;       
         Class.forName("com.mysql.jdbc.Driver").newInstance();   //com.mysql.cj.jdbc.Driver
-        conec=DriverManager.getConnection(url, usu, contraseña);   
+        conec=DriverManager.getConnection(url, usu, contraseña);
         
         System.out.println("Conexion exitosa con DB - "+db);
         //JOptionPane.showMessageDialog(null, "Base de Datos: " + db + "\nconectado con EXITO ");

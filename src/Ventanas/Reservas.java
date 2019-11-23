@@ -323,8 +323,8 @@ public class Reservas extends javax.swing.JFrame {
 
         btEliminar.setBackground(new java.awt.Color(234, 82, 62));
         btEliminar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        btEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/eliminar.png"))); // NOI18N
-        btEliminar.setText("Eliminar");
+        btEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/cancelar.png"))); // NOI18N
+        btEliminar.setText("Cancelar");
         btEliminar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btEliminar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btEliminar.addActionListener(new java.awt.event.ActionListener() {

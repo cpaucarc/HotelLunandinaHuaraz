@@ -27,6 +27,12 @@ public class Textos {
         }
     }
 
+    static public void LimiteCaracter(KeyEvent e, JTextField tx, int limite) { //Limita al JTextField a un numero dado, ejemplo txdni --> 8
+        if (tx.getText().length()>=limite) {
+            e.consume();
+        }
+    }
+    
     public void Decimal(KeyEvent e, JTextField tx) {
         char caracter = e.getKeyChar();
         if (((caracter < '0') || (caracter > '9'))
