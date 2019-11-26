@@ -2,66 +2,65 @@ package Ventanas;
 
 import java.awt.Color;
 import java.awt.Cursor;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import Clases.Control;
 import Clases.Controlador;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
-public class Habitaciones extends javax.swing.JFrame {
+public class Habitaciones extends javax.swing.JFrame{
 
     /**/
     Controlador control=new Controlador();
+    ArrayList<Habitacion> datosHab=new ArrayList<>(); 
     /**/
-    /* ESTADO POSIBLES DE LAS HABITACIONES */
-    public static String Disponible = "Disponible";
-    public static String Ocupado = "Ocupado";
-    public static String Reservado = "Reservado";
-    public static String Mantenimiento = "Mantenimiento";
-
-    //Solo para pruebas, se cambiara con DB -- Demuestra el estado de cada habitacion
-//    public static String[] EstadoHab = {Ocupado, Disponible, Ocupado, Mantenimiento, Reservado, Mantenimiento, Ocupado, Reservado,
-//        Ocupado, Mantenimiento, Reservado, Disponible, Disponible, Ocupado, Mantenimiento, Reservado};
-    public static String[] EstadoHab = new String[16];
+    /* ARRAY PARA ALMACENAR LOS PANELES QUE REPRESENTA A CADA HABITACION */
+    public static JPanel[] panel_Hab = new JPanel[16];
+    /* ARRAY PARA ALMACENAR LOS LABELS QUE REPRESENTA A CADA HABITACION */
+    public static JLabel[] label_Hab = new JLabel[16];
+    
     /* COLORES PARA FONDO DE PANEL DE HABITACION, NORMAL*/
     public static Color Disp = new Color(40, 167, 69);
     public static Color Ocup = new Color(220, 53, 69);
     public static Color Resev = new Color(255, 193, 7);
     public static Color Mant = new Color(23, 162, 184);
-
-    /* COLORES PARA FONDO DE PANEL DE HABITACION, HOVER*/
-    public static Color hover_Disp = new Color(136, 206, 82);
-    public static Color hover_Ocup = new Color(234, 82, 62);
-    public static Color hover_Resev = new Color(255, 185, 83);
-    public static Color hover_Mant = new Color(111, 168, 183);
-
-    /* ARRAY PARA ALMACENAR LOS PANELES QUE REPRESENTA A CADA HABITACION */
-    public static JPanel[] panel_Hab = new JPanel[16];
-    /* ARRAY PARA ALMACENAR LOS LABELS QUE REPRESENTA A CADA HABITACION */
-    public static JLabel[] label_Hab = new JLabel[16];
+    /* Listener para manejar el evento del mouse en el LABEL HABITACION 
+    MouseListener listener=new MouseListener() {
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            if (e.getSource() instanceof JLabel) {
+                String text = ((JLabel) e.getSource()).getText();
+                JOptionPane.showMessageDialog(null, text);
+                
+            }
+        }
+        @Override public void mousePressed(MouseEvent e) {}
+        @Override public void mouseReleased(MouseEvent e) {}
+        @Override public void mouseEntered(MouseEvent e) {}
+        @Override public void mouseExited(MouseEvent e) {}
+    };            
+    */
 
     public Habitaciones() {
         initComponents();
-        //AddPaneles(); //añadimos los paneles a los pnPiso1 y pnPiso2, segun corresponda
-        RecuperarInfoDB();
-        //AddColorPaneles(); //Asignamos el color segun el estado de la habitacion
-        //AddLabelInPanel(); //Añadimos label con numeor de habitacion a paneles
-        //AddIcon();  //Añadimos icono de tipo y icono de baño propio
-        //ClickLbhabitacion();  
+        AddPaneles(); //añadimos los paneles a los pnPiso1 y pnPiso2, segun corresponda
+        
+        RecuperarDatos();
+        AddColorPaneles(); //Asignamos el color segun el estado de la habitacion
+        AddLabelInPanel(); //Añadimos label con numeor de habitacion a paneles
+        AddIcon();  //Añadimos icono de tipo y icono de baño propio
+        ClickInHab();  
+        
         lbUserActual.setText(Control.usuario);
+        
+        lbMensajeHab.setVisible(false);//Mensaje cuando una habitacion tenga estado DISPONIBLE O MANTENIMIENTO
+        pnDatosCliente.setVisible(false); //Cuando la habitacion tenga estado OCUPADO O RESERVADO
+        pnServ.setVisible(false); //Cuando la habitacion tenga estado OCUPADO O RESERVADO
     }
 
-    public void RecuperarInfoDB(){
-        /* recuperamos los estados de las habitaciones */
-        AddPaneles();
-        for(int i=0; i<16; i++){
-            EstadoHab[i] = control.DevolverRegistroDto("SELECT estado FROM vw_habitacion WHERE id = "+(i++), 1);
-        }
-        /* recuperamos los estados de las habitaciones */
-        AddColorPaneles();
-        AddLabelInPanel();
-    }
     public void AddPaneles() {
         for (int i = 0; i < 16; i++) {
             panel_Hab[i] = new JPanel();  //Inicializamos los paneles
@@ -91,9 +90,18 @@ public class Habitaciones extends javax.swing.JFrame {
             }
         }
     }
+    public void RecuperarDatos(){
+        for(int i=1; i<17; i++){
+            int _numero = Integer.parseInt(control.DevolverRegistroDto("SELECT numero FROM vw_habitacion WHERE id = "+i+" order by id;", 1));
+            String _estado = control.DevolverRegistroDto("SELECT estado FROM vw_habitacion WHERE id = "+i+" order by id;", 1);
+            String _tipo = control.DevolverRegistroDto("SELECT tipo FROM vw_habitacion WHERE id = "+i+" order by id;", 1);
+            double _precio = Double.parseDouble(control.DevolverRegistroDto("SELECT precio FROM vw_habitacion WHERE id = "+i+" order by id;", 1));
+            datosHab.add(new Habitacion(_numero, _estado, _tipo, _precio));
+        }
+    }
     public void AddColorPaneles(){ //REC: Primero, desde la DB recoger el estado y almacenarlo en EstadoHab[]
         for (int i = 0; i < 16; i++) {
-            switch (EstadoHab[i]) {
+            switch (datosHab.get(i).estado) {
                 case "Disponible":
                     panel_Hab[i].setBackground(Disp);
                     break;
@@ -107,64 +115,44 @@ public class Habitaciones extends javax.swing.JFrame {
                     panel_Hab[i].setBackground(Mant);
                     break;
                 default:
-                    panel_Hab[i].setBackground(Color.white);
+                    panel_Hab[i].setBackground(Color.gray);
                     break;
             }
         }
     }
-    public void AddLabelInPanel(){ //Añade el numero de habitacion
+    public void AddLabelInPanel(){ //Añade el numero de habitacion        
         for (int i=0; i<16; i++){
             label_Hab[i] = new JLabel();
-            label_Hab[i].setText(control.DevolverRegistroDto("SELECT numero FROM vw_habitacion WHERE id = "+(i++), 1));
-            /*
-            if(i<8){
-                label_Hab[i].setText("20"+(i+1));
-            }else{
-                label_Hab[i].setText("30"+(i-8+1));
-            }
-            */
+            label_Hab[i].setText(""+datosHab.get(i).numero);
             label_Hab[i].setBounds(10,10,78,70);
             label_Hab[i].setFont(new java.awt.Font("Arial Black", 0, 36)); // NOI18N
             label_Hab[i].setForeground(new java.awt.Color(23, 23, 23));
             label_Hab[i].setCursor(new Cursor(HAND_CURSOR));
             label_Hab[i].setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+            
+            label_Hab[i].addMouseListener(listener);
+            
             //label_Hab[i].setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
             panel_Hab[i].add(label_Hab[i], new org.netbeans.lib.awtextra.AbsoluteConstraints(10,10,78,70));
-        }        
-    }
-    public void ClickInHab(){
-        for (int i = 0; i<16; i++){
-            label_Hab[i].addMouseListener(new MouseListener() {
-                @Override public void mouseClicked(MouseEvent e) {
-                    
-                    //lbNumHab.setText(label_Hab[i].getText());
-                }
-                @Override public void mousePressed(MouseEvent e) {}
-                @Override public void mouseReleased(MouseEvent e) {}
-                @Override public void mouseEntered(MouseEvent e) {
-                    
-                }
-                @Override public void mouseExited(MouseEvent e) {
-                    
-                }
-            });
         }
     }
     public void AddIcon(){
         for (int i = 0; i<16; i++){
-            JLabel lbt = new  JLabel();
-            JLabel lbb = new  JLabel();
+            JLabel lbt = new  JLabel();  //label tipo(lbt)
             //Tipo de habitacion
             lbt.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-            lbt.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/ml.png")));
+            lbt.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/"+datosHab.get(i).tipo+".png")));
             lbt.setBounds(108, 10, 42, 30);
-            //Bath
-            //lbb.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/icons8_bath_40px.png")));
-            lbb.setBounds(108, 50, 42, 30);
+            
             panel_Hab[i].add(lbt);
-            panel_Hab[i].add(lbb);
         }
     }
+    public void ClickInHab(){
+        for (int i = 0; i<16; i++){
+            
+        }
+    }
+    
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -183,30 +171,42 @@ public class Habitaciones extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         pnInfo = new javax.swing.JPanel();
         pnDatosHab = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
-        lbNumHab = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        lbTipoHab = new javax.swing.JLabel();
+        lbNumHab = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
+        lbTipoHab = new javax.swing.JLabel();
+        lbprecio = new javax.swing.JLabel();
         txPrecio = new javax.swing.JTextField();
-        pnCliente = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
-        lbEMail = new javax.swing.JLabel();
+        btCheckOut = new javax.swing.JButton();
+        btComprobante = new javax.swing.JButton();
+        lbMensajeHab = new javax.swing.JLabel();
+        pnDatosCliente = new javax.swing.JPanel();
+        pnClienteEmpresa = new javax.swing.JPanel();
+        jLabel17 = new javax.swing.JLabel();
+        lbRUC = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        lbNomEmpresa = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        lbProcEmpresa = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        lbMailEmpresa = new javax.swing.JLabel();
+        pnClientePersona = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         lbDNI = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         lbApellidos = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
         lbNombres = new javax.swing.JLabel();
-        lbProcedencia = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
+        lbProcPersona = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        lbMailPersona = new javax.swing.JLabel();
+        pnServ = new javax.swing.JPanel();
         pnServicios = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaServicios = new javax.swing.JTable();
         jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        lbTotServicio = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -322,92 +322,160 @@ public class Habitaciones extends javax.swing.JFrame {
         pnDatosHab.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "DATOS DE LA HABITACIÓN", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 12))); // NOI18N
         pnDatosHab.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel4.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel4.setText("Precio");
-        pnDatosHab.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, 110, 30));
-
-        lbNumHab.setFont(new java.awt.Font("Leelawadee UI Semilight", 1, 14)); // NOI18N
-        lbNumHab.setForeground(new java.awt.Color(255, 255, 255));
-        lbNumHab.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 51)));
-        pnDatosHab.add(lbNumHab, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 40, 200, 30));
-
         jLabel7.setBackground(new java.awt.Color(255, 255, 255));
         jLabel7.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel7.setText("N° de Habitacion");
         pnDatosHab.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 110, 30));
 
-        lbTipoHab.setFont(new java.awt.Font("Leelawadee UI Semilight", 1, 14)); // NOI18N
-        lbTipoHab.setForeground(new java.awt.Color(255, 255, 255));
-        lbTipoHab.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 51)));
-        pnDatosHab.add(lbTipoHab, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 95, 200, 30));
+        lbNumHab.setFont(new java.awt.Font("Leelawadee UI Semilight", 1, 14)); // NOI18N
+        lbNumHab.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbNumHab.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 51)));
+        pnDatosHab.add(lbNumHab, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 40, 200, 30));
 
         jLabel8.setBackground(new java.awt.Color(255, 255, 255));
         jLabel8.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel8.setText("Tipo Habitacion");
         pnDatosHab.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 95, 110, 30));
 
+        lbTipoHab.setFont(new java.awt.Font("Leelawadee UI Semilight", 1, 14)); // NOI18N
+        lbTipoHab.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbTipoHab.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 51)));
+        pnDatosHab.add(lbTipoHab, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 95, 200, 30));
+
+        lbprecio.setBackground(new java.awt.Color(255, 255, 255));
+        lbprecio.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        lbprecio.setText("Precio");
+        pnDatosHab.add(lbprecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, 110, 30));
+
+        txPrecio.setFont(new java.awt.Font("Leelawadee UI Semilight", 1, 14)); // NOI18N
         txPrecio.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txPrecio.setSelectionColor(new java.awt.Color(0, 122, 255));
         pnDatosHab.add(txPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 150, 200, 30));
 
         pnInfo.add(pnDatosHab, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 380, 220));
 
-        pnCliente.setBackground(new java.awt.Color(255, 255, 255));
-        pnCliente.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "DATOS DEL CLIENTE", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 12))); // NOI18N
-        pnCliente.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        btCheckOut.setBackground(new java.awt.Color(234, 82, 62));
+        btCheckOut.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
+        btCheckOut.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/exit.png"))); // NOI18N
+        btCheckOut.setText("Check - Out");
+        btCheckOut.setBorder(null);
+        pnInfo.add(btCheckOut, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 315, 320, 35));
 
-        jLabel6.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel6.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel6.setText("Nombres");
-        pnCliente.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, 100, 30));
+        btComprobante.setBackground(new java.awt.Color(111, 168, 183));
+        btComprobante.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
+        btComprobante.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/pdf.png"))); // NOI18N
+        btComprobante.setText("Generar Comprobante");
+        btComprobante.setBorder(null);
+        pnInfo.add(btComprobante, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 260, 320, 35));
 
-        lbEMail.setFont(new java.awt.Font("Leelawadee UI Semilight", 1, 14)); // NOI18N
-        lbEMail.setForeground(new java.awt.Color(255, 255, 255));
-        lbEMail.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 51)));
-        pnCliente.add(lbEMail, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 260, 250, 30));
+        lbMensajeHab.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+        lbMensajeHab.setForeground(new java.awt.Color(23, 23, 23));
+        lbMensajeHab.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbMensajeHab.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Lunandina/mensajeHab.png"))); // NOI18N
+        lbMensajeHab.setText("\n");
+        lbMensajeHab.setToolTipText("");
+        pnInfo.add(lbMensajeHab, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 20, 871, 330));
+
+        pnDatosCliente.setBackground(new java.awt.Color(255, 255, 255));
+        pnDatosCliente.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        pnClienteEmpresa.setBackground(new java.awt.Color(255, 255, 255));
+        pnClienteEmpresa.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "DATOS DEL CLIENTE", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 12))); // NOI18N
+        pnClienteEmpresa.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel17.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel17.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel17.setText("RUC");
+        pnClienteEmpresa.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 100, 30));
+
+        lbRUC.setFont(new java.awt.Font("Leelawadee UI Semilight", 1, 14)); // NOI18N
+        lbRUC.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 51)));
+        pnClienteEmpresa.add(lbRUC, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 40, 250, 30));
+
+        jLabel18.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel18.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel18.setText("Nombre Empresa");
+        pnClienteEmpresa.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 95, 120, 30));
+
+        lbNomEmpresa.setFont(new java.awt.Font("Leelawadee UI Semilight", 1, 14)); // NOI18N
+        lbNomEmpresa.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 51)));
+        pnClienteEmpresa.add(lbNomEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 95, 250, 30));
+
+        jLabel16.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel16.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel16.setText("Procedencia");
+        pnClienteEmpresa.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, 100, 30));
+
+        lbProcEmpresa.setFont(new java.awt.Font("Leelawadee UI Semilight", 1, 14)); // NOI18N
+        lbProcEmpresa.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 51)));
+        pnClienteEmpresa.add(lbProcEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 150, 250, 30));
+
+        jLabel20.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel20.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel20.setText("Email");
+        pnClienteEmpresa.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 205, 100, 30));
+
+        lbMailEmpresa.setFont(new java.awt.Font("Leelawadee UI Semilight", 1, 14)); // NOI18N
+        lbMailEmpresa.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 51)));
+        pnClienteEmpresa.add(lbMailEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 205, 250, 30));
+
+        pnDatosCliente.add(pnClienteEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 430, 280));
+
+        pnClientePersona.setBackground(new java.awt.Color(255, 255, 255));
+        pnClientePersona.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "DATOS DEL CLIENTE", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 12))); // NOI18N
+        pnClientePersona.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel9.setBackground(new java.awt.Color(255, 255, 255));
         jLabel9.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel9.setText("DNI");
-        pnCliente.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 100, 30));
+        pnClientePersona.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 100, 30));
 
         lbDNI.setFont(new java.awt.Font("Leelawadee UI Semilight", 1, 14)); // NOI18N
-        lbDNI.setForeground(new java.awt.Color(255, 255, 255));
         lbDNI.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 51)));
-        pnCliente.add(lbDNI, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 40, 250, 30));
+        pnClientePersona.add(lbDNI, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 40, 250, 30));
 
         jLabel10.setBackground(new java.awt.Color(255, 255, 255));
         jLabel10.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel10.setText("Apellidos");
-        pnCliente.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 95, 100, 30));
+        pnClientePersona.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 95, 100, 30));
 
         lbApellidos.setFont(new java.awt.Font("Leelawadee UI Semilight", 1, 14)); // NOI18N
-        lbApellidos.setForeground(new java.awt.Color(255, 255, 255));
         lbApellidos.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 51)));
-        pnCliente.add(lbApellidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 95, 250, 30));
+        pnClientePersona.add(lbApellidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 95, 250, 30));
 
-        jLabel11.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel11.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel11.setText("E-mail");
-        pnCliente.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, 100, 30));
+        jLabel6.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel6.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel6.setText("Nombres");
+        pnClientePersona.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, 100, 30));
 
         lbNombres.setFont(new java.awt.Font("Leelawadee UI Semilight", 1, 14)); // NOI18N
-        lbNombres.setForeground(new java.awt.Color(255, 255, 255));
         lbNombres.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 51)));
-        pnCliente.add(lbNombres, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 150, 250, 30));
-
-        lbProcedencia.setFont(new java.awt.Font("Leelawadee UI Semilight", 1, 14)); // NOI18N
-        lbProcedencia.setForeground(new java.awt.Color(255, 255, 255));
-        lbProcedencia.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 51)));
-        pnCliente.add(lbProcedencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 205, 250, 30));
+        pnClientePersona.add(lbNombres, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 150, 250, 30));
 
         jLabel12.setBackground(new java.awt.Color(255, 255, 255));
         jLabel12.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel12.setText("Procedencia");
-        pnCliente.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 205, 100, 30));
+        pnClientePersona.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 205, 100, 30));
 
-        pnInfo.add(pnCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 20, 430, 330));
+        lbProcPersona.setFont(new java.awt.Font("Leelawadee UI Semilight", 1, 14)); // NOI18N
+        lbProcPersona.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 51)));
+        pnClientePersona.add(lbProcPersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 205, 250, 30));
+
+        jLabel11.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel11.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel11.setText("E-mail");
+        pnClientePersona.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, 100, 30));
+
+        lbMailPersona.setFont(new java.awt.Font("Leelawadee UI Semilight", 1, 14)); // NOI18N
+        lbMailPersona.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 51)));
+        pnClientePersona.add(lbMailPersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 260, 250, 30));
+
+        pnDatosCliente.add(pnClientePersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 430, 330));
+
+        pnInfo.add(pnDatosCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 0, 490, 400));
+
+        pnServ.setBackground(new java.awt.Color(255, 255, 255));
+        pnServ.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         pnServicios.setBackground(new java.awt.Color(255, 255, 255));
         pnServicios.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "SERVICIOS RECIBIDOS", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 12))); // NOI18N
@@ -434,26 +502,15 @@ public class Habitaciones extends javax.swing.JFrame {
         jLabel13.setText("Total  S/.");
         pnServicios.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, 108, 30));
 
-        jLabel14.setFont(new java.awt.Font("Leelawadee UI Semilight", 1, 14)); // NOI18N
-        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel14.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        pnServicios.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(138, 260, 218, 30));
+        lbTotServicio.setFont(new java.awt.Font("Leelawadee UI Semilight", 1, 14)); // NOI18N
+        lbTotServicio.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbTotServicio.setText("0");
+        lbTotServicio.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        pnServicios.add(lbTotServicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(138, 260, 218, 30));
 
-        pnInfo.add(pnServicios, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 20, 386, 330));
+        pnServ.add(pnServicios, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 20, 386, 330));
 
-        jButton2.setBackground(new java.awt.Color(234, 82, 62));
-        jButton2.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/exit.png"))); // NOI18N
-        jButton2.setText("Check - Out");
-        jButton2.setBorder(null);
-        pnInfo.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 315, 320, 35));
-
-        jButton1.setBackground(new java.awt.Color(111, 168, 183));
-        jButton1.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/pdf.png"))); // NOI18N
-        jButton1.setText("Generar Comprobante");
-        jButton1.setBorder(null);
-        pnInfo.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 260, 320, 35));
+        pnInfo.add(pnServ, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 0, 436, 400));
 
         getContentPane().add(pnInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 346, 1366, 400));
 
@@ -463,11 +520,9 @@ public class Habitaciones extends javax.swing.JFrame {
     private void lbMinimizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbMinimizarMouseClicked
         this.setExtendedState(ICONIFIED);
     }//GEN-LAST:event_lbMinimizarMouseClicked
-
     private void lbMinimizarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbMinimizarMouseEntered
         lbMinimizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/minimizar2.png")));
     }//GEN-LAST:event_lbMinimizarMouseEntered
-
     private void lbMinimizarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbMinimizarMouseExited
         lbMinimizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/minimizar1.png")));
     }//GEN-LAST:event_lbMinimizarMouseExited
@@ -475,11 +530,9 @@ public class Habitaciones extends javax.swing.JFrame {
     private void lbCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbCerrarMouseClicked
         this.dispose();
     }//GEN-LAST:event_lbCerrarMouseClicked
-
     private void lbCerrarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbCerrarMouseEntered
         lbCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/cerrar2.png")));
     }//GEN-LAST:event_lbCerrarMouseEntered
-
     private void lbCerrarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbCerrarMouseExited
         lbCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/cerrar1.png")));
     }//GEN-LAST:event_lbCerrarMouseExited
@@ -520,18 +573,20 @@ public class Habitaciones extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btCheckOut;
+    private javax.swing.JButton btComprobante;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -541,22 +596,59 @@ public class Habitaciones extends javax.swing.JFrame {
     private javax.swing.JLabel lbApellidos;
     private javax.swing.JLabel lbCerrar;
     private javax.swing.JLabel lbDNI;
-    private javax.swing.JLabel lbEMail;
+    private javax.swing.JLabel lbMailEmpresa;
+    private javax.swing.JLabel lbMailPersona;
+    private javax.swing.JLabel lbMensajeHab;
     private javax.swing.JLabel lbMinimizar;
+    private javax.swing.JLabel lbNomEmpresa;
     private javax.swing.JLabel lbNombres;
     private javax.swing.JLabel lbNumHab;
-    private javax.swing.JLabel lbProcedencia;
+    private javax.swing.JLabel lbProcEmpresa;
+    private javax.swing.JLabel lbProcPersona;
+    private javax.swing.JLabel lbRUC;
     private javax.swing.JLabel lbTipoHab;
+    private javax.swing.JLabel lbTotServicio;
     private javax.swing.JLabel lbUserActual;
-    private javax.swing.JPanel pnCliente;
+    private javax.swing.JLabel lbprecio;
+    private javax.swing.JPanel pnClienteEmpresa;
+    private javax.swing.JPanel pnClientePersona;
+    private javax.swing.JPanel pnDatosCliente;
     private javax.swing.JPanel pnDatosHab;
     private javax.swing.JPanel pnInfo;
     private javax.swing.JPanel pnPiso1;
     private javax.swing.JPanel pnPiso2;
+    private javax.swing.JPanel pnServ;
     private javax.swing.JPanel pnServicios;
     private javax.swing.JPanel pnTitulo;
     private javax.swing.JTable tablaServicios;
     private javax.swing.JTextField txPrecio;
     // End of variables declaration//GEN-END:variables
-
+    MouseListener listener=new MouseListener() {
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            if (e.getSource() instanceof JLabel) {
+                String text = ((JLabel) e.getSource()).getText();
+                lbNumHab.setText(text);
+                lbTipoHab.setText(control.DevolverRegistroDto("SELECT tipo FROM vw_habitacion WHERE numero = '"+text+"';", 1));
+                txPrecio.setText(control.DevolverRegistroDto("SELECT precio FROM vw_habitacion WHERE numero = '"+text+"';", 1));
+                String __estado = control.DevolverRegistroDto("SELECT estado FROM vw_habitacion WHERE numero = '"+text+"';", 1);
+                if(__estado.equals("Ocupado") || __estado.equals("Reservado")){
+                    pnDatosCliente.setVisible(true);
+                    pnServ.setVisible(true);
+                    lbMensajeHab.setVisible(false);
+                    //falta definir que tipo de clinete es y mostrar el panel adecuado
+                    pnClientePersona.setVisible(true);
+                    pnClienteEmpresa.setVisible(false);
+                }else{
+                    lbMensajeHab.setVisible(true);
+                    pnDatosCliente.setVisible(false);
+                    pnServ.setVisible(false);
+                }
+            }
+        }
+        @Override public void mousePressed(MouseEvent e) {}
+        @Override public void mouseReleased(MouseEvent e) {}
+        @Override public void mouseEntered(MouseEvent e) {}
+        @Override public void mouseExited(MouseEvent e) {}
+    };
 }
