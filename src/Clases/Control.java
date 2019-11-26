@@ -5,7 +5,8 @@ import java.awt.Color;
 
 public class Control {
     
-    public static String usuario = "Username";
+    public static String usuario = ""; //Se almacenará el nombre y apellido del empleado
+    public static String empleado = ""; //Se almacenará el nombre de usuario del empleado
     public static String cargo = "";
     
     /*CONTROL DE COLOR DE INTERFAZ*/

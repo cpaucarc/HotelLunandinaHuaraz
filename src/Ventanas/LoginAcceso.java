@@ -3,6 +3,7 @@ package Ventanas;
 import Clases.Control;
 import Clases.Controlador;
 import Clases.Design;
+import Clases.LoginLunandina;
 import javax.swing.JOptionPane;
 
 public class LoginAcceso extends javax.swing.JFrame {
@@ -13,13 +14,12 @@ public class LoginAcceso extends javax.swing.JFrame {
     /* usuario y password para pruebas temporales, se cambiara con DB*/
     String[] userArray = {"consuelo", "victor"};
     String[] passArray = {"root", "1234"};
-    
+    String user, password;// Para hacer la compracion para el ingreso al sistema  
 
     public LoginAcceso() {
         initComponents();
         design.MoverFrame(jPanel1, this);
         this.setLocationRelativeTo(null);
-        pwVisible.setVisible(false);
         username.grabFocus();
         
         //control.LlenarCombo(cbo, "select * from cargos", 2);
@@ -101,10 +101,20 @@ public class LoginAcceso extends javax.swing.JFrame {
         pwOculto.setForeground(new java.awt.Color(23, 23, 23));
         pwOculto.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         pwOculto.setSelectionColor(new java.awt.Color(0, 122, 255));
+        pwOculto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                pwOcultoKeyReleased(evt);
+            }
+        });
         pnLogin.add(pwOculto, new org.netbeans.lib.awtextra.AbsoluteConstraints(55, 205, 200, 30));
 
         pwVisible.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
         pwVisible.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        pwVisible.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                pwVisibleKeyReleased(evt);
+            }
+        });
         pnLogin.add(pwVisible, new org.netbeans.lib.awtextra.AbsoluteConstraints(55, 205, 200, 30));
 
         jLabel4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -157,40 +167,55 @@ public class LoginAcceso extends javax.swing.JFrame {
             lbVerContra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/invisible.png")));
             lbVerContra.setToolTipText("Ocultar contraseña");
             pwOculto.setVisible(false);
-            pwVisible.setText(pwOculto.getText());
-            pwVisible.setVisible(true);
             psw = true;
         } else { //Ocultar la contraseña
             lbVerContra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/visible.png")));
             lbVerContra.setToolTipText("Mostrar contraseña");
-            pwVisible.setVisible(false);
-            pwOculto.setText(pwVisible.getText());
             pwOculto.setVisible(true);
             psw = false;
         }
     }//GEN-LAST:event_lbVerContraMouseClicked
 
     private void btIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btIngresarActionPerformed
-        String user, password;
-        user = username.getText();
-        password = pwOculto.getText();
-            
-        if (user.equals(userArray[0]) && password.equals(passArray[0])) { //User: consuelo, Password: root, Cargo: Administrador
-            Control.usuario = user;
-            Control.cargo = "Administrador";
-            MenuPrincipal mp = new MenuPrincipal();
-            mp.setVisible(true);
-            this.dispose();
-        } else if (user.equals(userArray[1]) && password.equals(passArray[1])) { //User: victor, Password: 1234, Cargo: Recepcionista
-            Control.usuario = user;
-            Control.cargo = "Recepcionista";
-            MenuPrincipal mp = new MenuPrincipal();
-            mp.setVisible(true);
-            this.dispose();
-        } else {
-            JOptionPane.showMessageDialog(null, "Credenciales incorrectas");
-            pwOculto.grabFocus();
+        user = username.getText(); //Recuperamos texto del campo username(TXT)
+        password = pwOculto.getText(); //Recuperamos la contraseña del campo pwOculto (PASS)
+        
+        LoginLunandina lgl=new LoginLunandina(user, password);
+        
+        if(lgl.VerifUsuario()){ //Vemos si existe usuario
+            if(lgl.VerifCredenciales()){
+                Control.usuario = lgl.getnomEmp(); //Apellidos y nombres del empleado
+                Control.empleado = lgl.getUsuario(); //Nombre de usuario del empleado 
+                Control.cargo = lgl.getCargo();
+                MenuPrincipal mp = new MenuPrincipal();
+                mp.setVisible(true);
+                this.dispose();
+            }else{
+                JOptionPane.showMessageDialog(null, "Credenciales incorrectas");
+                username.grabFocus();
+            }         
+        }else{
+            JOptionPane.showMessageDialog(null, "Este usuario no existe");
+            username.grabFocus();
         }
+        
+//        if (user.equals(userArray[0]) && password.equals(passArray[0])) { //User: consuelo, Password: root, Cargo: Administrador
+//            Control.usuario = user;
+//            Control.cargo = "Administrador";
+//            MenuPrincipal mp = new MenuPrincipal();
+//            mp.setVisible(true);
+//            this.dispose();
+//        } else if (user.equals(userArray[1]) && password.equals(passArray[1])) { //User: victor, Password: 1234, Cargo: Recepcionista
+//            Control.usuario = user;
+//            Control.cargo = "Recepcionista";
+//            MenuPrincipal mp = new MenuPrincipal();
+//            mp.setVisible(true);
+//            this.dispose();
+//        } else {
+//            JOptionPane.showMessageDialog(null, "Credenciales incorrectas");
+//            pwOculto.grabFocus();
+//        }
+
     }//GEN-LAST:event_btIngresarActionPerformed
 
     private void lbCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbCerrarMouseClicked
@@ -212,6 +237,14 @@ public class LoginAcceso extends javax.swing.JFrame {
     private void lbMinimizarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbMinimizarMouseExited
         lbMinimizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/minimizar3.png")));
     }//GEN-LAST:event_lbMinimizarMouseExited
+
+    /* EVENT KEY-RELEASED para sincronizar las contraseñas */
+    private void pwOcultoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pwOcultoKeyReleased
+        pwVisible.setText(pwOculto.getText());
+    }//GEN-LAST:event_pwOcultoKeyReleased
+    private void pwVisibleKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pwVisibleKeyReleased
+        pwOculto.setText(pwVisible.getText());
+    }//GEN-LAST:event_pwVisibleKeyReleased
 
     /**
      * @param args the command line arguments

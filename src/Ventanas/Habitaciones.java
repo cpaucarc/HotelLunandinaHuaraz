@@ -623,9 +623,9 @@ public class Habitaciones extends javax.swing.JFrame{
     private javax.swing.JTable tablaServicios;
     private javax.swing.JTextField txPrecio;
     // End of variables declaration//GEN-END:variables
+    
     MouseListener listener=new MouseListener() {
-        @Override
-        public void mouseClicked(MouseEvent e) {
+        @Override public void mouseClicked(MouseEvent e) {
             if (e.getSource() instanceof JLabel) {
                 String text = ((JLabel) e.getSource()).getText();
                 lbNumHab.setText(text);
