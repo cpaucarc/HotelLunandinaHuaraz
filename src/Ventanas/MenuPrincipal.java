@@ -1,12 +1,7 @@
 package Ventanas;
 
 import java.awt.Color;
-import javax.swing.JOptionPane;
-import Ventanas.*;
 import Clases.Control;
-import java.awt.Menu;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 
 /* importaciones para animar label */
 import javax.swing.Icon;
@@ -33,7 +28,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     /*Fin control de fuente y tamaño del menu */
     /* Variables para controlar animacion de label */
     public int contador = 0;
-    int velocidad = 5; //segundos
+    int velocidad = 5; //seconds
     Timer timer;
     TimerTask tarea;
     int velmil = velocidad * 1000;
@@ -527,11 +522,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private void lbMinimizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbMinimizarMouseClicked
         this.setExtendedState(ICONIFIED);
     }//GEN-LAST:event_lbMinimizarMouseClicked
-
     private void lbMinimizarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbMinimizarMouseEntered
         lbMinimizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/minimizar2.png")));
     }//GEN-LAST:event_lbMinimizarMouseEntered
-
     private void lbMinimizarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbMinimizarMouseExited
         lbMinimizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/minimizar1.png")));
     }//GEN-LAST:event_lbMinimizarMouseExited
@@ -539,11 +532,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private void lbCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbCerrarMouseClicked
         System.exit(0);
     }//GEN-LAST:event_lbCerrarMouseClicked
-
     private void lbCerrarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbCerrarMouseEntered
         lbCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/cerrar2.png")));
     }//GEN-LAST:event_lbCerrarMouseEntered
-
     private void lbCerrarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbCerrarMouseExited
         lbCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/cerrar1.png")));
     }//GEN-LAST:event_lbCerrarMouseExited

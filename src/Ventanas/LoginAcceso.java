@@ -8,21 +8,17 @@ import javax.swing.JOptionPane;
 
 public class LoginAcceso extends javax.swing.JFrame {
     
+    //MenuPrincipal mp;
     Controlador control=new Controlador();
     static Design design=new Design();
     public boolean psw = false;
-    /* usuario y password para pruebas temporales, se cambiara con DB*/
-    String[] userArray = {"consuelo", "victor"};
-    String[] passArray = {"root", "1234"};
     String user, password;// Para hacer la compracion para el ingreso al sistema  
 
     public LoginAcceso() {
         initComponents();
         design.MoverFrame(jPanel1, this);
         this.setLocationRelativeTo(null);
-        username.grabFocus();
-        
-        //control.LlenarCombo(cbo, "select * from cargos", 2);
+        username.grabFocus();        
     }
 
     @SuppressWarnings("unchecked")
@@ -183,39 +179,20 @@ public class LoginAcceso extends javax.swing.JFrame {
         LoginLunandina lgl=new LoginLunandina(user, password);
         
         if(lgl.VerifUsuario()){ //Vemos si existe usuario
-            if(lgl.VerifCredenciales()){
+            if(lgl.VerifCredenciales()){ //Vemos si el usuario y la contraseña coinciden
                 Control.usuario = lgl.getnomEmp(); //Apellidos y nombres del empleado
                 Control.empleado = lgl.getUsuario(); //Nombre de usuario del empleado 
                 Control.cargo = lgl.getCargo();
-                MenuPrincipal mp = new MenuPrincipal();
-                mp.setVisible(true);
                 this.dispose();
+                MenuPrincipal mp = new MenuPrincipal();
+                //mp = new MenuPrincipal();
+                mp.setVisible(true);
             }else{
-                JOptionPane.showMessageDialog(null, "Credenciales incorrectas");
-                username.grabFocus();
+                JOptionPane.showMessageDialog(null, "Credenciales incorrectas");username.grabFocus();
             }         
         }else{
-            JOptionPane.showMessageDialog(null, "Este usuario no existe");
-            username.grabFocus();
+            JOptionPane.showMessageDialog(null, "Este usuario no existe");username.grabFocus();
         }
-        
-//        if (user.equals(userArray[0]) && password.equals(passArray[0])) { //User: consuelo, Password: root, Cargo: Administrador
-//            Control.usuario = user;
-//            Control.cargo = "Administrador";
-//            MenuPrincipal mp = new MenuPrincipal();
-//            mp.setVisible(true);
-//            this.dispose();
-//        } else if (user.equals(userArray[1]) && password.equals(passArray[1])) { //User: victor, Password: 1234, Cargo: Recepcionista
-//            Control.usuario = user;
-//            Control.cargo = "Recepcionista";
-//            MenuPrincipal mp = new MenuPrincipal();
-//            mp.setVisible(true);
-//            this.dispose();
-//        } else {
-//            JOptionPane.showMessageDialog(null, "Credenciales incorrectas");
-//            pwOculto.grabFocus();
-//        }
-
     }//GEN-LAST:event_btIngresarActionPerformed
 
     private void lbCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbCerrarMouseClicked
