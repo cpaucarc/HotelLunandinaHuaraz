@@ -28,11 +28,11 @@ public class Textos {
     }
 
     static public void LimiteCaracter(KeyEvent e, JTextField tx, int limite) { //Limita al JTextField a un numero dado, ejemplo txdni --> 8
-        if (tx.getText().length()>=limite) {
+        if (tx.getText().length() >= limite) {
             e.consume();
         }
     }
-    
+
     public void Decimal(KeyEvent e, JTextField tx) {
         char caracter = e.getKeyChar();
         if (((caracter < '0') || (caracter > '9'))
@@ -60,5 +60,24 @@ public class Textos {
 
     public String A_Stg(JComboBox cbo) {
         return cbo.getSelectedItem().toString();
+    }
+
+    //Devuelve la palabra ingresada con la primera letra Mayuscula y el resto en Minuscula
+    public String capitalizeWord(String txt) {
+        char aux;
+        aux = txt.toUpperCase().charAt(0);
+        return (aux + txt.toLowerCase().substring(1));
+    }
+
+    //Devuelve el texto ingresado con la primera letra Mayuscula y el resto en Minuscula
+    public String capitalizeText(String txt) {
+        String name = "";
+        String[] words;
+        words = txt.split(" ");
+        for (String word : words) {
+            name += capitalizeWord(word);
+            name += " ";
+        }
+        return name.substring(0, (name.length() - 1));
     }
 }
