@@ -282,6 +282,7 @@ public class RegistroEmpleado extends javax.swing.JFrame {
                 "DNI", "Apellidos", "Nombres", "Email", "Cargo", "Nombre Usuario"
             }
         ));
+        tabla.setRowHeight(30);
         tabla.setSelectionBackground(new java.awt.Color(0, 122, 255));
         tabla.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
