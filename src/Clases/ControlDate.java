@@ -18,6 +18,17 @@ import java.util.Date;
 public class ControlDate {
     // Métodos de fechas
 
+    public String CrearFecha(JDateChooser jdt){
+        String fecha = "";
+        if(jdt!=null){
+            int año = jdt.getCalendar().get(Calendar.YEAR);
+            int mes = jdt.getCalendar().get(Calendar.MARCH)+1;
+            int dia = jdt.getCalendar().get(Calendar.DAY_OF_MONTH);
+            fecha =(año+"-"+mes+"-"+dia);
+        }
+        return fecha;
+    }
+    
     public String fecha_AMD(Date fecha) {
         SimpleDateFormat formatoAMD = new SimpleDateFormat("YYYY/MM/dd");
         return formatoAMD.format(fecha);//Retorna la fecha en tipo String

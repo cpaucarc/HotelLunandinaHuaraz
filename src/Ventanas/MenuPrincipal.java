@@ -2,16 +2,21 @@ package Ventanas;
 
 import java.awt.Color;
 import Clases.Control;
+import Clases.Controlador;
 
 /* importaciones para animar label */
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import java.util.Timer;
 import java.util.TimerTask;
+import javax.swing.table.DefaultTableModel;
 /* fin importaciones para animar label */
 public class MenuPrincipal extends javax.swing.JFrame {
 
     /* Ventanas externas */
+    Controlador control=new Controlador();
+    DefaultTableModel modelo=new DefaultTableModel();
+    
     RegistroEmpleado empleado = new RegistroEmpleado();
     Reportes reporte = new Reportes();
     Habitaciones habitacion=new Habitaciones();
@@ -38,6 +43,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     public MenuPrincipal() {
         initComponents();
+        
+        inicializarJTable();
+        Mostrar();
+                
         if (Control.cargo.equals("Recepcionista")) {
             lbadministracion.setVisible(false);
             lbReporte.setVisible(false);
@@ -71,6 +80,26 @@ public class MenuPrincipal extends javax.swing.JFrame {
         /* Fin controlador de animaciones*/        
     }
 
+    
+    public void inicializarJTable() {
+        modelo.setColumnIdentifiers(new String[]{"ID", "Fecha Reserva", "Nombre Cliente", "N° Habitacion"});
+        tabla.setModel(modelo);
+
+        tabla.getColumnModel().getColumn(0).setPreferredWidth(0);
+        tabla.getColumnModel().getColumn(1).setPreferredWidth(120);
+        tabla.getColumnModel().getColumn(2).setPreferredWidth(300);
+        tabla.getColumnModel().getColumn(3).setPreferredWidth(100);
+
+        tabla.getColumnModel().removeColumn(tabla.getColumnModel().getColumn(0));
+    }
+
+    private void Mostrar() {
+           control.LlenarJtable(modelo, "select "
+                   + "ID, Fecha_Resv, Cliente, N°Hab "
+               + "from v_reservaclient where Fecha_Ent = curdate() and ("
+                   + "Cliente like '%"+txBuscar.getText()+"%' or N°Hab like '%"+txBuscar.getText()+"%')", 4);
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -99,7 +128,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         tabla = new javax.swing.JTable();
         btValidar = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txBuscar = new javax.swing.JTextField();
         btValidar1 = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
@@ -363,10 +392,15 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jLabel3.setText("Buscar");
         jPanel4.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(85, 40, 100, 30));
 
-        jTextField1.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
-        jTextField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField1.setSelectionColor(new java.awt.Color(0, 122, 255));
-        jPanel4.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(185, 40, 250, 30));
+        txBuscar.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
+        txBuscar.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txBuscar.setSelectionColor(new java.awt.Color(0, 122, 255));
+        txBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txBuscarKeyReleased(evt);
+            }
+        });
+        jPanel4.add(txBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(185, 40, 250, 30));
 
         btValidar1.setBackground(new java.awt.Color(248, 177, 57));
         btValidar1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -539,6 +573,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
         lbCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/cerrar1.png")));
     }//GEN-LAST:event_lbCerrarMouseExited
 
+    private void txBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txBuscarKeyReleased
+        Mostrar();
+    }//GEN-LAST:event_txBuscarKeyReleased
+
     /**
      * @param args the command line arguments
      */
@@ -583,7 +621,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lbAloj;
     private javax.swing.JLabel lbAnimacion;
     private javax.swing.JLabel lbCerrar;
@@ -605,5 +642,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel pnReserva;
     private javax.swing.JPanel pnServicios;
     private javax.swing.JTable tabla;
+    private javax.swing.JTextField txBuscar;
     // End of variables declaration//GEN-END:variables
 }

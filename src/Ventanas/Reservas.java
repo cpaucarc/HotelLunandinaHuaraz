@@ -298,9 +298,15 @@ Controlador control=new Controlador();
         control.LlenarJtable(modelo, "select * from v_reservaemp  where "
                 + "RUC like'%" + txtBuscar.getText() + "%';", 9);
     }
+    
+    
     private void MostrarList_Cliente() {
         control.LlenarJtable(modelo1, "select * from v_reservaclient  where "
-                + "DNI like'%" + txtBuscar1.getText() + "%';", 9);
+              + "DNI like'%" + txtBuscar.getText() + "%';", 9);
+        
+//        control.LlenarJtable(modelo1, "select * from v_reservaclient  where "
+//                + "DNI like'%" + txtBuscar1.getText() + "%' or (Fecha_Ent like '%"
+//                +cd.CrearFecha(dcBuscar)+"%' or Fecha_Resv like '%"+cd.CrearFecha(dcBuscar)+"%');", 9);
 //        Seleccionar();   
     }
     public void inicializarJTable_cliente() {
@@ -543,7 +549,7 @@ Controlador control=new Controlador();
         tabla = new javax.swing.JTable();
         jLabelDNI16 = new javax.swing.JLabel();
         txtBuscar = new javax.swing.JTextField();
-        jDateChooser3 = new com.toedter.calendar.JDateChooser();
+        dcBuscar = new com.toedter.calendar.JDateChooser();
         btValidar = new javax.swing.JButton();
         txtBuscar1 = new javax.swing.JTextField();
 
@@ -1022,9 +1028,14 @@ Controlador control=new Controlador();
         });
         jPanel6.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(147, 40, 350, 30));
 
-        jDateChooser3.setBackground(new java.awt.Color(255, 255, 255));
-        jDateChooser3.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
-        jPanel6.add(jDateChooser3, new org.netbeans.lib.awtextra.AbsoluteConstraints(527, 40, 200, 30));
+        dcBuscar.setBackground(new java.awt.Color(255, 255, 255));
+        dcBuscar.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
+        dcBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                dcBuscarKeyReleased(evt);
+            }
+        });
+        jPanel6.add(dcBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(527, 40, 200, 30));
 
         btValidar.setBackground(new java.awt.Color(255, 185, 83));
         btValidar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -1326,6 +1337,10 @@ Controlador control=new Controlador();
         valHab_Client();
     }//GEN-LAST:event_jComboBox2ItemStateChanged
 
+    private void dcBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_dcBuscarKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_dcBuscarKeyReleased
+
     /**
      * @param args the command line arguments
      */
@@ -1385,9 +1400,9 @@ Controlador control=new Controlador();
     private javax.swing.JButton btRegistrar;
     private javax.swing.JButton btRegistrar1;
     private javax.swing.JButton btValidar;
+    private com.toedter.calendar.JDateChooser dcBuscar;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
-    private com.toedter.calendar.JDateChooser jDateChooser3;
     private com.toedter.calendar.JDateChooser jDateChooser4;
     private com.toedter.calendar.JDateChooser jDateChooser5;
     private javax.swing.JLabel jLabel1;
