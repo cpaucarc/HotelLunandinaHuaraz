@@ -15,7 +15,7 @@ public class Habitaciones extends javax.swing.JFrame{
 
     /**/
     Controlador control=new Controlador();
-    ArrayList<Habitacion> datosHab=new ArrayList<>(); 
+    ArrayList<Habitacion> datosHab = new ArrayList<>(); 
     /**/
     /* ARRAY PARA ALMACENAR LOS PANELES QUE REPRESENTA A CADA HABITACION */
     public static JPanel[] panel_Hab = new JPanel[16];
@@ -27,32 +27,14 @@ public class Habitaciones extends javax.swing.JFrame{
     public static Color Ocup = new Color(220, 53, 69);
     public static Color Resev = new Color(255, 193, 7);
     public static Color Mant = new Color(23, 162, 184);
-    /* Listener para manejar el evento del mouse en el LABEL HABITACION 
-    MouseListener listener=new MouseListener() {
-        @Override
-        public void mouseClicked(MouseEvent e) {
-            if (e.getSource() instanceof JLabel) {
-                String text = ((JLabel) e.getSource()).getText();
-                JOptionPane.showMessageDialog(null, text);
-                
-            }
-        }
-        @Override public void mousePressed(MouseEvent e) {}
-        @Override public void mouseReleased(MouseEvent e) {}
-        @Override public void mouseEntered(MouseEvent e) {}
-        @Override public void mouseExited(MouseEvent e) {}
-    };            
-    */
-
+    
     public Habitaciones() {
         initComponents();
         AddPaneles(); //añadimos los paneles a los pnPiso1 y pnPiso2, segun corresponda
-        
         RecuperarDatos();
         AddColorPaneles(); //Asignamos el color segun el estado de la habitacion
         AddLabelInPanel(); //Añadimos label con numeor de habitacion a paneles
         AddIcon();  //Añadimos icono de tipo y icono de baño propio
-        ClickInHab();  
         
         lbUserActual.setText(Control.usuario);
         
@@ -147,10 +129,9 @@ public class Habitaciones extends javax.swing.JFrame{
             panel_Hab[i].add(lbt);
         }
     }
-    public void ClickInHab(){
-        for (int i = 0; i<16; i++){
-            
-        }
+    
+    public static void ActualizarHabitaciones(){
+        //RecuperarDatos()
     }
     
     
