@@ -1,0 +1,17 @@
+version 19
+
+public String capitalizeWord( String txt){
+        char aux;
+        aux = txt.toUpperCase().charAt(0);        
+        return (aux + txt.toLowerCase().substring(1));
+    }
+    public String capitalizeText(String txt){
+        String name="";
+        String[] words;
+        words = txt.split(" ");
+        for (String word : words){
+            name += capitalizeWord(word);
+            name +=" ";
+        }        
+        return name.substring(0, (name.length()-1));
+    }

@@ -1074,8 +1074,8 @@ Controlador control=new Controlador();
     }// </editor-fold>//GEN-END:initComponents
 
     private void txDNIKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txDNIKeyTyped
-     Textos.Condicion(evt,txDNI,7); 
-     Textos.Numeros(evt);
+        Textos.Condicion(evt,txDNI,7); 
+        Textos.Numeros(evt);
     }//GEN-LAST:event_txDNIKeyTyped
 
     private void jtxtdni1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtdni1KeyTyped
