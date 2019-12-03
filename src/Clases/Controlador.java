@@ -11,6 +11,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import javax.swing.*;
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import javax.swing.table.DefaultTableModel;
 
 public class Controlador {
@@ -19,6 +20,7 @@ public class Controlador {
 
     public void LlenarCombo(JComboBox cbo, String Consulta, int pos) {
         cbo.removeAllItems();
+        cbo.addItem("--Seleccione--");
         try {
             Base.rt = DevolverRegistro(Consulta);
             while (Base.rt.next()) {
@@ -148,4 +150,5 @@ public class Controlador {
             e.printStackTrace();
         }
     }
+    
 }

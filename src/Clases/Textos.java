@@ -27,8 +27,22 @@ public class Textos {
         }
     }
 
-    static public void LimiteCaracter(KeyEvent e, JTextField tx, int limite) { //Limita al JTextField a un numero dado, ejemplo txdni --> 8
-        if (tx.getText().length() >= limite) {
+    static public void soloPurasLetras(KeyEvent e){
+        char c=e.getKeyChar();
+        if((c<65||c>90)&&(c<97||c>122)&&c!=32){
+            if(c!=241&&c!=209)
+                e.consume();
+        }
+    }
+    static public void soloTodosNum(KeyEvent e){
+        char c=e.getKeyChar();
+        if(c<48||c>57){
+            e.consume();
+        }
+    }
+    static public void sinesp(KeyEvent e){
+        char c=e.getKeyChar();
+        if(c==32){
             e.consume();
         }
     }
@@ -38,21 +52,6 @@ public class Textos {
         if (((caracter < '0') || (caracter > '9'))
                 && (caracter != KeyEvent.VK_BACK_SPACE)
                 && (caracter != '.' || tx.getText().contains("."))) {
-            e.consume();
-        }
-    }
-
-    static public void letras(KeyEvent e, JTextField tx) {
-
-        for (int i = 0; i < tx.getText().length(); i++) {
-            if (tx.getText().charAt(i) == 'A') {
-                e.consume();
-            }
-        }
-    }
-
-    static public void LimitarCaracter(KeyEvent e, JTextField tx, int limite) {
-        if (tx.getText().length() == limite) {
             e.consume();
         }
     }
@@ -75,6 +74,62 @@ public class Textos {
 
     public String A_Stg(JComboBox cbo) {
         return cbo.getSelectedItem().toString();
+    }
+    static public void solo_1_esp(KeyEvent e,JTextField t){
+        //llamar en evento keytyped
+        //permite escribir cualquier cadena en el texfield sin espacios en blanco
+        //al inicio y sin dos espacios en blanco consecutivos
+        if(e.getKeyChar()==32){
+            if(t.getCaretPosition()==0){
+                e.consume();
+            }
+            else{
+                if(t.getCaretPosition()<t.getText().length()){
+                    if((t.getText().charAt(t.getCaretPosition()-1)==' ')||(t.getText().charAt(t.getCaretPosition())==' '))
+                        e.consume();
+                }
+                else{
+                    if(t.getText().charAt(t.getCaretPosition()-1)==' ')
+                        e.consume();
+                }
+            }
+        }
+    }
+    
+    static public void LimiteCaracter(KeyEvent e, JTextField tx, int limite) { //Limita al JTextField a un numero dado, ejemplo txdni --> 8
+        if (tx.getText().length() >= limite) {
+            e.consume();
+        }
+    }
+    
+    static public void Condicion(KeyEvent e,JTextField tx,int n) {
+           if(tx.getText().length()>n){
+            e.consume();
+           }
+    }
+
+//    public void Decimal(KeyEvent e, JTextField tx) {
+//        char caracter = e.getKeyChar();
+//        if (((caracter < '0') || (caracter > '9'))
+//                && (caracter != KeyEvent.VK_BACK_SPACE)
+//                && (caracter != '.' || tx.getText().contains("."))) {
+//            e.consume();
+//        }
+//    }
+
+    static public void letras(KeyEvent e, JTextField tx) {
+
+        for (int i = 0; i < tx.getText().length(); i++) {
+            if (tx.getText().charAt(i) == 'A') {
+                e.consume();
+            }
+        }
+    }
+
+    static public void LimitarCaracter(KeyEvent e, JTextField tx, int limite) {
+        if (tx.getText().length() == limite) {
+            e.consume();
+        }
     }
 
     //Devuelve la palabra ingresada con la primera letra Mayuscula y el resto en Minuscula

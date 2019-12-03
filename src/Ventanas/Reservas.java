@@ -1,33 +1,60 @@
-
 package Ventanas;
 
 import Clases.Control;
+import Clases.ControlDate;
+import Clases.Controlador;
+import Clases.Textos;
 import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author CLINTON
  */
 public class Reservas extends javax.swing.JFrame {
+DefaultTableModel modelo = new DefaultTableModel(){
+    public boolean isCellEditable(int rowIndex,int columnIndex){return false;}
+};
+DefaultTableModel modelo1 = new DefaultTableModel(){
+    public boolean isCellEditable(int rowIndex,int columnIndex){return false;}
+};
+Controlador control=new Controlador();
+    ControlDate cd=new ControlDate();
 
+    int _idusuario;
     public Reservas() {
         initComponents();
+        
+        _idusuario= Integer.parseInt(control.DevolverRegistroDto("SELECT idusuario FROM usuarios WHERE login = '"+Control.empleado+"'", 1));
+        
+        this.getContentPane().setBackground(Color.white);
         btValidar.setEnabled(false);
         this.setLocationRelativeTo(null);
         lbUserActual.setText(Control.usuario);
         tabla.getTableHeader().setOpaque(true);
         tabla.getTableHeader().setBackground(new Color(248,177,57));
+        btValidar.setVisible(false);
+//        control.LlenarCombo(jComboBox1, "select * from habitaciones", 2);
+        control.LlenarCombo(jComboBox2, "select * from tipohabitacion", 2);
+        jComboBox2.removeItemAt(0);
+        jComboBox1.removeAllItems();
         
         //Ocultamos algunas funciones        
         lbReiniciar.setVisible(false);
+//        pnTipoCliente.setVisible(true);
         pnClienteEmpresa.setVisible(false);
         pnClientePersona.setVisible(false);
         pnFecha.setVisible(false);
         pnHabitacion.setVisible(false);
         btRegistrar.setVisible(false);
+        btRegistrar1.setVisible(false);
         btModificar.setVisible(false);
+        btModificar1.setVisible(false);
         btEliminar.setVisible(false);
+//        jPanel5.setVisible(false);
         //Listener de tabla
         tabla.addMouseListener(new MouseListener() {
             @Override public void mouseClicked(MouseEvent e) {
@@ -42,8 +69,413 @@ public class Reservas extends javax.swing.JFrame {
             @Override public void mouseEntered(MouseEvent e) {}
             @Override public void mouseExited(MouseEvent e) {}
         });
+        inicializarJTable_cliente();
+          MostrarList_Cliente();
+        
     }
+    String idres = "";
+    int numval;
+    int numval1;
+    public void reconocer_empresa(){
+        String Rc =txRUC.getText().toString();
+        int contDn = Integer.parseInt(control.DevolverRegistroDto("select count(*) from clienteempresa where RUC='" + Rc + "';", 1));
+      if (contDn != 0 && txRUC.getText().length()==11){
+                jTextField1.setText(control.DevolverRegistroDto("select  empresa from v_reservaEmp where RUC='" + Rc + "' limit 1;", 1));
+                jTextField2.setText(control.DevolverRegistroDto("select  Procedencia from v_reservaEmp where RUC='" + Rc + "' limit 1;", 1));
+                jTextField3.setText(control.DevolverRegistroDto("select  email from clienteempresa where RUC='" + Rc + "';", 1));
+      }
+      if(txRUC.getText().length()!=11){
+        jTextField1.setText("");
+        jTextField2.setText("");
+        jTextField3.setText("");
+      }
+        }
+    public void reconocer_cliente(){
+        String dni =txDNI.getText().toString();
+        int contDn = Integer.parseInt(control.DevolverRegistroDto("select count(*) from personas where DNI='" + dni + "';", 1));
+      if (contDn != 0 && txDNI.getText().length()==8){
+         jtxtdni1.setText(control.DevolverRegistroDto("select  apPat from personas where DNI='" + dni + "';", 1));
+         jtxtdni2.setText(control.DevolverRegistroDto("select  apMat from personas where DNI='" + dni + "';", 1));
+         jtxtdni3.setText(control.DevolverRegistroDto("select  nomb from personas where DNI='" + dni + "';", 1));
+         jtxtdni4.setText(control.DevolverRegistroDto("select  lugar from vw_clientepersona where DNI='" + dni + "' limit 1;", 1));
+         jtxtdni10.setText(control.DevolverRegistroDto("select  email from personas where DNI='" + dni + "';", 1)); 
+      }
+      if(txDNI.getText().length()!=8){
+        jtxtdni1.setText("");
+        jtxtdni2.setText("");
+        jtxtdni3.setText("");
+        jtxtdni4.setText("");
+        jtxtdni10.setText("");
+      }
+        }
+    public void Seleccionar_Cliente(){
+        if (btModificar.getText().equals("Modificar")) {
+            btRegistrar1.setEnabled(false);
+            btModificar.setText("Actualizar");
+        int fila =tabla.getSelectedRow();     
+        if (fila >-1) {
+            idres = modelo1.getValueAt(fila, 0).toString();
+            String dni = modelo1.getValueAt(fila, 6).toString();
+            int contDn = Integer.parseInt(control.DevolverRegistroDto("select count(*) from personas where DNI='" + dni + "';", 1));
+            txDNI.setText(modelo1.getValueAt(fila, 6).toString());
+            if (contDn != 0) {
+                
+                jtxtdni1.setText(control.DevolverRegistroDto("select  apPat from personas where DNI='" + dni + "';", 1));
+                jtxtdni2.setText(control.DevolverRegistroDto("select  apMat from personas where DNI='" + dni + "';", 1));
+                jtxtdni3.setText(control.DevolverRegistroDto("select  nomb from personas where DNI='" + dni + "';", 1));
+                jtxtdni4.setText(modelo1.getValueAt(fila, 8).toString());
+                jtxtdni10.setText(control.DevolverRegistroDto("select  email from personas where DNI='" + dni + "';", 1));
+                jDateChooser5.setDate(cd.Parse_Fecha(modelo1.getValueAt(fila, 2).toString()));
+                jDateChooser4.setDate(cd.Parse_Fecha(modelo1.getValueAt(fila, 3).toString()));
+            jComboBox2.setSelectedItem(modelo1.getValueAt(fila, 5).toString());
+            jComboBox1.removeAllItems();
+            jComboBox1.addItem(modelo1.getValueAt(fila, 4).toString());
+//            jComboBox1.setSelectedItem(modelo1.getValueAt(fila, 4).toString());
+           numval=Integer.parseInt(modelo1.getValueAt(fila, 4).toString());
+//           valHab_Client();
+           tabla.setEnabled(false);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Fila no seleccionada");
+            btModificar.setText("Modificar");
+            btRegistrar1.setEnabled(true);
+            tabla.setEnabled(true);
+        }
+        }else{
+            Editar_Persona(numval);
+//            btModificar.setText("Modificar");
+//            btRegistrar1.setEnabled(true);
+        }
+    }
+    public void Seleccionar_Empresa(){
+        if (btModificar1.getText().equals("Modificar")) {
+            btRegistrar.setEnabled(false);
+            btModificar1.setText("Actualizar");
+        int fila =tabla.getSelectedRow();     
+        if (fila >-1) {
+            idres = modelo.getValueAt(fila, 0).toString();
+            String Rc = modelo.getValueAt(fila, 6).toString();
+            int contDn = Integer.parseInt(control.DevolverRegistroDto("select count(*) from clienteempresa where RUC='" + Rc + "';", 1));
+            txRUC.setText(modelo.getValueAt(fila, 6).toString());
+            if (contDn != 0) {
+                
+                jTextField1.setText(modelo.getValueAt(fila, 7).toString());
+                jTextField2.setText(modelo.getValueAt(fila, 8).toString());
+                jTextField3.setText(control.DevolverRegistroDto("select email from clienteempresa where RUC='" + Rc + "';", 1));
+                jDateChooser5.setDate(cd.Parse_Fecha(modelo.getValueAt(fila, 2).toString()));
+                jDateChooser4.setDate(cd.Parse_Fecha(modelo.getValueAt(fila, 3).toString()));
+            jComboBox2.setSelectedItem(modelo.getValueAt(fila, 5).toString());
+            jComboBox1.removeAllItems();
+            jComboBox1.addItem(modelo1.getValueAt(fila, 4).toString());
+            numval1=Integer.parseInt(modelo.getValueAt(fila, 4).toString());
+//            valHab_Client();
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Fila no seleccionada");
+            btModificar1.setText("Modificar");
+            btRegistrar.setEnabled(true);
+        }
+        }else{
+            Editar_Empresa(numval1);
+//            btModificar1.setText("Modificar");
+//            btRegistrar.setEnabled(true);
+        }
+    }
+    public void crear_Empresa() {
+        int count=tabla.getRowCount();
+//        JOptionPane.showMessageDialog(null, count);
+        int idest=Integer.parseInt(control.DevolverRegistroDto("select idhabitacion from habitaciones where numHab='"+jComboBox1.getSelectedItem()+"';",1));
+        JOptionPane.showMessageDialog(null, control.DevolverRegistroDto("call Proc_ReservaEmp("
+                       + "'1',"
+                       + "'"+0+"',"
+                       + "'"+jTextField2.getText()+"',"
+                       + "'"+txRUC.getText()+"',"
+                       + "'"+jTextField1.getText()+"',"
+                       + "'"+jTextField3.getText()+"',"
+                       + "'"+cd.fecha_AMD(jDateChooser5.getDate())+"',"
+                       + "'"+cd.fecha_AMD(jDateChooser4.getDate())+"',"
+                       + "'"+idest+"',"
+                       + "'"+0+"',"
+                       + _idusuario+")", 1));
+        MostrarList_Empresa();
+        int count1=tabla.getRowCount();
+        if(count!=count1){
+        Limpiar();
+        }
+    }
+    public void Editar_Empresa(int numHab) { 
+        int val1=Integer.parseInt(control.DevolverRegistroDto("select DATEDIFF('"+cd.fecha_AMD(jDateChooser4.getDate())+"','"+cd.fecha_AMD(jDateChooser5.getDate())+"');", 1));
+        int val2=Integer.parseInt(control.DevolverRegistroDto("select DATEDIFF('"+cd.fecha_AMD(jDateChooser5.getDate())+"',(CURDATE()-1));", 1));
+        int idest=Integer.parseInt(control.DevolverRegistroDto("select idhabitacion from habitaciones where numHab='"+jComboBox1.getSelectedItem()+"';",1));
+        JOptionPane.showMessageDialog(null, control.DevolverRegistroDto("call Proc_ReservaEmp("
+                       + "'2',"
+                       + "'"+idres+"',"
+                       + "'"+jTextField2.getText()+"',"
+                       + "'"+txRUC.getText()+"',"
+                       + "'"+jTextField1.getText()+"',"
+                       + "'"+jTextField3.getText()+"',"
+                       + "'"+cd.fecha_AMD(jDateChooser5.getDate())+"',"
+                       + "'"+cd.fecha_AMD(jDateChooser4.getDate())+"',"
+                       + "'"+idest+"',"
+                       + "'"+numHab+"',"
+                       + _idusuario+")", 1));
+        MostrarList_Empresa();
+        if(val1>0 && val2>0){
+        Limpiar();
+        btModificar1.setText("Modificar");
+        btRegistrar.setEnabled(true);}
+    }
+    public void Limpiar(){
+        tabla.setEnabled(true);
+        jTextField2.setText("");
+        txRUC.setText("");
+        jTextField1.setText("");
+        jTextField3.setText("");
+        jDateChooser5.setDate(null);
+        jDateChooser4.setDate(null);
+        jComboBox1.setSelectedIndex(-1);
+        jComboBox2.setSelectedIndex(-1);
+        jtxtdni4.setText("");
+        txDNI.setText("");
+        jtxtdni1.setText("");
+        jtxtdni2.setText("");
+        jtxtdni3.setText("");
+        jtxtdni10.setText("");
+        btModificar.setText("Modificar");
+        btModificar1.setText("Modificar");
+        tabla.clearSelection();
+        btRegistrar.setEnabled(true);
+        btRegistrar1.setEnabled(true);
+    }
+    public void crear_Persona() {
+        int count=tabla.getRowCount();
+        int idest=Integer.parseInt(control.DevolverRegistroDto("select idhabitacion from habitaciones where numHab='"+jComboBox1.getSelectedItem()+"';",1));
+        JOptionPane.showMessageDialog(null, control.DevolverRegistroDto("call Proc_ReservaClient("
+                       + "'1',"
+                       + "'"+0+"',"
+                       + "'"+jtxtdni4.getText()+"',"
+                       + "'"+txDNI.getText()+"',"
+                       + "'"+jtxtdni1.getText()+"',"
+                       + "'"+jtxtdni2.getText()+"',"
+                       + "'"+jtxtdni3.getText()+"',"
+                       + "'"+jtxtdni10.getText()+"',"
+                       + "'"+cd.fecha_AMD(jDateChooser5.getDate())+"',"
+                       + "'"+cd.fecha_AMD(jDateChooser4.getDate())+"',"
+                       + "'"+idest+"',"
+                       + "'"+0+"',"
+                       + _idusuario+")", 1));
+        MostrarList_Cliente();
+        int count1=tabla.getRowCount();
+        if(count!=count1){
+          Limpiar();
+        }
+    }
+    public void Editar_Persona(int numHab) {
+        int val1=Integer.parseInt(control.DevolverRegistroDto("select DATEDIFF('"+cd.fecha_AMD(jDateChooser4.getDate())+"','"+cd.fecha_AMD(jDateChooser5.getDate())+"');", 1));
+        int val2=Integer.parseInt(control.DevolverRegistroDto("select DATEDIFF('"+cd.fecha_AMD(jDateChooser5.getDate())+"',(CURDATE()-1));", 1));
+        int idest=Integer.parseInt(control.DevolverRegistroDto("select idhabitacion from habitaciones where numHab='"+jComboBox1.getSelectedItem()+"';",1));
+        JOptionPane.showMessageDialog(null, control.DevolverRegistroDto("call Proc_ReservaClient("
+                       + "'2',"
+                       + "'"+idres+"',"
+                       + "'"+jtxtdni4.getText()+"',"
+                       + "'"+txDNI.getText()+"',"
+                       + "'"+jtxtdni1.getText()+"',"
+                       + "'"+jtxtdni2.getText()+"',"
+                       + "'"+jtxtdni3.getText()+"',"
+                       + "'"+jtxtdni10.getText()+"',"
+                       + "'"+cd.fecha_AMD(jDateChooser5.getDate())+"',"
+                       + "'"+cd.fecha_AMD(jDateChooser4.getDate())+"',"
+                       + "'"+idest+"',"
+                       + "'"+numHab+"',"
+                       + _idusuario+")", 1));
+        MostrarList_Cliente();
+        if(val1>0 && val2>0){
+        Limpiar();
+        btModificar.setText("Modificar");
+        btRegistrar1.setEnabled(true);}
+    }
+    private void MostrarList_Empresa() {
+        control.LlenarJtable(modelo, "select * from v_reservaemp  where "
+                + "RUC like'%" + txtBuscar.getText() + "%';", 9);
+    }
+    private void MostrarList_Cliente() {
+        control.LlenarJtable(modelo1, "select * from v_reservaclient  where "
+                + "DNI like'%" + txtBuscar1.getText() + "%';", 9);
+//        Seleccionar();   
+    }
+    public void inicializarJTable_cliente() {
+        modelo1.setColumnIdentifiers(new String[]{"ID","Fecha Reserva", "Fecha Entrada","Fecha Salida","N° Habitacion", "Tipo de Habitacion", "DNI", "Cliente", "Procedencia"});
+        tabla.setModel(modelo1);
 
+        tabla.getColumnModel().getColumn(0).setPreferredWidth(100);
+        tabla.getColumnModel().getColumn(1).setPreferredWidth(100);
+        tabla.getColumnModel().getColumn(2).setPreferredWidth(100);
+        tabla.getColumnModel().getColumn(3).setPreferredWidth(100);
+        tabla.getColumnModel().getColumn(4).setPreferredWidth(100);
+        tabla.getColumnModel().getColumn(5).setPreferredWidth(100);
+        tabla.getColumnModel().getColumn(6).setPreferredWidth(100);
+        tabla.getColumnModel().getColumn(7).setPreferredWidth(100);
+        tabla.getColumnModel().getColumn(8).setPreferredWidth(100);
+        
+        tabla.getColumnModel().removeColumn(tabla.getColumnModel().getColumn(0)); 
+    }
+    public void inicializarJTable_empresa() {
+        modelo.setColumnIdentifiers(new String[]{"ID","Fecha Reserva", "Fecha Entrada","Fecha Salida","N° Habitacion", "Tipo de Habitacion", "RUC", "Empresa", "Procedencia"});
+        tabla.setModel(modelo);
+
+        tabla.getColumnModel().getColumn(0).setPreferredWidth(100);
+        tabla.getColumnModel().getColumn(1).setPreferredWidth(100);
+        tabla.getColumnModel().getColumn(2).setPreferredWidth(100);
+        tabla.getColumnModel().getColumn(3).setPreferredWidth(100);
+        tabla.getColumnModel().getColumn(4).setPreferredWidth(100);
+        tabla.getColumnModel().getColumn(5).setPreferredWidth(100);
+        tabla.getColumnModel().getColumn(6).setPreferredWidth(100);
+        tabla.getColumnModel().getColumn(7).setPreferredWidth(100);
+        tabla.getColumnModel().getColumn(8).setPreferredWidth(100);
+        tabla.getColumnModel().removeColumn(tabla.getColumnModel().getColumn(0));
+    }
+    public void validarcampos_client(){
+       if(txDNI.getText().length()!=0 && txDNI.getText().length()>7){
+           if(jtxtdni1.getText().length()!=0){
+              if(jtxtdni2.getText().length()!=0){
+                 if(jtxtdni3.getText().length()!=0){
+                    if(jtxtdni4.getText().length()!=0){
+                      if(jtxtdni10.getText().length()!=0){
+                        if(jDateChooser5.getDate()!=null){
+                            if(jDateChooser4.getDate()!=null){
+                              if(jComboBox2.getSelectedIndex()!=-1){
+                                  if(jComboBox1.getSelectedIndex()!=-1){
+                                      crear_Persona();
+                                   }else{
+                                  JOptionPane.showMessageDialog(null,"Seleccione N° HABITACIÓN");}
+                              }else{
+                                  JOptionPane.showMessageDialog(null,"Seleccione TIPO HABITACIÓN");
+                              }
+                            }else{
+                              JOptionPane.showMessageDialog(null,"Ingrese FECHA DE SALIDA");  
+                            }  
+                        }else{
+                          JOptionPane.showMessageDialog(null,"Ingrese FECHA DE ENTRADA");  
+                        }  
+                        }else{
+                          JOptionPane.showMessageDialog(null,"Ingrese CORREO");
+                        }
+                      }else{
+                        JOptionPane.showMessageDialog(null,"Ingrese PROCEDENCIA");
+                        jtxtdni4.grabFocus();
+                      }
+                  }else{
+                     JOptionPane.showMessageDialog(null,"Ingrese NOMBRE");
+                     jtxtdni3.grabFocus();
+                  }
+              }else{
+                 JOptionPane.showMessageDialog(null,"Ingrese apellido MATERNO");
+                 jtxtdni2.grabFocus();
+              }
+           }else{
+               JOptionPane.showMessageDialog(null,"Ingrese apellido PATERNO");
+               jtxtdni1.grabFocus();
+           }
+       }else{
+           JOptionPane.showMessageDialog(null,"Ingrese DNI(8 dígitos)");
+           txDNI.grabFocus();
+       }
+    }
+    public void validarcampos_emp(){
+       if(txRUC.getText().length()!=0 && txRUC.getText().length()>10){
+           if(jTextField1.getText().length()!=0){
+              if(jTextField2.getText().length()!=0){
+                 if(jTextField3.getText().length()!=0){
+                        if(jDateChooser5.getDate()!=null){
+                            if(jDateChooser4.getDate()!=null){
+                              if(jComboBox2.getSelectedIndex()!=-1){
+                                  if(jComboBox1.getSelectedIndex()!=-1){
+                                      crear_Empresa();
+                                   }else{
+                                  JOptionPane.showMessageDialog(null,"Seleccione N° HABITACIÓN");}
+                              }else{
+                                  JOptionPane.showMessageDialog(null,"Seleccione TIPO HABITACIÓN");
+                              }
+                            }else{
+                              JOptionPane.showMessageDialog(null,"Ingrese FECHA DE SALIDA");  
+                            }  
+                        }else{
+                          JOptionPane.showMessageDialog(null,"Ingrese FECHA DE ENTRADA");  
+                        }
+                  }else{
+                     JOptionPane.showMessageDialog(null,"Ingrese CORREO");
+                     jTextField3.grabFocus();
+                  }
+              }else{
+                 JOptionPane.showMessageDialog(null,"Ingrese PROCEDENCIA");
+                 jTextField2.grabFocus();
+              }
+           }else{
+               JOptionPane.showMessageDialog(null,"Ingrese EMPRESA");
+               jTextField1.grabFocus();
+           }
+       }else{
+           JOptionPane.showMessageDialog(null,"Ingrese RUC(11 dígitos)");
+           txRUC.grabFocus();
+       }
+    }
+    public void valHab_Client(){
+//        control.LlenarCombo(jComboBox1, "select idhabitacion,numHab from habitaciones where (idtipoHab=1 and idestadoHab=1);", 2);      
+//        jComboBox2.removeItemAt(0);
+        if(jComboBox2.getSelectedIndex()==0){ //Individual
+           control.LlenarCombo(jComboBox1, "select idhabitacion,numHab from habitaciones where (idtipoHab=1 and idestadoHab=1);", 2);
+           jComboBox1.removeItemAt(0);
+           if(jComboBox1.getItemCount()==0){
+           jComboBox1.removeAllItems();
+           jComboBox1.addItem("No hay cuartos");
+        }
+        }
+        if(jComboBox2.getSelectedIndex()==1){ //Doble
+           control.LlenarCombo(jComboBox1, "select idhabitacion,numHab from habitaciones where (idtipoHab=2 and idestadoHab=1);", 2);
+           jComboBox1.removeItemAt(0);
+           if(jComboBox1.getItemCount()==0){
+           jComboBox1.removeAllItems();
+           jComboBox1.addItem("No hay cuartos");
+        }
+        }
+        if(jComboBox2.getSelectedIndex()==2){ //Triple
+           control.LlenarCombo(jComboBox1, "select idhabitacion,numHab from habitaciones where (idtipoHab=3 and idestadoHab=1);", 2);
+           jComboBox1.removeItemAt(0);
+           if(jComboBox1.getItemCount()==0){
+           jComboBox1.removeAllItems();
+           jComboBox1.addItem("No hay cuartos");
+        }
+        }
+        if(jComboBox2.getSelectedIndex()==3){ //Matrimonial
+           control.LlenarCombo(jComboBox1, "select idhabitacion,numHab from habitaciones where (idtipoHab=4 and idestadoHab=1);", 2);
+           jComboBox1.removeItemAt(0);
+           if(jComboBox1.getItemCount()==0){
+           jComboBox1.removeAllItems();
+           jComboBox1.addItem("No hay cuartos");
+        }
+        }
+        if(jComboBox2.getSelectedIndex()==4){ //Matrimonial Lunandina
+           control.LlenarCombo(jComboBox1, "select idhabitacion,numHab from habitaciones where (idtipoHab=5 and idestadoHab=1);", 2);
+           jComboBox1.removeItemAt(0);
+           if(jComboBox1.getItemCount()==0){
+           jComboBox1.removeAllItems();
+           jComboBox1.addItem("No hay cuartos");
+        }
+        }
+        if(jComboBox2.getSelectedIndex()==5){ //Familiar
+           control.LlenarCombo(jComboBox1, "select idhabitacion,numHab from habitaciones where (idtipoHab=6 and idestadoHab=1);", 2);
+           jComboBox1.removeItemAt(0);
+           if(jComboBox1.getItemCount()==0){
+           jComboBox1.removeAllItems();
+           jComboBox1.addItem("No hay cuartos");
+        }
+        }
+//        if(jComboBox1.getItemCount()==0){
+//           jComboBox1.removeAllItems();
+//           jComboBox1.addItem("No hay cuartos");
+//        }
+//        JOptionPane.showMessageDialog(null, jComboBox1.getItemCount());
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -97,6 +529,8 @@ public class Reservas extends javax.swing.JFrame {
         jLabelDNI15 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
         jComboBox2 = new javax.swing.JComboBox<>();
+        btRegistrar1 = new javax.swing.JButton();
+        btModificar1 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         lbUserActual = new javax.swing.JLabel();
@@ -108,9 +542,10 @@ public class Reservas extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
         jLabelDNI16 = new javax.swing.JLabel();
-        jtxtdni9 = new javax.swing.JTextField();
+        txtBuscar = new javax.swing.JTextField();
         jDateChooser3 = new com.toedter.calendar.JDateChooser();
         btValidar = new javax.swing.JButton();
+        txtBuscar1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -133,6 +568,11 @@ public class Reservas extends javax.swing.JFrame {
         lbLimpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/limpiar.png"))); // NOI18N
         lbLimpiar.setToolTipText("Limpiar formularios");
         lbLimpiar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lbLimpiar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbLimpiarMouseClicked(evt);
+            }
+        });
         jPanel2.add(lbLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(461, 0, -1, -1));
 
         pnTipoCliente.setBackground(new java.awt.Color(255, 255, 255));
@@ -174,7 +614,15 @@ public class Reservas extends javax.swing.JFrame {
         txDNI.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
         txDNI.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txDNI.setSelectionColor(new java.awt.Color(0, 122, 255));
+        txDNI.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txDNIActionPerformed(evt);
+            }
+        });
         txDNI.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txDNIKeyReleased(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txDNIKeyTyped(evt);
             }
@@ -279,23 +727,46 @@ public class Reservas extends javax.swing.JFrame {
 
         txRUC.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
         txRUC.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txRUC.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txRUCKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txRUCKeyTyped(evt);
+            }
+        });
         pnClienteEmpresa.add(txRUC, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 30, 280, 30));
 
         jTextField1.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
         jTextField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField1KeyTyped(evt);
+            }
+        });
         pnClienteEmpresa.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 80, 280, 30));
 
         jTextField2.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
         jTextField2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField2KeyTyped(evt);
+            }
+        });
         pnClienteEmpresa.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 130, 280, 30));
 
         jTextField3.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
         jTextField3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField3.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField3KeyTyped(evt);
+            }
+        });
         pnClienteEmpresa.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 180, 280, 30));
 
-        jPanel2.add(pnClienteEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 125, 461, 240));
+        jPanel2.add(pnClienteEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 35, 461, 240));
 
-        btRegistrar.setBackground(new java.awt.Color(136, 206, 82));
+        btRegistrar.setBackground(new java.awt.Color(0, 153, 153));
         btRegistrar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         btRegistrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/agregar.png"))); // NOI18N
         btRegistrar.setText("Registrar");
@@ -387,13 +858,64 @@ public class Reservas extends javax.swing.JFrame {
         jLabelDNI15.setText("S/.");
         pnHabitacion.add(jLabelDNI15, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 181, -1, -1));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "205", "207", "304" }));
+        jComboBox1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jComboBox1MouseClicked(evt);
+            }
+        });
         pnHabitacion.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 75, 156, 30));
 
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Individual", "Doble", "Triple", "Matrimonial", "Matrimonial Lunandina" }));
+        jComboBox2.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBox2ItemStateChanged(evt);
+            }
+        });
+        jComboBox2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jComboBox2MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jComboBox2MouseEntered(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jComboBox2MousePressed(evt);
+            }
+        });
+        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox2ActionPerformed(evt);
+            }
+        });
         pnHabitacion.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 25, 156, 30));
 
         jPanel2.add(pnHabitacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 535, 336, 120));
+
+        btRegistrar1.setBackground(new java.awt.Color(136, 206, 82));
+        btRegistrar1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        btRegistrar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/agregar.png"))); // NOI18N
+        btRegistrar1.setText("Registrar");
+        btRegistrar1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btRegistrar1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btRegistrar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btRegistrar1ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btRegistrar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(381, 430, 110, 55));
+
+        btModificar1.setBackground(new java.awt.Color(204, 204, 0));
+        btModificar1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        btModificar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/modificar.png"))); // NOI18N
+        btModificar1.setText("Modificar");
+        btModificar1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btModificar1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btModificar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btModificar1ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btModificar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(381, 495, 110, 55));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 46, 521, 700));
 
@@ -424,6 +946,11 @@ public class Reservas extends javax.swing.JFrame {
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 lbMinimizarMouseExited(evt);
+            }
+        });
+        lbMinimizar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                lbMinimizarKeyTyped(evt);
             }
         });
         jPanel4.add(lbMinimizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1280, 8, 30, 30));
@@ -477,15 +1004,23 @@ public class Reservas extends javax.swing.JFrame {
         jLabelDNI16.setText("Buscar");
         jPanel6.add(jLabelDNI16, new org.netbeans.lib.awtextra.AbsoluteConstraints(57, 40, 90, 30));
 
-        jtxtdni9.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
-        jtxtdni9.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jtxtdni9.setSelectionColor(new java.awt.Color(0, 122, 255));
-        jtxtdni9.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jtxtdni9KeyTyped(evt);
+        txtBuscar.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
+        txtBuscar.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtBuscar.setSelectionColor(new java.awt.Color(0, 122, 255));
+        txtBuscar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                txtBuscarMouseReleased(evt);
             }
         });
-        jPanel6.add(jtxtdni9, new org.netbeans.lib.awtextra.AbsoluteConstraints(147, 40, 350, 30));
+        txtBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtBuscarKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtBuscarKeyTyped(evt);
+            }
+        });
+        jPanel6.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(147, 40, 350, 30));
 
         jDateChooser3.setBackground(new java.awt.Color(255, 255, 255));
         jDateChooser3.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
@@ -495,7 +1030,30 @@ public class Reservas extends javax.swing.JFrame {
         btValidar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btValidar.setText("Validar alojamiento");
         btValidar.setBorder(null);
+        btValidar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btValidarActionPerformed(evt);
+            }
+        });
         jPanel6.add(btValidar, new org.netbeans.lib.awtextra.AbsoluteConstraints(584, 560, 160, 30));
+
+        txtBuscar1.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
+        txtBuscar1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtBuscar1.setSelectionColor(new java.awt.Color(0, 122, 255));
+        txtBuscar1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                txtBuscar1MouseReleased(evt);
+            }
+        });
+        txtBuscar1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtBuscar1KeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtBuscar1KeyTyped(evt);
+            }
+        });
+        jPanel6.add(txtBuscar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(147, 40, 350, 30));
 
         jPanel5.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 25, 784, 630));
 
@@ -505,19 +1063,30 @@ public class Reservas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txDNIKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txDNIKeyTyped
-        
+     Textos.Condicion(evt,txDNI,7); 
+     Textos.Numeros(evt);
     }//GEN-LAST:event_txDNIKeyTyped
 
     private void jtxtdni1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtdni1KeyTyped
         // TODO add your handling code here:
+        Textos.soloPurasLetras(evt);
+        Textos.Mayusculas(evt);
+        Textos.solo_1_esp(evt, jtxtdni3);
+        
     }//GEN-LAST:event_jtxtdni1KeyTyped
 
     private void jtxtdni2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtdni2KeyTyped
         // TODO add your handling code here:
+        Textos.soloPurasLetras(evt);
+        Textos.Mayusculas(evt);
+        Textos.solo_1_esp(evt, jtxtdni3);
     }//GEN-LAST:event_jtxtdni2KeyTyped
 
     private void jtxtdni3KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtdni3KeyTyped
         // TODO add your handling code here:
+        Textos.soloPurasLetras(evt);
+        Textos.Mayusculas(evt);
+        Textos.solo_1_esp(evt, jtxtdni3);
     }//GEN-LAST:event_jtxtdni3KeyTyped
 
     private void jtxtdni8KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtdni8KeyTyped
@@ -525,39 +1094,51 @@ public class Reservas extends javax.swing.JFrame {
     }//GEN-LAST:event_jtxtdni8KeyTyped
 
     private void btRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRegistrarActionPerformed
-     
+//     crear_Empresa();
+       validarcampos_emp();
     }//GEN-LAST:event_btRegistrarActionPerformed
 
     private void btModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btModificarActionPerformed
-      
+//     MostrarList_Cliente();
+       Seleccionar_Cliente();
     }//GEN-LAST:event_btModificarActionPerformed
 
     private void btEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEliminarActionPerformed
-  
+      Limpiar();
     }//GEN-LAST:event_btEliminarActionPerformed
 
-    private void jtxtdni9KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtdni9KeyTyped
+    private void txtBuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyTyped
         // TODO add your handling code here:
-    }//GEN-LAST:event_jtxtdni9KeyTyped
+    }//GEN-LAST:event_txtBuscarKeyTyped
 
     private void jtxtdni10KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtdni10KeyTyped
         // TODO add your handling code here:
+        Textos.sinesp(evt);
     }//GEN-LAST:event_jtxtdni10KeyTyped
 
     private void jtxtdni4KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtdni4KeyTyped
         // TODO add your handling code here:
+        Textos.soloPurasLetras(evt);
+        Textos.Mayusculas(evt);
+        Textos.solo_1_esp(evt, jTextField2);
     }//GEN-LAST:event_jtxtdni4KeyTyped
 
     private void lbReiniciarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbReiniciarMouseClicked
+        Limpiar();
+        inicializarJTable_cliente();
+          MostrarList_Cliente();
         pnTipoCliente.setVisible(true);
-        
+//        jPanel5.setVisible(false);
         pnClienteEmpresa.setVisible(false);
         pnClientePersona.setVisible(false);
         pnFecha.setVisible(false);
         pnHabitacion.setVisible(false);
+        btValidar.setVisible(false);
         
         btRegistrar.setVisible(false);
+        btRegistrar1.setVisible(false);
         btModificar.setVisible(false);
+        btModificar1.setVisible(false);
         btEliminar.setVisible(false);
         
         lbReiniciar.setVisible(false);
@@ -565,31 +1146,42 @@ public class Reservas extends javax.swing.JFrame {
 
     private void btClientePersonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btClientePersonaActionPerformed
         pnTipoCliente.setVisible(false);
-        
+        btValidar.setVisible(true);
         pnClientePersona.setVisible(true);
         pnFecha.setVisible(true);
         pnHabitacion.setVisible(true);
-        
+        jPanel5.setVisible(true);
+        inicializarJTable_cliente();
+        MostrarList_Cliente();
+        txtBuscar.setVisible(false);
+        txtBuscar1.setVisible(true);
         txDNI.grabFocus();
         
         lbReiniciar.setVisible(true);
-        btRegistrar.setVisible(true);
+        btRegistrar1.setVisible(true);
+        btRegistrar.setVisible(false);
         btModificar.setVisible(true);
+        btModificar1.setVisible(false);
         btEliminar.setVisible(true);
     }//GEN-LAST:event_btClientePersonaActionPerformed
 
     private void btClienteEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btClienteEmpresaActionPerformed
         pnTipoCliente.setVisible(false);
-        
+        btValidar.setVisible(true);
         pnClienteEmpresa.setVisible(true);
         pnFecha.setVisible(true);
         pnHabitacion.setVisible(true);
-        
+        jPanel5.setVisible(true);
+        inicializarJTable_empresa();
+        MostrarList_Empresa();
         txRUC.grabFocus();
-        
+        txtBuscar1.setVisible(false);
+        txtBuscar.setVisible(true);
         lbReiniciar.setVisible(true);
         btRegistrar.setVisible(true);
-        btModificar.setVisible(true);
+        btRegistrar1.setVisible(false);
+        btModificar1.setVisible(true);
+        btModificar.setVisible(false);
         btEliminar.setVisible(true);
     }//GEN-LAST:event_btClienteEmpresaActionPerformed
 
@@ -616,6 +1208,123 @@ public class Reservas extends javax.swing.JFrame {
     private void lbCerrarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbCerrarMouseExited
         lbCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/cerrar1.png")));
     }//GEN-LAST:event_lbCerrarMouseExited
+
+    private void txtBuscarMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtBuscarMouseReleased
+        // TODO add your handling code here:
+//        MostrarList();
+    }//GEN-LAST:event_txtBuscarMouseReleased
+
+    private void txtBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyReleased
+        // TODO add your handling code here:
+        MostrarList_Empresa();
+    }//GEN-LAST:event_txtBuscarKeyReleased
+
+    private void txtBuscar1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtBuscar1MouseReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtBuscar1MouseReleased
+
+    private void txtBuscar1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscar1KeyReleased
+        // TODO add your handling code here:
+        MostrarList_Cliente();
+    }//GEN-LAST:event_txtBuscar1KeyReleased
+
+    private void txtBuscar1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscar1KeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtBuscar1KeyTyped
+
+    private void jComboBox1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBox1MouseClicked
+        // TODO add your handling code here:
+//        JOptionPane.showMessageDialog(null, jComboBox1.getSelectedIndex());
+    }//GEN-LAST:event_jComboBox1MouseClicked
+
+    private void btRegistrar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRegistrar1ActionPerformed
+        // TODO add your handling code here:
+//        crear_Persona();
+          validarcampos_client();
+    }//GEN-LAST:event_btRegistrar1ActionPerformed
+
+    private void lbLimpiarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbLimpiarMouseClicked
+        // TODO add your handling code here:
+        Limpiar();
+    }//GEN-LAST:event_lbLimpiarMouseClicked
+
+    private void btModificar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btModificar1ActionPerformed
+        // TODO add your handling code here:
+        Seleccionar_Empresa();
+    }//GEN-LAST:event_btModificar1ActionPerformed
+
+    private void txRUCKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txRUCKeyTyped
+        // TODO add your handling code here:
+     Textos.Condicion(evt,txRUC,10); 
+     Textos.Numeros(evt);
+    }//GEN-LAST:event_txRUCKeyTyped
+
+    private void jTextField1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyTyped
+        // TODO add your handling code here:
+        Textos.soloPurasLetras(evt);
+        Textos.Mayusculas(evt);
+        Textos.solo_1_esp(evt, jTextField1);
+    }//GEN-LAST:event_jTextField1KeyTyped
+
+    private void jTextField2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField2KeyTyped
+        // TODO add your handling code here:Textos.soloPurasLetras(evt);
+        Textos.soloPurasLetras(evt);
+        Textos.Mayusculas(evt);
+        Textos.solo_1_esp(evt, jTextField2);
+    }//GEN-LAST:event_jTextField2KeyTyped
+
+    private void jTextField3KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField3KeyTyped
+        // TODO add your handling code here:
+        Textos.sinesp(evt);
+    }//GEN-LAST:event_jTextField3KeyTyped
+
+    private void lbMinimizarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_lbMinimizarKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lbMinimizarKeyTyped
+
+    private void txDNIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txDNIActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txDNIActionPerformed
+
+    private void txDNIKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txDNIKeyReleased
+        // TODO add your handling code here:
+        reconocer_cliente();
+    }//GEN-LAST:event_txDNIKeyReleased
+
+    private void txRUCKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txRUCKeyReleased
+        // TODO add your handling code here:
+        reconocer_empresa();
+    }//GEN-LAST:event_txRUCKeyReleased
+
+    private void jComboBox2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBox2MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox2MouseClicked
+
+    private void jComboBox2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBox2MouseEntered
+        // TODO add your handling code here:
+//        valHab_Client();
+    }//GEN-LAST:event_jComboBox2MouseEntered
+
+    private void btValidarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btValidarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btValidarActionPerformed
+
+    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+        // TODO add your handling code here:
+//        valHab_Client();
+    }//GEN-LAST:event_jComboBox2ActionPerformed
+
+    private void jComboBox2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBox2MousePressed
+        // TODO add your handling code here:
+//         valHab_Client();
+    }//GEN-LAST:event_jComboBox2MousePressed
+
+    private void jComboBox2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox2ItemStateChanged
+        // TODO add your handling code here:
+//        jComboBox2.removeAllItems();
+        
+        valHab_Client();
+    }//GEN-LAST:event_jComboBox2ItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -672,7 +1381,9 @@ public class Reservas extends javax.swing.JFrame {
     private javax.swing.JButton btClientePersona;
     private javax.swing.JButton btEliminar;
     private javax.swing.JButton btModificar;
+    private javax.swing.JButton btModificar1;
     private javax.swing.JButton btRegistrar;
+    private javax.swing.JButton btRegistrar1;
     private javax.swing.JButton btValidar;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
@@ -712,7 +1423,6 @@ public class Reservas extends javax.swing.JFrame {
     private javax.swing.JTextField jtxtdni3;
     private javax.swing.JTextField jtxtdni4;
     private javax.swing.JTextField jtxtdni8;
-    private javax.swing.JTextField jtxtdni9;
     private javax.swing.JLabel lbCerrar;
     private javax.swing.JLabel lbLimpiar;
     private javax.swing.JLabel lbMinimizar;
@@ -726,5 +1436,7 @@ public class Reservas extends javax.swing.JFrame {
     private javax.swing.JTable tabla;
     private javax.swing.JTextField txDNI;
     private javax.swing.JTextField txRUC;
+    private javax.swing.JTextField txtBuscar;
+    private javax.swing.JTextField txtBuscar1;
     // End of variables declaration//GEN-END:variables
 }
