@@ -42,6 +42,21 @@ public class Textos {
         }
     }
 
+    static public void letras(KeyEvent e, JTextField tx) {
+
+        for (int i = 0; i < tx.getText().length(); i++) {
+            if (tx.getText().charAt(i) == 'A') {
+                e.consume();
+            }
+        }
+    }
+
+    static public void LimitarCaracter(KeyEvent e, JTextField tx, int limite) {
+        if (tx.getText().length() == limite) {
+            e.consume();
+        }
+    }
+
     public int SeleccionarId(JTable tabla) {
         String idfac = "-1";
         if (tabla.getSelectedRow() > -1) {
@@ -63,14 +78,14 @@ public class Textos {
     }
 
     //Devuelve la palabra ingresada con la primera letra Mayuscula y el resto en Minuscula
-    public String capitalizeWord(String txt) {
+    public static String capitalizeWord(String txt) {
         char aux;
         aux = txt.toUpperCase().charAt(0);
         return (aux + txt.toLowerCase().substring(1));
     }
 
     //Devuelve el texto ingresado con la primera letra Mayuscula y el resto en Minuscula
-    public String capitalizeText(String txt) {
+    public static String capitalizeText(String txt) {
         String name = "";
         String[] words;
         words = txt.split(" ");
