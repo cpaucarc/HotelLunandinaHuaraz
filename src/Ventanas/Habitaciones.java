@@ -15,7 +15,7 @@ public class Habitaciones extends javax.swing.JFrame{
 
     /**/
     Controlador control=new Controlador();
-    ArrayList<Habitacion> datosHab = new ArrayList<>(); 
+    public static ArrayList<Habitacion> datosHab = new ArrayList<>(); 
     /**/
     /* ARRAY PARA ALMACENAR LOS PANELES QUE REPRESENTA A CADA HABITACION */
     public static JPanel[] panel_Hab = new JPanel[16];
@@ -27,14 +27,18 @@ public class Habitaciones extends javax.swing.JFrame{
     public static Color Ocup = new Color(220, 53, 69);
     public static Color Resev = new Color(255, 193, 7);
     public static Color Mant = new Color(23, 162, 184);
-    
+        
     public Habitaciones() {
         initComponents();
         AddPaneles(); //añadimos los paneles a los pnPiso1 y pnPiso2, segun corresponda
-        RecuperarDatos();
-        AddColorPaneles(); //Asignamos el color segun el estado de la habitacion
-        AddLabelInPanel(); //Añadimos label con numeor de habitacion a paneles
-        AddIcon();  //Añadimos icono de tipo y icono de baño propio
+//        RecuperarDatos();
+
+        //datosHab = Control.RecuperarDatos();
+        
+        //AddColorPaneles(datosHab); //Asignamos el color segun el estado de la habitacion
+       //AddLabelInPanel(datosHab); //Añadimos label con numeor de habitacion a paneles
+        //AddIcon(datosHab);  //Añadimos icono de tipo y icono de baño propio
+        actualizar();
         
         lbUserActual.setText(Control.usuario);
         
@@ -43,6 +47,14 @@ public class Habitaciones extends javax.swing.JFrame{
         pnServ.setVisible(false); //Cuando la habitacion tenga estado OCUPADO O RESERVADO
     }
 
+    public void actualizar(){
+        datosHab = Control.RecuperarDatos();
+        
+        AddColorPaneles(datosHab); //Asignamos el color segun el estado de la habitacion
+        AddLabelInPanel(datosHab); //Añadimos label con numeor de habitacion a paneles
+        AddIcon(datosHab);  //Añadimos icono de tipo y icono de baño propio
+    }
+    
     public void AddPaneles() {
         for (int i = 0; i < 16; i++) {
             panel_Hab[i] = new JPanel();  //Inicializamos los paneles
@@ -72,16 +84,18 @@ public class Habitaciones extends javax.swing.JFrame{
             }
         }
     }
-    public void RecuperarDatos(){
-        for(int i=1; i<17; i++){
-            int _numero = Integer.parseInt(control.DevolverRegistroDto("SELECT numero FROM vw_habitacion WHERE id = "+i+" order by id;", 1));
-            String _estado = control.DevolverRegistroDto("SELECT estado FROM vw_habitacion WHERE id = "+i+" order by id;", 1);
-            String _tipo = control.DevolverRegistroDto("SELECT tipo FROM vw_habitacion WHERE id = "+i+" order by id;", 1);
-            double _precio = Double.parseDouble(control.DevolverRegistroDto("SELECT precio FROM vw_habitacion WHERE id = "+i+" order by id;", 1));
-            datosHab.add(new Habitacion(_numero, _estado, _tipo, _precio));
-        }
-    }
-    public void AddColorPaneles(){ //REC: Primero, desde la DB recoger el estado y almacenarlo en EstadoHab[]
+    
+//    public void RecuperarDatos(){
+//        for(int i=1; i<17; i++){
+//            int _numero = Integer.parseInt(control.DevolverRegistroDto("SELECT numero FROM vw_habitacion WHERE id = "+i+" order by id;", 1));
+//            String _estado = control.DevolverRegistroDto("SELECT estado FROM vw_habitacion WHERE id = "+i+" order by id;", 1);
+//            String _tipo = control.DevolverRegistroDto("SELECT tipo FROM vw_habitacion WHERE id = "+i+" order by id;", 1);
+//            double _precio = Double.parseDouble(control.DevolverRegistroDto("SELECT precio FROM vw_habitacion WHERE id = "+i+" order by id;", 1));
+//            datosHab.add(new Habitacion(_numero, _estado, _tipo, _precio));
+//        }
+//    }
+   
+    public void AddColorPaneles(ArrayList<Habitacion> datosHab){ //REC: Primero, desde la DB recoger el estado y almacenarlo en EstadoHab[]
         for (int i = 0; i < 16; i++) {
             switch (datosHab.get(i).estado) {
                 case "Disponible":
@@ -102,7 +116,8 @@ public class Habitaciones extends javax.swing.JFrame{
             }
         }
     }
-    public void AddLabelInPanel(){ //Añade el numero de habitacion        
+    
+    public void AddLabelInPanel(ArrayList<Habitacion> datosHab){ //Añade el numero de habitacion        
         for (int i=0; i<16; i++){
             label_Hab[i] = new JLabel();
             label_Hab[i].setText(""+datosHab.get(i).numero);
@@ -118,7 +133,8 @@ public class Habitaciones extends javax.swing.JFrame{
             panel_Hab[i].add(label_Hab[i], new org.netbeans.lib.awtextra.AbsoluteConstraints(10,10,78,70));
         }
     }
-    public void AddIcon(){
+    
+    public void AddIcon(ArrayList<Habitacion> datosHab){ //
         for (int i = 0; i<16; i++){
             JLabel lbt = new  JLabel();  //label tipo(lbt)
             //Tipo de habitacion
@@ -130,9 +146,6 @@ public class Habitaciones extends javax.swing.JFrame{
         }
     }
     
-    public static void ActualizarHabitaciones(){
-        //RecuperarDatos()
-    }
     
     
     @SuppressWarnings("unchecked")
@@ -147,9 +160,11 @@ public class Habitaciones extends javax.swing.JFrame{
         lbCerrar = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         pnPiso1 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
+        Nivel2 = new javax.swing.JLabel();
+        lbActualizar1 = new javax.swing.JLabel();
         pnPiso2 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
+        Nivel3 = new javax.swing.JLabel();
+        lbActualizar2 = new javax.swing.JLabel();
         pnInfo = new javax.swing.JPanel();
         pnDatosHab = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
@@ -249,23 +264,35 @@ public class Habitaciones extends javax.swing.JFrame{
 
         pnPiso1.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Lunandina/nivel2.png"))); // NOI18N
+        Nivel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Nivel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Lunandina/nivel2.png"))); // NOI18N
+
+        lbActualizar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/actualizar.png"))); // NOI18N
+        lbActualizar1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lbActualizar1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbActualizar1MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnPiso1Layout = new javax.swing.GroupLayout(pnPiso1);
         pnPiso1.setLayout(pnPiso1Layout);
         pnPiso1Layout.setHorizontalGroup(
             pnPiso1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnPiso1Layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(25, 25, 25)
+                .addGroup(pnPiso1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lbActualizar1)
+                    .addComponent(Nivel2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(1263, Short.MAX_VALUE))
         );
         pnPiso1Layout.setVerticalGroup(
             pnPiso1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnPiso1Layout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(lbActualizar1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Nivel2, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(43, 43, 43))
         );
 
@@ -273,22 +300,35 @@ public class Habitaciones extends javax.swing.JFrame{
 
         pnPiso2.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Lunandina/nivel3.png"))); // NOI18N
+        Nivel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Nivel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Lunandina/nivel3.png"))); // NOI18N
+
+        lbActualizar2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/actualizar.png"))); // NOI18N
+        lbActualizar2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lbActualizar2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbActualizar2MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnPiso2Layout = new javax.swing.GroupLayout(pnPiso2);
         pnPiso2.setLayout(pnPiso2Layout);
         pnPiso2Layout.setHorizontalGroup(
             pnPiso2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnPiso2Layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(25, 25, 25)
+                .addGroup(pnPiso2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lbActualizar2)
+                    .addComponent(Nivel3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(5, 5, 5))
         );
         pnPiso2Layout.setVerticalGroup(
             pnPiso2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnPiso2Layout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnPiso2Layout.createSequentialGroup()
+                .addContainerGap(14, Short.MAX_VALUE)
+                .addComponent(lbActualizar2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(Nivel3, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jTabbedPane1.addTab("<html><center>N<br>I<br>V<br>E<br>L<br><br><b>3<b><br></center></html>", pnPiso2);
@@ -518,6 +558,15 @@ public class Habitaciones extends javax.swing.JFrame{
         lbCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/cerrar1.png")));
     }//GEN-LAST:event_lbCerrarMouseExited
 
+    private void lbActualizar2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbActualizar2MouseClicked
+        actualizar();
+        //JOptionPane.showMessageDialog(null, control.DevolverRegistroDto("select login from  usuarios where idusuario = 2;", 1));
+    }//GEN-LAST:event_lbActualizar2MouseClicked
+
+    private void lbActualizar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbActualizar1MouseClicked
+        actualizar();
+    }//GEN-LAST:event_lbActualizar1MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -554,6 +603,8 @@ public class Habitaciones extends javax.swing.JFrame{
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Nivel2;
+    private javax.swing.JLabel Nivel3;
     private javax.swing.JButton btCheckOut;
     private javax.swing.JButton btComprobante;
     private javax.swing.JLabel jLabel1;
@@ -565,15 +616,15 @@ public class Habitaciones extends javax.swing.JFrame{
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JLabel lbActualizar1;
+    private javax.swing.JLabel lbActualizar2;
     private javax.swing.JLabel lbApellidos;
     private javax.swing.JLabel lbCerrar;
     private javax.swing.JLabel lbDNI;

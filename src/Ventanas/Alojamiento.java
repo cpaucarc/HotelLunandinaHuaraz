@@ -380,19 +380,19 @@ public class Alojamiento extends javax.swing.JFrame {
 
         jLabelDNI18.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabelDNI18.setText("RUC");
-        pnClienteEmpresa.add(jLabelDNI18, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 120, 30));
+        pnClienteEmpresa.add(jLabelDNI18, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 45, 120, 30));
 
         jLabelDNI19.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabelDNI19.setText("E-mail");
-        pnClienteEmpresa.add(jLabelDNI19, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, 120, 30));
+        pnClienteEmpresa.add(jLabelDNI19, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 235, 120, 30));
 
         jLabelDNI20.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabelDNI20.setText("Nombre");
-        pnClienteEmpresa.add(jLabelDNI20, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 120, 30));
+        pnClienteEmpresa.add(jLabelDNI20, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 105, 120, 30));
 
         jLabelDNI21.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabelDNI21.setText("Procedencia");
-        pnClienteEmpresa.add(jLabelDNI21, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 120, 30));
+        pnClienteEmpresa.add(jLabelDNI21, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, 120, 30));
 
         txRUC.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
         txRUC.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -404,7 +404,7 @@ public class Alojamiento extends javax.swing.JFrame {
                 txRUCKeyTyped(evt);
             }
         });
-        pnClienteEmpresa.add(txRUC, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 30, 280, 30));
+        pnClienteEmpresa.add(txRUC, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 45, 280, 30));
 
         txNomEmp.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
         txNomEmp.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -413,7 +413,7 @@ public class Alojamiento extends javax.swing.JFrame {
                 txNomEmpKeyTyped(evt);
             }
         });
-        pnClienteEmpresa.add(txNomEmp, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 80, 280, 30));
+        pnClienteEmpresa.add(txNomEmp, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 105, 280, 30));
 
         txProcEmp.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
         txProcEmp.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -422,7 +422,7 @@ public class Alojamiento extends javax.swing.JFrame {
                 txProcEmpKeyTyped(evt);
             }
         });
-        pnClienteEmpresa.add(txProcEmp, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 130, 280, 30));
+        pnClienteEmpresa.add(txProcEmp, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 170, 280, 30));
 
         txEmailEmp.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
         txEmailEmp.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -431,9 +431,9 @@ public class Alojamiento extends javax.swing.JFrame {
                 txEmailEmpKeyTyped(evt);
             }
         });
-        pnClienteEmpresa.add(txEmailEmp, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 180, 280, 30));
+        pnClienteEmpresa.add(txEmailEmp, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 235, 280, 30));
 
-        jPanel2.add(pnClienteEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 125, 461, 240));
+        jPanel2.add(pnClienteEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 25, 461, 340));
 
         btRegistrar.setBackground(new java.awt.Color(136, 206, 82));
         btRegistrar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N

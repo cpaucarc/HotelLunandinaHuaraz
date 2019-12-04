@@ -458,6 +458,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     /*LABEL DE HABITACIONES */
     private void lbHabMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbHabMouseClicked
+        habitacion.actualizar();
         habitacion.setVisible(true);
     }//GEN-LAST:event_lbHabMouseClicked
     private void lbHabMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbHabMouseEntered

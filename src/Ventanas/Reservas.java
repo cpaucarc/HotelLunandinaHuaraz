@@ -717,19 +717,19 @@ Controlador control=new Controlador();
 
         jLabelDNI18.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabelDNI18.setText("RUC");
-        pnClienteEmpresa.add(jLabelDNI18, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 120, 30));
+        pnClienteEmpresa.add(jLabelDNI18, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 45, 120, 30));
 
         jLabelDNI19.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabelDNI19.setText("E-mail");
-        pnClienteEmpresa.add(jLabelDNI19, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, 120, 30));
+        pnClienteEmpresa.add(jLabelDNI19, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 235, 120, 30));
 
         jLabelDNI20.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabelDNI20.setText("Nombre");
-        pnClienteEmpresa.add(jLabelDNI20, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 120, 30));
+        pnClienteEmpresa.add(jLabelDNI20, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 105, 120, 30));
 
         jLabelDNI21.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabelDNI21.setText("Procedencia");
-        pnClienteEmpresa.add(jLabelDNI21, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 120, 30));
+        pnClienteEmpresa.add(jLabelDNI21, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, 120, 30));
 
         txRUC.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
         txRUC.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -741,7 +741,7 @@ Controlador control=new Controlador();
                 txRUCKeyTyped(evt);
             }
         });
-        pnClienteEmpresa.add(txRUC, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 30, 280, 30));
+        pnClienteEmpresa.add(txRUC, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 45, 280, 30));
 
         jTextField1.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
         jTextField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -750,7 +750,7 @@ Controlador control=new Controlador();
                 jTextField1KeyTyped(evt);
             }
         });
-        pnClienteEmpresa.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 80, 280, 30));
+        pnClienteEmpresa.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 105, 280, 30));
 
         jTextField2.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
         jTextField2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -759,7 +759,7 @@ Controlador control=new Controlador();
                 jTextField2KeyTyped(evt);
             }
         });
-        pnClienteEmpresa.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 130, 280, 30));
+        pnClienteEmpresa.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 170, 280, 30));
 
         jTextField3.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
         jTextField3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -768,11 +768,11 @@ Controlador control=new Controlador();
                 jTextField3KeyTyped(evt);
             }
         });
-        pnClienteEmpresa.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 180, 280, 30));
+        pnClienteEmpresa.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 235, 280, 30));
 
-        jPanel2.add(pnClienteEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 35, 461, 240));
+        jPanel2.add(pnClienteEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 25, 461, 340));
 
-        btRegistrar.setBackground(new java.awt.Color(0, 153, 153));
+        btRegistrar.setBackground(new java.awt.Color(136, 206, 82));
         btRegistrar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         btRegistrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/agregar.png"))); // NOI18N
         btRegistrar.setText("Registrar");
@@ -910,7 +910,7 @@ Controlador control=new Controlador();
         });
         jPanel2.add(btRegistrar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(381, 430, 110, 55));
 
-        btModificar1.setBackground(new java.awt.Color(204, 204, 0));
+        btModificar1.setBackground(new java.awt.Color(255, 185, 83));
         btModificar1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         btModificar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/modificar.png"))); // NOI18N
         btModificar1.setText("Modificar");
