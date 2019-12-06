@@ -1,6 +1,7 @@
 package Ventanas;
 
 import Clases.*;
+import alertas.*;
 import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -12,6 +13,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Alojamiento extends javax.swing.JFrame {
     
+     public String rpt = "";
     
     Controlador control = new Controlador();
     ControlDate controlDT = new ControlDate();
@@ -94,6 +96,7 @@ public class Alojamiento extends javax.swing.JFrame {
     int contDOR;
 
     public void Seleccionar() {
+        Alerta alr = new Alerta(this, true);
         DOR = "";
         contDOR = 0;
         int fila = tabla.getSelectedRow();
@@ -130,7 +133,9 @@ public class Alojamiento extends javax.swing.JFrame {
             }
 
         } else {
-            JOptionPane.showMessageDialog(null, "Fila no seleccionada");
+            rpt = "Fila no <br>seleccionada";
+            alr.titulo.setText("<html><center>" + rpt + "</center></html>");
+            alr.setVisible(true);
         }
 
     }
@@ -676,9 +681,10 @@ public class Alojamiento extends javax.swing.JFrame {
     }//GEN-LAST:event_jtxtdni8KeyTyped
 
     private void btRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRegistrarActionPerformed
-        if(cbonumhabitacion.getSelectedIndex()>0){
+        Alerta alr = new Alerta(this, true);
+        if(cbonumhabitacion.getSelectedIndex()>0){        
         if (cambio == 1) {
-            JOptionPane.showMessageDialog(null, control.DevolverRegistroDto("call proc_alojamiento_persona('" + txDNI.getText()
+            rpt = (control.DevolverRegistroDto("call proc_alojamiento_persona('" + txDNI.getText()
                     + "','" + Textos.capitalizeText(txapPaterno.getText()) + "','" + Textos.capitalizeText(txapMaterno.getText()) + "','" + Textos.capitalizeText(txNombre.getText())
                     + "','" + Textos.capitalizeText(txProcedencia.getText()) + "','" + txemail.getText() + "','"
                     + controlDT.fecha_AMD(txfentrada.getDate()) + "','" + controlDT.fecha_AMD(txfsalida.getDate())
@@ -686,19 +692,22 @@ public class Alojamiento extends javax.swing.JFrame {
                     + "','" + Control.empleado + "');", 1));
             MostrarPersona();
         } else if (cambio == 2) {
-            JOptionPane.showMessageDialog(null, control.DevolverRegistroDto("call proc_alojamiento_empresa('" + txRUC.getText()
-                    + "','" + Textos.capitalizeText(txNomEmp.getText()) + "','" + Textos.capitalizeText(txProcEmp.getText()) + "','" + txEmailEmp.getText()
+            rpt = (control.DevolverRegistroDto("call proc_alojamiento_empresa('" + txRUC.getText()
+                    + "','" + txNomEmp.getText() + "','" + txProcEmp.getText() + "','" + txEmailEmp.getText()
                     + "','" + controlDT.fecha_AMD(txfentrada.getDate()) + "','" + controlDT.fecha_AMD(txfsalida.getDate())
                     + "','" + cbotipohabitacion.getSelectedItem() + "'," + cbonumhabitacion.getSelectedItem()
                     + ",'" + Control.empleado + "');", 1));
             MostrarEmpresa();
-            
+
         }
+        alr.titulo.setText("<html><center>" + rpt + "</center></html>");
+        alr.setVisible(true);
         }
     }//GEN-LAST:event_btRegistrarActionPerformed
 
     private void btModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btModificarActionPerformed
 
+        Alerta alr = new Alerta(this, true);
         if (btModificar.getText().equals("Modificar")) {
             btRegistrar.setEnabled(false);
             btModificar.setText("Actualizar");
@@ -707,16 +716,20 @@ public class Alojamiento extends javax.swing.JFrame {
             Seleccionar();
         } else {
             if (cambio == 1) {
-                JOptionPane.showMessageDialog(null, control.DevolverRegistroDto("call proc_alojamiento_persona_editar(" + id + ",'" + txDNI.getText() + "','"
+                rpt = (control.DevolverRegistroDto("call proc_alojamiento_persona_editar(" + id + ",'" + txDNI.getText() + "','"
                         + Textos.capitalizeText(txapPaterno.getText()) + "','" + Textos.capitalizeText(txapMaterno.getText()) + "','" + Textos.capitalizeText(txNombre.getText()) + "','" + Textos.capitalizeText(txProcedencia.getText()) + "','"
                         + txemail.getText() + "','" + controlDT.fecha_AMD(txfsalida.getDate()) + "');", 1));
+
                 MostrarPersona();
             } else if (cambio == 2) {
-                JOptionPane.showMessageDialog(null, control.DevolverRegistroDto("call proc_alojamiento_empresa_editar(" + id + ",'" + txRUC.getText() + "','"
-                        + Textos.capitalizeText(txProcEmp.getText()) + "','" + Textos.capitalizeText(txNomEmp.getText()) + "','" + txEmailEmp.getText() + "','" + controlDT.fecha_AMD(txfsalida.getDate()) + "');", 1));
+                rpt = (control.DevolverRegistroDto("call proc_alojamiento_empresa_editar(" + id + ",'" + txRUC.getText() + "','"
+                        + Textos.capitalizeText(txProcEmp.getText()) + "','" + Textos.capitalizeText(txNomEmp.getText()) + "','" + Textos.capitalizeText(txEmailEmp.getText()) + "','"
+                        + controlDT.fecha_AMD(txfsalida.getDate()) + "');", 1));
                 MostrarEmpresa();
             }
         }
+        alr.titulo.setText("<html><center>" + rpt + "</center></html>");
+        alr.setVisible(true);
 
     }//GEN-LAST:event_btModificarActionPerformed
 

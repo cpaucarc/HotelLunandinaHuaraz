@@ -4,11 +4,13 @@ import Clases.Control;
 import Clases.ControlDate;
 import Clases.Controlador;
 import Clases.Textos;
+import alertas.Alerta;
 import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 /**
  *
@@ -23,13 +25,16 @@ DefaultTableModel modelo1 = new DefaultTableModel(){
 };
 Controlador control=new Controlador();
     ControlDate cd=new ControlDate();
-
+    public String rpt = "";
     int _idusuario;
     public Reservas() {
         initComponents();
         
         _idusuario= Integer.parseInt(control.DevolverRegistroDto("SELECT idusuario FROM usuarios WHERE login = '"+Control.empleado+"'", 1));
-        
+        ((JTextField)this.dcBuscar.getDateEditor()).setEditable(false);
+        txtBuscar.setVisible(false);
+        txtBuscar1.setVisible(true);
+                
         this.getContentPane().setBackground(Color.white);
         btValidar.setEnabled(false);
         this.setLocationRelativeTo(null);
@@ -109,121 +114,148 @@ Controlador control=new Controlador();
       }
         }
     public void Seleccionar_Cliente(){
+        Alerta alr = new Alerta(this, true);
+
         if (btModificar.getText().equals("Modificar")) {
             btRegistrar1.setEnabled(false);
             btModificar.setText("Actualizar");
-        int fila =tabla.getSelectedRow();     
-        if (fila >-1) {
-            idres = modelo1.getValueAt(fila, 0).toString();
-            String dni = modelo1.getValueAt(fila, 6).toString();
-            int contDn = Integer.parseInt(control.DevolverRegistroDto("select count(*) from personas where DNI='" + dni + "';", 1));
-            txDNI.setText(modelo1.getValueAt(fila, 6).toString());
-            if (contDn != 0) {
-                
-                jtxtdni1.setText(control.DevolverRegistroDto("select  apPat from personas where DNI='" + dni + "';", 1));
-                jtxtdni2.setText(control.DevolverRegistroDto("select  apMat from personas where DNI='" + dni + "';", 1));
-                jtxtdni3.setText(control.DevolverRegistroDto("select  nomb from personas where DNI='" + dni + "';", 1));
-                jtxtdni4.setText(modelo1.getValueAt(fila, 8).toString());
-                jtxtdni10.setText(control.DevolverRegistroDto("select  email from personas where DNI='" + dni + "';", 1));
-                jDateChooser5.setDate(cd.Parse_Fecha(modelo1.getValueAt(fila, 2).toString()));
-                jDateChooser4.setDate(cd.Parse_Fecha(modelo1.getValueAt(fila, 3).toString()));
-            jComboBox2.setSelectedItem(modelo1.getValueAt(fila, 5).toString());
-            jComboBox1.removeAllItems();
-            jComboBox1.addItem(modelo1.getValueAt(fila, 4).toString());
+            int fila = tabla.getSelectedRow();
+            if (fila > -1) {
+                idres = modelo1.getValueAt(fila, 0).toString();
+                String dni = modelo1.getValueAt(fila, 6).toString();
+                int contDn = Integer.parseInt(control.DevolverRegistroDto("select count(*) from personas where DNI='" + dni + "';", 1));
+                txDNI.setText(modelo1.getValueAt(fila, 6).toString());
+                if (contDn != 0) {
+
+                    jtxtdni1.setText(control.DevolverRegistroDto("select  apPat from personas where DNI='" + dni + "';", 1));
+                    jtxtdni2.setText(control.DevolverRegistroDto("select  apMat from personas where DNI='" + dni + "';", 1));
+                    jtxtdni3.setText(control.DevolverRegistroDto("select  nomb from personas where DNI='" + dni + "';", 1));
+                    jtxtdni4.setText(modelo1.getValueAt(fila, 8).toString());
+                    jtxtdni10.setText(control.DevolverRegistroDto("select  email from personas where DNI='" + dni + "';", 1));
+                    jDateChooser5.setDate(cd.Parse_Fecha(modelo1.getValueAt(fila, 2).toString()));
+                    jDateChooser4.setDate(cd.Parse_Fecha(modelo1.getValueAt(fila, 3).toString()));
+                    jComboBox2.setSelectedItem(modelo1.getValueAt(fila, 5).toString());
+                    jComboBox1.removeAllItems();
+                    jComboBox1.addItem(modelo1.getValueAt(fila, 4).toString());
 //            jComboBox1.setSelectedItem(modelo1.getValueAt(fila, 4).toString());
-           numval=Integer.parseInt(modelo1.getValueAt(fila, 4).toString());
+                    numval = Integer.parseInt(modelo1.getValueAt(fila, 4).toString());
 //           valHab_Client();
-           tabla.setEnabled(false);
+                    tabla.setEnabled(false);
+                }
+            } else {
+                //alertas
+                rpt = "Fila no <br>seleccionada";
+                alr.titulo.setText("<html><center>" + rpt + "</center></html>");
+                alr.setVisible(true);
+                //alertas
+
+                btModificar.setText("Modificar");
+                btRegistrar1.setEnabled(true);
+                tabla.setEnabled(true);
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Fila no seleccionada");
-            btModificar.setText("Modificar");
-            btRegistrar1.setEnabled(true);
-            tabla.setEnabled(true);
-        }
-        }else{
             Editar_Persona(numval);
 //            btModificar.setText("Modificar");
 //            btRegistrar1.setEnabled(true);
         }
     }
     public void Seleccionar_Empresa(){
+        Alerta alr = new Alerta(this, true);
+
         if (btModificar1.getText().equals("Modificar")) {
             btRegistrar.setEnabled(false);
             btModificar1.setText("Actualizar");
-        int fila =tabla.getSelectedRow();     
-        if (fila >-1) {
-            idres = modelo.getValueAt(fila, 0).toString();
-            String Rc = modelo.getValueAt(fila, 6).toString();
-            int contDn = Integer.parseInt(control.DevolverRegistroDto("select count(*) from clienteempresa where RUC='" + Rc + "';", 1));
-            txRUC.setText(modelo.getValueAt(fila, 6).toString());
-            if (contDn != 0) {
-                
-                jTextField1.setText(modelo.getValueAt(fila, 7).toString());
-                jTextField2.setText(modelo.getValueAt(fila, 8).toString());
-                jTextField3.setText(control.DevolverRegistroDto("select email from clienteempresa where RUC='" + Rc + "';", 1));
-                jDateChooser5.setDate(cd.Parse_Fecha(modelo.getValueAt(fila, 2).toString()));
-                jDateChooser4.setDate(cd.Parse_Fecha(modelo.getValueAt(fila, 3).toString()));
-            jComboBox2.setSelectedItem(modelo.getValueAt(fila, 5).toString());
-            jComboBox1.removeAllItems();
-            jComboBox1.addItem(modelo1.getValueAt(fila, 4).toString());
-            numval1=Integer.parseInt(modelo.getValueAt(fila, 4).toString());
+            int fila = tabla.getSelectedRow();
+            if (fila > -1) {
+                idres = modelo.getValueAt(fila, 0).toString();
+                String Rc = modelo.getValueAt(fila, 6).toString();
+                int contDn = Integer.parseInt(control.DevolverRegistroDto("select count(*) from clienteempresa where RUC='" + Rc + "';", 1));
+                txRUC.setText(modelo.getValueAt(fila, 6).toString());
+                if (contDn != 0) {
+
+                    jTextField1.setText(modelo.getValueAt(fila, 7).toString());
+                    jTextField2.setText(modelo.getValueAt(fila, 8).toString());
+                    jTextField3.setText(control.DevolverRegistroDto("select email from clienteempresa where RUC='" + Rc + "';", 1));
+                    jDateChooser5.setDate(cd.Parse_Fecha(modelo.getValueAt(fila, 2).toString()));
+                    jDateChooser4.setDate(cd.Parse_Fecha(modelo.getValueAt(fila, 3).toString()));
+                    jComboBox2.setSelectedItem(modelo.getValueAt(fila, 5).toString());
+                    jComboBox1.removeAllItems();
+                    jComboBox1.addItem(modelo1.getValueAt(fila, 4).toString());
+                    numval1 = Integer.parseInt(modelo.getValueAt(fila, 4).toString());
 //            valHab_Client();
+                }
+            } else {
+                //alertas
+                rpt = "Fila no <br>seleccionada";
+                alr.titulo.setText("<html><center>" + rpt + "</center></html>");
+                alr.setVisible(true);
+                //alertas
+                btModificar1.setText("Modificar");
+                btRegistrar.setEnabled(true);
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Fila no seleccionada");
-            btModificar1.setText("Modificar");
-            btRegistrar.setEnabled(true);
-        }
-        }else{
             Editar_Empresa(numval1);
 //            btModificar1.setText("Modificar");
 //            btRegistrar.setEnabled(true);
         }
     }
     public void crear_Empresa() {
-        int count=tabla.getRowCount();
+        Alerta alr = new Alerta(this, true);
+
+        int count = tabla.getRowCount();
 //        JOptionPane.showMessageDialog(null, count);
-        int idest=Integer.parseInt(control.DevolverRegistroDto("select idhabitacion from habitaciones where numHab='"+jComboBox1.getSelectedItem()+"';",1));
-        JOptionPane.showMessageDialog(null, control.DevolverRegistroDto("call Proc_ReservaEmp("
-                       + "'1',"
-                       + "'"+0+"',"
-                       + "'"+Textos.capitalizeText(jTextField2.getText())+"',"
-                       + "'"+txRUC.getText()+"',"
-                       + "'"+Textos.capitalizeText(jTextField1.getText())+"',"
-                       + "'"+jTextField3.getText()+"',"
-                       + "'"+cd.fecha_AMD(jDateChooser5.getDate())+"',"
-                       + "'"+cd.fecha_AMD(jDateChooser4.getDate())+"',"
-                       + "'"+idest+"',"
-                       + "'"+0+"',"
-                       + _idusuario+")", 1));
+        int idest = Integer.parseInt(control.DevolverRegistroDto("select idhabitacion from habitaciones where numHab='" + jComboBox1.getSelectedItem() + "';", 1));
+        rpt = (control.DevolverRegistroDto("call Proc_ReservaEmp("
+                + "'1',"
+                + "'" + 0 + "',"
+                + "'" + jTextField2.getText() + "',"
+                + "'" + txRUC.getText() + "',"
+                + "'" + jTextField1.getText() + "',"
+                + "'" + jTextField3.getText() + "',"
+                + "'" + cd.fecha_AMD(jDateChooser5.getDate()) + "',"
+                + "'" + cd.fecha_AMD(jDateChooser4.getDate()) + "',"
+                + "'" + idest + "',"
+                + "'" + 0 + "',"
+                + _idusuario + ")", 1));
+        //alertas
+        alr.titulo.setText("<html><center>" + rpt + "</center></html>");
+        alr.setVisible(true);
+        //alertas
+
         MostrarList_Empresa();
-        int count1=tabla.getRowCount();
-        if(count!=count1){
-        Limpiar();
+        int count1 = tabla.getRowCount();
+        if (count != count1) {
+            Limpiar();
         }
     }
     public void Editar_Empresa(int numHab) { 
-        int val1=Integer.parseInt(control.DevolverRegistroDto("select DATEDIFF('"+cd.fecha_AMD(jDateChooser4.getDate())+"','"+cd.fecha_AMD(jDateChooser5.getDate())+"');", 1));
-        int val2=Integer.parseInt(control.DevolverRegistroDto("select DATEDIFF('"+cd.fecha_AMD(jDateChooser5.getDate())+"',(CURDATE()-1));", 1));
-        int idest=Integer.parseInt(control.DevolverRegistroDto("select idhabitacion from habitaciones where numHab='"+jComboBox1.getSelectedItem()+"';",1));
-        JOptionPane.showMessageDialog(null, control.DevolverRegistroDto("call Proc_ReservaEmp("
-                       + "'2',"
-                       + "'"+idres+"',"
-                       + "'"+Textos.capitalizeText(jTextField2.getText())+"',"
-                       + "'"+txRUC.getText()+"',"
-                       + "'"+Textos.capitalizeText(jTextField1.getText())+"',"
-                       + "'"+jTextField3.getText()+"',"
-                       + "'"+cd.fecha_AMD(jDateChooser5.getDate())+"',"
-                       + "'"+cd.fecha_AMD(jDateChooser4.getDate())+"',"
-                       + "'"+idest+"',"
-                       + "'"+numHab+"',"
-                       + _idusuario+")", 1));
+        Alerta alr = new Alerta(this, true);
+
+        int val1 = Integer.parseInt(control.DevolverRegistroDto("select DATEDIFF('" + cd.fecha_AMD(jDateChooser4.getDate()) + "','" + cd.fecha_AMD(jDateChooser5.getDate()) + "');", 1));
+        int val2 = Integer.parseInt(control.DevolverRegistroDto("select DATEDIFF('" + cd.fecha_AMD(jDateChooser5.getDate()) + "',(CURDATE()-1));", 1));
+        int idest = Integer.parseInt(control.DevolverRegistroDto("select idhabitacion from habitaciones where numHab='" + jComboBox1.getSelectedItem() + "';", 1));
+        rpt = (control.DevolverRegistroDto("call Proc_ReservaEmp("
+                + "'2',"
+                + "'" + idres + "',"
+                + "'" + jTextField2.getText() + "',"
+                + "'" + txRUC.getText() + "',"
+                + "'" + jTextField1.getText() + "',"
+                + "'" + jTextField3.getText() + "',"
+                + "'" + cd.fecha_AMD(jDateChooser5.getDate()) + "',"
+                + "'" + cd.fecha_AMD(jDateChooser4.getDate()) + "',"
+                + "'" + idest + "',"
+                + "'" + numHab + "',"
+                + _idusuario + ")", 1));
+        //alertas
+        alr.titulo.setText("<html><center>" + rpt + "</center></html>");
+        alr.setVisible(true);
+        //alertas
         MostrarList_Empresa();
-        if(val1>0 && val2>0){
-        Limpiar();
-        btModificar1.setText("Modificar");
-        btRegistrar.setEnabled(true);}
+        if (val1 > 0 && val2 > 0) {
+            Limpiar();
+            btModificar1.setText("Modificar");
+            btRegistrar.setEnabled(true);
+        }
     }
     public void Limpiar(){
         tabla.setEnabled(true);
@@ -248,61 +280,85 @@ Controlador control=new Controlador();
         btRegistrar1.setEnabled(true);
     }
     public void crear_Persona() {
-        int count=tabla.getRowCount();
-        int idest=Integer.parseInt(control.DevolverRegistroDto("select idhabitacion from habitaciones where numHab='"+jComboBox1.getSelectedItem()+"';",1));
-        JOptionPane.showMessageDialog(null, control.DevolverRegistroDto("call Proc_ReservaClient("
-                       + "'1',"
-                       + "'"+0+"',"
-                       + "'"+Textos.capitalizeText(jtxtdni4.getText())+"',"
-                       + "'"+txDNI.getText()+"',"
-                       + "'"+Textos.capitalizeText(jtxtdni1.getText())+"',"
-                       + "'"+Textos.capitalizeText(jtxtdni2.getText())+"',"
-                       + "'"+Textos.capitalizeText(jtxtdni3.getText())+"',"
-                       + "'"+jtxtdni10.getText()+"',"
-                       + "'"+cd.fecha_AMD(jDateChooser5.getDate())+"',"
-                       + "'"+cd.fecha_AMD(jDateChooser4.getDate())+"',"
-                       + "'"+idest+"',"
-                       + "'"+0+"',"
-                       + _idusuario+")", 1));
+        Alerta alr = new Alerta(this, true);
+
+        int count = tabla.getRowCount();
+        int idest = Integer.parseInt(control.DevolverRegistroDto("select idhabitacion from habitaciones where numHab='" + jComboBox1.getSelectedItem() + "';", 1));
+        rpt = (control.DevolverRegistroDto("call Proc_ReservaClient("
+                + "'1',"
+                + "'" + 0 + "',"
+                + "'" + jtxtdni4.getText() + "',"
+                + "'" + txDNI.getText() + "',"
+                + "'" + jtxtdni1.getText() + "',"
+                + "'" + jtxtdni2.getText() + "',"
+                + "'" + jtxtdni3.getText() + "',"
+                + "'" + jtxtdni10.getText() + "',"
+                + "'" + cd.fecha_AMD(jDateChooser5.getDate()) + "',"
+                + "'" + cd.fecha_AMD(jDateChooser4.getDate()) + "',"
+                + "'" + idest + "',"
+                + "'" + 0 + "',"
+                + _idusuario + ")", 1));
+        //alertas
+        alr.titulo.setText("<html><center>" + rpt + "</center></html>");
+        alr.setVisible(true);
+        //alertas
         MostrarList_Cliente();
-        int count1=tabla.getRowCount();
-        if(count!=count1){
-          Limpiar();
+        int count1 = tabla.getRowCount();
+        if (count != count1) {
+            Limpiar();
         }
     }
     public void Editar_Persona(int numHab) {
-        int val1=Integer.parseInt(control.DevolverRegistroDto("select DATEDIFF('"+cd.fecha_AMD(jDateChooser4.getDate())+"','"+cd.fecha_AMD(jDateChooser5.getDate())+"');", 1));
-        int val2=Integer.parseInt(control.DevolverRegistroDto("select DATEDIFF('"+cd.fecha_AMD(jDateChooser5.getDate())+"',(CURDATE()-1));", 1));
-        int idest=Integer.parseInt(control.DevolverRegistroDto("select idhabitacion from habitaciones where numHab='"+jComboBox1.getSelectedItem()+"';",1));
-        JOptionPane.showMessageDialog(null, control.DevolverRegistroDto("call Proc_ReservaClient("
-                       + "'2',"
-                       + "'"+idres+"',"
-                       + "'"+Textos.capitalizeText(jtxtdni4.getText())+"',"
-                       + "'"+txDNI.getText()+"',"
-                       + "'"+Textos.capitalizeText(jtxtdni1.getText())+"',"
-                       + "'"+Textos.capitalizeText(jtxtdni2.getText())+"',"
-                       + "'"+Textos.capitalizeText(jtxtdni3.getText())+"',"
-                       + "'"+jtxtdni10.getText()+"',"
-                       + "'"+cd.fecha_AMD(jDateChooser5.getDate())+"',"
-                       + "'"+cd.fecha_AMD(jDateChooser4.getDate())+"',"
-                       + "'"+idest+"',"
-                       + "'"+numHab+"',"
-                       + _idusuario+")", 1));
+        Alerta alr = new Alerta(this, true);
+
+        int val1 = Integer.parseInt(control.DevolverRegistroDto("select DATEDIFF('" + cd.fecha_AMD(jDateChooser4.getDate()) + "','" + cd.fecha_AMD(jDateChooser5.getDate()) + "');", 1));
+        int val2 = Integer.parseInt(control.DevolverRegistroDto("select DATEDIFF('" + cd.fecha_AMD(jDateChooser5.getDate()) + "',(CURDATE()-1));", 1));
+        int idest = Integer.parseInt(control.DevolverRegistroDto("select idhabitacion from habitaciones where numHab='" + jComboBox1.getSelectedItem() + "';", 1));
+        rpt = (control.DevolverRegistroDto("call Proc_ReservaClient("
+                + "'2',"
+                + "'" + idres + "',"
+                + "'" + jtxtdni4.getText() + "',"
+                + "'" + txDNI.getText() + "',"
+                + "'" + jtxtdni1.getText() + "',"
+                + "'" + jtxtdni2.getText() + "',"
+                + "'" + jtxtdni3.getText() + "',"
+                + "'" + jtxtdni10.getText() + "',"
+                + "'" + cd.fecha_AMD(jDateChooser5.getDate()) + "',"
+                + "'" + cd.fecha_AMD(jDateChooser4.getDate()) + "',"
+                + "'" + idest + "',"
+                + "'" + numHab + "',"
+                + _idusuario + ")", 1));
+        //alertas
+        alr.titulo.setText("<html><center>" + rpt + "</center></html>");
+        alr.setVisible(true);
+        //alertas
         MostrarList_Cliente();
-        if(val1>0 && val2>0){
-        Limpiar();
-        btModificar.setText("Modificar");
-        btRegistrar1.setEnabled(true);}
+        if (val1 > 0 && val2 > 0) {
+            Limpiar();
+            btModificar.setText("Modificar");
+            btRegistrar1.setEnabled(true);
+        }
     }
     private void MostrarList_Empresa() {
-        control.LlenarJtable(modelo, "select * from v_reservaemp  where "
-                + "RUC like'%" + txtBuscar.getText() + "%';", 9);
+        if(dcBuscar.getDate() != null){
+            control.LlenarJtable(modelo, "select * from v_reservaemp  where "
+                + "(RUC like '%" + txtBuscar.getText() + "%' or Empresa like '%" + txtBuscar.getText() + "%' ) and Fecha_Resv = '"+cd.fecha_AMD(dcBuscar1.getDate())+"';", 9);
+        }else{
+            control.LlenarJtable(modelo, "select * from v_reservaemp  where "
+                + "RUC like'%" + txtBuscar.getText() +"%' or Empresa like '%" + txtBuscar.getText() + "%';", 9);
+        }
     }
     
     
     private void MostrarList_Cliente() {
+        if(dcBuscar.getDate() != null){
         control.LlenarJtable(modelo1, "select * from v_reservaclient  where "
-              + "DNI like'%" + txtBuscar.getText() + "%';", 9);
+              + "(DNI like'%" + txtBuscar1.getText() + "%' or Cliente like '%" + txtBuscar1.getText() + "%' ) and Fecha_Resv = '"+cd.fecha_AMD(dcBuscar.getDate())+"';", 9);
+        }else{
+            control.LlenarJtable(modelo1, "select * from v_reservaclient  where "
+              + "DNI like'%" + txtBuscar1.getText() + "%' or Cliente like '%" + txtBuscar1.getText() + "%';", 9);
+        }
+        
         
 //        control.LlenarJtable(modelo1, "select * from v_reservaclient  where "
 //                + "DNI like'%" + txtBuscar1.getText() + "%' or (Fecha_Ent like '%"
@@ -341,89 +397,110 @@ Controlador control=new Controlador();
         tabla.getColumnModel().removeColumn(tabla.getColumnModel().getColumn(0));
     }
     public void validarcampos_client(){
-       if(txDNI.getText().length()!=0 && txDNI.getText().length()>7){
-           if(jtxtdni1.getText().length()!=0){
-              if(jtxtdni2.getText().length()!=0){
-                 if(jtxtdni3.getText().length()!=0){
-                    if(jtxtdni4.getText().length()!=0){
-                      if(jtxtdni10.getText().length()!=0){
-                        if(jDateChooser5.getDate()!=null){
-                            if(jDateChooser4.getDate()!=null){
-                              if(jComboBox2.getSelectedIndex()!=-1){
-                                  if(jComboBox1.getSelectedIndex()!=-1){
-                                      crear_Persona();
-                                   }else{
-                                  JOptionPane.showMessageDialog(null,"Seleccione N° HABITACIÓN");}
-                              }else{
-                                  JOptionPane.showMessageDialog(null,"Seleccione TIPO HABITACIÓN");
-                              }
-                            }else{
-                              JOptionPane.showMessageDialog(null,"Ingrese FECHA DE SALIDA");  
-                            }  
-                        }else{
-                          JOptionPane.showMessageDialog(null,"Ingrese FECHA DE ENTRADA");  
-                        }  
-                        }else{
-                          JOptionPane.showMessageDialog(null,"Ingrese CORREO");
+       Alerta alr = new Alerta(this, true);
+
+        if (txDNI.getText().length() != 0 && txDNI.getText().length() > 7) {
+            if (jtxtdni1.getText().length() != 0) {
+                if (jtxtdni2.getText().length() != 0) {
+                    if (jtxtdni3.getText().length() != 0) {
+                        if (jtxtdni4.getText().length() != 0) {
+                            if (jtxtdni10.getText().length() != 0) {
+                                if (jDateChooser5.getDate() != null) {
+                                    if (jDateChooser4.getDate() != null) {
+                                        if (jComboBox2.getSelectedIndex() != -1) {
+                                            if (jComboBox1.getSelectedIndex() != -1) {
+                                                crear_Persona();
+                                                rpt = "";
+                                            } else {
+                                                rpt = ("Seleccione <br>N° HABITACIÓN");
+                                            }
+                                        } else {
+                                            rpt = ("Seleccione <br>TIPO HABITACIÓN");
+                                        }
+                                    } else {
+                                        rpt = ("Ingrese <br>FECHA DE SALIDA");
+                                    }
+                                } else {
+                                    rpt = ("Ingrese <br>FECHA DE ENTRADA");
+                                }
+                            } else {
+                                rpt = ("Ingrese CORREO");
+                            }
+                        } else {
+                            rpt = ("Ingrese PROCEDENCIA");
+                            jtxtdni4.grabFocus();
                         }
-                      }else{
-                        JOptionPane.showMessageDialog(null,"Ingrese PROCEDENCIA");
-                        jtxtdni4.grabFocus();
-                      }
-                  }else{
-                     JOptionPane.showMessageDialog(null,"Ingrese NOMBRE");
-                     jtxtdni3.grabFocus();
-                  }
-              }else{
-                 JOptionPane.showMessageDialog(null,"Ingrese apellido MATERNO");
-                 jtxtdni2.grabFocus();
-              }
-           }else{
-               JOptionPane.showMessageDialog(null,"Ingrese apellido PATERNO");
-               jtxtdni1.grabFocus();
-           }
-       }else{
-           JOptionPane.showMessageDialog(null,"Ingrese DNI(8 dígitos)");
-           txDNI.grabFocus();
-       }
+                    } else {
+                        rpt = ("Ingrese NOMBRE");
+                        jtxtdni3.grabFocus();
+                    }
+                } else {
+                    rpt = ("Ingrese <br>apellido MATERNO");
+                    jtxtdni2.grabFocus();
+                }
+            } else {
+                rpt = ("Ingrese <br>apellido PATERNO");
+                jtxtdni1.grabFocus();
+            }
+        } else {
+            rpt = ("Ingrese DNI(8 dígitos)");
+            txDNI.grabFocus();
+        }
+        //alertas
+//        
+        if(!rpt.equals("")){
+            alr.titulo.setText("<html><center>" + rpt + "</center></html>");
+            alr.setVisible(true);
+        }
+        //alertas
     }
     public void validarcampos_emp(){
-       if(txRUC.getText().length()!=0 && txRUC.getText().length()>10){
-           if(jTextField1.getText().length()!=0){
-              if(jTextField2.getText().length()!=0){
-                 if(jTextField3.getText().length()!=0){
-                        if(jDateChooser5.getDate()!=null){
-                            if(jDateChooser4.getDate()!=null){
-                              if(jComboBox2.getSelectedIndex()!=-1){
-                                  if(jComboBox1.getSelectedIndex()!=-1){
-                                      crear_Empresa();
-                                   }else{
-                                  JOptionPane.showMessageDialog(null,"Seleccione N° HABITACIÓN");}
-                              }else{
-                                  JOptionPane.showMessageDialog(null,"Seleccione TIPO HABITACIÓN");
-                              }
-                            }else{
-                              JOptionPane.showMessageDialog(null,"Ingrese FECHA DE SALIDA");  
-                            }  
-                        }else{
-                          JOptionPane.showMessageDialog(null,"Ingrese FECHA DE ENTRADA");  
+       Alerta alr = new Alerta(this, true);
+
+        if (txRUC.getText().length() != 0 && txRUC.getText().length() > 10) {
+            if (jTextField1.getText().length() != 0) {
+                if (jTextField2.getText().length() != 0) {
+                    if (jTextField3.getText().length() != 0) {
+                        if (jDateChooser5.getDate() != null) {
+                            if (jDateChooser4.getDate() != null) {
+                                if (jComboBox2.getSelectedIndex() != -1) {
+                                    if (jComboBox1.getSelectedIndex() != -1) {
+                                        crear_Empresa();
+                                        rpt = "";
+                                    } else {
+                                        rpt = ("Seleccione <br>N° HABITACIÓN");
+                                    }
+                                } else {
+                                    rpt = ("Seleccione <br>TIPO HABITACIÓN");
+                                }
+                            } else {
+                                rpt = ("Ingrese <br>FECHA DE SALIDA");
+                            }
+                        } else {
+                            rpt = ("Ingrese <br>FECHA DE ENTRADA");
                         }
-                  }else{
-                     JOptionPane.showMessageDialog(null,"Ingrese CORREO");
-                     jTextField3.grabFocus();
-                  }
-              }else{
-                 JOptionPane.showMessageDialog(null,"Ingrese PROCEDENCIA");
-                 jTextField2.grabFocus();
-              }
-           }else{
-               JOptionPane.showMessageDialog(null,"Ingrese EMPRESA");
-               jTextField1.grabFocus();
-           }
-       }else{
-           JOptionPane.showMessageDialog(null,"Ingrese RUC(11 dígitos)");
-           txRUC.grabFocus();
-       }
+                    } else {
+                        rpt = ("Ingrese CORREO");
+                        jTextField3.grabFocus();
+                    }
+                } else {
+                    rpt = ("Ingrese PROCEDENCIA");
+                    jTextField2.grabFocus();
+                }
+            } else {
+                rpt = ("Ingrese EMPRESA");
+                jTextField1.grabFocus();
+            }
+        } else {
+            rpt = ("Ingrese RUC(11 dígitos)");
+            txRUC.grabFocus();
+        }
+        //alertas
+        if(!rpt.equals("")){
+            alr.titulo.setText("<html><center>" + rpt + "</center></html>");
+            alr.setVisible(true);
+        }
+        //alertas
     }
     public void valHab_Client(){
 //        control.LlenarCombo(jComboBox1, "select idhabitacion,numHab from habitaciones where (idtipoHab=1 and idestadoHab=1);", 2);      
@@ -476,6 +553,7 @@ Controlador control=new Controlador();
            jComboBox1.addItem("No hay cuartos");
         }
         }
+        
 //        if(jComboBox1.getItemCount()==0){
 //           jComboBox1.removeAllItems();
 //           jComboBox1.addItem("No hay cuartos");
@@ -552,6 +630,7 @@ Controlador control=new Controlador();
         dcBuscar = new com.toedter.calendar.JDateChooser();
         btValidar = new javax.swing.JButton();
         txtBuscar1 = new javax.swing.JTextField();
+        dcBuscar1 = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -1031,6 +1110,11 @@ Controlador control=new Controlador();
 
         dcBuscar.setBackground(new java.awt.Color(255, 255, 255));
         dcBuscar.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
+        dcBuscar.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                dcBuscarPropertyChange(evt);
+            }
+        });
         dcBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 dcBuscarKeyReleased(evt);
@@ -1066,6 +1150,20 @@ Controlador control=new Controlador();
             }
         });
         jPanel6.add(txtBuscar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(147, 40, 350, 30));
+
+        dcBuscar1.setBackground(new java.awt.Color(255, 255, 255));
+        dcBuscar1.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
+        dcBuscar1.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                dcBuscar1PropertyChange(evt);
+            }
+        });
+        dcBuscar1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                dcBuscar1KeyReleased(evt);
+            }
+        });
+        jPanel6.add(dcBuscar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(527, 40, 200, 30));
 
         jPanel5.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 25, 790, 630));
 
@@ -1154,6 +1252,9 @@ Controlador control=new Controlador();
         btEliminar.setVisible(false);
         
         lbReiniciar.setVisible(false);
+        
+        txtBuscar.setVisible(false);
+        txtBuscar1.setVisible(true);
     }//GEN-LAST:event_lbReiniciarMouseClicked
 
     private void btClientePersonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btClientePersonaActionPerformed
@@ -1175,6 +1276,9 @@ Controlador control=new Controlador();
         btModificar.setVisible(true);
         btModificar1.setVisible(false);
         btEliminar.setVisible(true);
+        
+        dcBuscar.setVisible(true);
+        dcBuscar1.setVisible(false);
     }//GEN-LAST:event_btClientePersonaActionPerformed
 
     private void btClienteEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btClienteEmpresaActionPerformed
@@ -1195,6 +1299,9 @@ Controlador control=new Controlador();
         btModificar1.setVisible(true);
         btModificar.setVisible(false);
         btEliminar.setVisible(true);
+        dcBuscar.setVisible(false);
+        dcBuscar1.setVisible(true);
+        
     }//GEN-LAST:event_btClienteEmpresaActionPerformed
 
     private void lbMinimizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbMinimizarMouseClicked
@@ -1335,12 +1442,37 @@ Controlador control=new Controlador();
         // TODO add your handling code here:
 //        jComboBox2.removeAllItems();
         
-        valHab_Client();
+        //alHab_Client();
+        if (jComboBox2.getSelectedIndex() > 0 && jDateChooser5 != null && jDateChooser4 != null) {
+            control.LlenarCombo(jComboBox1, 
+                    "call proc_show_NumHab('"+jComboBox2.getSelectedItem()+"', \""
+                            +cd.fecha_AMD(jDateChooser5.getDate())+"\",\""
+                            +cd.fecha_AMD(jDateChooser4.getDate())+"\")", 1);
+            if(jComboBox1.getItemCount()>0){
+                jComboBox1.setSelectedIndex(0);
+            }
+            if(jComboBox1.getItemCount() == 1){ //Para cuando solo aparesca la opcion de '--Seleccione--'
+                jComboBox1.removeAllItems();
+                jComboBox1.addItem("--No hay cuartos--");
+            }
+        }
     }//GEN-LAST:event_jComboBox2ItemStateChanged
 
     private void dcBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_dcBuscarKeyReleased
         // TODO add your handling code here:
     }//GEN-LAST:event_dcBuscarKeyReleased
+
+    private void dcBuscarPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dcBuscarPropertyChange
+        MostrarList_Cliente();
+    }//GEN-LAST:event_dcBuscarPropertyChange
+
+    private void dcBuscar1PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dcBuscar1PropertyChange
+        MostrarList_Empresa();
+    }//GEN-LAST:event_dcBuscar1PropertyChange
+
+    private void dcBuscar1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_dcBuscar1KeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_dcBuscar1KeyReleased
 
     /**
      * @param args the command line arguments
@@ -1402,6 +1534,7 @@ Controlador control=new Controlador();
     private javax.swing.JButton btRegistrar1;
     private javax.swing.JButton btValidar;
     private com.toedter.calendar.JDateChooser dcBuscar;
+    private com.toedter.calendar.JDateChooser dcBuscar1;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private com.toedter.calendar.JDateChooser jDateChooser4;
