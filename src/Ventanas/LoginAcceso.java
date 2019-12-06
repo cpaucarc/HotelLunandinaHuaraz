@@ -183,10 +183,10 @@ public class LoginAcceso extends javax.swing.JFrame {
                 Control.usuario = lgl.getnomEmp(); //Apellidos y nombres del empleado
                 Control.empleado = lgl.getUsuario(); //Nombre de usuario del empleado 
                 Control.cargo = lgl.getCargo();
-                this.dispose();
                 MenuPrincipal mp = new MenuPrincipal();
                 //mp = new MenuPrincipal();
                 mp.setVisible(true);
+                this.dispose();
             }else{
                 JOptionPane.showMessageDialog(null, "Credenciales incorrectas");username.grabFocus();
             }         

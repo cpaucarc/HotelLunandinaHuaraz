@@ -188,9 +188,9 @@ Controlador control=new Controlador();
         JOptionPane.showMessageDialog(null, control.DevolverRegistroDto("call Proc_ReservaEmp("
                        + "'1',"
                        + "'"+0+"',"
-                       + "'"+jTextField2.getText()+"',"
+                       + "'"+Textos.capitalizeText(jTextField2.getText())+"',"
                        + "'"+txRUC.getText()+"',"
-                       + "'"+jTextField1.getText()+"',"
+                       + "'"+Textos.capitalizeText(jTextField1.getText())+"',"
                        + "'"+jTextField3.getText()+"',"
                        + "'"+cd.fecha_AMD(jDateChooser5.getDate())+"',"
                        + "'"+cd.fecha_AMD(jDateChooser4.getDate())+"',"
@@ -210,9 +210,9 @@ Controlador control=new Controlador();
         JOptionPane.showMessageDialog(null, control.DevolverRegistroDto("call Proc_ReservaEmp("
                        + "'2',"
                        + "'"+idres+"',"
-                       + "'"+jTextField2.getText()+"',"
+                       + "'"+Textos.capitalizeText(jTextField2.getText())+"',"
                        + "'"+txRUC.getText()+"',"
-                       + "'"+jTextField1.getText()+"',"
+                       + "'"+Textos.capitalizeText(jTextField1.getText())+"',"
                        + "'"+jTextField3.getText()+"',"
                        + "'"+cd.fecha_AMD(jDateChooser5.getDate())+"',"
                        + "'"+cd.fecha_AMD(jDateChooser4.getDate())+"',"
@@ -253,11 +253,11 @@ Controlador control=new Controlador();
         JOptionPane.showMessageDialog(null, control.DevolverRegistroDto("call Proc_ReservaClient("
                        + "'1',"
                        + "'"+0+"',"
-                       + "'"+jtxtdni4.getText()+"',"
+                       + "'"+Textos.capitalizeText(jtxtdni4.getText())+"',"
                        + "'"+txDNI.getText()+"',"
-                       + "'"+jtxtdni1.getText()+"',"
-                       + "'"+jtxtdni2.getText()+"',"
-                       + "'"+jtxtdni3.getText()+"',"
+                       + "'"+Textos.capitalizeText(jtxtdni1.getText())+"',"
+                       + "'"+Textos.capitalizeText(jtxtdni2.getText())+"',"
+                       + "'"+Textos.capitalizeText(jtxtdni3.getText())+"',"
                        + "'"+jtxtdni10.getText()+"',"
                        + "'"+cd.fecha_AMD(jDateChooser5.getDate())+"',"
                        + "'"+cd.fecha_AMD(jDateChooser4.getDate())+"',"
@@ -277,11 +277,11 @@ Controlador control=new Controlador();
         JOptionPane.showMessageDialog(null, control.DevolverRegistroDto("call Proc_ReservaClient("
                        + "'2',"
                        + "'"+idres+"',"
-                       + "'"+jtxtdni4.getText()+"',"
+                       + "'"+Textos.capitalizeText(jtxtdni4.getText())+"',"
                        + "'"+txDNI.getText()+"',"
-                       + "'"+jtxtdni1.getText()+"',"
-                       + "'"+jtxtdni2.getText()+"',"
-                       + "'"+jtxtdni3.getText()+"',"
+                       + "'"+Textos.capitalizeText(jtxtdni1.getText())+"',"
+                       + "'"+Textos.capitalizeText(jtxtdni2.getText())+"',"
+                       + "'"+Textos.capitalizeText(jtxtdni3.getText())+"',"
                        + "'"+jtxtdni10.getText()+"',"
                        + "'"+cd.fecha_AMD(jDateChooser5.getDate())+"',"
                        + "'"+cd.fecha_AMD(jDateChooser4.getDate())+"',"
@@ -314,14 +314,14 @@ Controlador control=new Controlador();
         tabla.setModel(modelo1);
 
         tabla.getColumnModel().getColumn(0).setPreferredWidth(100);
-        tabla.getColumnModel().getColumn(1).setPreferredWidth(100);
-        tabla.getColumnModel().getColumn(2).setPreferredWidth(100);
-        tabla.getColumnModel().getColumn(3).setPreferredWidth(100);
-        tabla.getColumnModel().getColumn(4).setPreferredWidth(100);
-        tabla.getColumnModel().getColumn(5).setPreferredWidth(100);
-        tabla.getColumnModel().getColumn(6).setPreferredWidth(100);
-        tabla.getColumnModel().getColumn(7).setPreferredWidth(100);
-        tabla.getColumnModel().getColumn(8).setPreferredWidth(100);
+        tabla.getColumnModel().getColumn(1).setPreferredWidth(95); //Fecha Reserva
+        tabla.getColumnModel().getColumn(2).setPreferredWidth(90); //Fecha Entrada
+        tabla.getColumnModel().getColumn(3).setPreferredWidth(87); //Fecha Salida
+        tabla.getColumnModel().getColumn(4).setPreferredWidth(45); // N° Habitacion
+        tabla.getColumnModel().getColumn(5).setPreferredWidth(110); // Tipo Habitacion
+        tabla.getColumnModel().getColumn(6).setPreferredWidth(75); // DNI
+        tabla.getColumnModel().getColumn(7).setPreferredWidth(200); // Cliente
+        tabla.getColumnModel().getColumn(8).setPreferredWidth(75); //Procedencia
         
         tabla.getColumnModel().removeColumn(tabla.getColumnModel().getColumn(0)); 
     }
@@ -330,14 +330,14 @@ Controlador control=new Controlador();
         tabla.setModel(modelo);
 
         tabla.getColumnModel().getColumn(0).setPreferredWidth(100);
-        tabla.getColumnModel().getColumn(1).setPreferredWidth(100);
-        tabla.getColumnModel().getColumn(2).setPreferredWidth(100);
-        tabla.getColumnModel().getColumn(3).setPreferredWidth(100);
-        tabla.getColumnModel().getColumn(4).setPreferredWidth(100);
-        tabla.getColumnModel().getColumn(5).setPreferredWidth(100);
-        tabla.getColumnModel().getColumn(6).setPreferredWidth(100);
-        tabla.getColumnModel().getColumn(7).setPreferredWidth(100);
-        tabla.getColumnModel().getColumn(8).setPreferredWidth(100);
+        tabla.getColumnModel().getColumn(1).setPreferredWidth(95);
+        tabla.getColumnModel().getColumn(2).setPreferredWidth(90);
+        tabla.getColumnModel().getColumn(3).setPreferredWidth(87);
+        tabla.getColumnModel().getColumn(4).setPreferredWidth(45);
+        tabla.getColumnModel().getColumn(5).setPreferredWidth(110);
+        tabla.getColumnModel().getColumn(6).setPreferredWidth(75);
+        tabla.getColumnModel().getColumn(7).setPreferredWidth(200);
+        tabla.getColumnModel().getColumn(8).setPreferredWidth(75);
         tabla.getColumnModel().removeColumn(tabla.getColumnModel().getColumn(0));
     }
     public void validarcampos_client(){
@@ -935,7 +935,7 @@ Controlador control=new Controlador();
         lbUserActual.setForeground(new java.awt.Color(255, 255, 255));
         lbUserActual.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lbUserActual.setText("jLabel13");
-        jPanel4.add(lbUserActual, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 0, 120, 46));
+        jPanel4.add(lbUserActual, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 0, 250, 46));
 
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/userActual.png"))); // NOI18N
@@ -986,7 +986,7 @@ Controlador control=new Controlador();
         jPanel6.setForeground(new java.awt.Color(255, 255, 255));
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        tabla.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
+        tabla.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 13)); // NOI18N
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null},
@@ -999,10 +999,11 @@ Controlador control=new Controlador();
             }
         ));
         tabla.setGridColor(new java.awt.Color(0, 0, 0));
+        tabla.setRowHeight(30);
         tabla.setSelectionBackground(new java.awt.Color(0, 122, 255));
         jScrollPane1.setViewportView(tabla);
 
-        jPanel6.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 744, 440));
+        jPanel6.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 790, 440));
 
         jLabelDNI16.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabelDNI16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -1066,7 +1067,7 @@ Controlador control=new Controlador();
         });
         jPanel6.add(txtBuscar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(147, 40, 350, 30));
 
-        jPanel5.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 25, 784, 630));
+        jPanel5.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 25, 790, 630));
 
         getContentPane().add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(521, 46, 845, 700));
 
@@ -1081,7 +1082,7 @@ Controlador control=new Controlador();
     private void jtxtdni1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtdni1KeyTyped
         // TODO add your handling code here:
         Textos.soloPurasLetras(evt);
-        Textos.Mayusculas(evt);
+        //Textos.Mayusculas(evt);
         Textos.solo_1_esp(evt, jtxtdni3);
         
     }//GEN-LAST:event_jtxtdni1KeyTyped
@@ -1089,14 +1090,14 @@ Controlador control=new Controlador();
     private void jtxtdni2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtdni2KeyTyped
         // TODO add your handling code here:
         Textos.soloPurasLetras(evt);
-        Textos.Mayusculas(evt);
+        //Textos.Mayusculas(evt);
         Textos.solo_1_esp(evt, jtxtdni3);
     }//GEN-LAST:event_jtxtdni2KeyTyped
 
     private void jtxtdni3KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtdni3KeyTyped
         // TODO add your handling code here:
         Textos.soloPurasLetras(evt);
-        Textos.Mayusculas(evt);
+        //Textos.Mayusculas(evt);
         Textos.solo_1_esp(evt, jtxtdni3);
     }//GEN-LAST:event_jtxtdni3KeyTyped
 
@@ -1130,7 +1131,7 @@ Controlador control=new Controlador();
     private void jtxtdni4KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtdni4KeyTyped
         // TODO add your handling code here:
         Textos.soloPurasLetras(evt);
-        Textos.Mayusculas(evt);
+        //Textos.Mayusculas(evt);
         Textos.solo_1_esp(evt, jTextField2);
     }//GEN-LAST:event_jtxtdni4KeyTyped
 
@@ -1273,14 +1274,14 @@ Controlador control=new Controlador();
     private void jTextField1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyTyped
         // TODO add your handling code here:
         Textos.soloPurasLetras(evt);
-        Textos.Mayusculas(evt);
+        //Textos.Mayusculas(evt);
         Textos.solo_1_esp(evt, jTextField1);
     }//GEN-LAST:event_jTextField1KeyTyped
 
     private void jTextField2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField2KeyTyped
         // TODO add your handling code here:Textos.soloPurasLetras(evt);
         Textos.soloPurasLetras(evt);
-        Textos.Mayusculas(evt);
+        //Textos.Mayusculas(evt);
         Textos.solo_1_esp(evt, jTextField2);
     }//GEN-LAST:event_jTextField2KeyTyped
 

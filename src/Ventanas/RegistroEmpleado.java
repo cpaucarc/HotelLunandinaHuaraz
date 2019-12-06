@@ -18,15 +18,28 @@ public class RegistroEmpleado extends javax.swing.JFrame {
         lbUserActual.setText(Control.usuario);
         control.LlenarCombo(cbEstado, "SELECT * FROM estadoempleado", 2);
         control.LlenarCombo(cbCargo, "SELECT * FROM cargos", 2);
-        modelo.setColumnIdentifiers(new String[]{"DNI", "APELLIDOS", "NOMBRES", "E-MAIL", "CARGO", "ESTADO","USUARIO"});
-        tabla.setModel(modelo);
-        ds.Centrar_Tabla(tabla);
+        cbCargo.setSelectedIndex(0);
+        
+        InicializarTabla();
+        //modelo.setColumnIdentifiers(new String[]{"DNI", "APELLIDOS", "NOMBRES", "E-MAIL", "CARGO", "ESTADO","USUARIO"});
+        //tabla.setModel(modelo);
+        //ds.Centrar_Tabla(tabla);
         MostrarResultados();
         
         cbEstado.setEnabled(false);
         cbEstado.setSelectedIndex(0);
         btModificar.setEnabled(false);
     }
+    public void InicializarTabla(){
+        modelo.setColumnIdentifiers(new String[]{"DNI", "APELLIDOS", "NOMBRES", "E-MAIL", "CARGO", "ESTADO","USUARIO"});
+        tabla.setModel(modelo);
+        ds.Centrar_Tabla(tabla);
+        
+        tabla.getColumnModel().getColumn(1).setPreferredWidth(100); // Apellidos
+        tabla.getColumnModel().getColumn(2).setPreferredWidth(100); // Nombres
+        tabla.getColumnModel().getColumn(3).setPreferredWidth(110); // Email
+    }
+    
     public void Seleccionar(){
         txdni.setText(tabla.getValueAt(tabla.getSelectedRow(), 0).toString());
         txappat.setText(tabla.getValueAt(tabla.getSelectedRow(), 1).toString().split(" ")[0]);
@@ -110,7 +123,7 @@ public class RegistroEmpleado extends javax.swing.JFrame {
         lbUserActual.setForeground(new java.awt.Color(255, 255, 255));
         lbUserActual.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lbUserActual.setText("jLabel13");
-        jPanel4.add(lbUserActual, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 0, 120, 46));
+        jPanel4.add(lbUserActual, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 0, 250, 46));
 
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/userActual.png"))); // NOI18N
@@ -323,9 +336,9 @@ public class RegistroEmpleado extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, 
                 control.DevolverRegistroDto("call proc_empleado(2,'"+
                         txdni.getText()+"','"+
-                        txappat.getText()+"','"+
-                        txapmat.getText()+"','"+
-                        txnomb.getText()+"','"+
+                        Textos.capitalizeText(txappat.getText())+"','"+
+                        Textos.capitalizeText(txapmat.getText())+"','"+
+                        Textos.capitalizeText(txnomb.getText())+"','"+
                         txmail.getText()+"','"+
                         cbCargo.getSelectedItem().toString() + "','"+
                         cbEstado.getSelectedItem().toString() + "')", 1));
@@ -364,16 +377,16 @@ public class RegistroEmpleado extends javax.swing.JFrame {
     private void btRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRegistrarActionPerformed
         if(txdni.getText().length()==8 && txappat.getText().length()>0 && txapmat.getText().length()>0 && 
                 txnomb.getText().length()>0 && txmail.getText().length()>0 &&
-                cbCargo.getSelectedIndex()>-1 && cbEstado.getSelectedIndex()>-1){
+                cbCargo.getSelectedIndex()>-1 && cbEstado.getSelectedIndex()>0){
             JOptionPane.showMessageDialog(null, 
                 control.DevolverRegistroDto("call proc_empleado(1,'"+
                         txdni.getText()+"','"+
-                        txappat.getText()+"','"+
-                        txapmat.getText()+"','"+
-                        txnomb.getText()+"','"+
+                        Textos.capitalizeText(txappat.getText())+"','"+
+                        Textos.capitalizeText(txapmat.getText())+"','"+
+                        Textos.capitalizeText(txnomb.getText())+"','"+
                         txmail.getText()+"','"+
                         cbCargo.getSelectedItem().toString() + "','"+
-                        cbEstado.getItemAt(0) + "')", 1));
+                        cbEstado.getItemAt(1) + "')", 1));
             Limpiar();
             MostrarResultados();
         }else{

@@ -44,6 +44,17 @@ public class ControlDate {
         }
         return dat;
     }
+    
+    public Date fechaDMA(String fecha) {
+        Date dat = null;
+        try {
+            SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+            dat = formato.parse(fecha);
+        } catch (ParseException ex) {
+
+        }
+        return dat;
+    }
 
     public int CalcularDias(JDateChooser fechaEntrada, JDateChooser fechaSalida) {
         int dias;

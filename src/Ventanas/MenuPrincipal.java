@@ -94,10 +94,16 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }
 
     private void Mostrar() {
-           control.LlenarJtable(modelo, "select "
-                   + "ID, Fecha_Resv, Cliente, N°Hab "
-               + "from v_reservaclient where Fecha_Ent = curdate() and ("
-                   + "Cliente like '%"+txBuscar.getText()+"%' or N°Hab like '%"+txBuscar.getText()+"%')", 4);
+        control.LlenarJtable(modelo, "select "
+                + "id, fecha_res, cliente, numHab "
+                + "from vw_alojamientoyreserva "
+                + "where (fecha_ent = curdate() and estadoAloj = 'Pendiente') "
+                + "and (cliente like '%"+txBuscar.getText()+"%' or numHab like '%"+txBuscar.getText()+"%')", 4);
+        
+//           control.LlenarJtable(modelo, "select "
+//                   + "ID, Fecha_Resv, Cliente, N°Hab "
+//               + "from v_reservaclient where Fecha_Ent = curdate() and ("
+//                   + "Cliente like '%"+txBuscar.getText()+"%' or N°Hab like '%"+txBuscar.getText()+"%')", 4);
     }
     
     @SuppressWarnings("unchecked")
@@ -368,6 +374,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 "Fecha Reserva", "Nombre Cliente", "N° Habitacion"
             }
         ));
+        tabla.setRowHeight(30);
         tabla.setSelectionBackground(new java.awt.Color(0, 122, 255));
         jScrollPane1.setViewportView(tabla);
 

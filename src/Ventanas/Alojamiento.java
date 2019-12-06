@@ -37,6 +37,9 @@ public class Alojamiento extends javax.swing.JFrame {
         btRegistrar.setVisible(false);
         btModificar.setVisible(false);
         btCancelar.setVisible(false);
+        
+        txfentrada.setDate(controlDT.Parse_Fecha(control.DevolverRegistroDto("select curdate()", 1)));
+        txfentrada.setEnabled(false);
     }
 
     public void inicializarJTable_persona() {
@@ -552,7 +555,7 @@ public class Alojamiento extends javax.swing.JFrame {
         lbUserActual.setForeground(new java.awt.Color(255, 255, 255));
         lbUserActual.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lbUserActual.setText("jLabel13");
-        jPanel4.add(lbUserActual, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 0, 120, 46));
+        jPanel4.add(lbUserActual, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 0, 250, 46));
 
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/userActual.png"))); // NOI18N
@@ -598,7 +601,7 @@ public class Alojamiento extends javax.swing.JFrame {
         jPanel6.setForeground(new java.awt.Color(255, 255, 255));
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        tabla.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
+        tabla.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 13)); // NOI18N
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
@@ -611,6 +614,7 @@ public class Alojamiento extends javax.swing.JFrame {
             }
         ));
         tabla.setGridColor(new java.awt.Color(0, 0, 0));
+        tabla.setRowHeight(30);
         tabla.setSelectionBackground(new java.awt.Color(0, 122, 255));
         tabla.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -619,7 +623,7 @@ public class Alojamiento extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tabla);
 
-        jPanel6.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 830, 490));
+        jPanel6.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 849, 490));
 
         jLabelDNI16.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabelDNI16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -653,17 +657,17 @@ public class Alojamiento extends javax.swing.JFrame {
     }//GEN-LAST:event_txDNIKeyTyped
 
     private void txapPaternoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txapPaternoKeyTyped
-        Textos.Mayusculas(evt);
+        //Textos.Mayusculas(evt);
         Textos.LimitarCaracter(evt, txapPaterno, 50);
     }//GEN-LAST:event_txapPaternoKeyTyped
 
     private void txapMaternoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txapMaternoKeyTyped
-        Textos.Mayusculas(evt);
+        //Textos.Mayusculas(evt);
         Textos.LimitarCaracter(evt, txapMaterno, 50);
     }//GEN-LAST:event_txapMaternoKeyTyped
 
     private void txNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txNombreKeyTyped
-        Textos.Mayusculas(evt);
+        //Textos.Mayusculas(evt);
         Textos.LimitarCaracter(evt, txNombre, 50);
     }//GEN-LAST:event_txNombreKeyTyped
 
@@ -672,22 +676,24 @@ public class Alojamiento extends javax.swing.JFrame {
     }//GEN-LAST:event_jtxtdni8KeyTyped
 
     private void btRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRegistrarActionPerformed
+        if(cbonumhabitacion.getSelectedIndex()>0){
         if (cambio == 1) {
             JOptionPane.showMessageDialog(null, control.DevolverRegistroDto("call proc_alojamiento_persona('" + txDNI.getText()
                     + "','" + Textos.capitalizeText(txapPaterno.getText()) + "','" + Textos.capitalizeText(txapMaterno.getText()) + "','" + Textos.capitalizeText(txNombre.getText())
-                    + "','" + txProcedencia.getText() + "','" + txemail.getText() + "','"
+                    + "','" + Textos.capitalizeText(txProcedencia.getText()) + "','" + txemail.getText() + "','"
                     + controlDT.fecha_AMD(txfentrada.getDate()) + "','" + controlDT.fecha_AMD(txfsalida.getDate())
                     + "','" + cbotipohabitacion.getSelectedItem() + "','" + cbonumhabitacion.getSelectedItem()
                     + "','" + Control.empleado + "');", 1));
             MostrarPersona();
         } else if (cambio == 2) {
             JOptionPane.showMessageDialog(null, control.DevolverRegistroDto("call proc_alojamiento_empresa('" + txRUC.getText()
-                    + "','" + txNomEmp.getText() + "','" + txProcEmp.getText() + "','" + txEmailEmp.getText()
+                    + "','" + Textos.capitalizeText(txNomEmp.getText()) + "','" + Textos.capitalizeText(txProcEmp.getText()) + "','" + txEmailEmp.getText()
                     + "','" + controlDT.fecha_AMD(txfentrada.getDate()) + "','" + controlDT.fecha_AMD(txfsalida.getDate())
                     + "','" + cbotipohabitacion.getSelectedItem() + "'," + cbonumhabitacion.getSelectedItem()
                     + ",'" + Control.empleado + "');", 1));
             MostrarEmpresa();
             
+        }
         }
     }//GEN-LAST:event_btRegistrarActionPerformed
 
@@ -702,12 +708,12 @@ public class Alojamiento extends javax.swing.JFrame {
         } else {
             if (cambio == 1) {
                 JOptionPane.showMessageDialog(null, control.DevolverRegistroDto("call proc_alojamiento_persona_editar(" + id + ",'" + txDNI.getText() + "','"
-                        + txapPaterno.getText() + "','" + txapMaterno.getText() + "','" + txNombre.getText() + "','" + txProcedencia.getText() + "','"
+                        + Textos.capitalizeText(txapPaterno.getText()) + "','" + Textos.capitalizeText(txapMaterno.getText()) + "','" + Textos.capitalizeText(txNombre.getText()) + "','" + Textos.capitalizeText(txProcedencia.getText()) + "','"
                         + txemail.getText() + "','" + controlDT.fecha_AMD(txfsalida.getDate()) + "');", 1));
                 MostrarPersona();
             } else if (cambio == 2) {
                 JOptionPane.showMessageDialog(null, control.DevolverRegistroDto("call proc_alojamiento_empresa_editar(" + id + ",'" + txRUC.getText() + "','"
-                        + txProcEmp.getText() + "','" + txNomEmp.getText() + "','" + txEmailEmp.getText() + "','" + controlDT.fecha_AMD(txfsalida.getDate()) + "');", 1));
+                        + Textos.capitalizeText(txProcEmp.getText()) + "','" + Textos.capitalizeText(txNomEmp.getText()) + "','" + txEmailEmp.getText() + "','" + controlDT.fecha_AMD(txfsalida.getDate()) + "');", 1));
                 MostrarEmpresa();
             }
         }
@@ -776,6 +782,8 @@ public class Alojamiento extends javax.swing.JFrame {
         btRegistrar.setVisible(true);
         btModificar.setVisible(true);
         btCancelar.setVisible(true);
+        
+        txfentrada.setDate(controlDT.Parse_Fecha(control.DevolverRegistroDto("select curdate()", 1)));
     }//GEN-LAST:event_btClientePersonaActionPerformed
 
     private void btClienteEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btClienteEmpresaActionPerformed
@@ -797,6 +805,8 @@ public class Alojamiento extends javax.swing.JFrame {
         btRegistrar.setVisible(true);
         btModificar.setVisible(true);
         btCancelar.setVisible(true);
+        
+        txfentrada.setDate(controlDT.Parse_Fecha(control.DevolverRegistroDto("select curdate()", 1)));
     }//GEN-LAST:event_btClienteEmpresaActionPerformed
 
     private void lbMinimizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbMinimizarMouseClicked
@@ -840,13 +850,29 @@ public class Alojamiento extends javax.swing.JFrame {
         btRegistrar.setEnabled(true);
         txDNI.setEditable(true);
         txRUC.setEditable(true);
+        txfentrada.setDate(controlDT.Parse_Fecha(control.DevolverRegistroDto("select curdate()", 1)));
     }//GEN-LAST:event_lbLimpiarMouseClicked
 
     private void cbotipohabitacionItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbotipohabitacionItemStateChanged
-        if (cbotipohabitacion.getSelectedIndex() > 0) {
-            control.LlenarCombo(cbonumhabitacion, "select numero from vw_habitacion where tipo = '"
-                    + cbotipohabitacion.getSelectedItem() + "' and estado='Disponible';", 1);
+        
+        if (cbotipohabitacion.getSelectedIndex() > 0 && txfentrada != null && txfsalida != null) {
+            control.LlenarCombo(cbonumhabitacion, 
+                    "call proc_show_NumHab('"+cbotipohabitacion.getSelectedItem()+"', \""
+                            +controlDT.fecha_AMD(txfentrada.getDate())+"\",\""
+                            +controlDT.fecha_AMD(txfentrada.getDate())+"\")", 1);
+            if(cbonumhabitacion.getItemCount()>0){
+                cbonumhabitacion.setSelectedIndex(0);
+            }
+            if(cbonumhabitacion.getItemCount() == 1){ //Para cuando solo aparesca la opcion de '--Seleccione--'
+                cbonumhabitacion.removeAllItems();
+                cbonumhabitacion.addItem("--No hay cuartos--");
+            }
         }
+        
+//        if (cbotipohabitacion.getSelectedIndex() > 0) {
+//            control.LlenarCombo(cbonumhabitacion, "select numero from vw_habitacion where tipo = '"
+//                    + cbotipohabitacion.getSelectedItem() + "' and estado='Disponible';", 1);
+//        }
         if (cbotipohabitacion.getSelectedItem() == ("--Seleccione--")) {
             cbonumhabitacion.removeAllItems();
         }

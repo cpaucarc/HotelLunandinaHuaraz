@@ -29,10 +29,7 @@ public class Control {
     //Blanco
     public static Color color_Body = new Color (255,255,255);
     
-    
-    
-    
-    
+        
     public static  ArrayList<Habitacion> RecuperarDatos(){
         ArrayList<Habitacion> datosHab = new ArrayList<>();
         for(int i=1; i<17; i++){
@@ -44,43 +41,5 @@ public class Control {
         }
         return datosHab;
     }
-    
-//    public void AddColorPaneles(ArrayList<Habitacion> datosHab){ //REC: Primero, desde la DB recoger el estado y almacenarlo en EstadoHab[]
-//        for (int i = 0; i < 16; i++) {
-//            switch (datosHab.get(i).estado){
-//                case "Disponible":
-//                    panel_Hab[i].setBackground(Disp);
-//                    break;
-//                case "Ocupado":
-//                    panel_Hab[i].setBackground(Ocup);
-//                    break;
-//                case "Reservado":
-//                    panel_Hab[i].setBackground(Resev);
-//                    break;
-//                case "Mantenimiento":
-//                    panel_Hab[i].setBackground(Mant);
-//                    break;
-//                default:
-//                    panel_Hab[i].setBackground(Color.gray);
-//                    break;
-//            }
-//        }
-//    }
-//    public void AddLabelInPanel(ArrayList<Habitacion> datosHab, MouseListener listener){ //Añade el numero de habitacion        
-//        for (int i=0; i<16; i++){
-//            label_Hab[i] = new JLabel();
-//            label_Hab[i].setText(""+datosHab.get(i).numero);
-//            label_Hab[i].setBounds(10,10,78,70);
-//            label_Hab[i].setFont(new java.awt.Font("Arial Black", 0, 36)); // NOI18N
-//            label_Hab[i].setForeground(new java.awt.Color(23, 23, 23));
-//            label_Hab[i].setCursor(new Cursor(HAND_CURSOR));
-//            label_Hab[i].setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-//            
-//            label_Hab[i].addMouseListener(listener);
-//            
-//            //label_Hab[i].setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-//            panel_Hab[i].add(label_Hab[i], new org.netbeans.lib.awtextra.AbsoluteConstraints(10,10,78,70));
-//        }
-//    }
-        
+            
 }
