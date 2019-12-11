@@ -6,10 +6,11 @@ import javax.swing.table.DefaultTableModel;
 import Clases.Control;
 import Clases.Controlador;
 import Clases.Conexion;
+import java.text.DecimalFormat;
 import javax.swing.JOptionPane;
 
 public class Servicios extends javax.swing.JFrame {
-
+    Imprimir imp=new Imprimir();
     Controlador control = new Controlador();
     Conexion cnn = new Conexion();
     Textos txt = new Textos();
@@ -715,12 +716,16 @@ public class Servicios extends javax.swing.JFrame {
         int tip = Integer.parseInt(control.DevolverRegistroDto("select idtipoServ from tiposervicio where nombreServ='" + cboservicio.getSelectedItem() + "';", 1));
         JOptionPane.showMessageDialog(null, control.DevolverRegistroDto("call p_servicios('" + txtcant.getText() + "'," + tip + "," + iddet + ",2);", 1));
         control.LlenarJtable(modelo, "SELECT * FROM vista_ds", 9);
+        int _id = Integer.parseInt(control.DevolverRegistroDto("select idDetServ from detalleservicio order by idDetServ desc limit 1", 1));
+        double total = Double.parseDouble(txtpreciounit1.getText())*Integer.parseInt(txtcant.getText());
+        //proc_InsBolFac(tipoCompr{1:Bol,2:Fac}, total, idmotivo{idServ, idAloj}, motivo{1:Serv, 2:Hab}, documento)
+        control.CrearRegistro("call proc_InsBolFac(1,"+total+","+_id+",1,"+lbDNI.getText()+")");
+        //JOptionPane.showMessageDialog(null, "Se lleno correctamente, mostrando boleta x servicio");
+        String _numBol = control.DevolverRegistroDto("select lpad(numBoleta, 8,'0') from boletas order by numBoleta desc limit 1", 1);
+        imp.ImprCon1Parametro("boleta", "Boleta ggaa", "numeroBoleta", _numBol);        
+        
         limpiar();        
-        /**
-         * 
-         * 
-         * 
-         */
+        
     }//GEN-LAST:event_btFisicoPActionPerformed
     private void txNumHabPKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txNumHabPKeyTyped
         Textos.LimiteCaracter(evt, txNumHabP, 3);
@@ -845,7 +850,7 @@ public class Servicios extends javax.swing.JFrame {
             lbDNI.setText(control.DevolverRegistroDto("select DNI from vista_pc where (curdate() between fecha_ent and fecha_sal) and estadoAloj = 'Alojado' and numHab = " + txNumHabP.getText(), 1));
         }else{
             Jpat.setText("");
-            Jpat.setText("");
+            Jmat.setText("");
             Jnom.setText("");
             lbDNI.setText("");
         }
