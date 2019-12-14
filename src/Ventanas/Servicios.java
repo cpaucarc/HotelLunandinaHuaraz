@@ -84,21 +84,41 @@ public class Servicios extends javax.swing.JFrame {
         limpiar();
 
     }
+    public boolean ValidarCamposLlenosP(){ // Para persona
+        if(lbDNI.getText().length() > 0 && txtpreciounit1.getText().length() > 0 && txtcant.getText().length() > 0)
+            return true;// Significa que los campos estan llenos
+        else
+            return false;// Significa que los campos NO estan llenos        
+    }
+    public boolean ValidarCamposLlenosE(){ // Para empresa
+        if(lbRUC.getText().length() > 0 && txtpreciounit1.getText().length() > 0 && txtcant.getText().length() > 0)
+            return true;   // Significa que los campos estan llenos
+        else
+            return false; // Significa que los campos NO estan llenos       
+    }
 
     public void crear() {
-        int iddet = Integer.parseInt(control.DevolverRegistroDto("select idDetAloj from detallealojamiento where idclientePersona=(select idclientePersona from clientepersona where DNI='" + lbDNI.getText() + "') and idhabitacion=(select idhabitacion from habitaciones where numHab=" + txNumHabP.getText() + ");", 1));
-        int tip = Integer.parseInt(control.DevolverRegistroDto("select idtipoServ from tiposervicio where nombreServ='" + cboservicio.getSelectedItem() + "';", 1));
-        JOptionPane.showMessageDialog(null, control.DevolverRegistroDto("call p_servicios('" + txtcant.getText() + "'," + tip + "," + iddet + ",1);", 1));
-        control.LlenarJtable(modelo, "SELECT * FROM vista_ds", 9);
-        limpiar();
+        if(ValidarCamposLlenosP()){
+            int iddet = Integer.parseInt(control.DevolverRegistroDto("select idDetAloj from detallealojamiento where idclientePersona=(select idclientePersona from clientepersona where DNI='" + lbDNI.getText() + "') and idhabitacion=(select idhabitacion from habitaciones where numHab=" + txNumHabP.getText() + ");", 1));
+            int tip = Integer.parseInt(control.DevolverRegistroDto("select idtipoServ from tiposervicio where nombreServ='" + cboservicio.getSelectedItem() + "';", 1));
+            JOptionPane.showMessageDialog(null, control.DevolverRegistroDto("call p_servicios('" + txtcant.getText() + "'," + tip + "," + iddet + ",1);", 1));
+            control.LlenarJtable(modelo, "SELECT * FROM vista_ds", 9);
+            limpiar();
+        }else{
+            JOptionPane.showMessageDialog(null, "Faltan campos por llenar");
+        }
     }
 
     public void crearemp() {
-        int iddet = Integer.parseInt(control.DevolverRegistroDto("select idDetAloj from detallealojamiento where RUC=('" + lbRUC.getText() + "') and idhabitacion=(select idhabitacion from habitaciones where numHab=" + txNumHabE.getText() + ");", 1));
-        int tip = Integer.parseInt(control.DevolverRegistroDto("select idtipoServ from tiposervicio where nombreServ='" + cboservicio.getSelectedItem() + "';", 1));
-        JOptionPane.showMessageDialog(null, control.DevolverRegistroDto("call p_servicios('" + txtcant.getText() + "'," + tip + "," + iddet + ",1);", 1));
-        control.LlenarJtable(modelo, "SELECT * FROM vista_dse", 9);
-        limpiar();
+        if(ValidarCamposLlenosE()){
+            int iddet = Integer.parseInt(control.DevolverRegistroDto("select idDetAloj from detallealojamiento where RUC=('" + lbRUC.getText() + "') and idhabitacion=(select idhabitacion from habitaciones where numHab=" + txNumHabE.getText() + ");", 1));
+            int tip = Integer.parseInt(control.DevolverRegistroDto("select idtipoServ from tiposervicio where nombreServ='" + cboservicio.getSelectedItem() + "';", 1));
+            JOptionPane.showMessageDialog(null, control.DevolverRegistroDto("call p_servicios('" + txtcant.getText() + "'," + tip + "," + iddet + ",1);", 1));
+            control.LlenarJtable(modelo, "SELECT * FROM vista_dse", 9);
+            limpiar();
+        }else{
+            JOptionPane.showMessageDialog(null, "Faltan campos por llenar");
+        }
     }
 
     public void inicializarJTable1() {
@@ -712,20 +732,23 @@ public class Servicios extends javax.swing.JFrame {
         txt.Numeros(evt);
     }//GEN-LAST:event_txtcantKeyTyped
     private void btFisicoPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btFisicoPActionPerformed
-        int iddet = Integer.parseInt(control.DevolverRegistroDto("select idDetAloj from detallealojamiento where idclientePersona=(select idclientePersona from clientepersona where DNI='" + lbDNI.getText() + "') and idhabitacion=(select idhabitacion from habitaciones where numHab=" + txNumHabP.getText() + ");", 1));
-        int tip = Integer.parseInt(control.DevolverRegistroDto("select idtipoServ from tiposervicio where nombreServ='" + cboservicio.getSelectedItem() + "';", 1));
-        JOptionPane.showMessageDialog(null, control.DevolverRegistroDto("call p_servicios('" + txtcant.getText() + "'," + tip + "," + iddet + ",2);", 1));
-        control.LlenarJtable(modelo, "SELECT * FROM vista_ds", 9);
-        int _id = Integer.parseInt(control.DevolverRegistroDto("select idDetServ from detalleservicio order by idDetServ desc limit 1", 1));
-        double total = Double.parseDouble(txtpreciounit1.getText())*Integer.parseInt(txtcant.getText());
-        //proc_InsBolFac(tipoCompr{1:Bol,2:Fac}, total, idmotivo{idServ, idAloj}, motivo{1:Serv, 2:Hab}, documento)
-        control.CrearRegistro("call proc_InsBolFac(1,"+total+","+_id+",1,"+lbDNI.getText()+")");
-        //JOptionPane.showMessageDialog(null, "Se lleno correctamente, mostrando boleta x servicio");
-        String _numBol = control.DevolverRegistroDto("select lpad(numBoleta, 8,'0') from boletas order by numBoleta desc limit 1", 1);
-        imp.ImprCon1Parametro("boleta", "Boleta ggaa", "numeroBoleta", _numBol);        
-        
-        limpiar();        
-        
+        if(ValidarCamposLlenosP()){
+            int iddet = Integer.parseInt(control.DevolverRegistroDto("select idDetAloj from detallealojamiento where idclientePersona=(select idclientePersona from clientepersona where DNI='" + lbDNI.getText() + "') and idhabitacion=(select idhabitacion from habitaciones where numHab=" + txNumHabP.getText() + ");", 1));
+            int tip = Integer.parseInt(control.DevolverRegistroDto("select idtipoServ from tiposervicio where nombreServ='" + cboservicio.getSelectedItem() + "';", 1));
+            JOptionPane.showMessageDialog(null, control.DevolverRegistroDto("call p_servicios('" + txtcant.getText() + "'," + tip + "," + iddet + ",2);", 1));
+            control.LlenarJtable(modelo, "SELECT * FROM vista_ds", 9);
+            int _id = Integer.parseInt(control.DevolverRegistroDto("select idDetServ from detalleservicio order by idDetServ desc limit 1", 1));
+            double total = Double.parseDouble(txtpreciounit1.getText())*Integer.parseInt(txtcant.getText());
+//proc_InsBolFac(tipoCompr{1:Bol,2:Fac},numBF{0:crear nuevo, Otro: añadir a existenete}, total, idmotivo{idServ, idAloj}, motivo{1:Serv, 2:Hab}, documento)
+            control.CrearRegistro("call proc_InsBolFac(1,0,"+total+","+_id+",1,"+lbDNI.getText()+")");
+            //JOptionPane.showMessageDialog(null, "Se lleno correctamente, mostrando boleta x servicio");
+            String _numBol = control.DevolverRegistroDto("select lpad(numBoleta, 8,'0') from boletas order by numBoleta desc limit 1", 1);
+            imp.ImprCon1Parametro("boleta", "Boleta N° "+_numBol, "numeroBoleta", _numBol);        
+
+            limpiar();        
+        }else{
+            JOptionPane.showMessageDialog(null, "Falta campos por llenar");
+        }
     }//GEN-LAST:event_btFisicoPActionPerformed
     private void txNumHabPKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txNumHabPKeyTyped
         Textos.LimiteCaracter(evt, txNumHabP, 3);
@@ -906,11 +929,24 @@ public class Servicios extends javax.swing.JFrame {
     }//GEN-LAST:event_txNumHabEKeyReleased
 
     private void btFisicoEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btFisicoEActionPerformed
-        int iddet = Integer.parseInt(control.DevolverRegistroDto("select idDetAloj from detallealojamiento where RUC=('" + lbRUC.getText() + "') and idhabitacion=(select idhabitacion from habitaciones where numHab=" + txNumHabE.getText() + ");", 1));
-        int tip = Integer.parseInt(control.DevolverRegistroDto("select idtipoServ from tiposervicio where nombreServ='" + cboservicio.getSelectedItem() + "';", 1));
-        JOptionPane.showMessageDialog(null, control.DevolverRegistroDto("call p_servicios('" + txtcant.getText() + "'," + tip + "," + iddet + ",2);", 1));
-        control.LlenarJtable(modelo, "SELECT * FROM vista_dse", 9);
-        limpiar();
+        if(ValidarCamposLlenosE()){
+            int iddet = Integer.parseInt(control.DevolverRegistroDto("select idDetAloj from detallealojamiento where RUC=('" + lbRUC.getText() + "') and idhabitacion=(select idhabitacion from habitaciones where numHab=" + txNumHabE.getText() + ");", 1));
+            int tip = Integer.parseInt(control.DevolverRegistroDto("select idtipoServ from tiposervicio where nombreServ='" + cboservicio.getSelectedItem() + "';", 1));
+            JOptionPane.showMessageDialog(null, control.DevolverRegistroDto("call p_servicios('" + txtcant.getText() + "'," + tip + "," + iddet + ",2);", 1));
+            control.LlenarJtable(modelo, "SELECT * FROM vista_dse", 9);
+
+            int _id = Integer.parseInt(control.DevolverRegistroDto("select idDetServ from detalleservicio order by idDetServ desc limit 1", 1));
+            double total = Double.parseDouble(txtpreciounit1.getText())*Integer.parseInt(txtcant.getText());
+//proc_InsBolFac(tipoCompr{1:Bol,2:Fac},numBF{0:crear nuevo, Otro: añadir a existenete}, total, idmotivo{idServ, idAloj}, motivo{1:Serv, 2:Hab}, documento)
+            control.CrearRegistro("call proc_InsBolFac(2,0,"+total+","+_id+",1,"+lbRUC.getText()+")");
+            //JOptionPane.showMessageDialog(null, "Se lleno correctamente, mostrando boleta x servicio");
+            String _numFac = control.DevolverRegistroDto("select lpad(numFactura, 8,'0') from facturas order by numFactura desc limit 1;", 1);
+            imp.ImprCon1Parametro("factura", "Factura N° "+_numFac, "numeroFactura", _numFac);        
+
+            limpiar();  
+        }else{
+            JOptionPane.showMessageDialog(null, "Falta campos por llenar");
+        }
     }//GEN-LAST:event_btFisicoEActionPerformed
 
     /**

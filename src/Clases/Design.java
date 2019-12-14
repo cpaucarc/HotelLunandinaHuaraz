@@ -57,6 +57,19 @@ public class Design {
             i++;
         }
     }
+    public void OcultarColumna(JTable tb, int column){
+        tb.getColumnModel().getColumn(column).setMaxWidth(0);
+        tb.getColumnModel().getColumn(column).setMinWidth(0);
+        tb.getTableHeader().getColumnModel().getColumn(column).setMaxWidth(0);
+        tb.getTableHeader().getColumnModel().getColumn(column).setMinWidth(0);
+    }
+    public String SumarColumna(JTable tb, int column){
+        double suma = 0;
+        for(int i=0; i<tb.getRowCount();i++){
+            suma += Double.parseDouble(tb.getValueAt(i, column).toString());
+        }
+        return ""+suma;
+    }
 
     public void Centrar_Lista(JList lista) {
         DefaultListCellRenderer modelocentar = new DefaultListCellRenderer();

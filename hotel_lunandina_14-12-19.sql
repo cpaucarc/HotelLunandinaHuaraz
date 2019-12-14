@@ -24,14 +24,11 @@ DROP TABLE IF EXISTS `boletas`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `boletas` (
   `numBoleta` int(11) NOT NULL AUTO_INCREMENT,
-  `idcomprobante` int(11) NOT NULL,
   `idclientePersona` int(11) NOT NULL,
   PRIMARY KEY (`numBoleta`),
-  KEY `fk_boletas_detalleComprobante1_idx` (`idcomprobante`),
   KEY `fk_boletas_clientePersona1_idx` (`idclientePersona`),
-  CONSTRAINT `fk_boletas_clientePersona1` FOREIGN KEY (`idclientePersona`) REFERENCES `clientepersona` (`idclientePersona`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_boletas_detalleComprobante1` FOREIGN KEY (`idcomprobante`) REFERENCES `detallecomprobante` (`idcomprobante`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  CONSTRAINT `fk_boletas_clientePersona1` FOREIGN KEY (`idclientePersona`) REFERENCES `clientepersona` (`idclientePersona`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,6 +37,7 @@ CREATE TABLE `boletas` (
 
 LOCK TABLES `boletas` WRITE;
 /*!40000 ALTER TABLE `boletas` DISABLE KEYS */;
+INSERT INTO `boletas` VALUES (2,1),(1,6),(3,6);
 /*!40000 ALTER TABLE `boletas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -180,12 +178,18 @@ CREATE TABLE `detallecomprobante` (
   `total` decimal(9,2) NOT NULL,
   `idDetServ` int(11) DEFAULT NULL,
   `idDetAloj` int(11) DEFAULT NULL,
+  `numBoleta` int(11) DEFAULT NULL,
+  `numFactura` int(11) DEFAULT NULL,
   PRIMARY KEY (`idcomprobante`),
   KEY `fk_detalleComprobante_detalleServicio1_idx` (`idDetServ`),
   KEY `fk_detalleComprobante_detalleAlojamiento1_idx` (`idDetAloj`),
+  KEY `fk_detalleComprobante_facturas1_idx` (`numFactura`),
+  KEY `fk_detalleComprobante_boletas1_idx` (`numBoleta`),
+  CONSTRAINT `fk_detalleComprobante_boletas1` FOREIGN KEY (`numBoleta`) REFERENCES `boletas` (`numBoleta`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_detalleComprobante_detalleAlojamiento1` FOREIGN KEY (`idDetAloj`) REFERENCES `detallealojamiento` (`idDetAloj`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_detalleComprobante_detalleServicio1` FOREIGN KEY (`idDetServ`) REFERENCES `detalleservicio` (`idDetServ`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  CONSTRAINT `fk_detalleComprobante_detalleServicio1` FOREIGN KEY (`idDetServ`) REFERENCES `detalleservicio` (`idDetServ`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_detalleComprobante_facturas1` FOREIGN KEY (`numFactura`) REFERENCES `facturas` (`numFactura`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -194,6 +198,7 @@ CREATE TABLE `detallecomprobante` (
 
 LOCK TABLES `detallecomprobante` WRITE;
 /*!40000 ALTER TABLE `detallecomprobante` DISABLE KEYS */;
+INSERT INTO `detallecomprobante` VALUES (1,'2019-12-11',42.37,7.63,50.00,3,NULL,1,NULL),(2,'2019-12-11',33.90,6.10,40.00,4,NULL,2,NULL),(3,'2019-12-12',25.42,4.58,30.00,5,NULL,NULL,1),(4,'2019-12-13',29.66,5.34,35.00,6,NULL,NULL,2),(5,'2019-12-13',4.24,0.76,5.00,7,NULL,3,NULL);
 /*!40000 ALTER TABLE `detallecomprobante` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -210,12 +215,15 @@ CREATE TABLE `detalleservicio` (
   `idtipoServ` int(11) NOT NULL,
   `idDetAloj` int(11) NOT NULL,
   `fechaServicio` date NOT NULL,
+  `idEstServ` int(11) NOT NULL,
+  `subtotal` decimal(9,2) NOT NULL,
   PRIMARY KEY (`idDetServ`),
   KEY `fk_servicios_tipoServicio1_idx` (`idtipoServ`),
   KEY `fk_detalleServicio_detalleAlojamiento1_idx` (`idDetAloj`),
+  KEY `fk_estadoservicio_idx` (`idEstServ`),
   CONSTRAINT `fk_detalleServicio_detalleAlojamiento1` FOREIGN KEY (`idDetAloj`) REFERENCES `detallealojamiento` (`idDetAloj`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_servicios_tipoServicio1` FOREIGN KEY (`idtipoServ`) REFERENCES `tiposervicio` (`idtipoServ`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -224,6 +232,7 @@ CREATE TABLE `detalleservicio` (
 
 LOCK TABLES `detalleservicio` WRITE;
 /*!40000 ALTER TABLE `detalleservicio` DISABLE KEYS */;
+INSERT INTO `detalleservicio` VALUES (1,2,1,20,'2019-12-07',1,20.00),(2,3,2,19,'2019-12-07',1,15.00),(3,2,3,13,'2019-12-11',2,50.00),(4,4,1,6,'2019-12-11',2,40.00),(5,3,1,9,'2019-12-12',2,30.00),(6,7,2,21,'2019-12-13',2,35.00),(7,1,2,13,'2019-12-13',2,5.00);
 /*!40000 ALTER TABLE `detalleservicio` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -332,6 +341,30 @@ INSERT INTO `estadohabitacion` VALUES (1,'Disponible'),(2,'Reservado'),(3,'Ocupa
 UNLOCK TABLES;
 
 --
+-- Table structure for table `estadoservicio`
+--
+
+DROP TABLE IF EXISTS `estadoservicio`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `estadoservicio` (
+  `idEstServ` int(11) NOT NULL AUTO_INCREMENT,
+  `estadoServ` varchar(45) NOT NULL,
+  PRIMARY KEY (`idEstServ`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `estadoservicio`
+--
+
+LOCK TABLES `estadoservicio` WRITE;
+/*!40000 ALTER TABLE `estadoservicio` DISABLE KEYS */;
+INSERT INTO `estadoservicio` VALUES (1,'Sin pagar'),(2,'Cancelado');
+/*!40000 ALTER TABLE `estadoservicio` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `facturas`
 --
 
@@ -340,14 +373,11 @@ DROP TABLE IF EXISTS `facturas`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `facturas` (
   `numFactura` int(11) NOT NULL AUTO_INCREMENT,
-  `idcomprobante` int(11) NOT NULL,
   `RUC` varchar(45) NOT NULL,
   PRIMARY KEY (`numFactura`),
-  KEY `fk_facturas_detalleComprobante1_idx` (`idcomprobante`),
   KEY `fk_facturas_clienteEmpresa1_idx` (`RUC`),
-  CONSTRAINT `fk_facturas_clienteEmpresa1` FOREIGN KEY (`RUC`) REFERENCES `clienteempresa` (`RUC`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_facturas_detalleComprobante1` FOREIGN KEY (`idcomprobante`) REFERENCES `detallecomprobante` (`idcomprobante`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  CONSTRAINT `fk_facturas_clienteEmpresa1` FOREIGN KEY (`RUC`) REFERENCES `clienteempresa` (`RUC`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -356,6 +386,7 @@ CREATE TABLE `facturas` (
 
 LOCK TABLES `facturas` WRITE;
 /*!40000 ALTER TABLE `facturas` DISABLE KEYS */;
+INSERT INTO `facturas` VALUES (1,'89415165154'),(2,'98461515511');
 /*!40000 ALTER TABLE `facturas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -477,7 +508,7 @@ CREATE TABLE `tiposervicio` (
   `nombreServ` varchar(45) NOT NULL,
   `precioServ` decimal(9,2) NOT NULL,
   PRIMARY KEY (`idtipoServ`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -486,6 +517,7 @@ CREATE TABLE `tiposervicio` (
 
 LOCK TABLES `tiposervicio` WRITE;
 /*!40000 ALTER TABLE `tiposervicio` DISABLE KEYS */;
+INSERT INTO `tiposervicio` VALUES (1,'Desayuno',10.00),(2,'Lavanderia',5.00),(3,'Boleto Turistico',25.00);
 /*!40000 ALTER TABLE `tiposervicio` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -612,6 +644,87 @@ SET character_set_client = utf8;
 SET character_set_client = @saved_cs_client;
 
 --
+-- Temporary view structure for view `vista_ce`
+--
+
+DROP TABLE IF EXISTS `vista_ce`;
+/*!50001 DROP VIEW IF EXISTS `vista_ce`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE VIEW `vista_ce` AS SELECT 
+ 1 AS `id`,
+ 1 AS `fecha_res`,
+ 1 AS `fecha_ent`,
+ 1 AS `fecha_sal`,
+ 1 AS `estadoAloj`,
+ 1 AS `numHab`,
+ 1 AS `RUC`,
+ 1 AS `nombreEmpresa`,
+ 1 AS `lugar`*/;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Temporary view structure for view `vista_ds`
+--
+
+DROP TABLE IF EXISTS `vista_ds`;
+/*!50001 DROP VIEW IF EXISTS `vista_ds`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE VIEW `vista_ds` AS SELECT 
+ 1 AS `idDetServ`,
+ 1 AS `nombreServ`,
+ 1 AS `cantidad`,
+ 1 AS `precioServ`,
+ 1 AS `numHab`,
+ 1 AS `DNI`,
+ 1 AS `cliente`,
+ 1 AS `fechaEntrada`,
+ 1 AS `login`*/;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Temporary view structure for view `vista_dse`
+--
+
+DROP TABLE IF EXISTS `vista_dse`;
+/*!50001 DROP VIEW IF EXISTS `vista_dse`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE VIEW `vista_dse` AS SELECT 
+ 1 AS `idDetServ`,
+ 1 AS `nombreServ`,
+ 1 AS `cantidad`,
+ 1 AS `precioServ`,
+ 1 AS `numHab`,
+ 1 AS `RUC`,
+ 1 AS `nombreEmpresa`,
+ 1 AS `fechaEntrada`,
+ 1 AS `login`*/;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Temporary view structure for view `vista_pc`
+--
+
+DROP TABLE IF EXISTS `vista_pc`;
+/*!50001 DROP VIEW IF EXISTS `vista_pc`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE VIEW `vista_pc` AS SELECT 
+ 1 AS `id`,
+ 1 AS `fecha_res`,
+ 1 AS `fecha_ent`,
+ 1 AS `fecha_sal`,
+ 1 AS `estadoAloj`,
+ 1 AS `numHab`,
+ 1 AS `DNI`,
+ 1 AS `apPat`,
+ 1 AS `apMat`,
+ 1 AS `nomb`*/;
+SET character_set_client = @saved_cs_client;
+
+--
 -- Temporary view structure for view `vw_alojamientoyreserva`
 --
 
@@ -631,6 +744,34 @@ SET character_set_client = utf8;
  1 AS `estadoHab`,
  1 AS `usuario`,
  1 AS `doc`,
+ 1 AS `cliente`,
+ 1 AS `lugar`*/;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Temporary view structure for view `vw_boleta`
+--
+
+DROP TABLE IF EXISTS `vw_boleta`;
+/*!50001 DROP VIEW IF EXISTS `vw_boleta`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE VIEW `vw_boleta` AS SELECT 
+ 1 AS `numBoleta`,
+ 1 AS `fechaEmision`,
+ 1 AS `subtotal`,
+ 1 AS `igv`,
+ 1 AS `total`,
+ 1 AS `fechaServicio`,
+ 1 AS `cantidad`,
+ 1 AS `descripcion`,
+ 1 AS `precioUnit`,
+ 1 AS `totalServ`,
+ 1 AS `estadoServ`,
+ 1 AS `fechaEntrada`,
+ 1 AS `fechaSalida`,
+ 1 AS `numHab`,
+ 1 AS `dni`,
  1 AS `cliente`,
  1 AS `lugar`*/;
 SET character_set_client = @saved_cs_client;
@@ -687,6 +828,34 @@ SET character_set_client = utf8;
 SET character_set_client = @saved_cs_client;
 
 --
+-- Temporary view structure for view `vw_factura`
+--
+
+DROP TABLE IF EXISTS `vw_factura`;
+/*!50001 DROP VIEW IF EXISTS `vw_factura`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE VIEW `vw_factura` AS SELECT 
+ 1 AS `numFactura`,
+ 1 AS `fechaEmision`,
+ 1 AS `subtotal`,
+ 1 AS `igv`,
+ 1 AS `total`,
+ 1 AS `fechaServicio`,
+ 1 AS `cantidad`,
+ 1 AS `descripcion`,
+ 1 AS `precioUnit`,
+ 1 AS `totalServ`,
+ 1 AS `estadoServ`,
+ 1 AS `fechaEntrada`,
+ 1 AS `fechaSalida`,
+ 1 AS `numHab`,
+ 1 AS `RUC`,
+ 1 AS `cliente`,
+ 1 AS `lugar`*/;
+SET character_set_client = @saved_cs_client;
+
+--
 -- Temporary view structure for view `vw_habitacion`
 --
 
@@ -700,6 +869,30 @@ SET character_set_client = utf8;
  1 AS `tipo`,
  1 AS `precio`,
  1 AS `estado`*/;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Temporary view structure for view `vw_sevicios`
+--
+
+DROP TABLE IF EXISTS `vw_sevicios`;
+/*!50001 DROP VIEW IF EXISTS `vw_sevicios`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE VIEW `vw_sevicios` AS SELECT 
+ 1 AS `idServ`,
+ 1 AS `fechaServicio`,
+ 1 AS `nombreServ`,
+ 1 AS `cantidad`,
+ 1 AS `precioServ`,
+ 1 AS `estadoServ`,
+ 1 AS `fechaEntrada`,
+ 1 AS `fechaSalida`,
+ 1 AS `numHab`,
+ 1 AS `estadoAloj`,
+ 1 AS `doc`,
+ 1 AS `cliente`,
+ 1 AS `lugar`*/;
 SET character_set_client = @saved_cs_client;
 
 --
@@ -728,6 +921,35 @@ BEGIN
         ( ((ent>=fecha_ent and ent<=fecha_sal) and (sal<=fecha_sal and sal>=fecha_ent))) or
         ( ((ent>=fecha_ent and ent<=fecha_sal) and (sal>=fecha_sal)))
         ));
+RETURN rsta;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP FUNCTION IF EXISTS `func_saberEstado` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` FUNCTION `func_saberEstado`(numH int) RETURNS int(11)
+BEGIN
+	declare rsta int;
+	
+	set rsta = ( select 
+		count(*) 
+	from vw_alojamientoyreserva 
+    where numHab = numH and
+    (
+		curdate() between fecha_ent and fecha_sal
+    ));
+
 RETURN rsta;
 END ;;
 DELIMITER ;
@@ -1314,24 +1536,79 @@ DELIMITER ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_Estado_Hab`()
 BEGIN
-	select 
+	select distinct
 		numHab, 
 		tipoHab, 
 		precio, 
-		estadoHab  
-    from vw_alojamientoyreserva 
-    
-    where fecha_ent < curdate() and fecha_sal > curdate()
+		if(func_saberEstado(numHab)>0, estadoHab, '---')
+    from vw_alojamientoyreserva
     
     union 
-    select
+    select distinct
 		numero,
         tipo,
-		precio,
-		estado
+        precio,
+        estado
     from vw_habitacion;
-    
     -- where estado = 'Disponible' or estado = 'Mantenimiento';
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `proc_InsBolFac` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_InsBolFac`(in tipoComp int,numC int, tot  decimal(9,2), idmotivo int, motivo int, doc varchar(11))
+BEGIN
+-- tipoComp ('Boleta --> 1 y Factura --> 2')
+-- numC (numBoleta o numFactura), si es = 0, creara un nuevo B/F, si es != 0, solo añadira el servicio/hab a la boleta/factura
+-- idmotivo (idDetServ o idDetAloj)
+-- motivo (Servicio --> 1 y Habitacion --> 2)
+	declare _numBF int;
+    set _numBF = numC;
+	case tipoComp
+		when 1 then -- boleta
+        
+			if ( numC=0) then -- no existe la boleta, se tiene que crear
+				insert into boletas(idclientePersona) values ((select idclientePersona from clientepersona where DNI = doc));
+                set _numBF = (select numBoleta from boletas order by numBoleta desc limit 1);
+            end if;
+        
+        
+			if (motivo = 1) then -- Boleta y Servicio
+				insert into detallecomprobante (fechaEmision,subtotal,IGV, total, idDetServ, numBoleta) values (curdate(), tot/1.18, (tot-(tot/1.18)), tot,idmotivo, _numBF);
+                
+			elseif(motivo = 2) then -- Boleta y Habitacion
+				insert into detallecomprobante (fechaEmision,subtotal,IGV, total, idDetAloj, numBoleta) values (curdate(), tot/1.18, (tot-(tot/1.18)), tot,idmotivo, _numBF); 
+                
+            end if;
+                
+        when 2 then -- factura
+        
+			if ( numC=0) then -- no existe la boleta, se tiene que crear
+				insert into facturas(RUC) values (doc);
+                set _numBF = (select numFactura from facturas order by numFactura desc limit 1);
+            end if;
+            
+            
+			if (motivo = 1) then -- Factura y Servicio
+				insert into detallecomprobante (fechaEmision,subtotal,IGV, total, idDetServ, numFactura) values (curdate(), tot/1.18, (tot-(tot/1.18)), tot,idmotivo, _numBF);
+                
+			elseif(motivo = 2) then -- Factura y Habitacion
+				insert into detallecomprobante (fechaEmision,subtotal,IGV, total, idDetAloj, numFactura) values (curdate(), tot/1.18, (tot-(tot/1.18)), tot,idmotivo, _numBF);
+                
+            end if;
+			
+	end case;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -1528,6 +1805,40 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `proc_SalirHab` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_SalirHab`(in numHab int, precioHab decimal(9,2), tipoComp int, idmotivo int,doc varchar(11))
+BEGIN
+	declare _numBF int;
+	case tipoComp
+		when 1 then -- boleta
+			-- insertamos en boletas y obtenemos el numero de boleta generado
+			insert into boletas(idclientePersona) values ((select idclientePersona from clientepersona where DNI = doc));
+			set _numBF = (select numBoleta from boletas order by numBoleta desc limit 1);
+            -- insertamos habitacion con el numero de boleta generado
+            call proc_InsBolFac(1,_numBF,precioHab,idmotivo,2,doc);
+		when 2 then -- factura
+			-- insertamos en facturas y obtenemos el numero de factura generado
+			insert into facturas(RUC) values (doc);
+            set _numBF = (select numFactura from facturas order by numFactura desc limit 1);
+            -- insertamos habitacion con el numero de factura generado
+            call proc_InsBolFac(2,_numBF,precioHab,idmotivo,2,doc);
+    end case;
+	-- FALTA COMPLETAR PARA LA PARTE DE INSERTAR SERVICIOS ASOCIADOS AL CUARTO
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `proc_show_NumHab` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -1610,6 +1921,83 @@ if(select count(*) from detallealojamiento where idDetAloj=id)!=0 then
 else
  select concat('La reserva no existe');
 end if;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `p_eliminar` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `p_eliminar`(id int)
+BEGIN
+	delete from detalleservicio where idDetServ=id;
+	select ('Servicio eliminado');
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `p_modserv` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `p_modserv`(in ID int ,cant int,idtip int,idDet int)
+BEGIN
+if (idtip >=0) then
+if (select(cant) <=0) then
+select ('Cantidad invalida');
+else
+update detalleservicio
+       set cantidad = cant , idtipoServ = idtip, idDetAloj = idDet where idDetServ=ID;
+ select ('Servicio modificado');
+end if;
+else
+select ('Seleccionar tipo de servicio');
+end if ;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `p_servicios` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `p_servicios`(in cant int,idtip int,idDet int, estSv int)
+BEGIN
+if (idtip >=0) then
+if (select(cant) <=0) then
+select ('Cantidad invalida');
+else
+insert into detalleservicio(cantidad,idtipoServ,idDetAloj, fechaServicio,idEstServ, subtotal) values (cant,idtip,idDet, curdate(),estSv,(cant*(select precioServ from tiposervicio where idtipoServ=idtip)));
+select ('Servicio completado');
+end if;
+else
+select ('Seleccionar tipo de servicio');
+end if ;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -1708,6 +2096,78 @@ DELIMITER ;
 /*!50001 SET collation_connection      = @saved_col_connection */;
 
 --
+-- Final view structure for view `vista_ce`
+--
+
+/*!50001 DROP VIEW IF EXISTS `vista_ce`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8 */;
+/*!50001 SET character_set_results     = utf8 */;
+/*!50001 SET collation_connection      = utf8_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `vista_ce` AS select `da`.`idDetAloj` AS `id`,`da`.`fechaReserva` AS `fecha_res`,`da`.`fechaEntrada` AS `fecha_ent`,`da`.`fechaSalida` AS `fecha_sal`,`ea`.`estadoAloj` AS `estadoAloj`,`h`.`numHab` AS `numHab`,`ce`.`RUC` AS `RUC`,`ce`.`nombreEmpresa` AS `nombreEmpresa`,`l`.`lugar` AS `lugar` from ((((((`detallealojamiento` `da` join `estadoalojamiento` `ea` on((`ea`.`idestadoAloj` = `da`.`idestadoAloj`))) join `habitaciones` `h` on((`h`.`idhabitacion` = `da`.`idhabitacion`))) join `tipohabitacion` `th` on((`th`.`idtipoHab` = `h`.`idtipoHab`))) join `estadohabitacion` `eh` on((`eh`.`idestadoHab` = `h`.`idestadoHab`))) join `clienteempresa` `ce` on((`ce`.`RUC` = `da`.`RUC`))) join `lugaresprocedencia` `l` on((`l`.`idprocedencia` = `ce`.`idprocedencia`))) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `vista_ds`
+--
+
+/*!50001 DROP VIEW IF EXISTS `vista_ds`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8 */;
+/*!50001 SET character_set_results     = utf8 */;
+/*!50001 SET collation_connection      = utf8_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `vista_ds` AS select `ds`.`idDetServ` AS `idDetServ`,`t`.`nombreServ` AS `nombreServ`,`ds`.`cantidad` AS `cantidad`,`ds`.`subtotal` AS `precioServ`,`h`.`numHab` AS `numHab`,`p`.`DNI` AS `DNI`,concat(`p`.`apPat`,_utf8' ',`p`.`apMat`,_utf8' ',`p`.`nomb`) AS `cliente`,`d`.`fechaEntrada` AS `fechaEntrada`,`u`.`login` AS `login` from ((((((`detalleservicio` `ds` join `detallealojamiento` `d`) join `personas` `p`) join `clientepersona` `c`) join `habitaciones` `h`) join `tiposervicio` `t`) join `usuarios` `u` on(((`p`.`DNI` = `c`.`DNI`) and (`c`.`idclientePersona` = `d`.`idclientePersona`) and (`d`.`idhabitacion` = `h`.`idhabitacion`) and (`ds`.`idtipoServ` = `t`.`idtipoServ`) and (`ds`.`idDetAloj` = `d`.`idDetAloj`) and (`d`.`idusuario` = `u`.`idusuario`)))) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `vista_dse`
+--
+
+/*!50001 DROP VIEW IF EXISTS `vista_dse`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8 */;
+/*!50001 SET character_set_results     = utf8 */;
+/*!50001 SET collation_connection      = utf8_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `vista_dse` AS select `ds`.`idDetServ` AS `idDetServ`,`t`.`nombreServ` AS `nombreServ`,`ds`.`cantidad` AS `cantidad`,`ds`.`subtotal` AS `precioServ`,`h`.`numHab` AS `numHab`,`c`.`RUC` AS `RUC`,`c`.`nombreEmpresa` AS `nombreEmpresa`,`d`.`fechaEntrada` AS `fechaEntrada`,`u`.`login` AS `login` from (((((`detalleservicio` `ds` join `detallealojamiento` `d`) join `clienteempresa` `c`) join `habitaciones` `h`) join `tiposervicio` `t`) join `usuarios` `u` on(((`d`.`RUC` = `c`.`RUC`) and (`d`.`idhabitacion` = `h`.`idhabitacion`) and (`ds`.`idtipoServ` = `t`.`idtipoServ`) and (`ds`.`idDetAloj` = `d`.`idDetAloj`) and (`d`.`idusuario` = `u`.`idusuario`)))) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `vista_pc`
+--
+
+/*!50001 DROP VIEW IF EXISTS `vista_pc`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8 */;
+/*!50001 SET character_set_results     = utf8 */;
+/*!50001 SET collation_connection      = utf8_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `vista_pc` AS select `da`.`idDetAloj` AS `id`,`da`.`fechaReserva` AS `fecha_res`,`da`.`fechaEntrada` AS `fecha_ent`,`da`.`fechaSalida` AS `fecha_sal`,`ea`.`estadoAloj` AS `estadoAloj`,`h`.`numHab` AS `numHab`,`p`.`DNI` AS `DNI`,`p`.`apPat` AS `apPat`,`p`.`apMat` AS `apMat`,`p`.`nomb` AS `nomb` from ((((((`detallealojamiento` `da` join `estadoalojamiento` `ea` on((`ea`.`idestadoAloj` = `da`.`idestadoAloj`))) join `habitaciones` `h` on((`h`.`idhabitacion` = `da`.`idhabitacion`))) join `tipohabitacion` `th` on((`th`.`idtipoHab` = `h`.`idtipoHab`))) join `estadohabitacion` `eh` on((`eh`.`idestadoHab` = `h`.`idestadoHab`))) join `clientepersona` `cp` on((`cp`.`idclientePersona` = `da`.`idclientePersona`))) join `personas` `p` on((`p`.`DNI` = `cp`.`DNI`))) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
 -- Final view structure for view `vw_alojamientoyreserva`
 --
 
@@ -1721,6 +2181,24 @@ DELIMITER ;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
 /*!50001 VIEW `vw_alojamientoyreserva` AS select `da`.`idDetAloj` AS `id`,`da`.`fechaReserva` AS `fecha_res`,`da`.`fechaEntrada` AS `fecha_ent`,`da`.`fechaSalida` AS `fecha_sal`,`ea`.`estadoAloj` AS `estadoAloj`,`h`.`numHab` AS `numHab`,`th`.`nombreTH` AS `tipoHab`,`th`.`precioTH` AS `precio`,`eh`.`estadoHab` AS `estadoHab`,`u`.`login` AS `usuario`,`p`.`DNI` AS `doc`,concat(`p`.`apPat`,' ',`p`.`apMat`,' ',`p`.`nomb`) AS `cliente`,`l`.`lugar` AS `lugar` from ((((((((`detallealojamiento` `da` join `estadoalojamiento` `ea` on((`ea`.`idestadoAloj` = `da`.`idestadoAloj`))) join `habitaciones` `h` on((`h`.`idhabitacion` = `da`.`idhabitacion`))) join `tipohabitacion` `th` on((`th`.`idtipoHab` = `h`.`idtipoHab`))) join `estadohabitacion` `eh` on((`eh`.`idestadoHab` = `h`.`idestadoHab`))) join `usuarios` `u` on((`u`.`idusuario` = `da`.`idusuario`))) join `clientepersona` `cp` on((`cp`.`idclientePersona` = `da`.`idclientePersona`))) join `personas` `p` on((`p`.`DNI` = `cp`.`DNI`))) join `lugaresprocedencia` `l` on((`l`.`idprocedencia` = `cp`.`idprocedencia`))) union select `da`.`idDetAloj` AS `id`,`da`.`fechaReserva` AS `fecha_res`,`da`.`fechaEntrada` AS `fecha_ent`,`da`.`fechaSalida` AS `fecha_sal`,`ea`.`estadoAloj` AS `estadoAloj`,`h`.`numHab` AS `numHab`,`th`.`nombreTH` AS `tipoHab`,`th`.`precioTH` AS `precio`,`eh`.`estadoHab` AS `estadoHab`,`u`.`login` AS `usuario`,`ce`.`RUC` AS `doc`,`ce`.`nombreEmpresa` AS `cliente`,`l`.`lugar` AS `lugar` from (((((((`detallealojamiento` `da` join `estadoalojamiento` `ea` on((`ea`.`idestadoAloj` = `da`.`idestadoAloj`))) join `habitaciones` `h` on((`h`.`idhabitacion` = `da`.`idhabitacion`))) join `tipohabitacion` `th` on((`th`.`idtipoHab` = `h`.`idtipoHab`))) join `estadohabitacion` `eh` on((`eh`.`idestadoHab` = `h`.`idestadoHab`))) join `usuarios` `u` on((`u`.`idusuario` = `da`.`idusuario`))) join `clienteempresa` `ce` on((`ce`.`RUC` = `da`.`RUC`))) join `lugaresprocedencia` `l` on((`l`.`idprocedencia` = `ce`.`idprocedencia`))) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `vw_boleta`
+--
+
+/*!50001 DROP VIEW IF EXISTS `vw_boleta`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8 */;
+/*!50001 SET character_set_results     = utf8 */;
+/*!50001 SET collation_connection      = utf8_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `vw_boleta` AS select lpad(`b`.`numBoleta`,8,'0') AS `numBoleta`,`dc`.`fechaEmision` AS `fechaEmision`,`dc`.`subtotal` AS `subtotal`,`dc`.`IGV` AS `igv`,`dc`.`total` AS `total`,`ds`.`fechaServicio` AS `fechaServicio`,`ds`.`cantidad` AS `cantidad`,concat('Uso de servicio ',`ts`.`nombreServ`) AS `descripcion`,`ts`.`precioServ` AS `precioUnit`,`ds`.`subtotal` AS `totalServ`,`es`.`estadoServ` AS `estadoServ`,`da`.`fechaEntrada` AS `fechaEntrada`,`da`.`fechaSalida` AS `fechaSalida`,`h`.`numHab` AS `numHab`,`p`.`DNI` AS `dni`,concat(`p`.`apPat`,' ',`p`.`apMat`,' ',`p`.`nomb`) AS `cliente`,`l`.`lugar` AS `lugar` from ((((((((((`boletas` `b` join `detallecomprobante` `dc` on((`dc`.`numBoleta` = `b`.`numBoleta`))) join `clientepersona` `cp` on((`cp`.`idclientePersona` = `b`.`idclientePersona`))) join `personas` `p` on((`p`.`DNI` = `cp`.`DNI`))) join `detalleservicio` `ds` on((`ds`.`idDetServ` = `dc`.`idDetServ`))) join `tiposervicio` `ts` on((`ts`.`idtipoServ` = `ds`.`idtipoServ`))) join `detallealojamiento` `da` on((`da`.`idDetAloj` = `ds`.`idDetAloj`))) join `estadoservicio` `es` on((`es`.`idEstServ` = `ds`.`idEstServ`))) join `habitaciones` `h` on((`h`.`idhabitacion` = `da`.`idhabitacion`))) join `tipohabitacion` `th` on((`th`.`idtipoHab` = `h`.`idtipoHab`))) join `lugaresprocedencia` `l` on((`l`.`idprocedencia` = `cp`.`idprocedencia`))) union select lpad(`b`.`numBoleta`,8,'0') AS `numBoleta`,`dc`.`fechaEmision` AS `fechaEmision`,`dc`.`subtotal` AS `subtotal`,`dc`.`IGV` AS `igv`,`dc`.`total` AS `total`,`da`.`fechaEntrada` AS `fechaServicio`,concat('1') AS `cantidad`,concat('Uso de habitacion N° ',`h`.`numHab`) AS `descripcion`,`th`.`precioTH` AS `precioUnit`,`dc`.`total` AS `totalServ`,concat('Cancelado--') AS `estadoServ`,`da`.`fechaEntrada` AS `fechaEntrada`,`da`.`fechaSalida` AS `fechaSalida`,`h`.`numHab` AS `numHab`,`p`.`DNI` AS `dni`,concat(`p`.`apPat`,' ',`p`.`apMat`,' ',`p`.`nomb`) AS `cliente`,`l`.`lugar` AS `lugar` from (((((((`boletas` `b` join `detallecomprobante` `dc` on((`dc`.`numBoleta` = `b`.`numBoleta`))) join `clientepersona` `cp` on((`cp`.`idclientePersona` = `b`.`idclientePersona`))) join `personas` `p` on((`p`.`DNI` = `cp`.`DNI`))) join `lugaresprocedencia` `l` on((`l`.`idprocedencia` = `cp`.`idprocedencia`))) join `detallealojamiento` `da` on((`da`.`idDetAloj` = `dc`.`idDetAloj`))) join `habitaciones` `h` on((`h`.`idhabitacion` = `da`.`idhabitacion`))) join `tipohabitacion` `th` on((`th`.`idtipoHab` = `h`.`idtipoHab`))) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -1780,6 +2258,24 @@ DELIMITER ;
 /*!50001 SET collation_connection      = @saved_col_connection */;
 
 --
+-- Final view structure for view `vw_factura`
+--
+
+/*!50001 DROP VIEW IF EXISTS `vw_factura`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8 */;
+/*!50001 SET character_set_results     = utf8 */;
+/*!50001 SET collation_connection      = utf8_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `vw_factura` AS select lpad(`f`.`numFactura`,8,'0') AS `numFactura`,`dc`.`fechaEmision` AS `fechaEmision`,`dc`.`subtotal` AS `subtotal`,`dc`.`IGV` AS `igv`,`dc`.`total` AS `total`,`ds`.`fechaServicio` AS `fechaServicio`,`ds`.`cantidad` AS `cantidad`,concat('Uso de servicio ',`ts`.`nombreServ`) AS `descripcion`,`ts`.`precioServ` AS `precioUnit`,`ds`.`subtotal` AS `totalServ`,`es`.`estadoServ` AS `estadoServ`,`da`.`fechaEntrada` AS `fechaEntrada`,`da`.`fechaSalida` AS `fechaSalida`,`h`.`numHab` AS `numHab`,`ce`.`RUC` AS `RUC`,`ce`.`nombreEmpresa` AS `cliente`,`l`.`lugar` AS `lugar` from (((((((((`facturas` `f` join `detallecomprobante` `dc` on((`dc`.`numFactura` = `f`.`numFactura`))) join `clienteempresa` `ce` on((`ce`.`RUC` = `f`.`RUC`))) join `detalleservicio` `ds` on((`ds`.`idDetServ` = `dc`.`idDetServ`))) join `tiposervicio` `ts` on((`ts`.`idtipoServ` = `ds`.`idtipoServ`))) join `detallealojamiento` `da` on((`da`.`idDetAloj` = `ds`.`idDetAloj`))) join `estadoservicio` `es` on((`es`.`idEstServ` = `ds`.`idEstServ`))) join `habitaciones` `h` on((`h`.`idhabitacion` = `da`.`idhabitacion`))) join `tipohabitacion` `th` on((`th`.`idtipoHab` = `h`.`idtipoHab`))) join `lugaresprocedencia` `l` on((`l`.`idprocedencia` = `ce`.`idprocedencia`))) union select lpad(`f`.`numFactura`,8,'0') AS `numFactura`,`dc`.`fechaEmision` AS `fechaEmision`,`dc`.`subtotal` AS `subtotal`,`dc`.`IGV` AS `igv`,`dc`.`total` AS `total`,`da`.`fechaEntrada` AS `fechaServicio`,concat('1') AS `cantidad`,concat('Uso de habitacion N° ',`h`.`numHab`,(', tipo ' + `th`.`nombreTH`)) AS `descripcion`,`th`.`precioTH` AS `precioUnit`,`dc`.`total` AS `totalServ`,concat('Cancelado.') AS `estadoServ`,`da`.`fechaEntrada` AS `fechaEntrada`,`da`.`fechaSalida` AS `fechaSalida`,`h`.`numHab` AS `numHab`,`ce`.`RUC` AS `RUC`,`ce`.`nombreEmpresa` AS `cliente`,`l`.`lugar` AS `lugar` from ((((((`facturas` `f` join `detallecomprobante` `dc` on((`dc`.`numFactura` = `f`.`numFactura`))) join `clienteempresa` `ce` on((`ce`.`RUC` = `f`.`RUC`))) join `lugaresprocedencia` `l` on((`l`.`idprocedencia` = `ce`.`idprocedencia`))) join `detallealojamiento` `da` on((`da`.`idDetAloj` = `dc`.`idDetAloj`))) join `habitaciones` `h` on((`h`.`idhabitacion` = `da`.`idhabitacion`))) join `tipohabitacion` `th` on((`th`.`idtipoHab` = `h`.`idtipoHab`))) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
 -- Final view structure for view `vw_habitacion`
 --
 
@@ -1796,6 +2292,24 @@ DELIMITER ;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `vw_sevicios`
+--
+
+/*!50001 DROP VIEW IF EXISTS `vw_sevicios`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8 */;
+/*!50001 SET character_set_results     = utf8 */;
+/*!50001 SET collation_connection      = utf8_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `vw_sevicios` AS select `ds`.`idDetServ` AS `idServ`,`ds`.`fechaServicio` AS `fechaServicio`,`ts`.`nombreServ` AS `nombreServ`,`ds`.`cantidad` AS `cantidad`,`ts`.`precioServ` AS `precioServ`,`es`.`estadoServ` AS `estadoServ`,`da`.`fechaEntrada` AS `fechaEntrada`,`da`.`fechaSalida` AS `fechaSalida`,`h`.`numHab` AS `numHab`,`ea`.`estadoAloj` AS `estadoAloj`,`p`.`DNI` AS `doc`,concat(`p`.`apPat`,' ',`p`.`apMat`,' ',`p`.`nomb`) AS `cliente`,`l`.`lugar` AS `lugar` from ((((((((`detalleservicio` `ds` join `tiposervicio` `ts` on((`ts`.`idtipoServ` = `ds`.`idtipoServ`))) join `detallealojamiento` `da` on((`da`.`idDetAloj` = `ds`.`idDetAloj`))) join `estadoservicio` `es` on((`es`.`idEstServ` = `ds`.`idEstServ`))) join `estadoalojamiento` `ea` on((`ea`.`idestadoAloj` = `da`.`idestadoAloj`))) join `habitaciones` `h` on((`h`.`idhabitacion` = `da`.`idhabitacion`))) join `clientepersona` `cp` on((`cp`.`idclientePersona` = `da`.`idclientePersona`))) join `personas` `p` on((`p`.`DNI` = `cp`.`DNI`))) join `lugaresprocedencia` `l` on((`l`.`idprocedencia` = `cp`.`idprocedencia`))) union select `ds`.`idDetServ` AS `idServ`,`ds`.`fechaServicio` AS `fechaServicio`,`ts`.`nombreServ` AS `nombreServ`,`ds`.`cantidad` AS `cantidad`,`ts`.`precioServ` AS `precioServ`,`es`.`estadoServ` AS `estadoServ`,`da`.`fechaEntrada` AS `fechaEntrada`,`da`.`fechaSalida` AS `fechaSalida`,`h`.`numHab` AS `numHab`,`ea`.`estadoAloj` AS `estadoAloj`,`ce`.`RUC` AS `doc`,`ce`.`nombreEmpresa` AS `cliente`,`l`.`lugar` AS `lugar` from (((((((`detalleservicio` `ds` join `tiposervicio` `ts` on((`ts`.`idtipoServ` = `ds`.`idtipoServ`))) join `detallealojamiento` `da` on((`da`.`idDetAloj` = `ds`.`idDetAloj`))) join `estadoservicio` `es` on((`es`.`idEstServ` = `ds`.`idEstServ`))) join `estadoalojamiento` `ea` on((`ea`.`idestadoAloj` = `da`.`idestadoAloj`))) join `habitaciones` `h` on((`h`.`idhabitacion` = `da`.`idhabitacion`))) join `clienteempresa` `ce` on((`ce`.`RUC` = `da`.`RUC`))) join `lugaresprocedencia` `l` on((`l`.`idprocedencia` = `ce`.`idprocedencia`))) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -1806,4 +2320,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-12-06 13:58:01
+-- Dump completed on 2019-12-14 11:53:38

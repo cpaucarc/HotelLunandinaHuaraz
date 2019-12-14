@@ -10,6 +10,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 public class Habitaciones extends javax.swing.JFrame{
 
@@ -27,17 +29,19 @@ public class Habitaciones extends javax.swing.JFrame{
     public static Color Ocup = new Color(220, 53, 69);
     public static Color Resev = new Color(255, 193, 7);
     public static Color Mant = new Color(23, 162, 184);
+    
+    /*Tabla Servicios*/
+    DefaultTableModel modelo=new DefaultTableModel();
+    /**/
+    int tipoCliente = 0; // 0: NN, 1: Persona, 2: Empresa
         
     public Habitaciones() {
         initComponents();
         AddPaneles(); //añadimos los paneles a los pnPiso1 y pnPiso2, segun corresponda
-//        RecuperarDatos();
 
-        //datosHab = Control.RecuperarDatos();
+        modelo.setColumnIdentifiers(new String[]{"ID", "SERVICIO", "PRECIO", "CANTIDAD", "TOTAL", "FECHA"});
+        tabla.setModel(modelo);
         
-        //AddColorPaneles(datosHab); //Asignamos el color segun el estado de la habitacion
-       //AddLabelInPanel(datosHab); //Añadimos label con numeor de habitacion a paneles
-        //AddIcon(datosHab);  //Añadimos icono de tipo y icono de baño propio
         actualizar();
         
         lbUserActual.setText(Control.usuario);
@@ -85,15 +89,6 @@ public class Habitaciones extends javax.swing.JFrame{
         }
     }
     
-//    public void RecuperarDatos(){
-//        for(int i=1; i<17; i++){
-//            int _numero = Integer.parseInt(control.DevolverRegistroDto("SELECT numero FROM vw_habitacion WHERE id = "+i+" order by id;", 1));
-//            String _estado = control.DevolverRegistroDto("SELECT estado FROM vw_habitacion WHERE id = "+i+" order by id;", 1);
-//            String _tipo = control.DevolverRegistroDto("SELECT tipo FROM vw_habitacion WHERE id = "+i+" order by id;", 1);
-//            double _precio = Double.parseDouble(control.DevolverRegistroDto("SELECT precio FROM vw_habitacion WHERE id = "+i+" order by id;", 1));
-//            datosHab.add(new Habitacion(_numero, _estado, _tipo, _precio));
-//        }
-//    }
    
     public void AddColorPaneles(ArrayList<Habitacion> datosHab){ //REC: Primero, desde la DB recoger el estado y almacenarlo en EstadoHab[]
         for (int i = 0; i < 16; i++) {
@@ -146,7 +141,28 @@ public class Habitaciones extends javax.swing.JFrame{
         }
     }
     
-    
+    public void GetCliente(String numHab){
+        String _doc = control.DevolverRegistroDto("select doc from vw_alojamientoyreserva where (curdate() between fecha_ent and fecha_sal) and numHab = "+numHab, 1);
+        lbDoc.setText(_doc);
+        lbCliente.setText(control.DevolverRegistroDto("select cliente from vw_alojamientoyreserva where (curdate() between fecha_ent and fecha_sal) and numHab = "+numHab, 1));
+        lbProc.setText(control.DevolverRegistroDto("select lugar from vw_alojamientoyreserva where (curdate() between fecha_ent and fecha_sal) and numHab = "+numHab, 1));
+        if(_doc.length() == 8){
+            tipoCliente = 1; // Persona
+        }else if (_doc.length() == 11){
+            tipoCliente = 2; // Empresa
+        }
+    }
+    public void GetServicios(String numHab, String doc){
+        String _sql = "select idServ, nombreServ, precioServ, cantidad, (precioServ*cantidad),fechaServicio from vw_sevicios where estadoServ = 'Sin Pagar' and numHab = "+numHab+" and doc = "+doc;
+        control.LlenarJtable(modelo, _sql, 6);
+    }
+    public String SumarColumna(JTable tb, int column){
+        double suma = 0;
+        for(int i=0; i<tb.getRowCount();i++){
+            suma += Double.parseDouble(tb.getValueAt(i, column).toString());
+        }
+        return ""+suma;
+    }
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -175,34 +191,22 @@ public class Habitaciones extends javax.swing.JFrame{
         txPrecio = new javax.swing.JTextField();
         btCheckOut = new javax.swing.JButton();
         btComprobante = new javax.swing.JButton();
-        lbMensajeHab = new javax.swing.JLabel();
         pnDatosCliente = new javax.swing.JPanel();
         pnClienteEmpresa = new javax.swing.JPanel();
         jLabel17 = new javax.swing.JLabel();
-        lbRUC = new javax.swing.JLabel();
+        lbDoc = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
-        lbNomEmpresa = new javax.swing.JLabel();
+        lbCliente = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
-        lbProcEmpresa = new javax.swing.JLabel();
-        jLabel20 = new javax.swing.JLabel();
-        lbMailEmpresa = new javax.swing.JLabel();
-        pnClientePersona = new javax.swing.JPanel();
-        jLabel9 = new javax.swing.JLabel();
-        lbDNI = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        lbApellidos = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        lbNombres = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        lbProcPersona = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        lbMailPersona = new javax.swing.JLabel();
+        lbProc = new javax.swing.JLabel();
+        jProgressBar1 = new javax.swing.JProgressBar();
         pnServ = new javax.swing.JPanel();
         pnServicios = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tablaServicios = new javax.swing.JTable();
+        tabla = new javax.swing.JTable();
         jLabel13 = new javax.swing.JLabel();
         lbTotServicio = new javax.swing.JLabel();
+        lbMensajeHab = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -387,15 +391,12 @@ public class Habitaciones extends javax.swing.JFrame{
         btComprobante.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/pdf.png"))); // NOI18N
         btComprobante.setText("Generar Comprobante");
         btComprobante.setBorder(null);
+        btComprobante.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btComprobanteActionPerformed(evt);
+            }
+        });
         pnInfo.add(btComprobante, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 260, 320, 35));
-
-        lbMensajeHab.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
-        lbMensajeHab.setForeground(new java.awt.Color(23, 23, 23));
-        lbMensajeHab.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbMensajeHab.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Lunandina/mensajeHab.png"))); // NOI18N
-        lbMensajeHab.setText("\n");
-        lbMensajeHab.setToolTipText("");
-        pnInfo.add(lbMensajeHab, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 20, 871, 330));
 
         pnDatosCliente.setBackground(new java.awt.Color(255, 255, 255));
         pnDatosCliente.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -406,92 +407,41 @@ public class Habitaciones extends javax.swing.JFrame{
 
         jLabel17.setBackground(new java.awt.Color(255, 255, 255));
         jLabel17.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel17.setText("RUC");
-        pnClienteEmpresa.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 100, 30));
+        jLabel17.setText("DNI / RUC");
+        jLabel17.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        pnClienteEmpresa.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 45, 85, 30));
 
-        lbRUC.setFont(new java.awt.Font("Leelawadee UI Semilight", 1, 14)); // NOI18N
-        lbRUC.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 51)));
-        pnClienteEmpresa.add(lbRUC, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 40, 250, 30));
+        lbDoc.setFont(new java.awt.Font("Leelawadee UI Semilight", 1, 14)); // NOI18N
+        lbDoc.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbDoc.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 51)));
+        pnClienteEmpresa.add(lbDoc, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 45, 280, 30));
 
         jLabel18.setBackground(new java.awt.Color(255, 255, 255));
         jLabel18.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel18.setText("Nombre Empresa");
-        pnClienteEmpresa.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 95, 120, 30));
+        jLabel18.setText("Cliente");
+        pnClienteEmpresa.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 105, 85, 30));
 
-        lbNomEmpresa.setFont(new java.awt.Font("Leelawadee UI Semilight", 1, 14)); // NOI18N
-        lbNomEmpresa.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 51)));
-        pnClienteEmpresa.add(lbNomEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 95, 250, 30));
+        lbCliente.setFont(new java.awt.Font("Leelawadee UI Semilight", 1, 14)); // NOI18N
+        lbCliente.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbCliente.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 51)));
+        pnClienteEmpresa.add(lbCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 105, 280, 30));
 
         jLabel16.setBackground(new java.awt.Color(255, 255, 255));
         jLabel16.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel16.setText("Procedencia");
-        pnClienteEmpresa.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, 100, 30));
+        pnClienteEmpresa.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 165, 85, 30));
 
-        lbProcEmpresa.setFont(new java.awt.Font("Leelawadee UI Semilight", 1, 14)); // NOI18N
-        lbProcEmpresa.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 51)));
-        pnClienteEmpresa.add(lbProcEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 150, 250, 30));
+        lbProc.setFont(new java.awt.Font("Leelawadee UI Semilight", 1, 14)); // NOI18N
+        lbProc.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbProc.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 51)));
+        pnClienteEmpresa.add(lbProc, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 165, 280, 30));
 
-        jLabel20.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel20.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel20.setText("Email");
-        pnClienteEmpresa.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 205, 100, 30));
+        pnDatosCliente.add(pnClienteEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 430, 240));
 
-        lbMailEmpresa.setFont(new java.awt.Font("Leelawadee UI Semilight", 1, 14)); // NOI18N
-        lbMailEmpresa.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 51)));
-        pnClienteEmpresa.add(lbMailEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 205, 250, 30));
-
-        pnDatosCliente.add(pnClienteEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 430, 280));
-
-        pnClientePersona.setBackground(new java.awt.Color(255, 255, 255));
-        pnClientePersona.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "DATOS DEL CLIENTE", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 12))); // NOI18N
-        pnClientePersona.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel9.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel9.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel9.setText("DNI");
-        pnClientePersona.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 100, 30));
-
-        lbDNI.setFont(new java.awt.Font("Leelawadee UI Semilight", 1, 14)); // NOI18N
-        lbDNI.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 51)));
-        pnClientePersona.add(lbDNI, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 40, 250, 30));
-
-        jLabel10.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel10.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel10.setText("Apellidos");
-        pnClientePersona.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 95, 100, 30));
-
-        lbApellidos.setFont(new java.awt.Font("Leelawadee UI Semilight", 1, 14)); // NOI18N
-        lbApellidos.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 51)));
-        pnClientePersona.add(lbApellidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 95, 250, 30));
-
-        jLabel6.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel6.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel6.setText("Nombres");
-        pnClientePersona.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, 100, 30));
-
-        lbNombres.setFont(new java.awt.Font("Leelawadee UI Semilight", 1, 14)); // NOI18N
-        lbNombres.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 51)));
-        pnClientePersona.add(lbNombres, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 150, 250, 30));
-
-        jLabel12.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel12.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel12.setText("Procedencia");
-        pnClientePersona.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 205, 100, 30));
-
-        lbProcPersona.setFont(new java.awt.Font("Leelawadee UI Semilight", 1, 14)); // NOI18N
-        lbProcPersona.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 51)));
-        pnClientePersona.add(lbProcPersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 205, 250, 30));
-
-        jLabel11.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel11.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel11.setText("E-mail");
-        pnClientePersona.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, 100, 30));
-
-        lbMailPersona.setFont(new java.awt.Font("Leelawadee UI Semilight", 1, 14)); // NOI18N
-        lbMailPersona.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 51)));
-        pnClientePersona.add(lbMailPersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 260, 250, 30));
-
-        pnDatosCliente.add(pnClientePersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 430, 330));
+        jProgressBar1.setBackground(new java.awt.Color(204, 0, 255));
+        jProgressBar1.setForeground(new java.awt.Color(255, 51, 102));
+        jProgressBar1.setValue(49);
+        pnDatosCliente.add(jProgressBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 306, 430, 30));
 
         pnInfo.add(pnDatosCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 0, 490, 400));
 
@@ -502,36 +452,44 @@ public class Habitaciones extends javax.swing.JFrame{
         pnServicios.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "SERVICIOS RECIBIDOS", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 12))); // NOI18N
         pnServicios.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        tablaServicios.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
-        tablaServicios.setModel(new javax.swing.table.DefaultTableModel(
+        tabla.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
+        tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Servicio", "Precio", "Fecha", "Usuario"
+                "Id", "Servicio", "Precio", "Cantidad", "Total", "Fecha"
             }
         ));
-        tablaServicios.setSelectionBackground(new java.awt.Color(0, 122, 255));
-        jScrollPane1.setViewportView(tablaServicios);
+        tabla.setSelectionBackground(new java.awt.Color(0, 122, 255));
+        jScrollPane1.setViewportView(tabla);
 
-        pnServicios.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 326, 205));
+        pnServicios.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 45, 356, 200));
 
         jLabel13.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel13.setText("Total  S/.");
-        pnServicios.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, 108, 30));
+        pnServicios.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, 108, 30));
 
         lbTotServicio.setFont(new java.awt.Font("Leelawadee UI Semilight", 1, 14)); // NOI18N
         lbTotServicio.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbTotServicio.setText("0");
         lbTotServicio.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        pnServicios.add(lbTotServicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(138, 260, 218, 30));
+        pnServicios.add(lbTotServicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(138, 280, 218, 30));
 
         pnServ.add(pnServicios, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 20, 386, 330));
 
         pnInfo.add(pnServ, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 0, 436, 400));
+
+        lbMensajeHab.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+        lbMensajeHab.setForeground(new java.awt.Color(23, 23, 23));
+        lbMensajeHab.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbMensajeHab.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Lunandina/mensajeHab.png"))); // NOI18N
+        lbMensajeHab.setText("\n");
+        lbMensajeHab.setToolTipText("");
+        pnInfo.add(lbMensajeHab, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 20, 871, 330));
 
         getContentPane().add(pnInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 346, 1366, 400));
 
@@ -560,12 +518,17 @@ public class Habitaciones extends javax.swing.JFrame{
 
     private void lbActualizar2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbActualizar2MouseClicked
         actualizar();
-        //JOptionPane.showMessageDialog(null, control.DevolverRegistroDto("select login from  usuarios where idusuario = 2;", 1));
     }//GEN-LAST:event_lbActualizar2MouseClicked
 
     private void lbActualizar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbActualizar1MouseClicked
         actualizar();
     }//GEN-LAST:event_lbActualizar1MouseClicked
+
+    private void btComprobanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btComprobanteActionPerformed
+        // insertar en detComp la habitacion,
+        // insertar los servicios en detComp
+        // mostrar boleta/factura
+    }//GEN-LAST:event_btComprobanteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -608,42 +571,30 @@ public class Habitaciones extends javax.swing.JFrame{
     private javax.swing.JButton btCheckOut;
     private javax.swing.JButton btComprobante;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
+    private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel lbActualizar1;
     private javax.swing.JLabel lbActualizar2;
-    private javax.swing.JLabel lbApellidos;
     private javax.swing.JLabel lbCerrar;
-    private javax.swing.JLabel lbDNI;
-    private javax.swing.JLabel lbMailEmpresa;
-    private javax.swing.JLabel lbMailPersona;
+    private javax.swing.JLabel lbCliente;
+    private javax.swing.JLabel lbDoc;
     private javax.swing.JLabel lbMensajeHab;
     private javax.swing.JLabel lbMinimizar;
-    private javax.swing.JLabel lbNomEmpresa;
-    private javax.swing.JLabel lbNombres;
     private javax.swing.JLabel lbNumHab;
-    private javax.swing.JLabel lbProcEmpresa;
-    private javax.swing.JLabel lbProcPersona;
-    private javax.swing.JLabel lbRUC;
+    private javax.swing.JLabel lbProc;
     private javax.swing.JLabel lbTipoHab;
     private javax.swing.JLabel lbTotServicio;
     private javax.swing.JLabel lbUserActual;
     private javax.swing.JLabel lbprecio;
     private javax.swing.JPanel pnClienteEmpresa;
-    private javax.swing.JPanel pnClientePersona;
     private javax.swing.JPanel pnDatosCliente;
     private javax.swing.JPanel pnDatosHab;
     private javax.swing.JPanel pnInfo;
@@ -652,7 +603,7 @@ public class Habitaciones extends javax.swing.JFrame{
     private javax.swing.JPanel pnServ;
     private javax.swing.JPanel pnServicios;
     private javax.swing.JPanel pnTitulo;
-    private javax.swing.JTable tablaServicios;
+    private javax.swing.JTable tabla;
     private javax.swing.JTextField txPrecio;
     // End of variables declaration//GEN-END:variables
     
@@ -668,9 +619,11 @@ public class Habitaciones extends javax.swing.JFrame{
                     pnDatosCliente.setVisible(true);
                     pnServ.setVisible(true);
                     lbMensajeHab.setVisible(false);
-                    //falta definir que tipo de clinete es y mostrar el panel adecuado
-                    pnClientePersona.setVisible(true);
-                    pnClienteEmpresa.setVisible(false);
+                    pnDatosCliente.setVisible(true);
+                    
+                    GetCliente(text);
+                    GetServicios(text, lbDoc.getText());
+                    lbTotServicio.setText(SumarColumna(tabla, 4));
                 }else{
                     lbMensajeHab.setVisible(true);
                     pnDatosCliente.setVisible(false);
