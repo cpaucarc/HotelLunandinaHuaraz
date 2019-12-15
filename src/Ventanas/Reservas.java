@@ -5,6 +5,7 @@ import Clases.ControlDate;
 import Clases.Controlador;
 import Clases.Textos;
 import alertas.Alerta;
+import alertas.AlertaError;
 import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -12,41 +13,48 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author CLINTON
  */
 public class Reservas extends javax.swing.JFrame {
-DefaultTableModel modelo = new DefaultTableModel(){
-    public boolean isCellEditable(int rowIndex,int columnIndex){return false;}
-};
-DefaultTableModel modelo1 = new DefaultTableModel(){
-    public boolean isCellEditable(int rowIndex,int columnIndex){return false;}
-};
-Controlador control=new Controlador();
-    ControlDate cd=new ControlDate();
+
+    DefaultTableModel modelo = new DefaultTableModel() {
+        public boolean isCellEditable(int rowIndex, int columnIndex) {
+            return false;
+        }
+    };
+    DefaultTableModel modelo1 = new DefaultTableModel() {
+        public boolean isCellEditable(int rowIndex, int columnIndex) {
+            return false;
+        }
+    };
+    Controlador control = new Controlador();
+    ControlDate cd = new ControlDate();
     public String rpt = "";
     int _idusuario;
+
     public Reservas() {
         initComponents();
-        
-        _idusuario= Integer.parseInt(control.DevolverRegistroDto("SELECT idusuario FROM usuarios WHERE login = '"+Control.empleado+"'", 1));
-        ((JTextField)this.dcBuscar.getDateEditor()).setEditable(false);
+
+        _idusuario = Integer.parseInt(control.DevolverRegistroDto("SELECT idusuario FROM usuarios WHERE login = '" + Control.empleado + "'", 1));
+        ((JTextField) this.dcBuscar.getDateEditor()).setEditable(false);
         txtBuscar.setVisible(false);
         txtBuscar1.setVisible(true);
-                
+
         this.getContentPane().setBackground(Color.white);
         btValidar.setEnabled(false);
         this.setLocationRelativeTo(null);
         lbUserActual.setText(Control.usuario);
         tabla.getTableHeader().setOpaque(true);
-        tabla.getTableHeader().setBackground(new Color(248,177,57));
+        tabla.getTableHeader().setBackground(new Color(248, 177, 57));
         btValidar.setVisible(false);
 //        control.LlenarCombo(jComboBox1, "select * from habitaciones", 2);
         control.LlenarCombo(jComboBox2, "select * from tipohabitacion", 2);
         jComboBox2.removeItemAt(0);
         jComboBox1.removeAllItems();
-        
+
         //Ocultamos algunas funciones        
         lbReiniciar.setVisible(false);
 //        pnTipoCliente.setVisible(true);
@@ -62,59 +70,75 @@ Controlador control=new Controlador();
 //        jPanel5.setVisible(false);
         //Listener de tabla
         tabla.addMouseListener(new MouseListener() {
-            @Override public void mouseClicked(MouseEvent e) {
-                if(tabla.getSelectedRow()>-1){
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (tabla.getSelectedRow() > -1) {
                     btValidar.setEnabled(true);
-                }else{
-                    btValidar.setEnabled(false);                    
+                } else {
+                    btValidar.setEnabled(false);
                 }
             }
-            @Override public void mousePressed(MouseEvent e) {}
-            @Override public void mouseReleased(MouseEvent e) {}
-            @Override public void mouseEntered(MouseEvent e) {}
-            @Override public void mouseExited(MouseEvent e) {}
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+            }
         });
         inicializarJTable_cliente();
-          MostrarList_Cliente();
-        
+        MostrarList_Cliente();
+
     }
     String idres = "";
     int numval;
     int numval1;
-    public void reconocer_empresa(){
-        String Rc =txRUC.getText().toString();
+
+    public void reconocer_empresa() {
+        String Rc = txRUC.getText().toString();
         int contDn = Integer.parseInt(control.DevolverRegistroDto("select count(*) from clienteempresa where RUC='" + Rc + "';", 1));
-      if (contDn != 0 && txRUC.getText().length()==11){
-                jTextField1.setText(control.DevolverRegistroDto("select  empresa from v_reservaEmp where RUC='" + Rc + "' limit 1;", 1));
-                jTextField2.setText(control.DevolverRegistroDto("select  Procedencia from v_reservaEmp where RUC='" + Rc + "' limit 1;", 1));
-                jTextField3.setText(control.DevolverRegistroDto("select  email from clienteempresa where RUC='" + Rc + "';", 1));
-      }
-      if(txRUC.getText().length()!=11){
-        jTextField1.setText("");
-        jTextField2.setText("");
-        jTextField3.setText("");
-      }
+        if (contDn != 0 && txRUC.getText().length() == 11) {
+            jTextField1.setText(control.DevolverRegistroDto("select  empresa from v_reservaEmp where RUC='" + Rc + "' limit 1;", 1));
+            jTextField2.setText(control.DevolverRegistroDto("select  Procedencia from v_reservaEmp where RUC='" + Rc + "' limit 1;", 1));
+            jTextField3.setText(control.DevolverRegistroDto("select  email from clienteempresa where RUC='" + Rc + "';", 1));
         }
-    public void reconocer_cliente(){
-        String dni =txDNI.getText().toString();
+        if (txRUC.getText().length() != 11) {
+            jTextField1.setText("");
+            jTextField2.setText("");
+            jTextField3.setText("");
+        }
+    }
+
+    public void reconocer_cliente() {
+        String dni = txDNI.getText().toString();
         int contDn = Integer.parseInt(control.DevolverRegistroDto("select count(*) from personas where DNI='" + dni + "';", 1));
-      if (contDn != 0 && txDNI.getText().length()==8){
-         jtxtdni1.setText(control.DevolverRegistroDto("select  apPat from personas where DNI='" + dni + "';", 1));
-         jtxtdni2.setText(control.DevolverRegistroDto("select  apMat from personas where DNI='" + dni + "';", 1));
-         jtxtdni3.setText(control.DevolverRegistroDto("select  nomb from personas where DNI='" + dni + "';", 1));
-         jtxtdni4.setText(control.DevolverRegistroDto("select  lugar from vw_clientepersona where DNI='" + dni + "' limit 1;", 1));
-         jtxtdni10.setText(control.DevolverRegistroDto("select  email from personas where DNI='" + dni + "';", 1)); 
-      }
-      if(txDNI.getText().length()!=8){
-        jtxtdni1.setText("");
-        jtxtdni2.setText("");
-        jtxtdni3.setText("");
-        jtxtdni4.setText("");
-        jtxtdni10.setText("");
-      }
+        if (contDn != 0 && txDNI.getText().length() == 8) {
+            jtxtdni1.setText(control.DevolverRegistroDto("select  apPat from personas where DNI='" + dni + "';", 1));
+            jtxtdni2.setText(control.DevolverRegistroDto("select  apMat from personas where DNI='" + dni + "';", 1));
+            jtxtdni3.setText(control.DevolverRegistroDto("select  nomb from personas where DNI='" + dni + "';", 1));
+            jtxtdni4.setText(control.DevolverRegistroDto("select  lugar from vw_clientepersona where DNI='" + dni + "' limit 1;", 1));
+            jtxtdni10.setText(control.DevolverRegistroDto("select  email from personas where DNI='" + dni + "';", 1));
         }
-    public void Seleccionar_Cliente(){
-        Alerta alr = new Alerta(this, true);
+        if (txDNI.getText().length() != 8) {
+            jtxtdni1.setText("");
+            jtxtdni2.setText("");
+            jtxtdni3.setText("");
+            jtxtdni4.setText("");
+            jtxtdni10.setText("");
+        }
+    }
+
+    public void Seleccionar_Cliente() {
+        AlertaError alError = new AlertaError(this, true);
 
         if (btModificar.getText().equals("Modificar")) {
             btRegistrar1.setEnabled(false);
@@ -145,8 +169,8 @@ Controlador control=new Controlador();
             } else {
                 //alertas
                 rpt = "Fila no <br>seleccionada";
-                alr.titulo.setText("<html><center>" + rpt + "</center></html>");
-                alr.setVisible(true);
+                alError.titulo.setText("<html><center>" + rpt + "</center></html>");
+                alError.setVisible(true);
                 //alertas
 
                 btModificar.setText("Modificar");
@@ -159,8 +183,9 @@ Controlador control=new Controlador();
 //            btRegistrar1.setEnabled(true);
         }
     }
-    public void Seleccionar_Empresa(){
-        Alerta alr = new Alerta(this, true);
+
+    public void Seleccionar_Empresa() {
+        AlertaError alError = new AlertaError(this, true);
 
         if (btModificar1.getText().equals("Modificar")) {
             btRegistrar.setEnabled(false);
@@ -187,8 +212,8 @@ Controlador control=new Controlador();
             } else {
                 //alertas
                 rpt = "Fila no <br>seleccionada";
-                alr.titulo.setText("<html><center>" + rpt + "</center></html>");
-                alr.setVisible(true);
+                alError.titulo.setText("<html><center>" + rpt + "</center></html>");
+                alError.setVisible(true);
                 //alertas
                 btModificar1.setText("Modificar");
                 btRegistrar.setEnabled(true);
@@ -199,6 +224,7 @@ Controlador control=new Controlador();
 //            btRegistrar.setEnabled(true);
         }
     }
+
     public void crear_Empresa() {
         Alerta alr = new Alerta(this, true);
 
@@ -228,7 +254,8 @@ Controlador control=new Controlador();
             Limpiar();
         }
     }
-    public void Editar_Empresa(int numHab) { 
+
+    public void Editar_Empresa(int numHab) {
         Alerta alr = new Alerta(this, true);
 
         int val1 = Integer.parseInt(control.DevolverRegistroDto("select DATEDIFF('" + cd.fecha_AMD(jDateChooser4.getDate()) + "','" + cd.fecha_AMD(jDateChooser5.getDate()) + "');", 1));
@@ -257,7 +284,8 @@ Controlador control=new Controlador();
             btRegistrar.setEnabled(true);
         }
     }
-    public void Limpiar(){
+
+    public void Limpiar() {
         tabla.setEnabled(true);
         jTextField2.setText("");
         txRUC.setText("");
@@ -279,6 +307,7 @@ Controlador control=new Controlador();
         btRegistrar.setEnabled(true);
         btRegistrar1.setEnabled(true);
     }
+
     public void crear_Persona() {
         Alerta alr = new Alerta(this, true);
 
@@ -308,6 +337,7 @@ Controlador control=new Controlador();
             Limpiar();
         }
     }
+
     public void Editar_Persona(int numHab) {
         Alerta alr = new Alerta(this, true);
 
@@ -339,34 +369,34 @@ Controlador control=new Controlador();
             btRegistrar1.setEnabled(true);
         }
     }
+
     private void MostrarList_Empresa() {
-        if(dcBuscar.getDate() != null){
+        if (dcBuscar.getDate() != null) {
             control.LlenarJtable(modelo, "select * from v_reservaemp  where "
-                + "(RUC like '%" + txtBuscar.getText() + "%' or Empresa like '%" + txtBuscar.getText() + "%' ) and Fecha_Resv = '"+cd.fecha_AMD(dcBuscar1.getDate())+"';", 9);
-        }else{
+                    + "(RUC like '%" + txtBuscar.getText() + "%' or Empresa like '%" + txtBuscar.getText() + "%' ) and Fecha_Resv = '" + cd.fecha_AMD(dcBuscar1.getDate()) + "';", 9);
+        } else {
             control.LlenarJtable(modelo, "select * from v_reservaemp  where "
-                + "RUC like'%" + txtBuscar.getText() +"%' or Empresa like '%" + txtBuscar.getText() + "%';", 9);
+                    + "RUC like'%" + txtBuscar.getText() + "%' or Empresa like '%" + txtBuscar.getText() + "%';", 9);
         }
     }
-    
-    
+
     private void MostrarList_Cliente() {
-        if(dcBuscar.getDate() != null){
-        control.LlenarJtable(modelo1, "select * from v_reservaclient  where "
-              + "(DNI like'%" + txtBuscar1.getText() + "%' or Cliente like '%" + txtBuscar1.getText() + "%' ) and Fecha_Resv = '"+cd.fecha_AMD(dcBuscar.getDate())+"';", 9);
-        }else{
+        if (dcBuscar.getDate() != null) {
             control.LlenarJtable(modelo1, "select * from v_reservaclient  where "
-              + "DNI like'%" + txtBuscar1.getText() + "%' or Cliente like '%" + txtBuscar1.getText() + "%';", 9);
+                    + "(DNI like'%" + txtBuscar1.getText() + "%' or Cliente like '%" + txtBuscar1.getText() + "%' ) and Fecha_Resv = '" + cd.fecha_AMD(dcBuscar.getDate()) + "';", 9);
+        } else {
+            control.LlenarJtable(modelo1, "select * from v_reservaclient  where "
+                    + "DNI like'%" + txtBuscar1.getText() + "%' or Cliente like '%" + txtBuscar1.getText() + "%';", 9);
         }
-        
-        
+
 //        control.LlenarJtable(modelo1, "select * from v_reservaclient  where "
 //                + "DNI like'%" + txtBuscar1.getText() + "%' or (Fecha_Ent like '%"
 //                +cd.CrearFecha(dcBuscar)+"%' or Fecha_Resv like '%"+cd.CrearFecha(dcBuscar)+"%');", 9);
 //        Seleccionar();   
     }
+
     public void inicializarJTable_cliente() {
-        modelo1.setColumnIdentifiers(new String[]{"ID","Fecha Reserva", "Fecha Entrada","Fecha Salida","N° Habitacion", "Tipo de Habitacion", "DNI", "Cliente", "Procedencia"});
+        modelo1.setColumnIdentifiers(new String[]{"ID", "Fecha Reserva", "Fecha Entrada", "Fecha Salida", "N° Habitacion", "Tipo de Habitacion", "DNI", "Cliente", "Procedencia"});
         tabla.setModel(modelo1);
 
         tabla.getColumnModel().getColumn(0).setPreferredWidth(100);
@@ -378,11 +408,12 @@ Controlador control=new Controlador();
         tabla.getColumnModel().getColumn(6).setPreferredWidth(75); // DNI
         tabla.getColumnModel().getColumn(7).setPreferredWidth(200); // Cliente
         tabla.getColumnModel().getColumn(8).setPreferredWidth(75); //Procedencia
-        
-        tabla.getColumnModel().removeColumn(tabla.getColumnModel().getColumn(0)); 
+
+        tabla.getColumnModel().removeColumn(tabla.getColumnModel().getColumn(0));
     }
+
     public void inicializarJTable_empresa() {
-        modelo.setColumnIdentifiers(new String[]{"ID","Fecha Reserva", "Fecha Entrada","Fecha Salida","N° Habitacion", "Tipo de Habitacion", "RUC", "Empresa", "Procedencia"});
+        modelo.setColumnIdentifiers(new String[]{"ID", "Fecha Reserva", "Fecha Entrada", "Fecha Salida", "N° Habitacion", "Tipo de Habitacion", "RUC", "Empresa", "Procedencia"});
         tabla.setModel(modelo);
 
         tabla.getColumnModel().getColumn(0).setPreferredWidth(100);
@@ -396,8 +427,9 @@ Controlador control=new Controlador();
         tabla.getColumnModel().getColumn(8).setPreferredWidth(75);
         tabla.getColumnModel().removeColumn(tabla.getColumnModel().getColumn(0));
     }
-    public void validarcampos_client(){
-       Alerta alr = new Alerta(this, true);
+
+    public void validarcampos_client() {
+        AlertaError alError = new AlertaError(this, true);
 
         if (txDNI.getText().length() != 0 && txDNI.getText().length() > 7) {
             if (jtxtdni1.getText().length() != 0) {
@@ -448,14 +480,15 @@ Controlador control=new Controlador();
         }
         //alertas
 //        
-        if(!rpt.equals("")){
-            alr.titulo.setText("<html><center>" + rpt + "</center></html>");
-            alr.setVisible(true);
+        if (!rpt.equals("")) {
+            alError.titulo.setText("<html><center>" + rpt + "</center></html>");
+            alError.setVisible(true);
         }
         //alertas
     }
-    public void validarcampos_emp(){
-       Alerta alr = new Alerta(this, true);
+
+    public void validarcampos_emp() {
+        AlertaError alError = new AlertaError(this, true);
 
         if (txRUC.getText().length() != 0 && txRUC.getText().length() > 10) {
             if (jTextField1.getText().length() != 0) {
@@ -496,70 +529,72 @@ Controlador control=new Controlador();
             txRUC.grabFocus();
         }
         //alertas
-        if(!rpt.equals("")){
-            alr.titulo.setText("<html><center>" + rpt + "</center></html>");
-            alr.setVisible(true);
+        if (!rpt.equals("")) {
+            alError.titulo.setText("<html><center>" + rpt + "</center></html>");
+            alError.setVisible(true);
         }
         //alertas
     }
-    public void valHab_Client(){
+
+    public void valHab_Client() {
 //        control.LlenarCombo(jComboBox1, "select idhabitacion,numHab from habitaciones where (idtipoHab=1 and idestadoHab=1);", 2);      
 //        jComboBox2.removeItemAt(0);
-        if(jComboBox2.getSelectedIndex()==0){ //Individual
-           control.LlenarCombo(jComboBox1, "select idhabitacion,numHab from habitaciones where (idtipoHab=1 and idestadoHab=1);", 2);
-           jComboBox1.removeItemAt(0);
-           if(jComboBox1.getItemCount()==0){
-           jComboBox1.removeAllItems();
-           jComboBox1.addItem("No hay cuartos");
+        if (jComboBox2.getSelectedIndex() == 0) { //Individual
+            control.LlenarCombo(jComboBox1, "select idhabitacion,numHab from habitaciones where (idtipoHab=1 and idestadoHab=1);", 2);
+            jComboBox1.removeItemAt(0);
+            if (jComboBox1.getItemCount() == 0) {
+                jComboBox1.removeAllItems();
+                jComboBox1.addItem("No hay cuartos");
+            }
         }
+        if (jComboBox2.getSelectedIndex() == 1) { //Doble
+            control.LlenarCombo(jComboBox1, "select idhabitacion,numHab from habitaciones where (idtipoHab=2 and idestadoHab=1);", 2);
+            jComboBox1.removeItemAt(0);
+            if (jComboBox1.getItemCount() == 0) {
+                jComboBox1.removeAllItems();
+                jComboBox1.addItem("No hay cuartos");
+            }
         }
-        if(jComboBox2.getSelectedIndex()==1){ //Doble
-           control.LlenarCombo(jComboBox1, "select idhabitacion,numHab from habitaciones where (idtipoHab=2 and idestadoHab=1);", 2);
-           jComboBox1.removeItemAt(0);
-           if(jComboBox1.getItemCount()==0){
-           jComboBox1.removeAllItems();
-           jComboBox1.addItem("No hay cuartos");
+        if (jComboBox2.getSelectedIndex() == 2) { //Triple
+            control.LlenarCombo(jComboBox1, "select idhabitacion,numHab from habitaciones where (idtipoHab=3 and idestadoHab=1);", 2);
+            jComboBox1.removeItemAt(0);
+            if (jComboBox1.getItemCount() == 0) {
+                jComboBox1.removeAllItems();
+                jComboBox1.addItem("No hay cuartos");
+            }
         }
+        if (jComboBox2.getSelectedIndex() == 3) { //Matrimonial
+            control.LlenarCombo(jComboBox1, "select idhabitacion,numHab from habitaciones where (idtipoHab=4 and idestadoHab=1);", 2);
+            jComboBox1.removeItemAt(0);
+            if (jComboBox1.getItemCount() == 0) {
+                jComboBox1.removeAllItems();
+                jComboBox1.addItem("No hay cuartos");
+            }
         }
-        if(jComboBox2.getSelectedIndex()==2){ //Triple
-           control.LlenarCombo(jComboBox1, "select idhabitacion,numHab from habitaciones where (idtipoHab=3 and idestadoHab=1);", 2);
-           jComboBox1.removeItemAt(0);
-           if(jComboBox1.getItemCount()==0){
-           jComboBox1.removeAllItems();
-           jComboBox1.addItem("No hay cuartos");
+        if (jComboBox2.getSelectedIndex() == 4) { //Matrimonial Lunandina
+            control.LlenarCombo(jComboBox1, "select idhabitacion,numHab from habitaciones where (idtipoHab=5 and idestadoHab=1);", 2);
+            jComboBox1.removeItemAt(0);
+            if (jComboBox1.getItemCount() == 0) {
+                jComboBox1.removeAllItems();
+                jComboBox1.addItem("No hay cuartos");
+            }
         }
+        if (jComboBox2.getSelectedIndex() == 5) { //Familiar
+            control.LlenarCombo(jComboBox1, "select idhabitacion,numHab from habitaciones where (idtipoHab=6 and idestadoHab=1);", 2);
+            jComboBox1.removeItemAt(0);
+            if (jComboBox1.getItemCount() == 0) {
+                jComboBox1.removeAllItems();
+                jComboBox1.addItem("No hay cuartos");
+            }
         }
-        if(jComboBox2.getSelectedIndex()==3){ //Matrimonial
-           control.LlenarCombo(jComboBox1, "select idhabitacion,numHab from habitaciones where (idtipoHab=4 and idestadoHab=1);", 2);
-           jComboBox1.removeItemAt(0);
-           if(jComboBox1.getItemCount()==0){
-           jComboBox1.removeAllItems();
-           jComboBox1.addItem("No hay cuartos");
-        }
-        }
-        if(jComboBox2.getSelectedIndex()==4){ //Matrimonial Lunandina
-           control.LlenarCombo(jComboBox1, "select idhabitacion,numHab from habitaciones where (idtipoHab=5 and idestadoHab=1);", 2);
-           jComboBox1.removeItemAt(0);
-           if(jComboBox1.getItemCount()==0){
-           jComboBox1.removeAllItems();
-           jComboBox1.addItem("No hay cuartos");
-        }
-        }
-        if(jComboBox2.getSelectedIndex()==5){ //Familiar
-           control.LlenarCombo(jComboBox1, "select idhabitacion,numHab from habitaciones where (idtipoHab=6 and idestadoHab=1);", 2);
-           jComboBox1.removeItemAt(0);
-           if(jComboBox1.getItemCount()==0){
-           jComboBox1.removeAllItems();
-           jComboBox1.addItem("No hay cuartos");
-        }
-        }
-        
+
 //        if(jComboBox1.getItemCount()==0){
 //           jComboBox1.removeAllItems();
 //           jComboBox1.addItem("No hay cuartos");
 //        }
 //        JOptionPane.showMessageDialog(null, jComboBox1.getItemCount());
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -1173,7 +1208,7 @@ Controlador control=new Controlador();
     }// </editor-fold>//GEN-END:initComponents
 
     private void txDNIKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txDNIKeyTyped
-        Textos.Condicion(evt,txDNI,7); 
+        Textos.Condicion(evt, txDNI, 7);
         Textos.Numeros(evt);
     }//GEN-LAST:event_txDNIKeyTyped
 
@@ -1182,7 +1217,7 @@ Controlador control=new Controlador();
         Textos.soloPurasLetras(evt);
         //Textos.Mayusculas(evt);
         Textos.solo_1_esp(evt, jtxtdni3);
-        
+
     }//GEN-LAST:event_jtxtdni1KeyTyped
 
     private void jtxtdni2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtdni2KeyTyped
@@ -1205,16 +1240,16 @@ Controlador control=new Controlador();
 
     private void btRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRegistrarActionPerformed
 //     crear_Empresa();
-       validarcampos_emp();
+        validarcampos_emp();
     }//GEN-LAST:event_btRegistrarActionPerformed
 
     private void btModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btModificarActionPerformed
 //     MostrarList_Cliente();
-       Seleccionar_Cliente();
+        Seleccionar_Cliente();
     }//GEN-LAST:event_btModificarActionPerformed
 
     private void btEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEliminarActionPerformed
-      Limpiar();
+        Limpiar();
     }//GEN-LAST:event_btEliminarActionPerformed
 
     private void txtBuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyTyped
@@ -1236,7 +1271,7 @@ Controlador control=new Controlador();
     private void lbReiniciarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbReiniciarMouseClicked
         Limpiar();
         inicializarJTable_cliente();
-          MostrarList_Cliente();
+        MostrarList_Cliente();
         pnTipoCliente.setVisible(true);
 //        jPanel5.setVisible(false);
         pnClienteEmpresa.setVisible(false);
@@ -1244,15 +1279,15 @@ Controlador control=new Controlador();
         pnFecha.setVisible(false);
         pnHabitacion.setVisible(false);
         btValidar.setVisible(false);
-        
+
         btRegistrar.setVisible(false);
         btRegistrar1.setVisible(false);
         btModificar.setVisible(false);
         btModificar1.setVisible(false);
         btEliminar.setVisible(false);
-        
+
         lbReiniciar.setVisible(false);
-        
+
         txtBuscar.setVisible(false);
         txtBuscar1.setVisible(true);
     }//GEN-LAST:event_lbReiniciarMouseClicked
@@ -1269,14 +1304,14 @@ Controlador control=new Controlador();
         txtBuscar.setVisible(false);
         txtBuscar1.setVisible(true);
         txDNI.grabFocus();
-        
+
         lbReiniciar.setVisible(true);
         btRegistrar1.setVisible(true);
         btRegistrar.setVisible(false);
         btModificar.setVisible(true);
         btModificar1.setVisible(false);
         btEliminar.setVisible(true);
-        
+
         dcBuscar.setVisible(true);
         dcBuscar1.setVisible(false);
     }//GEN-LAST:event_btClientePersonaActionPerformed
@@ -1301,7 +1336,7 @@ Controlador control=new Controlador();
         btEliminar.setVisible(true);
         dcBuscar.setVisible(false);
         dcBuscar1.setVisible(true);
-        
+
     }//GEN-LAST:event_btClienteEmpresaActionPerformed
 
     private void lbMinimizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbMinimizarMouseClicked
@@ -1359,7 +1394,7 @@ Controlador control=new Controlador();
     private void btRegistrar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRegistrar1ActionPerformed
         // TODO add your handling code here:
 //        crear_Persona();
-          validarcampos_client();
+        validarcampos_client();
     }//GEN-LAST:event_btRegistrar1ActionPerformed
 
     private void lbLimpiarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbLimpiarMouseClicked
@@ -1374,8 +1409,8 @@ Controlador control=new Controlador();
 
     private void txRUCKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txRUCKeyTyped
         // TODO add your handling code here:
-     Textos.Condicion(evt,txRUC,10); 
-     Textos.Numeros(evt);
+        Textos.Condicion(evt, txRUC, 10);
+        Textos.Numeros(evt);
     }//GEN-LAST:event_txRUCKeyTyped
 
     private void jTextField1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyTyped
@@ -1406,7 +1441,7 @@ Controlador control=new Controlador();
     }//GEN-LAST:event_txDNIActionPerformed
 
     private void txDNIKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txDNIKeyReleased
-        // TODO add your handling code here:
+          // TODO add your handling code here:
         reconocer_cliente();
     }//GEN-LAST:event_txDNIKeyReleased
 
@@ -1441,17 +1476,17 @@ Controlador control=new Controlador();
     private void jComboBox2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox2ItemStateChanged
         // TODO add your handling code here:
 //        jComboBox2.removeAllItems();
-        
+
         //alHab_Client();
         if (jComboBox2.getSelectedIndex() > 0 && jDateChooser5 != null && jDateChooser4 != null) {
-            control.LlenarCombo(jComboBox1, 
-                    "call proc_show_NumHab('"+jComboBox2.getSelectedItem()+"', \""
-                            +cd.fecha_AMD(jDateChooser5.getDate())+"\",\""
-                            +cd.fecha_AMD(jDateChooser4.getDate())+"\")", 1);
-            if(jComboBox1.getItemCount()>0){
+            control.LlenarCombo(jComboBox1,
+                    "call proc_show_NumHab('" + jComboBox2.getSelectedItem() + "', \""
+                    + cd.fecha_AMD(jDateChooser5.getDate()) + "\",\""
+                    + cd.fecha_AMD(jDateChooser4.getDate()) + "\")", 1);
+            if (jComboBox1.getItemCount() > 0) {
                 jComboBox1.setSelectedIndex(0);
             }
-            if(jComboBox1.getItemCount() == 1){ //Para cuando solo aparesca la opcion de '--Seleccione--'
+            if (jComboBox1.getItemCount() == 1) { //Para cuando solo aparesca la opcion de '--Seleccione--'
                 jComboBox1.removeAllItems();
                 jComboBox1.addItem("--No hay cuartos--");
             }
