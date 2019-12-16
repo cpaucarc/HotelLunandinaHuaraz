@@ -1,44 +1,37 @@
 package Ventanas;
 
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
-import Clases.Control;
-import Clases.Controlador;
-import Clases.Design;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
-import java.awt.event.WindowStateListener;
+import Clases.*;
+import alertas.*;
 
 public class DatosUsuario extends javax.swing.JFrame {
-    
-    Controlador control=new Controlador();
+
+    public String rpt = "";
+    Controlador control = new Controlador();
     public boolean pw1 = false; //controlador para visiblidad de campo de password 1
     public boolean pw2 = false; //controlador para visiblidad de campo de password 1
     Design design = new Design();
-    
+
     String aux_usuario = Control.empleado;
-    
+
     public DatosUsuario() {
         initComponents();
         design.MoverFrame(jPanel4, this);
         btModificar.setEnabled(false);
         this.setLocationRelativeTo(null);
-        
+
         lbCargo.setText(Control.cargo);
         lbUser.setText(Control.empleado);
-        if(!Control.cargo.equals("")){
-            lbDNI.setText(control.DevolverRegistroDto("SELECT dni FROM vw_empleados WHERE username = '"+aux_usuario+"'", 1));
-            lbAPaterno.setText(control.DevolverRegistroDto("SELECT apellidos FROM vw_empleados WHERE username = '"+aux_usuario+"'", 1).split(" ")[0]);
-            lbAMaterno.setText(control.DevolverRegistroDto("SELECT apellidos FROM vw_empleados WHERE username = '"+aux_usuario+"'", 1).split(" ")[1]);
-            lbNombres.setText(control.DevolverRegistroDto("SELECT nombres FROM vw_empleados WHERE username = '"+aux_usuario+"'", 1));
-        }      
+        if (!Control.cargo.equals("")) {
+            lbDNI.setText(control.DevolverRegistroDto("SELECT dni FROM vw_empleados WHERE username = '" + aux_usuario + "'", 1));
+            lbAPaterno.setText(control.DevolverRegistroDto("SELECT apellidos FROM vw_empleados WHERE username = '" + aux_usuario + "'", 1).split(" ")[0]);
+            lbAMaterno.setText(control.DevolverRegistroDto("SELECT apellidos FROM vw_empleados WHERE username = '" + aux_usuario + "'", 1).split(" ")[1]);
+            lbNombres.setText(control.DevolverRegistroDto("SELECT nombres FROM vw_empleados WHERE username = '" + aux_usuario + "'", 1));
+        }
         System.out.println("Usuario: " + aux_usuario);
     }
 
-    
-    public void Limpiar(){
+    public void Limpiar() {
         username.setText("");
         pw1Oculto.setText("");
         pw2Oculto.setText("");
@@ -46,14 +39,15 @@ public class DatosUsuario extends javax.swing.JFrame {
         pw2Visible.setText("");
         btModificar.setEnabled(false);
     }
-    public void ActivarBotonModificar(){
+
+    public void ActivarBotonModificar() {
         if (username.getText().length() > 0 && pw1Oculto.getText().length() > 0 && pw2Oculto.getText().length() > 0) {
             btModificar.setEnabled(true);
         } else {
             btModificar.setEnabled(false);
         }
     }
-            
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -344,7 +338,10 @@ public class DatosUsuario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btModificarActionPerformed
-        String usuario_viejo, usuario_nuevo, pw1, pw2, pwAnterior="anterior";
+        Alerta alr = new Alerta(this, true);
+        AlertaError alError = new AlertaError(this, true);
+        AlertaSuccess alSuccess = new AlertaSuccess(this, true);
+        String usuario_viejo, usuario_nuevo, pw1, pw2, pwAnterior = "anterior";
         usuario_viejo = Control.empleado;
         usuario_nuevo = username.getText();
         pw1 = pw1Oculto.getText();
@@ -352,21 +349,31 @@ public class DatosUsuario extends javax.swing.JFrame {
 
         if (pw1.equals(pw2)) {
             pwAnterior = JOptionPane.showInputDialog("Ingrese su contraseña actual para validar la operacion");
-            if(!control.Verficnst("SELECT idusuario FROM usuarios WHERE login = '"+usuario_nuevo+"'")){//No existe                
-                if(control.Verficnst("SELECT idusuario FROM usuarios WHERE login = '"+usuario_viejo+"' AND psw = md5('"+pwAnterior+"')")){
-                    control.CrearRegistro("update usuarios set login = '"+usuario_nuevo+"', psw = md5('"+pw1+"') WHERE login = '"+usuario_viejo+"'");
+            if (!control.Verficnst("SELECT idusuario FROM usuarios WHERE login = '" + usuario_nuevo + "'")) {//No existe                
+                if (control.Verficnst("SELECT idusuario FROM usuarios WHERE login = '" + usuario_viejo + "' AND psw = md5('" + pwAnterior + "')")) {
+                    control.CrearRegistro("update usuarios set login = '" + usuario_nuevo + "', psw = md5('" + pw1 + "') WHERE login = '" + usuario_viejo + "'");
                     Control.empleado = usuario_nuevo;
                     lbUser.setText(Control.empleado);
+                    rpt = ("Se cambió los datos del usuario correctamente");
+                    alSuccess.titulo.setText("<html><center>" + rpt + "</center></html>");
+                    alSuccess.setVisible(true);
                     Limpiar();
-                }else{
-                    JOptionPane.showMessageDialog(null, "La contraseña actual no coincide con la que ingreso");
+                } else {
+                    rpt = ("La contraseña actual no coincide con la que ingreso");
+                    alError.titulo.setText("<html><center>" + rpt + "</center></html>");
+                    alError.setVisible(true);
                 }
-            }else{//Ya existe
-                JOptionPane.showMessageDialog(null, "Este usuario ya existe, debe elegir otro");
+            } else {//Ya existe
+                rpt = ("Este usuario ya existe, debe elegir otro");
+                alError.titulo.setText("<html><center>" + rpt + "</center></html>");
+                alError.setVisible(true);
                 username.grabFocus();
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Las contraseñas no coinciden.");
+            rpt = ("Las contraseñas no coinciden.");
+            alError.titulo.setText("<html><center>" + rpt + "</center></html>");
+            alError.setVisible(true);
+
             pw2Oculto.grabFocus();
         }
     }//GEN-LAST:event_btModificarActionPerformed
@@ -379,13 +386,13 @@ public class DatosUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_pw2OcultoKeyTyped
 
     private void lbVisible1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbVisible1MouseClicked
-        if(!pw1){
+        if (!pw1) {
             pw1Oculto.setVisible(false);
             lbVisible1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/invisible.png")));
             lbVisible1.setToolTipText("Ocultar contraseña");
             pw1 = true;
-        }else{
-            pw1Oculto.setVisible(true);;            
+        } else {
+            pw1Oculto.setVisible(true);;
             lbVisible1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/visible.png")));
             lbVisible1.setToolTipText("Mostrar contraseña");
             pw1 = false;
@@ -393,12 +400,12 @@ public class DatosUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_lbVisible1MouseClicked
 
     private void lbVisible2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbVisible2MouseClicked
-        if(!pw2){
+        if (!pw2) {
             pw2Oculto.setVisible(false);
             lbVisible2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/invisible.png")));
             lbVisible2.setToolTipText("Ocultar contraseña");
             pw2 = true;
-        }else{
+        } else {
             pw2Oculto.setVisible(true);
             lbVisible2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/visible.png")));
             lbVisible2.setToolTipText("Mostrar contraseña");
@@ -407,8 +414,8 @@ public class DatosUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_lbVisible2MouseClicked
 
     private void btCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCerrarSesionActionPerformed
-        int rsta = JOptionPane.showConfirmDialog(null, "¿Desea cerrar la sesión actual?","Advertencia", JOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE);
-        if(rsta == 0){
+        int rsta = JOptionPane.showConfirmDialog(null, "¿Desea cerrar la sesión actual?", "Advertencia", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+        if (rsta == 0) {
             Control.cargo = "";
             Control.empleado = "";
             Control.usuario = "";

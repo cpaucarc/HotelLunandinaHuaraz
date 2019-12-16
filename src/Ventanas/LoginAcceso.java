@@ -1,16 +1,16 @@
 package Ventanas;
 
-import Clases.Control;
-import Clases.Controlador;
+import Clases.*;
+import alertas.*;
 import Clases.Design;
 import Clases.LoginLunandina;
-import javax.swing.JOptionPane;
 
 public class LoginAcceso extends javax.swing.JFrame {
-    
+
+    public String rpt = "";
     //MenuPrincipal mp;
-    Controlador control=new Controlador();
-    static Design design=new Design();
+    Controlador control = new Controlador();
+    static Design design = new Design();
     public boolean psw = false;
     String user, password;// Para hacer la compracion para el ingreso al sistema  
 
@@ -18,7 +18,7 @@ public class LoginAcceso extends javax.swing.JFrame {
         initComponents();
         design.MoverFrame(jPanel1, this);
         this.setLocationRelativeTo(null);
-        username.grabFocus();        
+        username.grabFocus();
     }
 
     @SuppressWarnings("unchecked")
@@ -173,13 +173,14 @@ public class LoginAcceso extends javax.swing.JFrame {
     }//GEN-LAST:event_lbVerContraMouseClicked
 
     private void btIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btIngresarActionPerformed
+        AlertaError alr = new AlertaError(this, true);
         user = username.getText(); //Recuperamos texto del campo username(TXT)
         password = pwOculto.getText(); //Recuperamos la contraseña del campo pwOculto (PASS)
-        
-        LoginLunandina lgl=new LoginLunandina(user, password);
-        
-        if(lgl.VerifUsuario()){ //Vemos si existe usuario
-            if(lgl.VerifCredenciales()){ //Vemos si el usuario y la contraseña coinciden
+
+        LoginLunandina lgl = new LoginLunandina(user, password);
+
+        if (lgl.VerifUsuario()) { //Vemos si existe usuario
+            if (lgl.VerifCredenciales()) { //Vemos si el usuario y la contraseña coinciden
                 Control.usuario = lgl.getnomEmp(); //Apellidos y nombres del empleado
                 Control.empleado = lgl.getUsuario(); //Nombre de usuario del empleado 
                 Control.cargo = lgl.getCargo();
@@ -187,12 +188,19 @@ public class LoginAcceso extends javax.swing.JFrame {
                 //mp = new MenuPrincipal();
                 mp.setVisible(true);
                 this.dispose();
-            }else{
-                JOptionPane.showMessageDialog(null, "Credenciales incorrectas");username.grabFocus();
-            }         
-        }else{
-            JOptionPane.showMessageDialog(null, "Este usuario no existe");username.grabFocus();
+            } else {
+                rpt = "Credenciales <br>incorrectas";
+                username.grabFocus();
+                alr.titulo.setText("<html><center>" + rpt + "</center></html>");
+                alr.setVisible(true);
+            }
+        } else {
+            rpt = "Este usuario <br>no existe";
+            username.grabFocus();
+            alr.titulo.setText("<html><center>" + rpt + "</center></html>");
+            alr.setVisible(true);
         }
+
     }//GEN-LAST:event_btIngresarActionPerformed
 
     private void lbCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbCerrarMouseClicked
@@ -252,7 +260,7 @@ public class LoginAcceso extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {                
+            public void run() {
                 design.Nimbus();
                 new LoginAcceso().setVisible(true);
             }

@@ -23,7 +23,7 @@ public class Conexion {
   public Conexion() {
     try{ 
        usu="root";
-       contraseña="1234";
+       contraseña="";
        host="localhost";
        db="hotel_lunandina";    
         String url="jdbc:mysql://"+host+"/"+db;       

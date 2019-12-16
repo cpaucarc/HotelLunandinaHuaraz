@@ -1,55 +1,55 @@
 package Ventanas;
 
-import Clases.Control;
-import Clases.Controlador;
-import Clases.Design;
-import Clases.Textos;
-import javax.swing.JOptionPane;
+import Clases.*;
+import alertas.*;
 import javax.swing.table.DefaultTableModel;
 
 public class RegistroEmpleado extends javax.swing.JFrame {
-    
-    Controlador control=new Controlador();
-    Design ds=new Design();
-    DefaultTableModel modelo=new DefaultTableModel();
-    
+
+    public String rpt = "";
+    Controlador control = new Controlador();
+    Design ds = new Design();
+    DefaultTableModel modelo = new DefaultTableModel();
+
     public RegistroEmpleado() {
         initComponents();
         lbUserActual.setText(Control.usuario);
         control.LlenarCombo(cbEstado, "SELECT * FROM estadoempleado", 2);
         control.LlenarCombo(cbCargo, "SELECT * FROM cargos", 2);
         cbCargo.setSelectedIndex(0);
-        
+
         InicializarTabla();
         //modelo.setColumnIdentifiers(new String[]{"DNI", "APELLIDOS", "NOMBRES", "E-MAIL", "CARGO", "ESTADO","USUARIO"});
         //tabla.setModel(modelo);
         //ds.Centrar_Tabla(tabla);
         MostrarResultados();
-        
+
         cbEstado.setEnabled(false);
         cbEstado.setSelectedIndex(0);
         btModificar.setEnabled(false);
     }
-    public void InicializarTabla(){
-        modelo.setColumnIdentifiers(new String[]{"DNI", "APELLIDOS", "NOMBRES", "E-MAIL", "CARGO", "ESTADO","USUARIO"});
+
+    public void InicializarTabla() {
+        modelo.setColumnIdentifiers(new String[]{"DNI", "APELLIDOS", "NOMBRES", "E-MAIL", "CARGO", "ESTADO", "USUARIO"});
         tabla.setModel(modelo);
         ds.Centrar_Tabla(tabla);
-        
+
         tabla.getColumnModel().getColumn(1).setPreferredWidth(100); // Apellidos
         tabla.getColumnModel().getColumn(2).setPreferredWidth(100); // Nombres
         tabla.getColumnModel().getColumn(3).setPreferredWidth(110); // Email
     }
-    
-    public void Seleccionar(){
+
+    public void Seleccionar() {
         txdni.setText(tabla.getValueAt(tabla.getSelectedRow(), 0).toString());
         txappat.setText(tabla.getValueAt(tabla.getSelectedRow(), 1).toString().split(" ")[0]);
         txapmat.setText(tabla.getValueAt(tabla.getSelectedRow(), 1).toString().split(" ")[1]);
-        txnomb.setText(tabla.getValueAt(tabla.getSelectedRow(), 2).toString());        
+        txnomb.setText(tabla.getValueAt(tabla.getSelectedRow(), 2).toString());
         txmail.setText(tabla.getValueAt(tabla.getSelectedRow(), 3).toString());
         cbCargo.setSelectedItem(tabla.getValueAt(tabla.getSelectedRow(), 4).toString());
         cbEstado.setSelectedItem(tabla.getValueAt(tabla.getSelectedRow(), 5).toString());
     }
-    public void Limpiar(){
+
+    public void Limpiar() {
         txdni.setText("");
         txappat.setText("");
         txapmat.setText("");
@@ -58,17 +58,19 @@ public class RegistroEmpleado extends javax.swing.JFrame {
         cbCargo.setSelectedIndex(-1);
         cbEstado.setSelectedIndex(0);
     }
-    public void MostrarResultados(){
+
+    public void MostrarResultados() {
         String consulta = "select * from vw_empleados where "
-                + "dni like '%"+txbuscar.getText()+"%' or "
-                + "apellidos like '%"+txbuscar.getText()+"%' or "
-                + "nombres like '%"+txbuscar.getText()+"%' or "
-                + "mail like '%"+txbuscar.getText()+"%' or "
-                + "cargo like '%"+txbuscar.getText()+"%' or "
-                + "estado like '%"+txbuscar.getText()+"%' or "
-                + "username like '%"+txbuscar.getText()+"%'";
+                + "dni like '%" + txbuscar.getText() + "%' or "
+                + "apellidos like '%" + txbuscar.getText() + "%' or "
+                + "nombres like '%" + txbuscar.getText() + "%' or "
+                + "mail like '%" + txbuscar.getText() + "%' or "
+                + "cargo like '%" + txbuscar.getText() + "%' or "
+                + "estado like '%" + txbuscar.getText() + "%' or "
+                + "username like '%" + txbuscar.getText() + "%'";
         control.LlenarJtable(modelo, consulta, 7);
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -330,27 +332,33 @@ public class RegistroEmpleado extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btModificarActionPerformed
-        if(txdni.getText().length()==8 && txappat.getText().length()>0 && txapmat.getText().length()>0 && 
-                txnomb.getText().length()>0 && txmail.getText().length()>0 &&
-                cbCargo.getSelectedIndex()>-1 && cbEstado.getSelectedIndex()>-1){
-            JOptionPane.showMessageDialog(null, 
-                control.DevolverRegistroDto("call proc_empleado(2,'"+
-                        txdni.getText()+"','"+
-                        Textos.capitalizeText(txappat.getText())+"','"+
-                        Textos.capitalizeText(txapmat.getText())+"','"+
-                        Textos.capitalizeText(txnomb.getText())+"','"+
-                        txmail.getText()+"','"+
-                        cbCargo.getSelectedItem().toString() + "','"+
-                        cbEstado.getSelectedItem().toString() + "')", 1));
+        AlertaError alerror = new AlertaError(this, true);
+        AlertaSuccess alsuccess = new AlertaSuccess(this, true);
+        if (txdni.getText().length() == 8 && txappat.getText().length() > 0 && txapmat.getText().length() > 0
+                && txnomb.getText().length() > 0 && txmail.getText().length() > 0
+                && cbCargo.getSelectedIndex() > -1 && cbEstado.getSelectedIndex() > -1) {
+            rpt = (control.DevolverRegistroDto("call proc_empleado(2,'"
+                    + txdni.getText() + "','"
+                    + Textos.capitalizeText(txappat.getText()) + "','"
+                    + Textos.capitalizeText(txapmat.getText()) + "','"
+                    + Textos.capitalizeText(txnomb.getText()) + "','"
+                    + txmail.getText() + "','"
+                    + cbCargo.getSelectedItem().toString() + "','"
+                    + cbEstado.getSelectedItem().toString() + "')", 1));
             Limpiar();
             MostrarResultados();
-            
-            cbEstado.setEnabled(false);        
+
+            cbEstado.setEnabled(false);
             txdni.setEditable(true);
             btModificar.setEnabled(false);
             btRegistrar.setEnabled(true);
-        }else{
-            JOptionPane.showMessageDialog(null, "Faltan datos por rellenar","Advertencia", JOptionPane.WARNING_MESSAGE);
+
+            alsuccess.titulo.setText("<html><center>" + rpt + "</center></html>");
+            alsuccess.setVisible(true);
+        } else {
+            rpt = "Faltan datos por rellenar";
+            alerror.titulo.setText("<html><center>" + rpt + "</center></html>");
+            alerror.setVisible(true);
         }
     }//GEN-LAST:event_btModificarActionPerformed
 
@@ -375,23 +383,28 @@ public class RegistroEmpleado extends javax.swing.JFrame {
     }//GEN-LAST:event_lbCerrarMouseExited
 
     private void btRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRegistrarActionPerformed
-        if(txdni.getText().length()==8 && txappat.getText().length()>0 && txapmat.getText().length()>0 && 
-                txnomb.getText().length()>0 && txmail.getText().length()>0 &&
-                cbCargo.getSelectedIndex()>-1 && cbEstado.getSelectedIndex()>0){
-            JOptionPane.showMessageDialog(null, 
-                control.DevolverRegistroDto("call proc_empleado(1,'"+
-                        txdni.getText()+"','"+
-                        Textos.capitalizeText(txappat.getText())+"','"+
-                        Textos.capitalizeText(txapmat.getText())+"','"+
-                        Textos.capitalizeText(txnomb.getText())+"','"+
-                        txmail.getText()+"','"+
-                        cbCargo.getSelectedItem().toString() + "','"+
-                        cbEstado.getItemAt(1) + "')", 1));
+        AlertaError alerror = new AlertaError(this, true);
+        Alerta alwarnig = new Alerta(this, true);
+        if (txdni.getText().length() == 8 && txappat.getText().length() > 0 && txapmat.getText().length() > 0
+                && txnomb.getText().length() > 0 && txmail.getText().length() > 0
+                && cbCargo.getSelectedIndex() > -1 && cbEstado.getSelectedIndex() > 0) {
+            rpt = (control.DevolverRegistroDto("call proc_empleado(1,'"
+                    + txdni.getText() + "','"
+                    + Textos.capitalizeText(txappat.getText()) + "','"
+                    + Textos.capitalizeText(txapmat.getText()) + "','"
+                    + Textos.capitalizeText(txnomb.getText()) + "','"
+                    + txmail.getText() + "','"
+                    + cbCargo.getSelectedItem().toString() + "','"
+                    + cbEstado.getItemAt(1) + "')", 1));
             Limpiar();
             MostrarResultados();
-        }else{
-            JOptionPane.showMessageDialog(null, "Faltan datos por rellenar","Advertencia", JOptionPane.WARNING_MESSAGE);
-        }        
+            alwarnig.titulo.setText("<html><center>" + rpt + "</center></html>");
+            alwarnig.setVisible(true);
+        } else {
+            rpt = "Faltan datos por rellenar";
+            alerror.titulo.setText("<html><center>" + rpt + "</center></html>");
+            alerror.setVisible(true);
+        }
     }//GEN-LAST:event_btRegistrarActionPerformed
 
     private void txbuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txbuscarKeyTyped
@@ -405,7 +418,7 @@ public class RegistroEmpleado extends javax.swing.JFrame {
 
     private void jLabel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseClicked
         Limpiar();
-        cbEstado.setEnabled(false);        
+        cbEstado.setEnabled(false);
         txdni.setEditable(true);
         btModificar.setEnabled(false);
         btRegistrar.setEnabled(true);
