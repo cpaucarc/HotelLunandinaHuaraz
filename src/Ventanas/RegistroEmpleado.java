@@ -384,10 +384,10 @@ public class RegistroEmpleado extends javax.swing.JFrame {
 
     private void btRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRegistrarActionPerformed
         AlertaError alerror = new AlertaError(this, true);
-        Alerta alwarnig = new Alerta(this, true);
+        AlertaSuccess alsuccess = new AlertaSuccess(this, true);
         if (txdni.getText().length() == 8 && txappat.getText().length() > 0 && txapmat.getText().length() > 0
                 && txnomb.getText().length() > 0 && txmail.getText().length() > 0
-                && cbCargo.getSelectedIndex() > -1 && cbEstado.getSelectedIndex() > 0) {
+                && cbCargo.getSelectedIndex() > -1) {
             rpt = (control.DevolverRegistroDto("call proc_empleado(1,'"
                     + txdni.getText() + "','"
                     + Textos.capitalizeText(txappat.getText()) + "','"
@@ -396,10 +396,10 @@ public class RegistroEmpleado extends javax.swing.JFrame {
                     + txmail.getText() + "','"
                     + cbCargo.getSelectedItem().toString() + "','"
                     + cbEstado.getItemAt(1) + "')", 1));
-            Limpiar();
             MostrarResultados();
-            alwarnig.titulo.setText("<html><center>" + rpt + "</center></html>");
-            alwarnig.setVisible(true);
+            alsuccess.titulo.setText("<html><center>" + rpt + "</center></html>");
+            alsuccess.setVisible(true);
+            Limpiar();
         } else {
             rpt = "Faltan datos por rellenar";
             alerror.titulo.setText("<html><center>" + rpt + "</center></html>");

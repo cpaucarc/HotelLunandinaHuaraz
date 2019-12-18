@@ -184,6 +184,7 @@ public class LoginAcceso extends javax.swing.JFrame {
                 Control.usuario = lgl.getnomEmp(); //Apellidos y nombres del empleado
                 Control.empleado = lgl.getUsuario(); //Nombre de usuario del empleado 
                 Control.cargo = lgl.getCargo();
+                control.CrearRegistro("call proc_UpdateStateDay();"); //Actualizamos el estado de las habitaciones
                 MenuPrincipal mp = new MenuPrincipal();
                 //mp = new MenuPrincipal();
                 mp.setVisible(true);

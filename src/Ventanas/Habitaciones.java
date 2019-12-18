@@ -6,6 +6,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import Clases.Control;
 import Clases.Controlador;
+import Clases.Design;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ import javax.swing.table.DefaultTableModel;
 public class Habitaciones extends javax.swing.JFrame{
 
     /**/
+    Design ds=new Design();
     Controlador control=new Controlador();
     public static ArrayList<Habitacion> datosHab = new ArrayList<>(); 
     /**/
@@ -49,6 +51,9 @@ public class Habitaciones extends javax.swing.JFrame{
         lbMensajeHab.setVisible(false);//Mensaje cuando una habitacion tenga estado DISPONIBLE O MANTENIMIENTO
         pnDatosCliente.setVisible(false); //Cuando la habitacion tenga estado OCUPADO O RESERVADO
         pnServ.setVisible(false); //Cuando la habitacion tenga estado OCUPADO O RESERVADO
+        
+        
+        ds.OcultarColumna(tabla, 0); //OCultamos la columna ID de la tabla Servicios
     }
 
     public void actualizar(){
@@ -141,7 +146,7 @@ public class Habitaciones extends javax.swing.JFrame{
         }
     }
     
-    public void GetCliente(String numHab){
+    public void GetCliente(String numHab){ // Obtiene los datos del clinete que ocua la habitacion hoy dia (CURDATE)
         String _doc = control.DevolverRegistroDto("select doc from vw_alojamientoyreserva where (curdate() between fecha_ent and fecha_sal) and numHab = "+numHab, 1);
         lbDoc.setText(_doc);
         lbCliente.setText(control.DevolverRegistroDto("select cliente from vw_alojamientoyreserva where (curdate() between fecha_ent and fecha_sal) and numHab = "+numHab, 1));
@@ -519,13 +524,12 @@ public class Habitaciones extends javax.swing.JFrame{
     private void lbActualizar2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbActualizar2MouseClicked
         actualizar();
     }//GEN-LAST:event_lbActualizar2MouseClicked
-
     private void lbActualizar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbActualizar1MouseClicked
         actualizar();
     }//GEN-LAST:event_lbActualizar1MouseClicked
 
     private void btComprobanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btComprobanteActionPerformed
-        // insertar en detComp la habitacion,
+        // insertar en detComp la habitacion
         // insertar los servicios en detComp
         // mostrar boleta/factura
     }//GEN-LAST:event_btComprobanteActionPerformed
