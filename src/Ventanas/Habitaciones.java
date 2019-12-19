@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 import Clases.Control;
 import Clases.Controlador;
 import Clases.Design;
+import Clases.Imprimir;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ public class Habitaciones extends javax.swing.JFrame{
 
     /**/
     Design ds=new Design();
+    Imprimir imp = new Imprimir();
     Controlador control=new Controlador();
     public static ArrayList<Habitacion> datosHab = new ArrayList<>(); 
     /**/
@@ -36,6 +38,7 @@ public class Habitaciones extends javax.swing.JFrame{
     DefaultTableModel modelo=new DefaultTableModel();
     /**/
     int tipoCliente = 0; // 0: NN, 1: Persona, 2: Empresa
+    boolean habOcupado = false; // Sera 'true' solo si la habitacion seleccionada esta Ocupada, se usa para emitir factura/boleta
         
     public Habitaciones() {
         initComponents();
@@ -167,6 +170,15 @@ public class Habitaciones extends javax.swing.JFrame{
             suma += Double.parseDouble(tb.getValueAt(i, column).toString());
         }
         return ""+suma;
+    }
+    public void Limpiar(){
+        lbNumHab.setText("");
+        lbTipoHab.setText("");
+        txPrecio.setText("");
+        lbMensajeHab.setVisible(true);
+        pnDatosCliente.setVisible(false);
+        pnServ.setVisible(false);
+        habOcupado = false;
     }
     
     @SuppressWarnings("unchecked")
@@ -529,9 +541,48 @@ public class Habitaciones extends javax.swing.JFrame{
     }//GEN-LAST:event_lbActualizar1MouseClicked
 
     private void btComprobanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btComprobanteActionPerformed
-        // insertar en detComp la habitacion
-        // insertar los servicios en detComp
-        // mostrar boleta/factura
+                
+        if(lbNumHab.getText().length()>0 && habOcupado && tipoCliente!=0){ // Si hay un numero en lbNumHab y la habitacion esta Ocupado
+            // Proceso para obtener el idAloj
+            String __numHab = lbNumHab.getText();
+            String __sql = "select id from vw_alojamientoyreserva where (curdate() between fecha_ent and fecha_sal) and numHab = "+__numHab;
+            String _idAloj = control.DevolverRegistroDto(__sql, 1);
+            // insertar en detComp la habitacion
+            // tipoCliente es --> {1: persona} y {2: empresa}
+            control.CrearRegistro("call proc_InsBolFac("+tipoCliente+",0,"+Double.parseDouble(txPrecio.getText())+","+_idAloj+",2,'"+lbDoc.getText()+"')");
+           
+            // Proceso para obtener el numero de boleta o factura
+            String __numComprobante = control.DevolverRegistroDto("select numBoleta, numFactura from detallecomprobante order by idcomprobante desc limit 1", tipoCliente); // Si es persona sera 1 (Boleta) y si esempresa sera 2 (factura)
+                       
+            // insertar los servicios en detComp y cambia su estado a Cancelado{2}
+            if(tabla.getRowCount()>0){ // Si hay algun Servicio a cuneta de la habitacion
+                for(int i=0; i<tabla.getRowCount();i++){
+                    //tipoComp int,numC int, tot  decimal(9,2), idmotivo int, motivo int, doc varchar(11)
+                    //modelo.setColumnIdentifiers(new String[]{"ID", "SERVICIO", "PRECIO", "CANTIDAD", "TOTAL", "FECHA"});
+                    control.CrearRegistro("call proc_InsBolFac("
+                            +tipoCliente+","+__numComprobante+","
+                            +Double.parseDouble(tabla.getValueAt(i, 4).toString())
+                            +","+tabla.getValueAt(i, 0).toString()+",1,"+lbDoc.getText()+")");
+                    control.CrearRegistro("update detalleservicio set idEstServ = 2 where idDetServ = "+tabla.getValueAt(i, 0).toString());
+                }
+            }
+            
+            String _aux_lpadNumC = control.DevolverRegistroDto("select lpad(" + __numComprobante+ ", 8,'0')", 1);
+            // mostrar boleta/factura
+            if(tipoCliente == 1){// Boleta
+                imp.ImprCon1Parametro("boleta", "Boleta N° " + _aux_lpadNumC, "numeroBoleta", _aux_lpadNumC);
+            }else if(tipoCliente == 2){ // Factura
+                imp.ImprCon1Parametro("factura", "Factura N° " + _aux_lpadNumC, "numeroFactura", _aux_lpadNumC);
+            }
+            // Cambiar estado alojamiento a 'Concluido'
+            control.CrearRegistro("update detallealojamiento set idestadoAloj = 3 where idDetAloj = "+_idAloj);
+            // Cambiar el estado de la habitacion a 'Mantenimiento'
+            control.CrearRegistro("update habitaciones set idestadoHab = 4 where numHab = "+lbNumHab.getText());
+            //Actualizamos el panel de las habitaciones
+            actualizar();
+            Limpiar();
+        }
+        
     }//GEN-LAST:event_btComprobanteActionPerformed
 
     /**
@@ -628,10 +679,15 @@ public class Habitaciones extends javax.swing.JFrame{
                     GetCliente(text);
                     GetServicios(text, lbDoc.getText());
                     lbTotServicio.setText(SumarColumna(tabla, 4));
+                    habOcupado = false;
+                    if(__estado.equals("Ocupado")){
+                        habOcupado = true;
+                    }
                 }else{
                     lbMensajeHab.setVisible(true);
                     pnDatosCliente.setVisible(false);
                     pnServ.setVisible(false);
+                    habOcupado = false;
                 }
             }
         }

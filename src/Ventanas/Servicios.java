@@ -791,7 +791,7 @@ public class Servicios extends javax.swing.JFrame {
             control.LlenarJtable(modelo, "SELECT * FROM vista_ds", 9);
             int _id = Integer.parseInt(control.DevolverRegistroDto("select idDetServ from detalleservicio order by idDetServ desc limit 1", 1));
             double total = Double.parseDouble(txtpreciounit1.getText()) * Integer.parseInt(txtcant.getText());
-//proc_InsBolFac(tipoCompr{1:Bol,2:Fac},numBF{0:crear nuevo, Otro: añadir a existenete}, total, idmotivo{idServ, idAloj}, motivo{1:Serv, 2:Hab}, documento)
+//proc_InsBolFac(tipoCompr{1:Bol,2:Fac},numBF{0:crear nuevo, Otro: añadir a existente}, total, idmotivo{idServ, idAloj}, motivo{1:Serv, 2:Hab}, documento)
             control.CrearRegistro("call proc_InsBolFac(1,0," + total + "," + _id + ",1," + lbDNI.getText() + ")");
             //JOptionPane.showMessageDialog(null, "Se lleno correctamente, mostrando boleta x servicio");
             String _numBol = control.DevolverRegistroDto("select lpad(numBoleta, 8,'0') from boletas order by numBoleta desc limit 1", 1);
