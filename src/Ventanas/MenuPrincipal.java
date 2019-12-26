@@ -104,7 +104,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 + "from vw_alojamientoyreserva "
                 + "where (fecha_ent = curdate() and estadoAloj = 'Pendiente') "
                 + "and (cliente like '%"+txBuscar.getText()+"%' or numHab like '%"+txBuscar.getText()+"%')", 4);
-
     }
     
     @SuppressWarnings("unchecked")

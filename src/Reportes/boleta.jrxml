@@ -12,6 +12,7 @@ fechaEmision,
 subtotal,
 igv,
 total,
+totalServ,
 cantidad,
 descripcion,
 precioUnit,
@@ -35,7 +36,10 @@ cliente
 	<field name="total" class="java.math.BigDecimal">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="cantidad" class="java.lang.String">
+	<field name="totalServ" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="cantidad" class="java.lang.Long">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="descripcion" class="java.lang.String">
@@ -58,6 +62,9 @@ cliente
 	</variable>
 	<variable name="_total" class="java.math.BigDecimal" calculation="Sum">
 		<variableExpression><![CDATA[$F{total}]]></variableExpression>
+	</variable>
+	<variable name="_descuento" class="java.lang.String">
+		<variableExpression><![CDATA[$F{totalServ}-$F{total}]]></variableExpression>
 	</variable>
 	<background>
 		<band splitType="Stretch"/>
@@ -406,19 +413,19 @@ ELECTRONICA]]></text>
 				<textFieldExpression><![CDATA[$V{_total}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="472" y="50" width="73" height="20" uuid="5c8e68c2-d5dd-4207-bf86-99f4c7a98afd"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="11"/>
-				</textElement>
-				<text><![CDATA[0.00]]></text>
-			</staticText>
-			<staticText>
 				<reportElement x="472" y="90" width="73" height="20" uuid="5b1b9da4-5e6f-41a6-828d-54c2b3f1b41e"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial" size="11"/>
 				</textElement>
 				<text><![CDATA[0.00]]></text>
 			</staticText>
+			<textField>
+				<reportElement x="472" y="50" width="73" height="20" uuid="2eb613e2-1f67-4ea2-886d-a88444ac5a37"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{_descuento}]]></textFieldExpression>
+			</textField>
 		</band>
 	</summary>
 </jasperReport>

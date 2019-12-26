@@ -794,7 +794,7 @@ public class Servicios extends javax.swing.JFrame {
 //proc_InsBolFac(tipoCompr{1:Bol,2:Fac},numBF{0:crear nuevo, Otro: añadir a existente}, total, idmotivo{idServ, idAloj}, motivo{1:Serv, 2:Hab}, documento)
             control.CrearRegistro("call proc_InsBolFac(1,0," + total + "," + _id + ",1," + lbDNI.getText() + ")");
             //JOptionPane.showMessageDialog(null, "Se lleno correctamente, mostrando boleta x servicio");
-            String _numBol = control.DevolverRegistroDto("select lpad(numBoleta, 8,'0') from boletas order by numBoleta desc limit 1", 1);
+            String _numBol = control.DevolverRegistroDto("select CONCAT('B', LPAD(numBoleta, 7, '0')) from boletas order by numBoleta desc limit 1", 1);
             imp.ImprCon1Parametro("boleta", "Boleta N° " + _numBol, "numeroBoleta", _numBol);
 
             alr.titulo.setText("<html><center>" + rpt + "</center></html>");
@@ -998,7 +998,7 @@ public class Servicios extends javax.swing.JFrame {
 //proc_InsBolFac(tipoCompr{1:Bol,2:Fac},numBF{0:crear nuevo, Otro: añadir a existenete}, total, idmotivo{idServ, idAloj}, motivo{1:Serv, 2:Hab}, documento)
             control.CrearRegistro("call proc_InsBolFac(2,0," + total + "," + _id + ",1," + lbRUC.getText() + ")");
             //JOptionPane.showMessageDialog(null, "Se lleno correctamente, mostrando boleta x servicio");
-            String _numFac = control.DevolverRegistroDto("select lpad(numFactura, 8,'0') from facturas order by numFactura desc limit 1;", 1);
+            String _numFac = control.DevolverRegistroDto("select CONCAT('F', LPAD(numFactura, 7, '0')) from facturas order by numFactura desc limit 1;", 1);
             imp.ImprCon1Parametro("factura", "Factura N° " + _numFac, "numeroFactura", _numFac);
 
             alr.titulo.setText("<html><center>" + rpt + "</center></html>");

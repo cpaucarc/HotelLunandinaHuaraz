@@ -130,6 +130,7 @@ public class ReporteServicios extends javax.swing.JInternalFrame {
             }
         ));
         jTable1.setEnabled(false);
+        jTable1.setRowHeight(25);
         jTable1.setSelectionBackground(new java.awt.Color(0, 122, 255));
         jScrollPane1.setViewportView(jTable1);
 
@@ -150,7 +151,7 @@ public class ReporteServicios extends javax.swing.JInternalFrame {
         lbMes.setText("Desayuno");
         jPanel3.add(lbMes, new org.netbeans.lib.awtextra.AbsoluteConstraints(317, 10, 150, 30));
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, 784, 374));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, 784, 375));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 844, 720));
 

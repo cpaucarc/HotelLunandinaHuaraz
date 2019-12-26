@@ -164,6 +164,16 @@ public class Habitaciones extends javax.swing.JFrame{
         String _sql = "select idServ, nombreServ, precioServ, cantidad, (precioServ*cantidad),fechaServicio from vw_sevicios where estadoServ = 'Sin Pagar' and numHab = "+numHab+" and doc = "+doc;
         control.LlenarJtable(modelo, _sql, 6);
     }
+    public void GetFechas(String numHab){
+        String _fechaEntrada = control.DevolverRegistroDto("select fecha_ent from vw_alojamientoyreserva where (curdate() between fecha_ent and fecha_sal) and numHab = "+numHab, 1);
+        String _fechaSalida = control.DevolverRegistroDto("select fecha_sal from vw_alojamientoyreserva where (curdate() between fecha_ent and fecha_sal) and numHab = "+numHab, 1);
+        String _NumDias = control.DevolverRegistroDto("select datediff(fecha_sal,fecha_ent) from vw_alojamientoyreserva where (curdate() between fecha_ent and fecha_sal) and numHab = "+numHab, 1);
+        lbNumDias.setText(_NumDias);
+        lbFechaEntrada.setText(_fechaEntrada);
+        lbFechaSalida.setText(_fechaSalida);
+        
+        txPrecioTotal.setText(""+Integer.parseInt(_NumDias)*Double.parseDouble(txPrecioUnit.getText()));
+    }
     public String SumarColumna(JTable tb, int column){
         double suma = 0;
         for(int i=0; i<tb.getRowCount();i++){
@@ -174,7 +184,8 @@ public class Habitaciones extends javax.swing.JFrame{
     public void Limpiar(){
         lbNumHab.setText("");
         lbTipoHab.setText("");
-        txPrecio.setText("");
+        txPrecioUnit.setText("");
+        txPrecioTotal.setText("");
         lbMensajeHab.setVisible(true);
         pnDatosCliente.setVisible(false);
         pnServ.setVisible(false);
@@ -205,7 +216,9 @@ public class Habitaciones extends javax.swing.JFrame{
         jLabel8 = new javax.swing.JLabel();
         lbTipoHab = new javax.swing.JLabel();
         lbprecio = new javax.swing.JLabel();
-        txPrecio = new javax.swing.JTextField();
+        txPrecioTotal = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        txPrecioUnit = new javax.swing.JTextField();
         btCheckOut = new javax.swing.JButton();
         btComprobante = new javax.swing.JButton();
         pnDatosCliente = new javax.swing.JPanel();
@@ -217,6 +230,9 @@ public class Habitaciones extends javax.swing.JFrame{
         jLabel16 = new javax.swing.JLabel();
         lbProc = new javax.swing.JLabel();
         jProgressBar1 = new javax.swing.JProgressBar();
+        lbNumDias = new javax.swing.JLabel();
+        lbFechaEntrada = new javax.swing.JLabel();
+        lbFechaSalida = new javax.swing.JLabel();
         pnServ = new javax.swing.JPanel();
         pnServicios = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -386,22 +402,34 @@ public class Habitaciones extends javax.swing.JFrame{
 
         lbprecio.setBackground(new java.awt.Color(255, 255, 255));
         lbprecio.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        lbprecio.setText("Precio");
+        lbprecio.setText("Precio x Dia");
         pnDatosHab.add(lbprecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, 110, 30));
 
-        txPrecio.setFont(new java.awt.Font("Leelawadee UI Semilight", 1, 14)); // NOI18N
-        txPrecio.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txPrecio.setSelectionColor(new java.awt.Color(0, 122, 255));
-        pnDatosHab.add(txPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 150, 200, 30));
+        txPrecioTotal.setFont(new java.awt.Font("Leelawadee UI Semilight", 1, 14)); // NOI18N
+        txPrecioTotal.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txPrecioTotal.setSelectionColor(new java.awt.Color(0, 122, 255));
+        pnDatosHab.add(txPrecioTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 205, 200, 30));
 
-        pnInfo.add(pnDatosHab, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 380, 220));
+        jLabel2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel2.setText("Precio Total");
+        pnDatosHab.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 205, 110, 30));
+
+        txPrecioUnit.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txPrecioUnit.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txPrecioUnitKeyReleased(evt);
+            }
+        });
+        pnDatosHab.add(txPrecioUnit, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 150, 200, 30));
+
+        pnInfo.add(pnDatosHab, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 380, 270));
 
         btCheckOut.setBackground(new java.awt.Color(234, 82, 62));
         btCheckOut.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
         btCheckOut.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/exit.png"))); // NOI18N
         btCheckOut.setText("Check - Out");
         btCheckOut.setBorder(null);
-        pnInfo.add(btCheckOut, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 315, 320, 35));
+        pnInfo.add(btCheckOut, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 360, 320, 30));
 
         btComprobante.setBackground(new java.awt.Color(111, 168, 183));
         btComprobante.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
@@ -413,7 +441,7 @@ public class Habitaciones extends javax.swing.JFrame{
                 btComprobanteActionPerformed(evt);
             }
         });
-        pnInfo.add(btComprobante, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 260, 320, 35));
+        pnInfo.add(btComprobante, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 320, 320, 35));
 
         pnDatosCliente.setBackground(new java.awt.Color(255, 255, 255));
         pnDatosCliente.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -459,6 +487,18 @@ public class Habitaciones extends javax.swing.JFrame{
         jProgressBar1.setForeground(new java.awt.Color(255, 51, 102));
         jProgressBar1.setValue(49);
         pnDatosCliente.add(jProgressBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 306, 430, 30));
+
+        lbNumDias.setFont(new java.awt.Font("Sylfaen", 0, 14)); // NOI18N
+        lbNumDias.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbNumDias.setText("jLabel3");
+        lbNumDias.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, new java.awt.Color(255, 204, 0), new java.awt.Color(0, 153, 153)));
+        pnDatosCliente.add(lbNumDias, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 270, 100, 30));
+
+        lbFechaEntrada.setText("jLabel3");
+        pnDatosCliente.add(lbFechaEntrada, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 274, 110, 20));
+
+        lbFechaSalida.setText("jLabel3");
+        pnDatosCliente.add(lbFechaSalida, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 280, 110, -1));
 
         pnInfo.add(pnDatosCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 0, 490, 400));
 
@@ -549,7 +589,7 @@ public class Habitaciones extends javax.swing.JFrame{
             String _idAloj = control.DevolverRegistroDto(__sql, 1);
             // insertar en detComp la habitacion
             // tipoCliente es --> {1: persona} y {2: empresa}
-            control.CrearRegistro("call proc_InsBolFac("+tipoCliente+",0,"+Double.parseDouble(txPrecio.getText())+","+_idAloj+",2,'"+lbDoc.getText()+"')");
+            control.CrearRegistro("call proc_InsBolFac("+tipoCliente+",0,"+Double.parseDouble(txPrecioTotal.getText())+","+_idAloj+",2,'"+lbDoc.getText()+"')");
            
             // Proceso para obtener el numero de boleta o factura
             String __numComprobante = control.DevolverRegistroDto("select numBoleta, numFactura from detallecomprobante order by idcomprobante desc limit 1", tipoCliente); // Si es persona sera 1 (Boleta) y si esempresa sera 2 (factura)
@@ -567,7 +607,12 @@ public class Habitaciones extends javax.swing.JFrame{
                 }
             }
             
-            String _aux_lpadNumC = control.DevolverRegistroDto("select lpad(" + __numComprobante+ ", 8,'0')", 1);
+            String _aux_lpadNumC = "";
+            if(tipoCliente == 1){ //Persona
+                _aux_lpadNumC = control.DevolverRegistroDto("select CONCAT('B', LPAD(" + __numComprobante+ ", 7, '0')))", 1);
+            }else if(tipoCliente == 2 ){// Empresa
+                _aux_lpadNumC = control.DevolverRegistroDto("select CONCAT('F', LPAD(" + __numComprobante+ ", 7, '0')))", 1);
+            }
             // mostrar boleta/factura
             if(tipoCliente == 1){// Boleta
                 imp.ImprCon1Parametro("boleta", "Boleta N° " + _aux_lpadNumC, "numeroBoleta", _aux_lpadNumC);
@@ -584,6 +629,12 @@ public class Habitaciones extends javax.swing.JFrame{
         }
         
     }//GEN-LAST:event_btComprobanteActionPerformed
+
+    private void txPrecioUnitKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txPrecioUnitKeyReleased
+        if(lbNumDias.getText().length()>0 && txPrecioUnit.getText().length()>0){
+            txPrecioTotal.setText(""+Integer.parseInt(lbNumDias.getText())*Double.parseDouble(txPrecioUnit.getText()));
+        }
+    }//GEN-LAST:event_txPrecioUnitKeyReleased
 
     /**
      * @param args the command line arguments
@@ -631,6 +682,7 @@ public class Habitaciones extends javax.swing.JFrame{
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JProgressBar jProgressBar1;
@@ -641,8 +693,11 @@ public class Habitaciones extends javax.swing.JFrame{
     private javax.swing.JLabel lbCerrar;
     private javax.swing.JLabel lbCliente;
     private javax.swing.JLabel lbDoc;
+    private javax.swing.JLabel lbFechaEntrada;
+    private javax.swing.JLabel lbFechaSalida;
     private javax.swing.JLabel lbMensajeHab;
     private javax.swing.JLabel lbMinimizar;
+    private javax.swing.JLabel lbNumDias;
     private javax.swing.JLabel lbNumHab;
     private javax.swing.JLabel lbProc;
     private javax.swing.JLabel lbTipoHab;
@@ -659,7 +714,8 @@ public class Habitaciones extends javax.swing.JFrame{
     private javax.swing.JPanel pnServicios;
     private javax.swing.JPanel pnTitulo;
     private javax.swing.JTable tabla;
-    private javax.swing.JTextField txPrecio;
+    private javax.swing.JTextField txPrecioTotal;
+    private javax.swing.JTextField txPrecioUnit;
     // End of variables declaration//GEN-END:variables
     
     MouseListener listener=new MouseListener() {
@@ -668,7 +724,7 @@ public class Habitaciones extends javax.swing.JFrame{
                 String text = ((JLabel) e.getSource()).getText();
                 lbNumHab.setText(text);
                 lbTipoHab.setText(control.DevolverRegistroDto("SELECT tipo FROM vw_habitacion WHERE numero = '"+text+"';", 1));
-                txPrecio.setText(control.DevolverRegistroDto("SELECT precio FROM vw_habitacion WHERE numero = '"+text+"';", 1));
+                txPrecioUnit.setText(control.DevolverRegistroDto("SELECT precio FROM vw_habitacion WHERE numero = '"+text+"';", 1));
                 String __estado = control.DevolverRegistroDto("SELECT estado FROM vw_habitacion WHERE numero = '"+text+"';", 1);
                 if(__estado.equals("Ocupado") || __estado.equals("Reservado")){
                     pnDatosCliente.setVisible(true);
@@ -678,6 +734,7 @@ public class Habitaciones extends javax.swing.JFrame{
                     
                     GetCliente(text);
                     GetServicios(text, lbDoc.getText());
+                    GetFechas(text);
                     lbTotServicio.setText(SumarColumna(tabla, 4));
                     habOcupado = false;
                     if(__estado.equals("Ocupado")){
@@ -688,6 +745,8 @@ public class Habitaciones extends javax.swing.JFrame{
                     pnDatosCliente.setVisible(false);
                     pnServ.setVisible(false);
                     habOcupado = false;
+                    
+                    txPrecioTotal.setText("");
                 }
             }
         }
