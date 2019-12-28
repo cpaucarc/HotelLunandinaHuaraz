@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="subLugar_NoMes" language="groovy" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="79cb89ee-0624-4411-ae2a-e125a9f8f57d">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="sub_year" class="java.lang.String"/>
+	<parameter name="sub_place" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select fechaEmision,sum(total),numHab, doc, cliente,lugar from vw_boleta_factura where year(fechaEmision) = $P{sub_year} and lugar = $P{sub_place} group by serie;]]>
+	</queryString>
+	<field name="fechaEmision" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="sum(total)" class="java.math.BigDecimal"/>
+	<field name="numHab" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="doc" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="cliente" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="lugar" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<variable name="_total" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{sum(total)}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="40" splitType="Stretch">
+			<image>
+				<reportElement x="10" y="10" width="50" height="20" uuid="2b4e48a5-a28a-4277-a3b2-291853bb3194"/>
+				<imageExpression><![CDATA["C:\\Users\\PAUCAR\\Documents\\NetBeansProjects\\Git\\HotelLunandinaHuaraz\\src\\Imagenes\\Recursos\\place.png"]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="30" y="5" width="171" height="30" forecolor="#171717" uuid="e6d12a48-7b23-4da3-b396-977aa5d2243a"/>
+				<textElement verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{sub_place}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="1" width="555" height="1" forecolor="#0D2746" uuid="a93f1b41-1204-494e-b0a7-fdbf3689100d"/>
+			</line>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="70" height="20" forecolor="#0D2746" backcolor="#0D2746" uuid="68d6d6c0-249b-4bf8-a3f5-59e45f318fee"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="70" y="0" width="120" height="20" forecolor="#0D2746" backcolor="#0D2746" uuid="534f5edd-f093-4cd6-8be7-4507bc1f0307"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="190" y="0" width="200" height="20" forecolor="#0D2746" backcolor="#0D2746" uuid="ed06c634-d9a8-4000-84a2-0fc3beba83df"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="390" y="0" width="75" height="20" forecolor="#0D2746" backcolor="#0D2746" uuid="35eb9b55-b1f9-4b2f-a44a-b3000107b60d"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="465" y="0" width="90" height="20" forecolor="#0D2746" backcolor="#0D2746" uuid="9d1d4e72-97a0-4236-b824-1377f9caf777"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="0" width="70" height="20" forecolor="#FFFFFF" uuid="f0c62143-6ad6-40c8-a559-05e30ca0c748"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="465" y="0" width="90" height="20" forecolor="#FFFFFF" uuid="002fbedd-2c30-4bb1-80b6-d06f935a2e87"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Monto (S/.)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="70" y="0" width="120" height="20" forecolor="#FFFFFF" uuid="5317d1cf-bc0c-4c98-850e-737ca892bc87"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[N° de Identificacion]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="190" y="0" width="200" height="20" forecolor="#FFFFFF" uuid="5ca51b56-22ed-4334-9be5-1f3496025734"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre del Cliente]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="390" y="0" width="75" height="20" forecolor="#FFFFFF" uuid="3b709e3d-8a68-4bbc-a1a6-5a38b068a324"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[N° Habitacion]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="70" height="20" forecolor="#0D2746" uuid="e7e4ad2c-58d3-42c0-9f30-418aeaa44456"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="70" y="0" width="120" height="20" forecolor="#0D2746" uuid="f6333495-2400-455c-8f64-0381ece74bb3"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="190" y="0" width="200" height="20" forecolor="#0D2746" uuid="1fd9078a-f301-4c31-87f6-c3b024cf5572"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="390" y="0" width="75" height="20" forecolor="#0D2746" uuid="ff849a19-4175-4791-9d90-b27b13835a09"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="465" y="0" width="90" height="20" forecolor="#0D2746" uuid="6501c7b3-da79-4293-bda2-1f529bbc95da"/>
+			</rectangle>
+			<textField>
+				<reportElement x="10" y="0" width="50" height="20" forecolor="#171717" uuid="457c0b51-7322-4259-a47e-3ee883e5ab3c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fechaEmision}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="465" y="0" width="70" height="20" forecolor="#171717" uuid="6812f74f-df6b-49fc-870f-9d13f4e7a426"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{sum(total)}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="70" y="0" width="120" height="20" forecolor="#171717" uuid="6c58b2bf-9528-4b92-8900-b69ee231239d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{doc}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="190" y="0" width="200" height="20" forecolor="#171717" uuid="4b1b9efd-af49-4f14-929e-54a6c4e1c202"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cliente}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="390" y="0" width="75" height="20" forecolor="#171717" uuid="363bd9ba-0367-4fff-a614-caa9bb83cdec"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{numHab}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="30" splitType="Stretch">
+			<rectangle>
+				<reportElement x="390" y="0" width="75" height="20" forecolor="#0D2746" backcolor="#0D2746" uuid="4a12063c-6b67-498a-86ea-59a5cc84a7bd"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="465" y="0" width="90" height="20" forecolor="#0D2746" backcolor="#FFFFFF" uuid="969ab097-0167-41e2-9969-c51acb2dff64"/>
+			</rectangle>
+			<textField>
+				<reportElement x="465" y="0" width="70" height="20" forecolor="#171717" uuid="d083bc47-80ef-4b7a-8433-d5bfda583b5c"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{_total}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="390" y="0" width="75" height="20" forecolor="#FFFFFF" uuid="57634376-4806-4aab-89d7-c907011ae8fc"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

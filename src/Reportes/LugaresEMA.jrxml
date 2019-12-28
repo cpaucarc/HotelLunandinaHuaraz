@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="LugaresEMA" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="10fa2d89-905a-4237-be62-8956b6c644b6">
+	<property name="ireport.zoom" value="1.3310000000000006"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="_month" class="java.lang.String"/>
+	<parameter name="_year" class="java.lang.String"/>
+	<parameter name="_place" class="java.lang.String"/>
+	<parameter name="_monthName" class="java.lang.String"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\Users\\PAUCAR\\Documents\\NetBeansProjects\\Git\\HotelLunandinaHuaraz\\src\\Reportes\\"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select curtime() as hora;]]>
+	</queryString>
+	<field name="hora" class="java.sql.Time"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="215" splitType="Stretch">
+			<staticText>
+				<reportElement x="10" y="40" width="220" height="20" forecolor="#171717" uuid="4750cd72-df19-4a01-bb68-b6bd60d5e80a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<text><![CDATA[Avenida Centenario N° 1187 - Huaraz - Perú]]></text>
+			</staticText>
+			<image>
+				<reportElement x="24" y="8" width="192" height="35" uuid="55bf69dc-6940-4571-b430-d53e3dbb334e"/>
+				<imageExpression><![CDATA["C:\\Users\\PAUCAR\\Documents\\NetBeansProjects\\Git\\HotelLunandinaHuaraz\\src\\Imagenes\\Lunandina\\logo rojo.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="10" y="60" width="220" height="20" forecolor="#171717" uuid="2a34a5d6-f0bd-4a34-9446-0842dad83b4a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<text><![CDATA[Teléfono: (043) 236408]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="278" y="0" width="254" height="80" forecolor="#171717" uuid="580402bc-df47-46e1-a5c2-40e30b3a6e29"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[REPORTE DE GANANCIAS POR LUGARES]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="95" width="555" height="1" forecolor="#0D2746" uuid="f71eae05-1371-498f-8f90-977fa9ffb654"/>
+			</line>
+			<textField>
+				<reportElement x="120" y="130" width="100" height="25" forecolor="#171717" uuid="15aa2e54-98c7-42d2-9932-157a1d78e92c"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{_monthName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="120" y="155" width="100" height="25" forecolor="#171717" uuid="c953c5da-71a8-4f5b-8d17-46a1c0eb038a"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{_year}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yy">
+				<reportElement x="120" y="180" width="100" height="25" forecolor="#171717" uuid="0224b75a-260d-4ef8-97b9-7233907d83ce"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="10" y="180" width="100" height="25" forecolor="#171717" uuid="2688a384-a57b-43c7-b007-7b0576d122d9"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<text><![CDATA[Fecha de Consulta:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="42" y="155" width="68" height="25" forecolor="#171717" uuid="06344988-d430-4bd2-86d8-56bf93ba83ff"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<text><![CDATA[Año:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="105" width="100" height="25" forecolor="#171717" uuid="bcfe4ca9-6e4c-4384-87d4-9c7ba40738fc"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="11" isItalic="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Periodo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="42" y="130" width="68" height="25" forecolor="#171717" uuid="122cbf10-c5ca-477c-9eb9-a1b6ecbd2bb0"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<text><![CDATA[Mes:]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<subreport>
+				<reportElement x="0" y="0" width="555" height="125" uuid="4932e41b-fc20-4a7d-b812-fcfd24537c05"/>
+				<subreportParameter name="sub_month">
+					<subreportParameterExpression><![CDATA[$P{_month}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="sub_year">
+					<subreportParameterExpression><![CDATA[$P{_year}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="sub_place">
+					<subreportParameterExpression><![CDATA[$P{_place}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "subLugar_Mes.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="200" y="0" width="80" height="20" uuid="07946389-078b-483e-94ef-6a7bece4eaa5"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[""+$V{PAGE_NUMBER}+" / "]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="280" y="0" width="40" height="20" uuid="32664113-d72b-4ed5-9f62-66636ffe2738"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

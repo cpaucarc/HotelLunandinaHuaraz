@@ -3,18 +3,21 @@ package Ventanas;
 
 import Clases.Controlador;
 import Clases.Design;
+import Clases.Imprimir;
+import alertas.AlertaError;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class LugarProcedencia extends javax.swing.JInternalFrame {
 
+    Imprimir imp=new Imprimir();
     Controlador control=new Controlador();
     Design ds=new Design();
     DefaultTableModel modelo=new DefaultTableModel();
     
     public LugarProcedencia() {
         initComponents();
-        cbMonth.setSelectedIndex(Integer.parseInt(control.DevolverRegistroDto("select (month(curdate())-1)", 1)));
+        cbMonth.setSelectedIndex(Integer.parseInt(control.DevolverRegistroDto("select (month(curdate()))", 1)));
         cbYear.setValue(Integer.parseInt(control.DevolverRegistroDto("select year(curdate())", 1)));
         SetPlace();
         LlenarTabla();
@@ -27,8 +30,8 @@ public class LugarProcedencia extends javax.swing.JInternalFrame {
         tabla.setModel(modelo);
         
         String mes = "";
-        if(cbMonth.getSelectedIndex() != 12){
-            mes = "month(fechaEmision) = "+(cbMonth.getSelectedIndex()+1)+" AND ";
+        if(cbMonth.getSelectedIndex() != 0){ // 0 significa que debe mostrarse TODOS los meses
+            mes = "month(fechaEmision) = "+(cbMonth.getSelectedIndex())+" AND ";
         }
         
         String _sql1 = "SELECT fechaEmision,sum(totalServ),cliente,lugar FROM ";
@@ -46,6 +49,21 @@ public class LugarProcedencia extends javax.swing.JInternalFrame {
     }
     public void SetPlace(){
         lbPlace.setText(txLugar.getText()+" ("+cbMonth.getSelectedItem().toString()+" - "+cbYear.getValue()+")");
+    }
+    public int CasoConsulta(){
+        if(txLugar.getText().trim().length() == 0){ // Todos los lugares
+            if(cbMonth.getSelectedIndex() == 0){ //Todos los meses
+                return 4;
+            }else{//Mes especifico
+                return 3;
+            }
+        }else{ // Lugar Especifico
+            if(cbMonth.getSelectedIndex() == 0){ //Todos los meses
+                return 2;
+            }else{//Mes especifico
+                return 1;
+            }
+        }
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -84,8 +102,7 @@ public class LugarProcedencia extends javax.swing.JInternalFrame {
         jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 30, 120, 30));
 
         cbMonth.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
-        cbMonth.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre", "Todos los meses" }));
-        cbMonth.setSelectedIndex(12);
+        cbMonth.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos los meses", "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" }));
         cbMonth.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cbMonthItemStateChanged(evt);
@@ -119,6 +136,7 @@ public class LugarProcedencia extends javax.swing.JInternalFrame {
 
         txLugar.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 13)); // NOI18N
         txLugar.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txLugar.setSelectionColor(new java.awt.Color(0, 122, 255));
         txLugar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txLugarKeyReleased(evt);
@@ -198,10 +216,31 @@ public class LugarProcedencia extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cbYearPropertyChange
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if(cbMonth.getSelectedIndex() == 12){
-            JOptionPane.showMessageDialog(null, "Todos los meses");
-        }else{
-            JOptionPane.showMessageDialog(null, "Mes seleccionado: "+cbMonth.getSelectedIndex()+" - "+cbMonth.getSelectedItem());
+        
+        String __month = cbMonth.getSelectedIndex()+"";
+        String __year = cbYear.getValue()+"";
+        String __nameMonth = cbMonth.getSelectedItem().toString();
+        
+        
+        if(tabla.getRowCount()>0){ //Existen filas, si hay reporte
+            String __namePlace = tabla.getValueAt(0, 3).toString();
+            switch(CasoConsulta()){
+                case 1:
+                    imp.Imp4P("Reporte por Lugar", "LugaresEMA", "_month", "_year", "_place", "_monthName", __month, __year, __namePlace, __nameMonth);
+                    break;
+                case 2:
+                    imp.Imp2P("LugaresEA", "Reporte por Lugar", "year", "place", __year, txLugar.getText());
+                    break;
+                case 3:
+                    imp.Imp3P("Reporte por Lugar", "Lugares_Mes", "month", __month, "year", __year, "monthName", __nameMonth);
+                    break;
+                case 4:
+                    imp.Imp2P("LugaresEA", "Reporte por Lugar", "year", "place", __year, txLugar.getText());
+                    break;
+                default: JOptionPane.showMessageDialog(null, "No hay registros");
+            }
+        }else{ // No existen filas, no hay reporte
+            JOptionPane.showMessageDialog(null, "No existen registros con este criterio de busqueda");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

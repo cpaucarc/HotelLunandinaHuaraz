@@ -999,8 +999,8 @@ public class Servicios extends javax.swing.JFrame {
             control.CrearRegistro("call proc_InsBolFac(2,0," + total + "," + _id + ",1," + lbRUC.getText() + ")");
             //JOptionPane.showMessageDialog(null, "Se lleno correctamente, mostrando boleta x servicio");
             String _numFac = control.DevolverRegistroDto("select CONCAT('F', LPAD(numFactura, 7, '0')) from facturas order by numFactura desc limit 1;", 1);
-            imp.ImprCon1Parametro("factura", "Factura N° " + _numFac, "numeroFactura", _numFac);
-
+            //imp.ImprCon1Parametro("factura", "Factura N° " + _numFac, "numeroFactura", _numFac);
+            imp.Imp2P("factura", "Factura N° "+_numFac, "numeroFactura", "montoLiteral", _numFac, Textos.montoLiteral(""+total));
             alr.titulo.setText("<html><center>" + rpt + "</center></html>");
             alr.setVisible(true);
             limpiar();
