@@ -63,7 +63,7 @@ public class Reservas extends javax.swing.JFrame {
 
         btEliminar.setVisible(false);
 //        jPanel5.setVisible(false);
-        );
+        
 //        jPanel5.setVisible(false); 
       
         inicializarJTable_cliente();
