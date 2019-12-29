@@ -312,7 +312,7 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="30" y="250" width="784" height="374"/>
+              <AbsoluteConstraints x="30" y="250" width="784" height="375"/>
             </Constraint>
           </Constraints>
 
@@ -384,6 +384,7 @@
                       </Table>
                     </Property>
                     <Property name="enabled" type="boolean" value="false"/>
+                    <Property name="rowHeight" type="int" value="25"/>
                     <Property name="selectionBackground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="ff" green="7a" red="0" type="rgb"/>
                     </Property>

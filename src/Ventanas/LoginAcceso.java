@@ -12,7 +12,7 @@ public class LoginAcceso extends javax.swing.JFrame {
     Controlador control = new Controlador();
     static Design design = new Design();
     public boolean psw = false;
-    String user, password;// Para hacer la compracion para el ingreso al sistema  
+    String user, password;// Para hacer la comparacion para el ingreso al sistema  
 
     public LoginAcceso() {
         initComponents();

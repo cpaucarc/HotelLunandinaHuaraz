@@ -1,12 +1,40 @@
 
 package Ventanas;
 
+import Clases.Controlador;
+import Clases.Design;
+import javax.swing.table.DefaultTableModel;
+
 public class IngresosAnuales extends javax.swing.JInternalFrame {
 
+    Controlador control=new Controlador();
+    Design ds=new Design();
+    DefaultTableModel modelo=new DefaultTableModel();
+    
     public IngresosAnuales() {
         initComponents();
+        cbYear.setValue(Integer.parseInt(control.DevolverRegistroDto("select year(curdate())", 1)));
+        LlenarTabla();
+        ds.Centrar_Tabla(tabla);
     }
-
+    public void LlenarTabla(){       
+        
+        modelo.setColumnIdentifiers(new String[]{"Fecha", "Monto Total", "Cliente", "Procedencia"});
+        tabla.setModel(modelo);
+        
+        String _sql1 = "select fechaEmision,sum(totalServ),cliente,lugar from ";
+        String _sql2 = " where year(fechaEmision) = "+cbYear.getValue();
+        String sql = _sql1+"vw_boleta"+_sql2+" group by numBoleta union "+_sql1+"vw_factura"+_sql2+" group by numFactura  order by fechaEmision";
+        control.LlenarJtable(modelo, sql, 4);
+        
+        //Tamaño de tabla: Ancho(724)
+        tabla.getColumnModel().getColumn(0).setPreferredWidth(100);
+        tabla.getColumnModel().getColumn(1).setPreferredWidth(100);
+        tabla.getColumnModel().getColumn(2).setPreferredWidth(374);
+        tabla.getColumnModel().getColumn(3).setPreferredWidth(150);
+        
+        lbTotal.setText(ds.SumarColumna(tabla, 1));
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -19,19 +47,18 @@ public class IngresosAnuales extends javax.swing.JInternalFrame {
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
         jLabel5 = new javax.swing.JLabel();
-        jYearChooser1 = new com.toedter.calendar.JYearChooser();
+        cbYear = new com.toedter.calendar.JYearChooser();
         jButton1 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabla = new javax.swing.JTable();
         jLabel6 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        lbAño = new javax.swing.JLabel();
+        lbTotal = new javax.swing.JLabel();
+        lbDate = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setBorder(null);
         setClosable(true);
-        setMaximizable(true);
         setTitle("Ingresos Anuales");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -69,7 +96,13 @@ public class IngresosAnuales extends javax.swing.JInternalFrame {
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/calendario.png"))); // NOI18N
         jLabel5.setText("Año");
         jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, 70, 30));
-        jPanel2.add(jYearChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 40, 100, 30));
+
+        cbYear.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                cbYearPropertyChange(evt);
+            }
+        });
+        jPanel2.add(cbYear, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 40, 100, 30));
 
         jButton1.setBackground(new java.awt.Color(111, 168, 183));
         jButton1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -84,8 +117,8 @@ public class IngresosAnuales extends javax.swing.JInternalFrame {
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "INGRESOS REGISTRADOS", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 12))); // NOI18N
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTable1.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabla.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
+        tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"22-10-2019", "200.00", "[Nombre de cliente aqui]", "Huaraz", "victor"},
                 {"23-10-2019", "225.50", "[Nombre de cliente aqui]", "Casma", "victor"},
@@ -97,39 +130,46 @@ public class IngresosAnuales extends javax.swing.JInternalFrame {
                 "Fecha", "Monto Total", "Cliente", "Procedencia", "Usuario"
             }
         ));
-        jTable1.setEnabled(false);
-        jTable1.setSelectionBackground(new java.awt.Color(0, 122, 255));
-        jScrollPane1.setViewportView(jTable1);
+        tabla.setEnabled(false);
+        tabla.setRowHeight(25);
+        tabla.setSelectionBackground(new java.awt.Color(0, 122, 255));
+        jScrollPane1.setViewportView(tabla);
 
-        jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 724, 234));
+        jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 724, 275));
 
         jLabel6.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel6.setText("Total  S/.");
-        jPanel3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 290, 70, 40));
+        jPanel3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 315, 90, 35));
 
-        jLabel3.setFont(new java.awt.Font("Leelawadee UI Semilight", 1, 14)); // NOI18N
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 295, 150, 35));
+        lbTotal.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+        lbTotal.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbTotal.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel3.add(lbTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 315, 100, 35));
 
-        lbAño.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        lbAño.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbAño.setText("2019");
-        jPanel3.add(lbAño, new org.netbeans.lib.awtextra.AbsoluteConstraints(317, 10, 150, 30));
+        lbDate.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        lbDate.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbDate.setText("2019");
+        jPanel3.add(lbDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(317, 10, 150, 30));
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, 784, 374));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, 784, 375));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 844, 720));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void cbYearPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_cbYearPropertyChange
+        lbDate.setText(""+cbYear.getValue());
+        LlenarTabla();
+    }//GEN-LAST:event_cbYearPropertyChange
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private com.toedter.calendar.JYearChooser cbYear;
     private javax.swing.ButtonGroup gDinero;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
@@ -138,9 +178,9 @@ public class IngresosAnuales extends javax.swing.JInternalFrame {
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField2;
-    private com.toedter.calendar.JYearChooser jYearChooser1;
-    private javax.swing.JLabel lbAño;
+    private javax.swing.JLabel lbDate;
+    private javax.swing.JLabel lbTotal;
+    private javax.swing.JTable tabla;
     // End of variables declaration//GEN-END:variables
 }

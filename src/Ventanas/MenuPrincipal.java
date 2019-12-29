@@ -3,17 +3,20 @@ package Ventanas;
 import java.awt.Color;
 import Clases.Control;
 import Clases.Controlador;
+import Clases.Design;
+import alertas.AlertQuestion;
 
 /* importaciones para animar label */
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import java.util.Timer;
-import java.util.TimerTask;
+//import javax.swing.Icon;
+//import javax.swing.ImageIcon;
+//import java.util.Timer;
+//import java.util.TimerTask;
 import javax.swing.table.DefaultTableModel;
 /* fin importaciones para animar label */
 public class MenuPrincipal extends javax.swing.JFrame {
 
     /* Ventanas externas */
+    Design ds=new Design();
     Controlador control=new Controlador();
     DefaultTableModel modelo=new DefaultTableModel();
     
@@ -32,13 +35,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
     int tamG = 13;
     /*Fin control de fuente y tamaño del menu */
     /* Variables para controlar animacion de label */
-    public int contador = 0;
-    int velocidad = 5; //seconds
-    Timer timer;
-    TimerTask tarea;
-    int velmil = velocidad * 1000;
-    Icon iconoxLabel;
-
+//    public int contador = 0;
+//    int velocidad = 5; //seconds
+//    Timer timer;
+//    TimerTask tarea;
+//    int velmil = velocidad * 1000;
+//    Icon iconoxLabel;
     /* Fin variables para controlar animacion de label */
 
     public MenuPrincipal() {
@@ -53,31 +55,34 @@ public class MenuPrincipal extends javax.swing.JFrame {
         }
 
         /* Controlador de animaciones*/
-        tarea = new TimerTask() {
-            @Override
-            public void run() {
-                switch (contador) {
-                    case 0:
-                        contador = 1;
-                        iconoxLabel = new ImageIcon(getClass().getResource("/Imagenes/Transicion/Hotel.jpg"));
-                        lbAnimacion.setIcon(iconoxLabel);
-                        break;
-                    case 1:
-                        contador = 2;
-                        iconoxLabel = new ImageIcon(getClass().getResource("/Imagenes/Transicion/Servicios.jpg"));
-                        lbAnimacion.setIcon(iconoxLabel);
-                        break;
-                    case 2:
-                        contador = 0;
-                        iconoxLabel = new ImageIcon(getClass().getResource("/Imagenes/Transicion/Cuartos.jpg"));
-                        lbAnimacion.setIcon(iconoxLabel);
-                        break;
-                }
-            }
-        };
-        timer = new Timer();
-        timer.scheduleAtFixedRate(tarea, velmil, velmil);
-        /* Fin controlador de animaciones*/        
+//        tarea = new TimerTask() {
+//            @Override
+//            public void run() {
+//                switch (contador) {
+//                    case 0:
+//                        contador = 1;
+//                        iconoxLabel = new ImageIcon(getClass().getResource("/Imagenes/Transicion/Hotel.jpg"));
+//                        lbAnimacion.setIcon(iconoxLabel);
+//                        break;
+//                    case 1:
+//                        contador = 2;
+//                        iconoxLabel = new ImageIcon(getClass().getResource("/Imagenes/Transicion/Servicios.jpg"));
+//                        lbAnimacion.setIcon(iconoxLabel);
+//                        break;
+//                    case 2:
+//                        contador = 0;
+//                        iconoxLabel = new ImageIcon(getClass().getResource("/Imagenes/Transicion/Cuartos.jpg"));
+//                        lbAnimacion.setIcon(iconoxLabel);
+//                        break;
+//                }
+//            }
+//        };
+//        timer = new Timer();
+//        timer.scheduleAtFixedRate(tarea, velmil, velmil);
+        /* Fin controlador de animaciones*/  
+        
+        
+        ds.OcultarColumna(tabla, 0);
     }
 
     
@@ -89,8 +94,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         tabla.getColumnModel().getColumn(1).setPreferredWidth(120);
         tabla.getColumnModel().getColumn(2).setPreferredWidth(300);
         tabla.getColumnModel().getColumn(3).setPreferredWidth(100);
-
-        tabla.getColumnModel().removeColumn(tabla.getColumnModel().getColumn(0));
     }
 
     private void Mostrar() {
@@ -99,11 +102,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 + "from vw_alojamientoyreserva "
                 + "where (fecha_ent = curdate() and estadoAloj = 'Pendiente') "
                 + "and (cliente like '%"+txBuscar.getText()+"%' or numHab like '%"+txBuscar.getText()+"%')", 4);
-        
-//           control.LlenarJtable(modelo, "select "
-//                   + "ID, Fecha_Resv, Cliente, N°Hab "
-//               + "from v_reservaclient where Fecha_Ent = curdate() and ("
-//                   + "Cliente like '%"+txBuscar.getText()+"%' or N°Hab like '%"+txBuscar.getText()+"%')", 4);
     }
     
     @SuppressWarnings("unchecked")
@@ -132,7 +130,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
-        btValidar = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         txBuscar = new javax.swing.JTextField();
         btValidar1 = new javax.swing.JButton();
@@ -380,20 +377,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jPanel4.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 460, 360));
 
-        btValidar.setBackground(new java.awt.Color(255, 185, 83));
-        btValidar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        btValidar.setForeground(new java.awt.Color(23, 23, 23));
-        btValidar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/lista.png"))); // NOI18N
-        btValidar.setText("Administrar Reservas");
-        btValidar.setBorder(null);
-        btValidar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btValidar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btValidarActionPerformed(evt);
-            }
-        });
-        jPanel4.add(btValidar, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 480, 190, 40));
-
         jLabel3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/buscar.png"))); // NOI18N
         jLabel3.setText("Buscar");
@@ -538,12 +521,24 @@ public class MenuPrincipal extends javax.swing.JFrame {
         lbServicio.setFont(new java.awt.Font(fuente, 0, tamP));
     }//GEN-LAST:event_lbServicioMouseExited
 
-    private void btValidarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btValidarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btValidarActionPerformed
-
     private void btValidar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btValidar1ActionPerformed
-        // TODO add your handling code here:
+        if(tabla.getSelectedRow()>0){
+            AlertQuestion aq=new AlertQuestion(this, true);
+            String rpt = "¿Desea validar la reserva de "+tabla.getValueAt(tabla.getSelectedRow(), 2)+"?";
+            String _idAloj = tabla.getValueAt(tabla.getSelectedRow(), 0).toString();
+            String _idHab = null;
+            aq.titulo.setText("<html><center>" + rpt + "</center></html>");
+            aq.setVisible(true);
+            if(aq._rsta){ // Cuando la respuesta es 'SI'
+                // Actualizamos el estado del alojamiento a Alojado {2}
+                control.CrearRegistro("update detallealojamiento set idestadoAloj = 2 where idDetAloj = "+_idAloj);
+                // Obtenemos el id de la habitacion
+                _idHab = control.DevolverRegistroDto("select idhabitacion from detallealojamiento where idDetAloj = "+_idAloj, 1);
+                // Actualizamos el estado de la habitacion a Ocupado {3}
+                control.CrearRegistro("update habitaciones set idestadoHab = 3 where idhabitacion = "+_idHab);
+                Mostrar();
+            }
+        }
     }//GEN-LAST:event_btValidar1ActionPerformed
 
     /* ALOJAMIENTO */
@@ -621,7 +616,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btValidar;
     private javax.swing.JButton btValidar1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

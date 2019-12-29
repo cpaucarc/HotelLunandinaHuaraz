@@ -9,12 +9,13 @@ import java.awt.event.*;
 import javax.swing.JComboBox;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-
 /**
  * **** @author User ********
  */
 public class Textos {
 
+    static Numero_a_Letras numLit = new Numero_a_Letras();
+    
     static public void Mayusculas(KeyEvent e) {
         if (Character.isLowerCase(e.getKeyChar())) {
             e.setKeyChar(("" + e.getKeyChar()).toUpperCase().charAt(0));
@@ -27,22 +28,25 @@ public class Textos {
         }
     }
 
-    static public void soloPurasLetras(KeyEvent e){
-        char c=e.getKeyChar();
-        if((c<65||c>90)&&(c<97||c>122)&&c!=32){
-            if(c!=241&&c!=209)
+    static public void soloPurasLetras(KeyEvent e) {
+        char c = e.getKeyChar();
+        if ((c < 65 || c > 90) && (c < 97 || c > 122) && c != 32) {
+            if (c != 241 && c != 209) {
                 e.consume();
+            }
         }
     }
-    static public void soloTodosNum(KeyEvent e){
-        char c=e.getKeyChar();
-        if(c<48||c>57){
+
+    static public void soloTodosNum(KeyEvent e) {
+        char c = e.getKeyChar();
+        if (c < 48 || c > 57) {
             e.consume();
         }
     }
-    static public void sinesp(KeyEvent e){
-        char c=e.getKeyChar();
-        if(c==32){
+
+    static public void sinesp(KeyEvent e) {
+        char c = e.getKeyChar();
+        if (c == 32) {
             e.consume();
         }
     }
@@ -75,37 +79,38 @@ public class Textos {
     public String A_Stg(JComboBox cbo) {
         return cbo.getSelectedItem().toString();
     }
-    static public void solo_1_esp(KeyEvent e,JTextField t){
+
+    static public void solo_1_esp(KeyEvent e, JTextField t) {
         //llamar en evento keytyped
         //permite escribir cualquier cadena en el texfield sin espacios en blanco
         //al inicio y sin dos espacios en blanco consecutivos
-        if(e.getKeyChar()==32){
-            if(t.getCaretPosition()==0){
+        if (e.getKeyChar() == 32) {
+            if (t.getCaretPosition() == 0) {
                 e.consume();
-            }
-            else{
-                if(t.getCaretPosition()<t.getText().length()){
-                    if((t.getText().charAt(t.getCaretPosition()-1)==' ')||(t.getText().charAt(t.getCaretPosition())==' '))
+            } else {
+                if (t.getCaretPosition() < t.getText().length()) {
+                    if ((t.getText().charAt(t.getCaretPosition() - 1) == ' ') || (t.getText().charAt(t.getCaretPosition()) == ' ')) {
                         e.consume();
-                }
-                else{
-                    if(t.getText().charAt(t.getCaretPosition()-1)==' ')
+                    }
+                } else {
+                    if (t.getText().charAt(t.getCaretPosition() - 1) == ' ') {
                         e.consume();
+                    }
                 }
             }
         }
     }
-    
+
     static public void LimiteCaracter(KeyEvent e, JTextField tx, int limite) { //Limita al JTextField a un numero dado, ejemplo txdni --> 8
         if (tx.getText().length() >= limite) {
             e.consume();
         }
     }
-    
-    static public void Condicion(KeyEvent e,JTextField tx,int n) {
-           if(tx.getText().length()>n){
+
+    static public void Condicion(KeyEvent e, JTextField tx, int n) {
+        if (tx.getText().length() > n) {
             e.consume();
-           }
+        }
     }
 
 //    public void Decimal(KeyEvent e, JTextField tx) {
@@ -116,7 +121,6 @@ public class Textos {
 //            e.consume();
 //        }
 //    }
-
     static public void letras(KeyEvent e, JTextField tx) {
 
         for (int i = 0; i < tx.getText().length(); i++) {
@@ -149,5 +153,10 @@ public class Textos {
             name += " ";
         }
         return name.substring(0, (name.length() - 1));
+    }
+    
+    //Devuelve el valor literal de un numero (usar en facturas)
+    public static String montoLiteral(String monto){
+        return "SON: "+ numLit.Convertir(monto, true);
     }
 }

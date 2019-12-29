@@ -9,8 +9,6 @@ import alertas.AlertaError;
 import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
@@ -20,16 +18,8 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Reservas extends javax.swing.JFrame {
 
-    DefaultTableModel modelo = new DefaultTableModel() {
-        public boolean isCellEditable(int rowIndex, int columnIndex) {
-            return false;
-        }
-    };
-    DefaultTableModel modelo1 = new DefaultTableModel() {
-        public boolean isCellEditable(int rowIndex, int columnIndex) {
-            return false;
-        }
-    };
+    DefaultTableModel modelo = new DefaultTableModel();
+    DefaultTableModel modelo1 = new DefaultTableModel();
     Controlador control = new Controlador();
     ControlDate cd = new ControlDate();
     public String rpt = "";
@@ -43,9 +33,9 @@ public class Reservas extends javax.swing.JFrame {
         txtBuscar.setVisible(false);
         txtBuscar1.setVisible(true);
 
-        this.getContentPane().setBackground(Color.white);
+        //this.getContentPane().setBackground(Color.white);
         btValidar.setEnabled(false);
-        this.setLocationRelativeTo(null);
+        //this.setLocationRelativeTo(null);
         lbUserActual.setText(Control.usuario);
         tabla.getTableHeader().setOpaque(true);
         tabla.getTableHeader().setBackground(new Color(248, 177, 57));
@@ -67,38 +57,15 @@ public class Reservas extends javax.swing.JFrame {
         btModificar.setVisible(false);
         btModificar1.setVisible(false);
         btEliminar.setVisible(false);
+
         btEliminar1.setVisible(false);
         btCancelar.setVisible(false);
 
         btEliminar.setVisible(false);
 //        jPanel5.setVisible(false);
-        //Listener de tabla
-        tabla.addMouseListener(new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                if (tabla.getSelectedRow() > -1) {
-                    btValidar.setEnabled(true);
-                } else {
-                    btValidar.setEnabled(false);
-                }
-            }
-
-            @Override
-            public void mousePressed(MouseEvent e) {
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-            }
-        });
+        );
+//        jPanel5.setVisible(false); 
+      
         inicializarJTable_cliente();
         MostrarList_Cliente();
 
@@ -1087,6 +1054,11 @@ public class Reservas extends javax.swing.JFrame {
         tabla.setGridColor(new java.awt.Color(0, 0, 0));
         tabla.setRowHeight(30);
         tabla.setSelectionBackground(new java.awt.Color(0, 122, 255));
+        tabla.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tabla);
 
         jPanel6.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 790, 440));
@@ -1185,7 +1157,6 @@ public class Reservas extends javax.swing.JFrame {
     }//GEN-LAST:event_txDNIKeyTyped
 
     private void jtxtdni1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtdni1KeyTyped
-        // TODO add your handling code here:
         Textos.soloPurasLetras(evt);
         //Textos.Mayusculas(evt);
         Textos.solo_1_esp(evt, jtxtdni3);
@@ -1193,21 +1164,18 @@ public class Reservas extends javax.swing.JFrame {
     }//GEN-LAST:event_jtxtdni1KeyTyped
 
     private void jtxtdni2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtdni2KeyTyped
-        // TODO add your handling code here:
         Textos.soloPurasLetras(evt);
         //Textos.Mayusculas(evt);
         Textos.solo_1_esp(evt, jtxtdni3);
     }//GEN-LAST:event_jtxtdni2KeyTyped
 
     private void jtxtdni3KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtdni3KeyTyped
-        // TODO add your handling code here:
         Textos.soloPurasLetras(evt);
         //Textos.Mayusculas(evt);
         Textos.solo_1_esp(evt, jtxtdni3);
     }//GEN-LAST:event_jtxtdni3KeyTyped
 
     private void jtxtdni8KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtdni8KeyTyped
-        // TODO add your handling code here:
     }//GEN-LAST:event_jtxtdni8KeyTyped
 
     private void btRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRegistrarActionPerformed
@@ -1231,16 +1199,13 @@ public class Reservas extends javax.swing.JFrame {
     }//GEN-LAST:event_btCancelarActionPerformed
 
     private void txtBuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyTyped
-        // TODO add your handling code here:
     }//GEN-LAST:event_txtBuscarKeyTyped
 
     private void jtxtdni10KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtdni10KeyTyped
-        // TODO add your handling code here:
         Textos.sinesp(evt);
     }//GEN-LAST:event_jtxtdni10KeyTyped
 
     private void jtxtdni4KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtdni4KeyTyped
-        // TODO add your handling code here:
         Textos.soloPurasLetras(evt);
         //Textos.Mayusculas(evt);
         Textos.solo_1_esp(evt, jTextField2);
@@ -1351,41 +1316,32 @@ public class Reservas extends javax.swing.JFrame {
     }//GEN-LAST:event_lbCerrarMouseExited
 
     private void txtBuscarMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtBuscarMouseReleased
-        // TODO add your handling code here:
 //        MostrarList();
     }//GEN-LAST:event_txtBuscarMouseReleased
 
     private void txtBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyReleased
-        // TODO add your handling code here:
         MostrarList_Empresa();
     }//GEN-LAST:event_txtBuscarKeyReleased
 
     private void txtBuscar1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtBuscar1MouseReleased
-        // TODO add your handling code here:
     }//GEN-LAST:event_txtBuscar1MouseReleased
 
     private void txtBuscar1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscar1KeyReleased
-        // TODO add your handling code here:
         MostrarList_Cliente();
     }//GEN-LAST:event_txtBuscar1KeyReleased
 
     private void txtBuscar1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscar1KeyTyped
-        // TODO add your handling code here:
     }//GEN-LAST:event_txtBuscar1KeyTyped
 
     private void jComboBox1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBox1MouseClicked
-        // TODO add your handling code here:
-//        JOptionPane.showMessageDialog(null, jComboBox1.getSelectedIndex());
     }//GEN-LAST:event_jComboBox1MouseClicked
 
     private void btRegistrar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRegistrar1ActionPerformed
-        // TODO add your handling code here:
 //        crear_Persona();
         validarcampos_client();
     }//GEN-LAST:event_btRegistrar1ActionPerformed
 
     private void lbLimpiarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbLimpiarMouseClicked
-        // TODO add your handling code here:
         Limpiar();
     }//GEN-LAST:event_lbLimpiarMouseClicked
 
@@ -1400,57 +1356,48 @@ public class Reservas extends javax.swing.JFrame {
 //            btModificar1.setText("Modificar");
 //            btRegistrar.setEnabled(true);
         }
+        //Seleccionar_Empresa();
     }//GEN-LAST:event_btModificar1ActionPerformed
 
     private void txRUCKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txRUCKeyTyped
-        // TODO add your handling code here:
         Textos.Condicion(evt, txRUC, 10);
         Textos.Numeros(evt);
     }//GEN-LAST:event_txRUCKeyTyped
 
     private void jTextField1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyTyped
-        // TODO add your handling code here:
         Textos.soloPurasLetras(evt);
         //Textos.Mayusculas(evt);
         Textos.solo_1_esp(evt, jTextField1);
     }//GEN-LAST:event_jTextField1KeyTyped
 
     private void jTextField2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField2KeyTyped
-        // TODO add your handling code here:Textos.soloPurasLetras(evt);
         Textos.soloPurasLetras(evt);
         //Textos.Mayusculas(evt);
         Textos.solo_1_esp(evt, jTextField2);
     }//GEN-LAST:event_jTextField2KeyTyped
 
     private void jTextField3KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField3KeyTyped
-        // TODO add your handling code here:
         Textos.sinesp(evt);
     }//GEN-LAST:event_jTextField3KeyTyped
 
     private void lbMinimizarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_lbMinimizarKeyTyped
-        // TODO add your handling code here:
     }//GEN-LAST:event_lbMinimizarKeyTyped
 
     private void txDNIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txDNIActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_txDNIActionPerformed
 
     private void txDNIKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txDNIKeyReleased
-        // TODO add your handling code here:
         reconocer_cliente();
     }//GEN-LAST:event_txDNIKeyReleased
 
     private void txRUCKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txRUCKeyReleased
-        // TODO add your handling code here:
         reconocer_empresa();
     }//GEN-LAST:event_txRUCKeyReleased
 
     private void jComboBox2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBox2MouseClicked
-        // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox2MouseClicked
 
     private void jComboBox2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBox2MouseEntered
-        // TODO add your handling code here:
 //        valHab_Client();
     }//GEN-LAST:event_jComboBox2MouseEntered
 
@@ -1524,6 +1471,15 @@ public class Reservas extends javax.swing.JFrame {
             EliminarReserva(idres);
         }
     }//GEN-LAST:event_btEliminar1ActionPerformed
+
+    private void tablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMouseClicked
+        if (tabla.getSelectedRow() > -1) {
+            btValidar.setEnabled(true);
+        } else {
+            btValidar.setEnabled(false);
+        }
+    }//GEN-LAST:event_tablaMouseClicked
+
 
     /**
      * @param args the command line arguments

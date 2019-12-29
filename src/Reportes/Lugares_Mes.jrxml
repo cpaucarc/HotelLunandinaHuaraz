@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Lugares_Mes" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7e141d8b-624b-4fa6-9d6d-e27881fe489b">
+	<property name="ireport.zoom" value="1.2100000000000009"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="month" class="java.lang.String"/>
+	<parameter name="year" class="java.lang.String"/>
+	<parameter name="monthName" class="java.lang.String"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\Users\\PAUCAR\\Documents\\NetBeansProjects\\Git\\HotelLunandinaHuaraz\\src\\Reportes\\"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select distinct lugar from vw_boleta_factura where month(fechaEmision) = $P{month} and year(fechaEmision) = $P{year} group by serie order by lugar;]]>
+	</queryString>
+	<field name="lugar" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="215" splitType="Stretch">
+			<staticText>
+				<reportElement x="278" y="0" width="254" height="85" forecolor="#171717" uuid="7806d7c8-cbf0-4794-935d-0e14c875cde3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[REPORTE DE GANANCIAS POR LUGARES]]></text>
+			</staticText>
+			<image>
+				<reportElement x="24" y="8" width="192" height="35" uuid="adf556d2-ad74-41a8-bb9f-ad0fc25285cf"/>
+				<imageExpression><![CDATA["C:\\Users\\PAUCAR\\Documents\\NetBeansProjects\\Git\\HotelLunandinaHuaraz\\src\\Imagenes\\Lunandina\\logo rojo.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="10" y="60" width="220" height="20" forecolor="#171717" uuid="c614f693-078d-4f9f-ae35-54688348c45f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<text><![CDATA[Teléfono: (043) 236408]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="40" width="220" height="20" forecolor="#171717" uuid="034a5a97-a873-4bff-8525-a793f1399759"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<text><![CDATA[Avenida Centenario N° 1187 - Huaraz - Perú]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="120" y="155" width="70" height="25" forecolor="#171717" uuid="1126677a-8601-4333-8d0e-570727785f62"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{year}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="120" y="130" width="90" height="25" forecolor="#171717" uuid="3b3218a0-27e1-4ead-ae3d-fab616ae7c94"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{monthName}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yy">
+				<reportElement x="120" y="180" width="97" height="25" forecolor="#171717" uuid="aa0e8ca0-c6ca-4cf2-be13-92a3754631d6"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="95" width="555" height="1" forecolor="#0D2746" uuid="d52e0544-f18b-46dc-b0b2-8812643cd28b"/>
+			</line>
+			<staticText>
+				<reportElement x="10" y="180" width="100" height="25" forecolor="#171717" uuid="cc4319ba-1b81-413e-879b-25907b2a2aba"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<text><![CDATA[Fecha de Consulta:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="42" y="155" width="68" height="25" forecolor="#171717" uuid="0a410c51-8b0e-4abf-9654-caea1d61c5e3"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<text><![CDATA[Año:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="105" width="100" height="25" forecolor="#171717" uuid="9f4ba614-1523-4498-bc36-db31674cb447"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="11" isItalic="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Periodo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="42" y="130" width="68" height="25" forecolor="#171717" uuid="77b9f067-97a9-483e-b0af-416128b1682a"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<text><![CDATA[Mes:]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="100" splitType="Stretch">
+			<subreport>
+				<reportElement x="0" y="0" width="555" height="100" uuid="8abd42a9-dc12-4e20-841a-338a3d96b948"/>
+				<subreportParameter name="sub_month">
+					<subreportParameterExpression><![CDATA[$P{month}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="sub_year">
+					<subreportParameterExpression><![CDATA[$P{year}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="sub_place">
+					<subreportParameterExpression><![CDATA[$F{lugar}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "subLugar_Mes.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="216" y="0" width="80" height="20" uuid="bf154418-c9fe-40e2-b1fc-fb31264e0052"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[""+$V{PAGE_NUMBER}+" / "]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="296" y="0" width="40" height="20" uuid="86985f76-30b3-40dc-abeb-bcbebe4a9b74"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>
