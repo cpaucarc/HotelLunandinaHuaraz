@@ -7,11 +7,10 @@ import Clases.Design;
 import alertas.AlertQuestion;
 
 /* importaciones para animar label */
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import java.util.Timer;
-import java.util.TimerTask;
-import javax.swing.JOptionPane;
+//import javax.swing.Icon;
+//import javax.swing.ImageIcon;
+//import java.util.Timer;
+//import java.util.TimerTask;
 import javax.swing.table.DefaultTableModel;
 /* fin importaciones para animar label */
 public class MenuPrincipal extends javax.swing.JFrame {
@@ -36,13 +35,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
     int tamG = 13;
     /*Fin control de fuente y tamaño del menu */
     /* Variables para controlar animacion de label */
-    public int contador = 0;
-    int velocidad = 5; //seconds
-    Timer timer;
-    TimerTask tarea;
-    int velmil = velocidad * 1000;
-    Icon iconoxLabel;
-
+//    public int contador = 0;
+//    int velocidad = 5; //seconds
+//    Timer timer;
+//    TimerTask tarea;
+//    int velmil = velocidad * 1000;
+//    Icon iconoxLabel;
     /* Fin variables para controlar animacion de label */
 
     public MenuPrincipal() {
@@ -57,30 +55,30 @@ public class MenuPrincipal extends javax.swing.JFrame {
         }
 
         /* Controlador de animaciones*/
-        tarea = new TimerTask() {
-            @Override
-            public void run() {
-                switch (contador) {
-                    case 0:
-                        contador = 1;
-                        iconoxLabel = new ImageIcon(getClass().getResource("/Imagenes/Transicion/Hotel.jpg"));
-                        lbAnimacion.setIcon(iconoxLabel);
-                        break;
-                    case 1:
-                        contador = 2;
-                        iconoxLabel = new ImageIcon(getClass().getResource("/Imagenes/Transicion/Servicios.jpg"));
-                        lbAnimacion.setIcon(iconoxLabel);
-                        break;
-                    case 2:
-                        contador = 0;
-                        iconoxLabel = new ImageIcon(getClass().getResource("/Imagenes/Transicion/Cuartos.jpg"));
-                        lbAnimacion.setIcon(iconoxLabel);
-                        break;
-                }
-            }
-        };
-        timer = new Timer();
-        timer.scheduleAtFixedRate(tarea, velmil, velmil);
+//        tarea = new TimerTask() {
+//            @Override
+//            public void run() {
+//                switch (contador) {
+//                    case 0:
+//                        contador = 1;
+//                        iconoxLabel = new ImageIcon(getClass().getResource("/Imagenes/Transicion/Hotel.jpg"));
+//                        lbAnimacion.setIcon(iconoxLabel);
+//                        break;
+//                    case 1:
+//                        contador = 2;
+//                        iconoxLabel = new ImageIcon(getClass().getResource("/Imagenes/Transicion/Servicios.jpg"));
+//                        lbAnimacion.setIcon(iconoxLabel);
+//                        break;
+//                    case 2:
+//                        contador = 0;
+//                        iconoxLabel = new ImageIcon(getClass().getResource("/Imagenes/Transicion/Cuartos.jpg"));
+//                        lbAnimacion.setIcon(iconoxLabel);
+//                        break;
+//                }
+//            }
+//        };
+//        timer = new Timer();
+//        timer.scheduleAtFixedRate(tarea, velmil, velmil);
         /* Fin controlador de animaciones*/  
         
         

@@ -19,9 +19,6 @@ public class RegistroEmpleado extends javax.swing.JFrame {
         cbCargo.setSelectedIndex(0);
 
         InicializarTabla();
-        //modelo.setColumnIdentifiers(new String[]{"DNI", "APELLIDOS", "NOMBRES", "E-MAIL", "CARGO", "ESTADO","USUARIO"});
-        //tabla.setModel(modelo);
-        //ds.Centrar_Tabla(tabla);
         MostrarResultados();
 
         cbEstado.setEnabled(false);
@@ -334,9 +331,8 @@ public class RegistroEmpleado extends javax.swing.JFrame {
     private void btModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btModificarActionPerformed
         AlertaError alerror = new AlertaError(this, true);
         AlertaSuccess alsuccess = new AlertaSuccess(this, true);
-        if (txdni.getText().length() == 8 && txappat.getText().length() > 0 && txapmat.getText().length() > 0
-                && txnomb.getText().length() > 0 && txmail.getText().length() > 0
-                && cbCargo.getSelectedIndex() > -1 && cbEstado.getSelectedIndex() > -1) {
+        if (txdni.getText().length() == 8 && txappat.getText() != null && txapmat.getText() != null && txnomb.getText() != null 
+                && txmail.getText() != null && cbCargo.getSelectedIndex() > -1 && cbEstado.getSelectedIndex() > -1) {
             rpt = (control.DevolverRegistroDto("call proc_empleado(2,'"
                     + txdni.getText() + "','"
                     + Textos.capitalizeText(txappat.getText()) + "','"
@@ -385,9 +381,8 @@ public class RegistroEmpleado extends javax.swing.JFrame {
     private void btRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRegistrarActionPerformed
         AlertaError alerror = new AlertaError(this, true);
         AlertaSuccess alsuccess = new AlertaSuccess(this, true);
-        if (txdni.getText().length() == 8 && txappat.getText().length() > 0 && txapmat.getText().length() > 0
-                && txnomb.getText().length() > 0 && txmail.getText().length() > 0
-                && cbCargo.getSelectedIndex() > -1) {
+        if (txdni.getText().length() == 8 && txappat.getText() != null && txapmat.getText() != null
+                && txnomb.getText() != null && txmail.getText() != null && cbCargo.getSelectedIndex() > -1) {
             rpt = (control.DevolverRegistroDto("call proc_empleado(1,'"
                     + txdni.getText() + "','"
                     + Textos.capitalizeText(txappat.getText()) + "','"
