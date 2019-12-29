@@ -858,6 +858,7 @@ public class Alojamiento extends javax.swing.JFrame {
             txDNI.setEditable(false);
             txRUC.setEditable(false);
             Seleccionar();
+            rpt="";
         } else if (btModificar.getText().equals("Actualizar")) {
             if (cambio == 1) {
                 rpt = (control.DevolverRegistroDto("call proc_alojamiento_persona_editar(" + id + ",'" + txDNI.getText() + "','"
