@@ -20,13 +20,15 @@ public class MenuPrincipal extends javax.swing.JFrame {
     Controlador control=new Controlador();
     DefaultTableModel modelo=new DefaultTableModel();
     
-    RegistroEmpleado empleado = new RegistroEmpleado();
-    Reportes reporte = new Reportes();
-    Habitaciones habitacion=new Habitaciones();
-    Reservas reserva=new Reservas();
-    Alojamiento alojamiento=new Alojamiento();
-    Servicios servicio=new Servicios();
-    DatosUsuario datosUsuario = new DatosUsuario();
+//    RegistroEmpleado empleado = new RegistroEmpleado();
+//    Reportes reporte = new Reportes();
+//    Habitaciones habitacion=new Habitaciones();
+//    Reservas reserva=new Reservas();
+//    Alojamiento alojamiento=new Alojamiento();
+//    Servicios servicio=new Servicios();
+//    DatosUsuario datosUsuario = new DatosUsuario();
+    
+    
     /* Fin Ventanas externas */
 
     /*Control de fuente y tamaño del menu */
@@ -432,6 +434,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     /*LABEL DE ADMINISTRACION*/
     private void lbadministracionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbadministracionMouseClicked
+        RegistroEmpleado empleado = new RegistroEmpleado();
         //this.setVisible(false);
         empleado.setVisible(true);
     }//GEN-LAST:event_lbadministracionMouseClicked
@@ -448,6 +451,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     /*LABEL DE HABITACIONES */
     private void lbHabMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbHabMouseClicked
+        Habitaciones habitacion=new Habitaciones();
         habitacion.actualizar();
         habitacion.setVisible(true);
     }//GEN-LAST:event_lbHabMouseClicked
@@ -464,6 +468,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     /*LABEL DE RESERVA*/
     private void lbReservaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbReservaMouseClicked
+        Reservas reserva=new Reservas();    
         reserva.setVisible(true);
     }//GEN-LAST:event_lbReservaMouseClicked
     private void lbReservaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbReservaMouseEntered
@@ -479,6 +484,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     /*LABEL DE REPORTES*/
     private void lbReporteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbReporteMouseClicked
+        Reportes reporte = new Reportes();
         reporte.setVisible(true);
     }//GEN-LAST:event_lbReporteMouseClicked
     private void lbReporteMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbReporteMouseEntered
@@ -494,6 +500,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     /*LABEL DE LOGOUT*/
     private void lbLogOutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbLogOutMouseClicked
+        DatosUsuario datosUsuario = new DatosUsuario();
         datosUsuario.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_lbLogOutMouseClicked
@@ -508,6 +515,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     /*LABEL DE SERVICIOS*/
     private void lbServicioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbServicioMouseClicked
+        Servicios servicio=new Servicios();
         servicio.setVisible(true);
     }//GEN-LAST:event_lbServicioMouseClicked
     private void lbServicioMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbServicioMouseEntered
@@ -522,7 +530,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_lbServicioMouseExited
 
     private void btValidar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btValidar1ActionPerformed
-        if(tabla.getSelectedRow()>0){
+        if(tabla.getSelectedRow()>-1){
             AlertQuestion aq=new AlertQuestion(this, true);
             String rpt = "¿Desea validar la reserva de "+tabla.getValueAt(tabla.getSelectedRow(), 2)+"?";
             String _idAloj = tabla.getValueAt(tabla.getSelectedRow(), 0).toString();
@@ -543,6 +551,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     /* ALOJAMIENTO */
     private void lbAlojMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbAlojMouseClicked
+        Alojamiento alojamiento=new Alojamiento();
         alojamiento.setVisible(true);
     }//GEN-LAST:event_lbAlojMouseClicked
     private void lbAlojMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbAlojMouseEntered

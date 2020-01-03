@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="boleta" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2a51d70c-e599-4678-9ebc-f084ab06115f">
 	<property name="ireport.zoom" value="1.3310000000000015"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="130"/>
 	<parameter name="numeroBoleta" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[select
@@ -198,62 +198,47 @@ ELECTRONICA]]></text>
 	<columnHeader>
 		<band height="35" splitType="Stretch">
 			<rectangle>
-				<reportElement x="247" y="15" width="75" height="20" forecolor="#0D2746" backcolor="#0D2746" uuid="2f66a4f9-3506-45ad-be6b-3820c386c197"/>
-			</rectangle>
-			<rectangle>
-				<reportElement x="322" y="15" width="75" height="20" forecolor="#0D2746" backcolor="#0D2746" uuid="74bdd726-bcf9-488c-82a1-b202b786b9d9"/>
-			</rectangle>
-			<rectangle>
-				<reportElement x="397" y="15" width="75" height="20" forecolor="#0D2746" backcolor="#0D2746" uuid="ee2087f7-b31b-486c-92d7-4dcd563d3041"/>
-			</rectangle>
-			<rectangle>
-				<reportElement x="60" y="15" width="187" height="20" forecolor="#0D2746" backcolor="#0D2746" uuid="70feb79e-486d-42ab-b5bf-a51794bc38c9"/>
-			</rectangle>
-			<rectangle>
-				<reportElement x="10" y="15" width="50" height="20" forecolor="#0D2746" backcolor="#0D2746" uuid="70a9f3fd-eaa1-448a-a51f-55bb52c44483"/>
-			</rectangle>
-			<rectangle>
-				<reportElement x="472" y="15" width="73" height="20" forecolor="#0D2746" backcolor="#0D2746" uuid="c93b04d6-6ee7-4d22-9830-56b8a402a3eb"/>
+				<reportElement x="10" y="15" width="535" height="20" forecolor="#0D2746" backcolor="#0D2746" uuid="70a9f3fd-eaa1-448a-a51f-55bb52c44483"/>
 			</rectangle>
 			<staticText>
 				<reportElement x="472" y="15" width="73" height="20" forecolor="#FFFFFF" uuid="b55a9ec3-7969-43c8-8102-89f559437fd7"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="12" isBold="true"/>
+					<font fontName="Arial" size="11" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Total]]></text>
+				<text><![CDATA[TOTAL]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="10" y="15" width="50" height="20" forecolor="#FFFFFF" uuid="ded3f435-b684-4e4f-b2d7-55485faea82c"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="12" isBold="true"/>
+					<font fontName="Arial" size="11" isBold="true"/>
 				</textElement>
 				<text><![CDATA[N°]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="397" y="15" width="75" height="20" forecolor="#FFFFFF" uuid="e4403f02-f2dc-4a08-96a0-d40ef891a194"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="12" isBold="true"/>
+					<font fontName="Arial" size="11" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Cantidad]]></text>
+				<text><![CDATA[CANTIDAD]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="60" y="15" width="187" height="20" forecolor="#FFFFFF" uuid="7ef57653-7c10-4b21-84d4-2757ac3c308f"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="12" isBold="true"/>
+					<font fontName="Arial" size="11" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Descripción]]></text>
+				<text><![CDATA[DESCRIPCION]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="322" y="15" width="75" height="20" forecolor="#FFFFFF" uuid="3ed5a996-28ad-443d-9f08-979d51381256"/>
+				<reportElement x="319" y="15" width="81" height="20" forecolor="#FFFFFF" uuid="3ed5a996-28ad-443d-9f08-979d51381256"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="12" isBold="true"/>
+					<font fontName="Arial" size="11" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Precio Unit.]]></text>
+				<text><![CDATA[PRECIO UNIT.]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="247" y="15" width="75" height="20" forecolor="#FFFFFF" uuid="23814fab-b7ca-4d05-945b-6da88826f86c"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="12" isBold="true"/>
+					<font fontName="Arial" size="11" isBold="true"/>
 				</textElement>
 				<text><![CDATA[UM]]></text>
 			</staticText>
@@ -262,22 +247,7 @@ ELECTRONICA]]></text>
 	<detail>
 		<band height="25" splitType="Stretch">
 			<rectangle>
-				<reportElement x="10" y="0" width="50" height="25" uuid="5cd3a651-0827-447c-bdbe-7ce8b6804c0f"/>
-			</rectangle>
-			<rectangle>
-				<reportElement x="60" y="0" width="187" height="25" uuid="5722c29a-7eb3-4226-9d3d-4ddefccdcb89"/>
-			</rectangle>
-			<rectangle>
-				<reportElement x="247" y="0" width="75" height="25" uuid="9c5426b6-acf7-4f80-aa95-122072db3e29"/>
-			</rectangle>
-			<rectangle>
-				<reportElement x="322" y="0" width="75" height="25" uuid="f9a179ba-b93a-4f6c-b164-db32b4f5c681"/>
-			</rectangle>
-			<rectangle>
-				<reportElement x="397" y="0" width="75" height="25" uuid="4c8b7917-fd9e-4550-9e93-457566622ee9"/>
-			</rectangle>
-			<rectangle>
-				<reportElement x="472" y="0" width="73" height="25" uuid="39e4c6fb-5630-4586-bd3f-c791aed09b3c"/>
+				<reportElement x="10" y="0" width="535" height="25" uuid="5cd3a651-0827-447c-bdbe-7ce8b6804c0f"/>
 			</rectangle>
 			<textField>
 				<reportElement x="60" y="0" width="187" height="25" forecolor="#171717" uuid="4aba6406-e4b7-4462-b7d4-9ad278c0c2ad"/>

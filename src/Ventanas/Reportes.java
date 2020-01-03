@@ -6,14 +6,14 @@ import Clases.Control;
 
 public class Reportes extends javax.swing.JFrame {
 
-    Facturas factura=new Facturas();
-    Boletas boleta=new Boletas();
-    IngresosMensuales inMensual=new IngresosMensuales();
-    IngresosAnuales inAnual =new IngresosAnuales();
-    LugarProcedencia lugar=new LugarProcedencia();
-    ReporteServicios servicio=new ReporteServicios();
-    ReporteClientes cliente=new ReporteClientes();
-    ReporteAloj alojamiento=new ReporteAloj();
+//    Facturas factura=new Facturas();
+//    Boletas boleta=new Boletas();
+//    IngresosMensuales inMensual=new IngresosMensuales();
+//    IngresosAnuales inAnual =new IngresosAnuales();
+//    LugarProcedencia lugar=new LugarProcedencia();
+//    ReporteServicios servicio=new ReporteServicios();
+//    ReporteClientes cliente=new ReporteClientes();
+//    ReporteAloj alojamiento=new ReporteAloj();
     
     int ancho = 844;
     int alto = 750;
@@ -344,6 +344,8 @@ public class Reportes extends javax.swing.JFrame {
 
     /* FACTURA */
     private void lbFacturaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbFacturaMouseClicked
+        Facturas factura=new Facturas();
+        
         desktop.removeAll();
         desktop.repaint();
         desktop.add(factura);
@@ -365,6 +367,9 @@ public class Reportes extends javax.swing.JFrame {
 
     /* BOLETA DE VENTA */
     private void lbBoletaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbBoletaMouseClicked
+        
+        Boletas boleta=new Boletas();
+        
         desktop.removeAll();
         desktop.repaint();
         desktop.add(boleta);
@@ -380,6 +385,9 @@ public class Reportes extends javax.swing.JFrame {
 
     /* INGRESOS MENSUALES */
     private void lbMensualMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbMensualMouseClicked
+        
+        IngresosMensuales inMensual=new IngresosMensuales();
+        
         desktop.removeAll();
         desktop.repaint();
         desktop.add(inMensual);
@@ -395,6 +403,9 @@ public class Reportes extends javax.swing.JFrame {
 
     /* INGRESOS ANUALES */
     private void lbAnualMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbAnualMouseClicked
+        
+        IngresosAnuales inAnual =new IngresosAnuales();
+        
         desktop.removeAll();
         desktop.repaint();
         desktop.add(inAnual);
@@ -410,6 +421,9 @@ public class Reportes extends javax.swing.JFrame {
 
     /* SERVICIOS */
     private void lbServicioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbServicioMouseClicked
+        
+        ReporteServicios servicio=new ReporteServicios();
+        
         desktop.removeAll();
         desktop.repaint();
         desktop.add(servicio);
@@ -425,6 +439,9 @@ public class Reportes extends javax.swing.JFrame {
 
     /* LUGAR DE PROCEDENCIA */
     private void lbLugarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbLugarMouseClicked
+        
+        LugarProcedencia lugar=new LugarProcedencia();
+        
         desktop.removeAll();
         desktop.repaint();
         desktop.add(lugar);
@@ -440,6 +457,9 @@ public class Reportes extends javax.swing.JFrame {
 
     /* CLIENTES */
     private void lbClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbClienteMouseClicked
+        
+        ReporteClientes cliente=new ReporteClientes();
+        
         desktop.removeAll();
         desktop.repaint();
         desktop.add(cliente);
@@ -455,7 +475,9 @@ public class Reportes extends javax.swing.JFrame {
 
     /* ALOJAMIENTOS */
     private void lbAlojamientoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbAlojamientoMouseClicked
-        // TODO add your handling code here:alojamiento
+        
+        ReporteAloj alojamiento=new ReporteAloj();
+        
         desktop.removeAll();
         desktop.repaint();
         desktop.add(alojamiento);

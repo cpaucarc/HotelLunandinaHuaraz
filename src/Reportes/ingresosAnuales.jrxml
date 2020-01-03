@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ingresosAnuales" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f3611fe8-0e73-4f9f-9ec8-18f8a390c426">
+	<property name="ireport.zoom" value="1.331000000000002"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="_year" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select
+func_Capitalize(monthname(fechaEmision)) as mes,
+func_Abrv(monthname(fechaEmision)) as abrv,
+sum(total) as total
+from vw_boleta_factura
+where year(fechaEmision) = $P{_year}
+group by month(fechaEmision)
+order by month(fechaEmision);]]>
+	</queryString>
+	<field name="mes" class="java.lang.String"/>
+	<field name="abrv" class="java.lang.String"/>
+	<field name="total" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<variable name="_total" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{total}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="120" splitType="Stretch">
+			<staticText>
+				<reportElement x="18" y="60" width="220" height="20" forecolor="#171717" uuid="47cfbc30-f615-459d-8643-9c0553275d3e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<text><![CDATA[Teléfono: (043) 236408]]></text>
+			</staticText>
+			<image>
+				<reportElement x="32" y="8" width="192" height="35" uuid="cbf56fe0-8626-402f-ade7-0c0720e98003"/>
+				<imageExpression><![CDATA["C:\\Users\\PAUCAR\\Documents\\NetBeansProjects\\Git\\HotelLunandinaHuaraz\\src\\Imagenes\\Lunandina\\logo rojo.png"]]></imageExpression>
+			</image>
+			<line>
+				<reportElement x="0" y="100" width="555" height="1" forecolor="#0D2746" uuid="9ab7a4e0-cb67-4336-8531-f9d7e7fc3149"/>
+			</line>
+			<staticText>
+				<reportElement x="18" y="40" width="220" height="20" forecolor="#171717" uuid="a6419bc2-b98a-4ba6-a91e-6f9b1bea3236"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<text><![CDATA[Avenida Centenario N° 1187 - Huaraz - Perú]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="352" y="0" width="170" height="80" forecolor="#171717" uuid="dcaada39-bfce-43d3-bfbb-a2d4541f48bf"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="18" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["RESUMEN DE INGRESOS EN "+$P{_year}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="25" splitType="Stretch">
+			<rectangle>
+				<reportElement x="30" y="0" width="130" height="25" forecolor="#0D2746" backcolor="#0D2746" uuid="d3a9be07-e859-4a0b-b0f7-349babe8ea5f"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="160" y="0" width="150" height="25" forecolor="#0D2746" backcolor="#0D2746" uuid="456eb8d6-00fb-412e-b1c2-0e5ff08ee265"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="30" y="0" width="130" height="25" forecolor="#FFFFFF" uuid="4ff8ed0b-0398-4ac4-90fc-f8189ff8a8bc"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[MES]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="160" y="0" width="150" height="25" forecolor="#FFFFFF" uuid="536a93a9-0ab2-4743-81a6-23759bab51ad"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[GANANCIA (S/.)]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="25" splitType="Stretch">
+			<rectangle>
+				<reportElement x="30" y="0" width="130" height="25" uuid="33c9b014-ef97-43fb-be39-41731432d874"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="160" y="0" width="150" height="25" uuid="80c4c4e1-44a0-47b3-b473-29f7d4d9e012"/>
+			</rectangle>
+			<textField>
+				<reportElement x="60" y="0" width="100" height="25" forecolor="#171717" uuid="8261838c-ccf0-4a8d-a81e-b4e869670a68"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{mes}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="160" y="0" width="110" height="25" forecolor="#171717" uuid="9a79aa85-2efe-46cf-b0de-f42baef4f5ea"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="190" y="0" width="80" height="20" forecolor="#171717" uuid="38482248-60eb-4f85-87b0-0b300a51f8d9"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom"/>
+				<textFieldExpression><![CDATA[""+$V{PAGE_NUMBER}+" /"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="270" y="0" width="40" height="20" forecolor="#171717" uuid="53c5bc59-a3b2-406b-8b01-c2a313532b65"/>
+				<textElement verticalAlignment="Bottom"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="340" splitType="Stretch">
+			<barChart>
+				<chart isShowLegend="false">
+					<reportElement x="0" y="85" width="555" height="255" uuid="3b80d510-d738-4d31-b06c-d6eb3305d239"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA["Ingresos Mensuales"]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{abrv}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{total}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<barPlot>
+					<plot/>
+					<itemLabel/>
+					<categoryAxisFormat>
+						<axisFormat labelColor="#333333"/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat labelColor="#333333"/>
+					</valueAxisFormat>
+				</barPlot>
+			</barChart>
+			<line>
+				<reportElement x="0" y="45" width="555" height="1" forecolor="#0D2746" uuid="591e4f82-bbec-43cc-b052-bd28088761fb"/>
+			</line>
+			<rectangle>
+				<reportElement x="30" y="0" width="130" height="25" forecolor="#0D2746" backcolor="#0D2746" uuid="84e4a4bc-a75c-480f-aaa5-e36b67eb9dd1"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="30" y="0" width="130" height="25" forecolor="#FFFFFF" uuid="fc6d2687-6bc2-4176-a642-413cefd18228"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="160" y="0" width="150" height="25" uuid="cddc10ec-4b77-46da-8306-72b4d3409ea4"/>
+			</rectangle>
+			<textField>
+				<reportElement x="160" y="0" width="110" height="25" forecolor="#171717" uuid="df4b06e5-840a-43e8-843c-08125501dbfb"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{_total}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="60" width="80" height="20" forecolor="#666666" uuid="3b2a8264-2572-4b06-8170-0615469f0961"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Ingresos (S/.)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="522" y="315" width="33" height="20" forecolor="#666666" uuid="17b913fa-a896-44e6-9b12-2515bcb8f9e7"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Meses]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="subServicioT" language="groovy" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="24f748e6-9592-4b97-b07e-d2f96386d81f">
+	<property name="ireport.zoom" value="1.4641000000000013"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="sub_month" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="sub_year" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="sub_service" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select fechaEmision, cantidad,doc, cliente,total
+from vw_boleta_factura
+where descripcion not like '% '
+and servicio = $P{sub_service}
+and month(fechaEmision) = $P{sub_month}
+and year(fechaEmision) = $P{sub_year}
+order by fechaEmision;]]>
+	</queryString>
+	<field name="fechaEmision" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="cantidad" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="doc" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="cliente" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="total" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<variable name="_totalCant" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{cantidad}]]></variableExpression>
+	</variable>
+	<variable name="_totalMonto" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{total}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="70" splitType="Stretch">
+			<textField>
+				<reportElement x="55" y="30" width="140" height="30" forecolor="#171717" uuid="1bb1dcdc-a7a4-4b77-b0e0-9760f7fc71cd"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{sub_service}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="20" width="555" height="1" forecolor="#0D2746" uuid="01064da8-60a0-422c-94a0-1a70bd564e6a"/>
+			</line>
+			<image>
+				<reportElement x="15" y="35" width="30" height="30" uuid="85361e6a-ca18-47ff-a99e-509b67d24ecc"/>
+				<imageExpression><![CDATA["C:\\Users\\PAUCAR\\Documents\\NetBeansProjects\\Git\\HotelLunandinaHuaraz\\src\\Imagenes\\Recursos\\room_service.png"]]></imageExpression>
+			</image>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="20" forecolor="#0D2746" backcolor="#0D2746" uuid="882c40a3-327f-4959-ae3a-3a5764c09cff"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="339" y="0" width="216" height="20" forecolor="#FFFFFF" uuid="4b7e248c-f14a-4fe0-b304-7b183b4280c1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CLIENTE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="225" y="0" width="114" height="20" forecolor="#FFFFFF" uuid="8f8ccd95-d0dd-4396-81e1-6fae0f53d10e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[N° IDENTIFICACION]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="135" y="0" width="90" height="20" forecolor="#FFFFFF" uuid="1c40ac72-c6e6-4db8-8231-9e61adb336df"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[MONTO (S/.)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="60" y="0" width="75" height="20" forecolor="#FFFFFF" uuid="bf0f1f15-4ac5-4573-b199-be5b04808892"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CANTIDAD]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="60" height="20" forecolor="#FFFFFF" uuid="0923e2d5-ba03-4fa8-9b5d-53df075d5a9b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[FECHA]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="25" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="25" forecolor="#0D2746" uuid="b899f3e4-0b80-427c-b256-6c4bdb098a11"/>
+			</rectangle>
+			<textField>
+				<reportElement x="5" y="0" width="50" height="25" forecolor="#171717" uuid="47ef0d75-2c07-4942-8b67-6667eecc4fb6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fechaEmision}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="60" y="0" width="75" height="25" forecolor="#171717" uuid="e9bda217-ecfe-41e0-acc7-61e8de10c5c3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cantidad}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="225" y="0" width="96" height="25" forecolor="#171717" uuid="766cbf8d-d24a-4c61-9ef0-88184d65ce3c"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{doc}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="339" y="0" width="216" height="25" forecolor="#171717" uuid="d8a4ac05-ecbd-427d-8018-14f336273545"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cliente}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="135" y="0" width="60" height="25" forecolor="#171717" uuid="16f73b31-0e33-48a2-a1b4-888155771ec8"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="35" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="60" height="25" forecolor="#0D2746" backcolor="#0D2746" uuid="911497a2-5f02-42db-9fb8-d9173dff4838"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="60" y="0" width="495" height="25" forecolor="#0D2746" uuid="e3b63412-169d-4c62-83d5-a8c71f2042b8"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="0" width="60" height="25" forecolor="#FFFFFF" uuid="aa75434c-c151-4923-91e9-7b187abd5491"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="60" y="0" width="75" height="25" forecolor="#171717" uuid="1a9daad5-927b-4660-b86c-90ff7a890751"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{_totalCant}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="135" y="0" width="60" height="25" forecolor="#171717" uuid="a92c64c4-ddb1-4d9f-bf1c-b6e82e11cf8a"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{_totalMonto}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

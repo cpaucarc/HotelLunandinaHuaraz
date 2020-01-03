@@ -7,8 +7,6 @@ import Clases.Textos;
 import alertas.Alerta;
 import alertas.AlertaError;
 import java.awt.Color;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
@@ -62,9 +60,6 @@ public class Reservas extends javax.swing.JFrame {
         btCancelar.setVisible(false);
 
         btEliminar.setVisible(false);
-//        jPanel5.setVisible(false);
-        );
-//        jPanel5.setVisible(false); 
       
         inicializarJTable_cliente();
         MostrarList_Cliente();

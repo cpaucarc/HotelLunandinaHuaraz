@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="alojT" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9cdcb9cc-95d9-4003-a082-1a8c06c10faf">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="_year" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\Users\\PAUCAR\\Documents\\NetBeansProjects\\Git\\HotelLunandinaHuaraz\\src\\Reportes\\"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select distinct
+month(fechaEmision) as month
+from vw_boleta_factura where year(fechaEmision)=$P{_year}
+order by month(fechaEmision);]]>
+	</queryString>
+	<field name="month" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="100" splitType="Stretch">
+			<staticText>
+				<reportElement x="26" y="40" width="220" height="20" forecolor="#171717" uuid="f259a327-f018-4a52-8749-ec6f04d6d38a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<text><![CDATA[Avenida Centenario N° 1187 - Huaraz - Perú]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="26" y="60" width="220" height="20" forecolor="#171717" uuid="3049e961-6577-4884-b201-39affd016cd0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<text><![CDATA[Teléfono: (043) 236408]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="346" y="0" width="184" height="80" forecolor="#171717" uuid="00f624bb-9d5a-4152-909e-0a5238aa0101"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="18" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["INGRESOS POR ALOJAMIENTO EN CADA MES EN "+$P{_year}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="40" y="8" width="192" height="35" uuid="e4843e90-9cde-47c0-9ff7-009101b75792"/>
+				<imageExpression><![CDATA["C:\\Users\\PAUCAR\\Documents\\NetBeansProjects\\Git\\HotelLunandinaHuaraz\\src\\Imagenes\\Lunandina\\logo rojo.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<subreport>
+				<reportElement x="0" y="0" width="555" height="125" uuid="22fb2b4b-bd65-4722-bb41-e827923637f6"/>
+				<subreportParameter name="sub_month">
+					<subreportParameterExpression><![CDATA[$F{month}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="sub_year">
+					<subreportParameterExpression><![CDATA[$P{_year}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "sub_Aloj.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="189" y="0" width="80" height="20" uuid="cfc13890-5d5f-463e-9821-28fea00934dd"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[""+$V{PAGE_NUMBER}+" /"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="269" y="0" width="40" height="20" uuid="b456e5c0-6ec6-4b87-87a8-36d11d651bb9"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

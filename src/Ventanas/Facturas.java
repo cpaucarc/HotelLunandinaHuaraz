@@ -17,29 +17,20 @@ public class Facturas extends javax.swing.JInternalFrame {
     public Facturas() {
         initComponents();
         LlenarTabla();
-        
-        Radio();
     }
     public void LlenarTabla(){
         modelo.setColumnIdentifiers(new String[]{"N° Factura", "Fecha", "Monto Total", "Cliente", "Procedencia"});
         tabla.setModel(modelo);
         
-        control.LlenarJtable(modelo, "select numFactura,fechaEmision,sum(totalServ),cliente,lugar from vw_factura group by numFactura", 5);
+        String _condicion = " where numFactura like '%"+txNumFactura.getText()
+                +"%' and  cliente like '%"+txCliente.getText()+"%' and lugar like '%"+txProc.getText()+"%' ";
+        
+        control.LlenarJtable(modelo, "select numFactura,fechaEmision,sum(totalServ),cliente,lugar from vw_factura "+_condicion+" group by numFactura", 5);
         tabla.getColumnModel().getColumn(0).setPreferredWidth(85);
         tabla.getColumnModel().getColumn(1).setPreferredWidth(85);
         tabla.getColumnModel().getColumn(2).setPreferredWidth(100);
         tabla.getColumnModel().getColumn(3).setPreferredWidth(329);
         tabla.getColumnModel().getColumn(4).setPreferredWidth(125);
-    }
-    public void Radio(){
-        if(txMonto.getText() != null){
-            if(rbMenor.isSelected()){
-                txMonto.setText(""+(Integer.parseInt(txMonto.getText()) - 5));
-            }else if(rbMayor.isSelected()){
-                txMonto.setText(""+(Integer.parseInt(txMonto.getText()) + 5));
-            }
-        }
-        
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -89,7 +80,7 @@ public class Facturas extends javax.swing.JInternalFrame {
 
         jLabel3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/numero.png"))); // NOI18N
-        jLabel3.setText("N° Boleta");
+        jLabel3.setText("N° Factura");
         jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(414, 30, 120, 30));
 
         jLabel4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -105,6 +96,14 @@ public class Facturas extends javax.swing.JInternalFrame {
                 txClienteActionPerformed(evt);
             }
         });
+        txCliente.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txClienteKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txClienteKeyTyped(evt);
+            }
+        });
         jPanel2.add(txCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 30, 200, 30));
 
         txMonto.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
@@ -115,6 +114,14 @@ public class Facturas extends javax.swing.JInternalFrame {
         txNumFactura.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
         txNumFactura.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txNumFactura.setSelectionColor(new java.awt.Color(0, 122, 255));
+        txNumFactura.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txNumFacturaKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txNumFacturaKeyTyped(evt);
+            }
+        });
         jPanel2.add(txNumFactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(534, 30, 200, 30));
 
         txFecha.setBackground(new java.awt.Color(255, 255, 255));
@@ -136,6 +143,14 @@ public class Facturas extends javax.swing.JInternalFrame {
         txProc.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
         txProc.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txProc.setSelectionColor(new java.awt.Color(0, 122, 255));
+        txProc.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txProcKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txProcKeyTyped(evt);
+            }
+        });
         jPanel2.add(txProc, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 85, 200, 30));
 
         jLabel5.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -152,9 +167,7 @@ public class Facturas extends javax.swing.JInternalFrame {
         tabla.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"0001", "22-10-2015", "200.00", "[Nombre de cliente aqui]", "Huaraz", "victor"},
-                {"0002", "23-10-2016", "225.50", "[Nombre de cliente aqui]", "Casma", "victor"},
-                {"0003", "23-12-2018", "185.00", "[Nombre de cliente aqui]", "Lima", "victor"},
+                {null, null, null, null, null, null},
                 {null, null, null, null, null, null}
             },
             new String [] {
@@ -207,6 +220,23 @@ public class Facturas extends javax.swing.JInternalFrame {
         _montoTotal = tabla.getValueAt(tabla.getSelectedRow(), 2).toString();
         txCliente.setText(_numFac + " mt: "+ _montoTotal);
     }//GEN-LAST:event_tablaMouseClicked
+
+    private void txClienteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txClienteKeyTyped
+    }//GEN-LAST:event_txClienteKeyTyped
+    private void txNumFacturaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txNumFacturaKeyTyped
+    }//GEN-LAST:event_txNumFacturaKeyTyped
+    private void txProcKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txProcKeyTyped
+    }//GEN-LAST:event_txProcKeyTyped
+
+    private void txClienteKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txClienteKeyReleased
+        LlenarTabla();
+    }//GEN-LAST:event_txClienteKeyReleased
+    private void txNumFacturaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txNumFacturaKeyReleased
+        LlenarTabla();
+    }//GEN-LAST:event_txNumFacturaKeyReleased
+    private void txProcKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txProcKeyReleased
+        LlenarTabla();
+    }//GEN-LAST:event_txProcKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

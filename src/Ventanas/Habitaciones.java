@@ -169,9 +169,15 @@ public class Habitaciones extends javax.swing.JFrame{
         String _fechaEntrada = control.DevolverRegistroDto("select fecha_ent from vw_alojamientoyreserva where (curdate() between fecha_ent and fecha_sal) and numHab = "+numHab, 1);
         String _fechaSalida = control.DevolverRegistroDto("select fecha_sal from vw_alojamientoyreserva where (curdate() between fecha_ent and fecha_sal) and numHab = "+numHab, 1);
         String _NumDias = control.DevolverRegistroDto("select datediff(fecha_sal,fecha_ent) from vw_alojamientoyreserva where (curdate() between fecha_ent and fecha_sal) and numHab = "+numHab, 1);
+        String _transcDias = control.DevolverRegistroDto("select datediff(curdate(),'"+_fechaEntrada+"')", 1);
+        
         lbNumDias.setText(_NumDias);
         lbFechaEntrada.setText(_fechaEntrada);
         lbFechaSalida.setText(_fechaSalida);
+        
+        slider.setMinimum(0);
+        slider.setMaximum(Integer.parseInt(_NumDias));
+        slider.setValue(Integer.parseInt(_transcDias));
         
         txPrecioTotal.setText(""+Integer.parseInt(_NumDias)*Double.parseDouble(txPrecioUnit.getText()));
     }
@@ -231,11 +237,11 @@ public class Habitaciones extends javax.swing.JFrame{
         lbCliente = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         lbProc = new javax.swing.JLabel();
-        jProgressBar1 = new javax.swing.JProgressBar();
         lbNumDias = new javax.swing.JLabel();
         lbFechaEntrada = new javax.swing.JLabel();
         lbFechaSalida = new javax.swing.JLabel();
         btCheckOut = new javax.swing.JButton();
+        slider = new javax.swing.JSlider();
         pnServ = new javax.swing.JPanel();
         pnServicios = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -488,29 +494,36 @@ public class Habitaciones extends javax.swing.JFrame{
 
         pnDatosCliente.add(pnClienteEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 430, 240));
 
-        jProgressBar1.setBackground(new java.awt.Color(204, 0, 255));
-        jProgressBar1.setForeground(new java.awt.Color(255, 51, 102));
-        jProgressBar1.setValue(49);
-        pnDatosCliente.add(jProgressBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 306, 430, 30));
-
-        lbNumDias.setFont(new java.awt.Font("Sylfaen", 0, 14)); // NOI18N
+        lbNumDias.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
         lbNumDias.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbNumDias.setText("jLabel3");
-        lbNumDias.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, new java.awt.Color(255, 204, 0), new java.awt.Color(0, 153, 153)));
-        pnDatosCliente.add(lbNumDias, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 270, 100, 30));
+        lbNumDias.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        pnDatosCliente.add(lbNumDias, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 280, 100, 25));
 
+        lbFechaEntrada.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
         lbFechaEntrada.setText("jLabel3");
-        pnDatosCliente.add(lbFechaEntrada, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 274, 110, 20));
+        pnDatosCliente.add(lbFechaEntrada, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, 110, 25));
 
+        lbFechaSalida.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
+        lbFechaSalida.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         lbFechaSalida.setText("jLabel3");
-        pnDatosCliente.add(lbFechaSalida, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 280, 110, -1));
+        pnDatosCliente.add(lbFechaSalida, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 280, 110, 25));
 
         btCheckOut.setBackground(new java.awt.Color(234, 82, 62));
         btCheckOut.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
         btCheckOut.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/exit.png"))); // NOI18N
         btCheckOut.setText("Check - Out");
         btCheckOut.setBorder(null);
-        pnDatosCliente.add(btCheckOut, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 360, 320, 30));
+        pnDatosCliente.add(btCheckOut, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 370, 320, 20));
+
+        slider.setBackground(new java.awt.Color(255, 255, 255));
+        slider.setMajorTickSpacing(1);
+        slider.setMaximum(5);
+        slider.setPaintLabels(true);
+        slider.setPaintTicks(true);
+        slider.setToolTipText("Dias transcuridos del total");
+        slider.setValue(3);
+        pnDatosCliente.add(slider, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 315, 430, 40));
 
         pnInfo.add(pnDatosCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 0, 490, 400));
 
@@ -699,7 +712,6 @@ public class Habitaciones extends javax.swing.JFrame{
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel lbActualizar1;
@@ -728,6 +740,7 @@ public class Habitaciones extends javax.swing.JFrame{
     private javax.swing.JPanel pnServ;
     private javax.swing.JPanel pnServicios;
     private javax.swing.JPanel pnTitulo;
+    private javax.swing.JSlider slider;
     private javax.swing.JTable tabla;
     private javax.swing.JTextField txPrecioTotal;
     private javax.swing.JTextField txPrecioUnit;
@@ -746,6 +759,7 @@ public class Habitaciones extends javax.swing.JFrame{
                     pnServ.setVisible(true);
                     lbMensajeHab.setVisible(false);
                     pnDatosCliente.setVisible(true);
+                    btComprobante.setEnabled(false);
                     
                     GetCliente(text);
                     GetServicios(text, lbDoc.getText());
@@ -753,10 +767,12 @@ public class Habitaciones extends javax.swing.JFrame{
                     lbTotServicio.setText(SumarColumna(tabla, 4));
                     habOcupado = false;
                     if(__estado.equals("Ocupado")){
+                        btComprobante.setEnabled(true);
                         habOcupado = true;
                         lbTotal.setText(""+(Double.parseDouble(txPrecioTotal.getText())+Double.parseDouble(lbTotServicio.getText())));
                     }
                 }else{
+                    btComprobante.setEnabled(false);
                     lbMensajeHab.setVisible(true);
                     pnDatosCliente.setVisible(false);
                     pnServ.setVisible(false);

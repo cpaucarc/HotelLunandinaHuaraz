@@ -27,7 +27,7 @@
 				<text><![CDATA[Avenida Centenario N° 1187 - Huaraz - Perú]]></text>
 			</staticText>
 			<line>
-				<reportElement x="2" y="95" width="555" height="1" forecolor="#0D2746" uuid="7690fab9-9de1-45aa-b247-079dd46f4d96"/>
+				<reportElement x="0" y="95" width="555" height="1" forecolor="#0D2746" uuid="7690fab9-9de1-45aa-b247-079dd46f4d96"/>
 			</line>
 			<staticText>
 				<reportElement x="10" y="105" width="100" height="25" forecolor="#171717" uuid="1da6028a-68cd-4186-803d-eaf3bcb384cb"/>

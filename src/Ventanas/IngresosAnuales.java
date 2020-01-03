@@ -3,10 +3,13 @@ package Ventanas;
 
 import Clases.Controlador;
 import Clases.Design;
+import Clases.Imprimir;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class IngresosAnuales extends javax.swing.JInternalFrame {
 
+    Imprimir imp=new Imprimir();
     Controlador control=new Controlador();
     Design ds=new Design();
     DefaultTableModel modelo=new DefaultTableModel();
@@ -109,6 +112,11 @@ public class IngresosAnuales extends javax.swing.JInternalFrame {
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/pdf.png"))); // NOI18N
         jButton1.setText("Imprimir");
         jButton1.setBorder(null);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(584, 90, 150, 40));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 784, 180));
@@ -163,6 +171,16 @@ public class IngresosAnuales extends javax.swing.JInternalFrame {
         lbDate.setText(""+cbYear.getValue());
         LlenarTabla();
     }//GEN-LAST:event_cbYearPropertyChange
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        
+        String _year = ""+cbYear.getValue();
+        if(tabla.getRowCount() > 0){
+            imp.ImprCon1Parametro("ingresosAnuales", "Ingresos en "+_year, "_year", _year);
+        }else{
+            JOptionPane.showMessageDialog(null, "No existen datos que mostrar en este periodo");
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

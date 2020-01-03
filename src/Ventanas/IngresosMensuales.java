@@ -3,10 +3,13 @@ package Ventanas;
 
 import Clases.Controlador;
 import Clases.Design;
+import Clases.Imprimir;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class IngresosMensuales extends javax.swing.JInternalFrame {
 
+    Imprimir imp=new Imprimir();
     Controlador control=new Controlador();
     Design ds=new Design();
     DefaultTableModel modelo=new DefaultTableModel();
@@ -103,7 +106,7 @@ public class IngresosMensuales extends javax.swing.JInternalFrame {
                 cbMonthItemStateChanged(evt);
             }
         });
-        jPanel2.add(cbMonth, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 40, 110, 30));
+        jPanel2.add(cbMonth, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 40, 120, 30));
 
         jLabel5.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/calendario.png"))); // NOI18N
@@ -122,6 +125,11 @@ public class IngresosMensuales extends javax.swing.JInternalFrame {
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/pdf.png"))); // NOI18N
         jButton1.setText("Imprimir");
         jButton1.setBorder(null);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(584, 90, 150, 40));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 784, 180));
@@ -180,6 +188,17 @@ public class IngresosMensuales extends javax.swing.JInternalFrame {
         lbDate.setText(cbMonth.getSelectedItem().toString() + " - " + cbYear.getValue());
         LlenarTabla();
     }//GEN-LAST:event_cbYearPropertyChange
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        String _nameMonth = cbMonth.getSelectedItem().toString().toUpperCase();
+        String _month = ""+(cbMonth.getSelectedIndex()+1);
+        String _year = ""+cbYear.getValue();
+        if(tabla.getRowCount() > 0){
+            imp.Imp3P("Reporte de "+_nameMonth, "ingresosMensuales", "_mes", _month, "_year", _year, "_mesNombre", _nameMonth);
+        }else{
+            JOptionPane.showMessageDialog(null, "No existen datos que mostrar en este periodo");
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

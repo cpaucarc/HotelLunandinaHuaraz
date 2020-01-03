@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="alojE" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="61aea01d-ad0e-458b-a30b-7e81f85b90b7">
+	<property name="ireport.zoom" value="1.1000000000000005"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="_month" class="java.lang.String"/>
+	<parameter name="_year" class="java.lang.String"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\Users\\PAUCAR\\Documents\\NetBeansProjects\\Git\\HotelLunandinaHuaraz\\src\\Reportes\\"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select distinct
+right(descripcion,4) as numH,
+count(descripcion) as nV
+from vw_boleta_factura where servicio like 'H%' and year(fechaEmision)= $P{_year} and
+month(fechaEmision) = $P{_month}
+ group by descripcion;]]>
+	</queryString>
+	<field name="numH" class="java.lang.String"/>
+	<field name="nV" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="100" splitType="Stretch">
+			<staticText>
+				<reportElement x="12" y="60" width="220" height="20" forecolor="#171717" uuid="d1eaf4cc-a775-4199-8f31-d4c0b1757fac"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<text><![CDATA[Teléfono: (043) 236408]]></text>
+			</staticText>
+			<image>
+				<reportElement x="26" y="8" width="192" height="35" uuid="27c8c05e-6604-49c4-a430-66c81da3489a"/>
+				<imageExpression><![CDATA["C:\\Users\\PAUCAR\\Documents\\NetBeansProjects\\Git\\HotelLunandinaHuaraz\\src\\Imagenes\\Lunandina\\logo rojo.png"]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="350" y="0" width="184" height="80" forecolor="#171717" uuid="9815bdac-344f-453f-86e0-ba9b0edc11a7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="18" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["INGRESOS POR ALOJAMIENTO EN "+$P{_year}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="12" y="40" width="220" height="20" forecolor="#171717" uuid="afee2254-5aa6-45d5-945a-b2ad0ab52531"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<text><![CDATA[Avenida Centenario N° 1187 - Huaraz - Perú]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="10" splitType="Stretch">
+			<subreport>
+				<reportElement x="0" y="0" width="555" height="10" uuid="1081f72d-5965-4da6-be58-c4014a33bc9f">
+					<printWhenExpression><![CDATA[new Boolean($V{REPORT_COUNT}.intValue()==1)]]></printWhenExpression>
+				</reportElement>
+				<subreportParameter name="sub_month">
+					<subreportParameterExpression><![CDATA[$P{_month}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="sub_year">
+					<subreportParameterExpression><![CDATA[$P{_year}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "sub_Aloj.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<summary>
+		<band height="270" splitType="Stretch">
+			<staticText>
+				<reportElement x="12" y="0" width="398" height="25" forecolor="#171717" uuid="a8445871-f2e0-4c7b-af3c-010af00e9716"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<text><![CDATA[Gráfico comparativo del número de usos de cada habitación durante el mes]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="31" y="45" width="53" height="20" forecolor="#333333" uuid="913fee6a-cefb-48d6-96a1-1e4c3cad99ff"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<text><![CDATA[N° de usos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="481" y="245" width="74" height="20" forecolor="#333333" uuid="3a6b6710-d2c0-4b95-8719-3af6be06b545"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<text><![CDATA[N° de habitacion]]></text>
+			</staticText>
+			<barChart>
+				<chart isShowLegend="false">
+					<reportElement x="26" y="65" width="500" height="205" uuid="e0620c80-d842-48bb-ae77-2a8d8b33e094"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA["Dummy Series"]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{numH}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{nV}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<barPlot>
+					<plot/>
+					<itemLabel/>
+					<categoryAxisFormat>
+						<axisFormat/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat/>
+					</valueAxisFormat>
+				</barPlot>
+			</barChart>
+		</band>
+	</summary>
+</jasperReport>

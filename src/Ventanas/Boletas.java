@@ -27,7 +27,10 @@ public class Boletas extends javax.swing.JInternalFrame {
         modelo.setColumnIdentifiers(new String[]{"N° Boleta", "Fecha", "Monto Total", "Cliente", "Procedencia"});
         tabla.setModel(modelo);
         
-        control.LlenarJtable(modelo, "select numBoleta,fechaEmision,sum(totalServ),cliente,lugar from vw_boleta group by numBoleta", 5);
+        String _condicion = " where numBoleta like '%"+txNumBoleta.getText()
+                +"%' and  cliente like '%"+txCliente.getText()+"%' and lugar like '%"+txProc.getText()+"%' ";
+        
+        control.LlenarJtable(modelo, "select numBoleta,fechaEmision,sum(totalServ),cliente,lugar from vw_boleta "+_condicion+" group by numBoleta", 5);
         tabla.getColumnModel().getColumn(0).setPreferredWidth(85);
         tabla.getColumnModel().getColumn(1).setPreferredWidth(85);
         tabla.getColumnModel().getColumn(2).setPreferredWidth(100);
@@ -46,13 +49,13 @@ public class Boletas extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txCliente = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
+        txNumBoleta = new javax.swing.JTextField();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
-        jTextField4 = new javax.swing.JTextField();
+        txProc = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -91,25 +94,35 @@ public class Boletas extends javax.swing.JInternalFrame {
         jLabel4.setText("Fecha");
         jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(414, 85, 120, 30));
 
-        jTextField1.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
-        jTextField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField1.setSelectionColor(new java.awt.Color(0, 122, 255));
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        txCliente.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
+        txCliente.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txCliente.setSelectionColor(new java.awt.Color(0, 122, 255));
+        txCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                txClienteActionPerformed(evt);
             }
         });
-        jPanel2.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 30, 200, 30));
+        txCliente.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txClienteKeyReleased(evt);
+            }
+        });
+        jPanel2.add(txCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 30, 200, 30));
 
         jTextField2.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
         jTextField2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField2.setSelectionColor(new java.awt.Color(0, 122, 255));
         jPanel2.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(377, 140, 150, 30));
 
-        jTextField3.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
-        jTextField3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField3.setSelectionColor(new java.awt.Color(0, 122, 255));
-        jPanel2.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(534, 30, 200, 30));
+        txNumBoleta.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
+        txNumBoleta.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txNumBoleta.setSelectionColor(new java.awt.Color(0, 122, 255));
+        txNumBoleta.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txNumBoletaKeyReleased(evt);
+            }
+        });
+        jPanel2.add(txNumBoleta, new org.netbeans.lib.awtextra.AbsoluteConstraints(534, 30, 200, 30));
 
         jDateChooser1.setBackground(new java.awt.Color(255, 255, 255));
         jDateChooser1.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
@@ -127,10 +140,15 @@ public class Boletas extends javax.swing.JInternalFrame {
         jRadioButton2.setText("Mayor que ...");
         jPanel2.add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(527, 140, 120, 30));
 
-        jTextField4.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
-        jTextField4.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField4.setSelectionColor(new java.awt.Color(0, 122, 255));
-        jPanel2.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 85, 200, 30));
+        txProc.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
+        txProc.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txProc.setSelectionColor(new java.awt.Color(0, 122, 255));
+        txProc.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txProcKeyReleased(evt);
+            }
+        });
+        jPanel2.add(txProc, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 85, 200, 30));
 
         jLabel5.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/procedencia.png"))); // NOI18N
@@ -146,9 +164,7 @@ public class Boletas extends javax.swing.JInternalFrame {
         tabla.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"0001", "22-10-2015", "200.00", "[Nombre de cliente aqui]", "Huaraz", "victor"},
-                {"0002", "23-10-2016", "225.50", "[Nombre de cliente aqui]", "Casma", "victor"},
-                {"0003", "23-12-2018", "185.00", "[Nombre de cliente aqui]", "Lima", "victor"},
+                {null, null, null, null, null, null},
                 {null, null, null, null, null, null}
             },
             new String [] {
@@ -185,9 +201,8 @@ public class Boletas extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    private void txClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txClienteActionPerformed
+    }//GEN-LAST:event_txClienteActionPerformed
 
     private void tablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMouseClicked
         _numBol = tabla.getValueAt(tabla.getSelectedRow(), 0).toString();
@@ -198,6 +213,16 @@ public class Boletas extends javax.swing.JInternalFrame {
             imp.ImprCon1Parametro("boleta", "Boleta N° " + _numBol, "numeroBoleta", _numBol);
         }
     }//GEN-LAST:event_btImprimirBoletaActionPerformed
+
+    private void txClienteKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txClienteKeyReleased
+        LlenarTabla();
+    }//GEN-LAST:event_txClienteKeyReleased
+    private void txNumBoletaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txNumBoletaKeyReleased
+        LlenarTabla();
+    }//GEN-LAST:event_txNumBoletaKeyReleased
+    private void txProcKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txProcKeyReleased
+        LlenarTabla();
+    }//GEN-LAST:event_txProcKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -215,10 +240,10 @@ public class Boletas extends javax.swing.JInternalFrame {
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
     private javax.swing.JTable tabla;
+    private javax.swing.JTextField txCliente;
+    private javax.swing.JTextField txNumBoleta;
+    private javax.swing.JTextField txProc;
     // End of variables declaration//GEN-END:variables
 }

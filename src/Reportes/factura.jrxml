@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="factura" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="99a96748-2688-4d2b-8207-b25a7acec3e4">
 	<property name="ireport.zoom" value="1.3310000000000006"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="341"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="numeroFactura" class="java.lang.String"/>
 	<parameter name="montoLiteral" class="java.lang.String"/>
 	<queryString>
@@ -227,60 +227,42 @@ FROM vw_factura where numFactura = $P{numeroFactura};]]>
 	<columnHeader>
 		<band height="20" splitType="Stretch">
 			<rectangle>
-				<reportElement x="10" y="0" width="90" height="20" forecolor="#0D2746" backcolor="#0D2746" uuid="001f68bd-ba6a-4796-a112-59e403f334d1"/>
-			</rectangle>
-			<rectangle>
-				<reportElement x="100" y="0" width="85" height="20" forecolor="#0D2746" backcolor="#0D2746" uuid="aafcffb7-bcdb-4cc9-ac30-17bf26549945"/>
-			</rectangle>
-			<rectangle>
-				<reportElement x="185" y="0" width="255" height="20" forecolor="#0D2746" backcolor="#0D2746" uuid="7922d752-97d6-4e10-a406-694ee3e29d79"/>
-			</rectangle>
-			<rectangle>
-				<reportElement x="440" y="0" width="105" height="20" forecolor="#0D2746" backcolor="#0D2746" uuid="a565f400-b3da-4f2e-9786-c5d2967f8edc"/>
+				<reportElement x="10" y="0" width="535" height="20" forecolor="#0D2746" backcolor="#0D2746" uuid="001f68bd-ba6a-4796-a112-59e403f334d1"/>
 			</rectangle>
 			<staticText>
 				<reportElement x="10" y="0" width="90" height="20" forecolor="#FFFFFF" uuid="41ffb4eb-030c-4c73-b458-f1d6c0ae6593"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="12" isBold="true"/>
+					<font fontName="Arial" size="11" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Cantidad]]></text>
+				<text><![CDATA[CANTIDAD]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="100" y="0" width="85" height="20" forecolor="#FFFFFF" uuid="bfff887c-11b4-4994-95b5-948c37406d11"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="12" isBold="true"/>
+					<font fontName="Arial" size="11" isBold="true"/>
 				</textElement>
 				<text><![CDATA[UM]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="185" y="0" width="255" height="20" forecolor="#FFFFFF" uuid="f51b3c33-5094-4093-9a5c-829ac095f399"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="12" isBold="true"/>
+					<font fontName="Arial" size="11" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Descripción]]></text>
+				<text><![CDATA[DESCRIPCION]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="440" y="0" width="105" height="20" forecolor="#FFFFFF" uuid="42b002a7-d6eb-4c4a-a9fa-614f0daba5bb"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="12" isBold="true"/>
+					<font fontName="Arial" size="11" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Valor Unitario]]></text>
+				<text><![CDATA[VALOR UNITARIO]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="25" splitType="Stretch">
 			<rectangle>
-				<reportElement x="10" y="0" width="90" height="25" forecolor="#0D2746" uuid="2949523f-56b6-4357-9462-276144f04986"/>
-			</rectangle>
-			<rectangle>
-				<reportElement x="100" y="0" width="85" height="25" forecolor="#0D2746" uuid="4e975a1d-926e-4d80-a173-555298c3a4aa"/>
-			</rectangle>
-			<rectangle>
-				<reportElement x="185" y="0" width="255" height="25" forecolor="#0D2746" uuid="1884fbbf-328d-4305-8913-de7a6b20e8f7"/>
-			</rectangle>
-			<rectangle>
-				<reportElement x="440" y="0" width="105" height="25" forecolor="#0D2746" uuid="5ebb4e3a-fe39-4162-a34d-e8fb8f51f98a"/>
+				<reportElement x="10" y="0" width="535" height="25" forecolor="#0D2746" uuid="2949523f-56b6-4357-9462-276144f04986"/>
 			</rectangle>
 			<textField>
 				<reportElement x="10" y="0" width="90" height="25" forecolor="#171717" uuid="efae42d9-cdfa-44e5-b473-80ce9a9643d5"/>

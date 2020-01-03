@@ -18,7 +18,6 @@ public class DatosUsuario extends javax.swing.JFrame {
         initComponents();
         design.MoverFrame(jPanel4, this);
         btModificar.setEnabled(false);
-        this.setLocationRelativeTo(null);
 
         lbCargo.setText(Control.cargo);
         lbUser.setText(Control.empleado);
@@ -28,7 +27,6 @@ public class DatosUsuario extends javax.swing.JFrame {
             lbAMaterno.setText(control.DevolverRegistroDto("SELECT apellidos FROM vw_empleados WHERE username = '" + aux_usuario + "'", 1).split(" ")[1]);
             lbNombres.setText(control.DevolverRegistroDto("SELECT nombres FROM vw_empleados WHERE username = '" + aux_usuario + "'", 1));
         }
-        System.out.println("Usuario: " + aux_usuario);
     }
 
     public void Limpiar() {
@@ -335,6 +333,7 @@ public class DatosUsuario extends javax.swing.JFrame {
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 46, 590, 480));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btModificarActionPerformed

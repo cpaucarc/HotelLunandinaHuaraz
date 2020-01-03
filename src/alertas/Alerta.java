@@ -53,7 +53,7 @@ public class Alerta extends javax.swing.JDialog {
         titulo.setForeground(new java.awt.Color(80, 80, 80));
         titulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         titulo.setText("ALERT WARNING");
-        jPanel1.add(titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 155, 400, 60));
+        jPanel1.add(titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 145, 400, 80));
 
         materialButton1.setBackground(new java.awt.Color(248, 187, 134));
         materialButton1.setForeground(new java.awt.Color(80, 80, 80));

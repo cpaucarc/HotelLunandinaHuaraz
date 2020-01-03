@@ -55,7 +55,7 @@ public class AlertQuestion extends javax.swing.JDialog {
         titulo.setForeground(new java.awt.Color(80, 80, 80));
         titulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         titulo.setText("ALERT WARNING");
-        jPanel1.add(titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 155, 475, 60));
+        jPanel1.add(titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 145, 475, 80));
 
         btnNo.setBackground(new java.awt.Color(221, 51, 51));
         btnNo.setBorder(null);

@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="servicioT" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ee0701f6-cfcb-4d33-bdc9-52206b4ede5e">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="226"/>
+	<parameter name="_month" class="java.lang.String"/>
+	<parameter name="_year" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="_monthName" class="java.lang.String"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\Users\\PAUCAR\\Documents\\NetBeansProjects\\Git\\HotelLunandinaHuaraz\\src\\Reportes\\"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select distinct
+servicio, sum(total)
+from vw_boleta_factura
+where month(fechaEmision) =  $P{_month}
+and year(fechaEmision) = $P{_year}
+and servicio not like 'H%'
+ group by servicio
+;]]>
+	</queryString>
+	<field name="servicio" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="sum(total)" class="java.math.BigDecimal"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="90" splitType="Stretch">
+			<staticText>
+				<reportElement x="12" y="60" width="220" height="20" forecolor="#171717" uuid="c56a26e9-2055-40de-a7fc-71fb80079e14"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<text><![CDATA[Teléfono: (043) 236408]]></text>
+			</staticText>
+			<image>
+				<reportElement x="26" y="8" width="192" height="35" uuid="e27b8f85-de7f-4d56-8eb7-61cf22508496"/>
+				<imageExpression><![CDATA["C:\\Users\\PAUCAR\\Documents\\NetBeansProjects\\Git\\HotelLunandinaHuaraz\\src\\Imagenes\\Lunandina\\logo rojo.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="12" y="40" width="220" height="20" forecolor="#171717" uuid="e0ea54f3-3de8-4b7c-b727-032cc5aadc7c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<text><![CDATA[Avenida Centenario N° 1187 - Huaraz - Perú]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="286" y="0" width="234" height="80" forecolor="#171717" uuid="6ccdc67d-7758-457b-a2f3-91e699623106"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="18" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["REPORTE DE INGRESOS POR CADA SERVICIO "+$P{_monthName}+" DE "+$P{_year}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<subreport>
+				<reportElement x="0" y="0" width="555" height="125" uuid="49b98a9c-6b62-4f65-9e99-5dbfcf085950"/>
+				<subreportParameter name="sub_year">
+					<subreportParameterExpression><![CDATA[$P{_year}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="sub_month">
+					<subreportParameterExpression><![CDATA[$P{_month}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="sub_service">
+					<subreportParameterExpression><![CDATA[$F{servicio}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "subServicioT.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="206" y="0" width="80" height="20" uuid="a9718d14-843b-4213-9787-adf0482696e1"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom"/>
+				<textFieldExpression><![CDATA[""+$V{PAGE_NUMBER}+" /"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="286" y="0" width="40" height="20" uuid="8f35c6e1-74fb-4758-aed3-5912763f578d"/>
+				<textElement verticalAlignment="Bottom"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="310" splitType="Stretch">
+			<barChart>
+				<chart isShowLegend="false">
+					<reportElement x="75" y="66" width="400" height="244" uuid="97c2e041-d7bd-4b82-b776-3042a4004ab2"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA["Ganancias por servicio"]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{servicio}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{sum(total)}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<barPlot>
+					<plot/>
+					<itemLabel/>
+					<categoryAxisFormat>
+						<axisFormat/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat/>
+					</valueAxisFormat>
+				</barPlot>
+			</barChart>
+			<line>
+				<reportElement x="0" y="20" width="555" height="1" forecolor="#0D2746" uuid="11d660fa-8c66-470f-acb5-831d55a50a2e"/>
+			</line>
+			<staticText>
+				<reportElement x="475" y="285" width="45" height="20" forecolor="#666666" uuid="c32d2155-8e70-4eb9-858e-97cd7a066be5"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Servicios]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="66" y="50" width="80" height="20" forecolor="#666666" uuid="95c7002a-6f79-488e-85f2-b995ea44821c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Ingresos (S/.)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="12" y="21" width="274" height="25" uuid="39c26a37-fabc-4ce4-926b-1cbad958e6a4"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<text><![CDATA[Gráfico comparativo de ingresos por cada servicio]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>
