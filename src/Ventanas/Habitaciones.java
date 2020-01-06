@@ -240,7 +240,6 @@ public class Habitaciones extends javax.swing.JFrame{
         lbNumDias = new javax.swing.JLabel();
         lbFechaEntrada = new javax.swing.JLabel();
         lbFechaSalida = new javax.swing.JLabel();
-        btCheckOut = new javax.swing.JButton();
         slider = new javax.swing.JSlider();
         pnServ = new javax.swing.JPanel();
         pnServicios = new javax.swing.JPanel();
@@ -442,7 +441,7 @@ public class Habitaciones extends javax.swing.JFrame{
 
         pnInfo.add(pnDatosHab, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 380, 320));
 
-        btComprobante.setBackground(new java.awt.Color(111, 168, 183));
+        btComprobante.setBackground(new java.awt.Color(234, 82, 62));
         btComprobante.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
         btComprobante.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/pdf.png"))); // NOI18N
         btComprobante.setText("Generar Comprobante");
@@ -508,13 +507,6 @@ public class Habitaciones extends javax.swing.JFrame{
         lbFechaSalida.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         lbFechaSalida.setText("jLabel3");
         pnDatosCliente.add(lbFechaSalida, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 280, 110, 25));
-
-        btCheckOut.setBackground(new java.awt.Color(234, 82, 62));
-        btCheckOut.setFont(new java.awt.Font("Arial", 1, 13)); // NOI18N
-        btCheckOut.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/exit.png"))); // NOI18N
-        btCheckOut.setText("Check - Out");
-        btCheckOut.setBorder(null);
-        pnDatosCliente.add(btCheckOut, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 370, 320, 20));
 
         slider.setBackground(new java.awt.Color(255, 255, 255));
         slider.setMajorTickSpacing(1);
@@ -700,7 +692,6 @@ public class Habitaciones extends javax.swing.JFrame{
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Nivel2;
     private javax.swing.JLabel Nivel3;
-    private javax.swing.JButton btCheckOut;
     private javax.swing.JButton btComprobante;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel13;

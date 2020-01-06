@@ -155,7 +155,6 @@ public class LoginAcceso extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void usernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernameActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_usernameActionPerformed
 
     private void lbVerContraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbVerContraMouseClicked
@@ -190,15 +189,15 @@ public class LoginAcceso extends javax.swing.JFrame {
                 mp.setVisible(true);
                 this.dispose();
             } else {
-                rpt = "Credenciales <br>incorrectas";
+                rpt = "Credenciales incorrectas";
                 username.grabFocus();
-                alr.titulo.setText("<html><center>" + rpt + "</center></html>");
+                alr.titulo.setText(rpt);
                 alr.setVisible(true);
             }
         } else {
-            rpt = "Este usuario <br>no existe";
+            rpt = "Este usuario no existe";
             username.grabFocus();
-            alr.titulo.setText("<html><center>" + rpt + "</center></html>");
+            alr.titulo.setText(rpt);
             alr.setVisible(true);
         }
 

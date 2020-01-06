@@ -78,7 +78,7 @@
               <Color blue="50" green="50" red="50" type="rgb"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="ALERT WARNING"/>
+            <Property name="text" type="java.lang.String" value="Este usuario no existe"/>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>

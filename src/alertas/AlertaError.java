@@ -51,7 +51,7 @@ public class AlertaError extends javax.swing.JDialog {
         titulo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         titulo.setForeground(new java.awt.Color(80, 80, 80));
         titulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        titulo.setText("ALERT WARNING");
+        titulo.setText("Este usuario no existe");
         jPanel1.add(titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 145, 400, 80));
 
         cancelar.setBackground(new java.awt.Color(242, 116, 116));
@@ -144,39 +144,7 @@ public class AlertaError extends javax.swing.JDialog {
             java.util.logging.Logger.getLogger(AlertaError.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(AlertaError.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
+        }      
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {

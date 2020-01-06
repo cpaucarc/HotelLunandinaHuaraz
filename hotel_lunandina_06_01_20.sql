@@ -28,7 +28,7 @@ CREATE TABLE `boletas` (
   PRIMARY KEY (`numBoleta`),
   KEY `fk_boletas_clientePersona1_idx` (`idclientePersona`),
   CONSTRAINT `fk_boletas_clientePersona1` FOREIGN KEY (`idclientePersona`) REFERENCES `clientepersona` (`idclientePersona`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -37,7 +37,7 @@ CREATE TABLE `boletas` (
 
 LOCK TABLES `boletas` WRITE;
 /*!40000 ALTER TABLE `boletas` DISABLE KEYS */;
-INSERT INTO `boletas` VALUES (2,1),(1,6),(3,6),(4,7),(5,7),(7,12),(6,17);
+INSERT INTO `boletas` VALUES (2,1),(1,6),(3,6),(4,7),(5,7),(7,12),(6,17),(8,19),(9,20);
 /*!40000 ALTER TABLE `boletas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -89,7 +89,7 @@ CREATE TABLE `clienteempresa` (
 
 LOCK TABLES `clienteempresa` WRITE;
 /*!40000 ALTER TABLE `clienteempresa` DISABLE KEYS */;
-INSERT INTO `clienteempresa` VALUES ('54444444444','hghghg','ghgfhgh',16),('78456412123','Discotienda Rosita','discotiendarosita@gmail.com',12),('87451212121','Multiservicios Virgo','virgos@gmail.com',11),('89415165154','Doritos Sad','FBFNFNFN',4),('98461515511','Memes Virgosam Sac','potorico@gmail.com',11);
+INSERT INTO `clienteempresa` VALUES ('45127889562','five sac','five@mail.com',10),('54444444444','hghghg','ghgfhgh',16),('78456412123','Discotienda Rosita','discotiendarosita@gmail.com',12),('87213213211','Naturandes','pasteleria@mail.com',11),('87451212121','Multiservicios Virgo','virgos@gmail.com',11),('89415165154','Doritos Sad','FBFNFNFN',4),('98461515511','Memes Virgosam Sac','potorico@gmail.com',11);
 /*!40000 ALTER TABLE `clienteempresa` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -109,7 +109,7 @@ CREATE TABLE `clientepersona` (
   KEY `fk_clientePersona_procedencias1_idx` (`idprocedencia`),
   CONSTRAINT `fk_clientePersona_personas1` FOREIGN KEY (`DNI`) REFERENCES `personas` (`DNI`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_clientePersona_procedencias1` FOREIGN KEY (`idprocedencia`) REFERENCES `lugaresprocedencia` (`idprocedencia`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -118,7 +118,7 @@ CREATE TABLE `clientepersona` (
 
 LOCK TABLES `clientepersona` WRITE;
 /*!40000 ALTER TABLE `clientepersona` DISABLE KEYS */;
-INSERT INTO `clientepersona` VALUES (1,'57676767',1),(2,'21322323',1),(3,'78565666',2),(4,'54565656',3),(5,'74125856',4),(6,'43666666',7),(7,'89748611',8),(8,'67686756',9),(9,'87454544',10),(10,'74111112',10),(11,'77777765',13),(12,'98746554',14),(13,'98794151',11),(14,'48612131',10),(15,'21212311',15),(16,'35325535',17),(17,'51121213',18);
+INSERT INTO `clientepersona` VALUES (1,'57676767',1),(2,'21322323',1),(3,'78565666',2),(4,'54565656',3),(5,'74125856',4),(6,'43666666',7),(7,'89748611',8),(8,'67686756',9),(9,'87454544',10),(10,'74111112',10),(11,'77777765',13),(12,'98746554',14),(13,'98794151',11),(14,'48612131',10),(15,'21212311',15),(16,'35325535',17),(17,'51121213',18),(18,'79461325',10),(19,'13467945',19),(20,'46464644',20),(21,'45646454',21);
 /*!40000 ALTER TABLE `clientepersona` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -150,7 +150,7 @@ CREATE TABLE `detallealojamiento` (
   CONSTRAINT `fk_detalleAlojamiento_estadoAlojamiento1` FOREIGN KEY (`idestadoAloj`) REFERENCES `estadoalojamiento` (`idestadoAloj`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_detalleAlojamiento_habitaciones1` FOREIGN KEY (`idhabitacion`) REFERENCES `habitaciones` (`idhabitacion`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_detalleAlojamiento_usuarios1` FOREIGN KEY (`idusuario`) REFERENCES `usuarios` (`idusuario`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -159,7 +159,7 @@ CREATE TABLE `detallealojamiento` (
 
 LOCK TABLES `detallealojamiento` WRITE;
 /*!40000 ALTER TABLE `detallealojamiento` DISABLE KEYS */;
-INSERT INTO `detallealojamiento` VALUES (1,'2019-12-02','2019-12-02','2019-12-03',2,8,1,2,NULL),(2,'2019-12-02','2019-12-02','2019-12-03',2,12,1,3,NULL),(3,'2019-12-02','2019-12-02','2019-12-06',2,3,1,4,NULL),(4,'2019-12-03','2019-12-03','2019-12-10',2,4,1,1,NULL),(5,'2019-12-03','2019-12-04','2019-12-05',2,2,1,1,NULL),(6,'2019-12-03','2019-12-04','2019-12-11',2,15,1,1,NULL),(7,'2019-12-03','2019-12-04','2019-12-05',1,13,1,5,NULL),(8,'2019-12-03','2019-12-10','2019-12-12',1,1,1,NULL,'89415165154'),(9,'2019-12-03','2019-12-11','2019-12-13',2,10,1,NULL,'89415165154'),(10,'2019-12-03','2019-12-11','2019-12-12',1,6,1,6,NULL),(11,'2019-12-03','2019-12-18','2019-12-21',2,1,2,7,NULL),(12,'2019-12-03','2019-12-18','2019-12-25',2,9,1,6,NULL),(13,'2019-12-03','2019-12-05','2019-12-19',2,7,1,6,NULL),(14,'2019-12-03','2019-12-04','2019-12-08',1,14,2,6,NULL),(15,'2019-12-03','2019-12-03','2019-12-04',1,5,1,8,NULL),(16,'2019-12-03','2019-12-03','2019-12-06',2,16,2,9,NULL),(17,'2019-12-04','2019-12-05','2019-12-08',1,6,1,NULL,'87451212121'),(18,'2019-12-04','2019-12-05','2019-12-06',1,10,2,10,NULL),(19,'2019-12-05','2019-12-05','2019-12-09',2,1,2,NULL,'78456412123'),(20,'2019-12-06','2019-12-06','2019-12-10',2,2,1,11,NULL),(21,'2019-12-06','2019-12-06','2019-12-13',2,12,1,NULL,'98461515511'),(22,'2019-12-06','2019-12-06','2019-12-07',2,9,1,12,NULL),(23,'2019-12-06','2019-12-09','2019-12-12',1,3,2,13,NULL),(24,'2019-12-06','2019-12-13','2019-12-14',1,15,2,14,NULL),(25,'2019-12-06','2019-12-11','2019-12-12',1,4,1,15,NULL),(26,'2019-12-06','2019-12-21','2019-12-23',1,10,1,NULL,'54444444444'),(27,'2019-12-06','2019-12-25','2019-12-26',1,2,1,16,NULL),(28,'2019-12-26','2019-12-26','2019-12-28',2,8,2,17,NULL),(29,'2019-12-26','2019-12-26','2019-12-27',3,13,1,NULL,'78456412123'),(30,'2019-12-26','2019-12-26','2019-12-29',3,3,2,12,NULL),(31,'2019-12-26','2019-12-26','2019-12-29',3,12,2,NULL,'78456412123');
+INSERT INTO `detallealojamiento` VALUES (1,'2019-12-02','2019-12-02','2019-12-03',3,8,1,2,NULL),(2,'2019-12-02','2019-12-02','2019-12-03',3,12,1,3,NULL),(3,'2019-12-02','2019-12-02','2019-12-06',3,3,1,4,NULL),(4,'2019-12-03','2019-12-03','2019-12-10',3,4,1,1,NULL),(5,'2019-12-03','2019-12-04','2019-12-05',3,2,1,1,NULL),(6,'2019-12-03','2019-12-04','2019-12-11',3,15,1,1,NULL),(7,'2019-12-03','2019-12-04','2019-12-05',3,13,1,5,NULL),(8,'2019-12-03','2019-12-10','2019-12-12',3,1,1,NULL,'89415165154'),(9,'2019-12-03','2019-12-11','2019-12-13',3,10,1,NULL,'89415165154'),(10,'2019-12-03','2019-12-11','2019-12-12',3,6,1,6,NULL),(11,'2019-12-03','2019-12-18','2019-12-21',3,1,2,7,NULL),(12,'2019-12-03','2019-12-18','2019-12-25',3,9,1,6,NULL),(13,'2019-12-03','2019-12-05','2019-12-19',3,7,1,6,NULL),(14,'2019-12-03','2019-12-04','2019-12-08',3,14,2,6,NULL),(15,'2019-12-03','2019-12-03','2019-12-04',3,5,1,8,NULL),(16,'2019-12-03','2019-12-03','2019-12-06',3,16,2,9,NULL),(17,'2019-12-04','2019-12-05','2019-12-08',3,6,1,NULL,'87451212121'),(18,'2019-12-04','2019-12-05','2019-12-06',3,10,2,10,NULL),(19,'2019-12-05','2019-12-05','2019-12-09',3,1,2,NULL,'78456412123'),(20,'2019-12-06','2019-12-06','2019-12-10',3,2,1,11,NULL),(21,'2019-12-06','2019-12-06','2019-12-13',3,12,1,NULL,'98461515511'),(22,'2019-12-06','2019-12-06','2019-12-07',3,9,1,12,NULL),(23,'2019-12-06','2019-12-09','2019-12-12',3,3,2,13,NULL),(24,'2019-12-06','2019-12-13','2019-12-14',3,15,2,14,NULL),(25,'2019-12-06','2019-12-11','2019-12-12',3,4,1,15,NULL),(26,'2019-12-06','2019-12-21','2019-12-23',3,10,1,NULL,'54444444444'),(27,'2019-12-06','2019-12-25','2019-12-26',3,2,1,16,NULL),(28,'2019-12-26','2019-12-26','2019-12-28',3,8,2,17,NULL),(29,'2019-12-26','2019-12-26','2019-12-27',3,13,1,NULL,'78456412123'),(30,'2019-12-26','2019-12-26','2019-12-29',3,3,2,12,NULL),(31,'2019-12-26','2019-12-26','2019-12-29',3,12,2,NULL,'78456412123'),(32,'2019-12-29','2021-12-30','2021-12-31',1,13,1,16,NULL),(33,'2020-01-01','2020-01-01','2020-01-04',2,1,1,18,NULL),(34,'2020-01-01','2020-01-01','2020-01-02',3,4,1,19,NULL),(35,'2020-01-01','2020-01-01','2020-01-03',3,7,1,20,NULL),(36,'2020-01-01','2020-01-03','2020-01-05',2,2,1,21,NULL),(37,'2020-01-01','2020-01-05','2020-01-07',2,13,1,NULL,'45127889562'),(38,'2020-01-01','2020-01-10','2020-01-12',1,15,1,NULL,'87213213211'),(39,'2020-01-01','2020-01-02','2020-01-04',2,8,1,16,NULL);
 /*!40000 ALTER TABLE `detallealojamiento` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -189,7 +189,7 @@ CREATE TABLE `detallecomprobante` (
   CONSTRAINT `fk_detalleComprobante_detalleAlojamiento1` FOREIGN KEY (`idDetAloj`) REFERENCES `detallealojamiento` (`idDetAloj`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_detalleComprobante_detalleServicio1` FOREIGN KEY (`idDetServ`) REFERENCES `detalleservicio` (`idDetServ`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_detalleComprobante_facturas1` FOREIGN KEY (`numFactura`) REFERENCES `facturas` (`numFactura`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -198,7 +198,7 @@ CREATE TABLE `detallecomprobante` (
 
 LOCK TABLES `detallecomprobante` WRITE;
 /*!40000 ALTER TABLE `detallecomprobante` DISABLE KEYS */;
-INSERT INTO `detallecomprobante` VALUES (1,'2019-12-11',42.37,7.63,50.00,3,NULL,1,NULL),(2,'2019-12-11',33.90,6.10,40.00,4,NULL,2,NULL),(3,'2019-12-12',25.42,4.58,30.00,5,NULL,NULL,1),(4,'2019-12-13',29.66,5.34,35.00,6,NULL,NULL,2),(5,'2019-12-13',4.24,0.76,5.00,7,NULL,3,NULL),(6,'2019-12-18',80.51,14.49,95.00,NULL,11,4,NULL),(7,'2019-12-18',12.71,2.29,15.00,9,NULL,4,NULL),(8,'2019-12-18',16.95,3.05,20.00,8,NULL,4,NULL),(9,'2019-12-18',80.51,14.49,95.00,NULL,11,5,NULL),(10,'2019-12-18',8.47,1.53,10.00,13,NULL,5,NULL),(11,'2019-12-18',42.37,7.63,50.00,12,NULL,5,NULL),(12,'2019-12-18',42.37,7.63,50.00,11,NULL,5,NULL),(13,'2019-12-18',12.71,2.29,15.00,10,NULL,5,NULL),(14,'2019-12-26',21.19,3.81,25.00,16,NULL,6,NULL),(15,'2019-12-26',101.69,18.31,120.00,NULL,29,NULL,3),(16,'2019-12-26',25.42,4.58,30.00,17,NULL,NULL,3),(17,'2019-12-26',21.19,3.81,25.00,19,NULL,NULL,3),(18,'2019-12-26',21.19,3.81,25.00,18,NULL,NULL,3),(19,'2019-12-26',635.59,114.41,750.00,NULL,30,7,NULL),(20,'2019-12-26',25.42,4.58,30.00,20,NULL,7,NULL),(21,'2019-12-26',105.93,19.07,125.00,22,NULL,7,NULL),(22,'2019-12-26',16.95,3.05,20.00,21,NULL,7,NULL),(23,'2019-12-27',673.73,121.27,795.00,NULL,31,NULL,4),(24,'2019-12-27',16.95,3.05,20.00,23,NULL,NULL,4);
+INSERT INTO `detallecomprobante` VALUES (1,'2019-12-11',42.37,7.63,50.00,3,NULL,1,NULL),(2,'2019-12-11',33.90,6.10,40.00,4,NULL,2,NULL),(3,'2019-12-12',25.42,4.58,30.00,5,NULL,NULL,1),(4,'2019-12-13',29.66,5.34,35.00,6,NULL,NULL,2),(5,'2019-12-13',4.24,0.76,5.00,7,NULL,3,NULL),(6,'2019-12-18',80.51,14.49,95.00,NULL,11,4,NULL),(7,'2019-12-18',12.71,2.29,15.00,9,NULL,4,NULL),(8,'2019-12-18',16.95,3.05,20.00,8,NULL,4,NULL),(9,'2019-12-18',80.51,14.49,95.00,NULL,11,5,NULL),(10,'2019-12-18',8.47,1.53,10.00,13,NULL,5,NULL),(11,'2019-12-18',42.37,7.63,50.00,12,NULL,5,NULL),(12,'2019-12-18',42.37,7.63,50.00,11,NULL,5,NULL),(13,'2019-12-18',12.71,2.29,15.00,10,NULL,5,NULL),(14,'2019-12-26',21.19,3.81,25.00,16,NULL,6,NULL),(15,'2019-12-26',101.69,18.31,120.00,NULL,29,NULL,3),(16,'2019-12-26',25.42,4.58,30.00,17,NULL,NULL,3),(17,'2019-12-26',21.19,3.81,25.00,19,NULL,NULL,3),(18,'2019-12-26',21.19,3.81,25.00,18,NULL,NULL,3),(19,'2019-12-26',635.59,114.41,750.00,NULL,30,7,NULL),(20,'2019-12-26',25.42,4.58,30.00,20,NULL,7,NULL),(21,'2019-12-26',105.93,19.07,125.00,22,NULL,7,NULL),(22,'2019-12-26',16.95,3.05,20.00,21,NULL,7,NULL),(23,'2019-12-27',673.73,121.27,795.00,NULL,31,NULL,4),(24,'2019-12-27',16.95,3.05,20.00,23,NULL,NULL,4),(25,'2020-01-02',122.88,22.12,145.00,NULL,34,8,NULL),(26,'2020-01-02',12.71,2.29,15.00,25,NULL,8,NULL),(27,'2020-01-02',16.95,3.05,20.00,24,NULL,8,NULL),(28,'2020-01-03',152.54,27.46,180.00,NULL,35,9,NULL);
 /*!40000 ALTER TABLE `detallecomprobante` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -223,7 +223,7 @@ CREATE TABLE `detalleservicio` (
   KEY `fk_estadoservicio_idx` (`idEstServ`),
   CONSTRAINT `fk_detalleServicio_detalleAlojamiento1` FOREIGN KEY (`idDetAloj`) REFERENCES `detallealojamiento` (`idDetAloj`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_servicios_tipoServicio1` FOREIGN KEY (`idtipoServ`) REFERENCES `tiposervicio` (`idtipoServ`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -232,7 +232,7 @@ CREATE TABLE `detalleservicio` (
 
 LOCK TABLES `detalleservicio` WRITE;
 /*!40000 ALTER TABLE `detalleservicio` DISABLE KEYS */;
-INSERT INTO `detalleservicio` VALUES (1,2,1,20,'2019-12-07',1,20.00),(2,3,2,19,'2019-12-07',1,15.00),(3,2,3,13,'2019-12-11',2,50.00),(4,4,1,6,'2019-12-11',2,40.00),(5,3,1,9,'2019-12-12',2,30.00),(6,7,2,21,'2019-12-13',2,35.00),(7,1,2,13,'2019-12-13',2,5.00),(8,5,1,11,'2019-12-18',2,20.00),(9,3,2,11,'2019-12-18',2,15.00),(10,3,2,11,'2019-12-18',2,15.00),(11,2,3,11,'2019-12-18',2,50.00),(12,5,1,11,'2019-12-18',2,50.00),(13,1,1,11,'2019-12-18',2,10.00),(14,2,1,28,'2019-12-26',1,10.00),(15,3,2,28,'2019-12-26',1,15.00),(16,1,3,28,'2019-12-26',2,25.00),(17,3,1,29,'2019-12-26',2,30.00),(18,5,2,29,'2019-12-26',2,25.00),(19,1,3,29,'2019-12-26',2,25.00),(20,3,1,30,'2019-12-26',2,30.00),(21,4,2,30,'2019-12-26',2,20.00),(22,5,3,30,'2019-12-26',2,125.00),(23,2,1,31,'2019-12-27',2,20.00);
+INSERT INTO `detalleservicio` VALUES (1,2,1,20,'2019-12-07',1,20.00),(2,3,2,19,'2019-12-07',1,15.00),(3,2,3,13,'2019-12-11',2,50.00),(4,4,1,6,'2019-12-11',2,40.00),(5,3,1,9,'2019-12-12',2,30.00),(6,7,2,21,'2019-12-13',2,35.00),(7,1,2,13,'2019-12-13',2,5.00),(8,5,1,11,'2019-12-18',2,20.00),(9,3,2,11,'2019-12-18',2,15.00),(10,3,2,11,'2019-12-18',2,15.00),(11,2,3,11,'2019-12-18',2,50.00),(12,5,1,11,'2019-12-18',2,50.00),(13,1,1,11,'2019-12-18',2,10.00),(14,2,1,28,'2019-12-26',1,10.00),(15,3,2,28,'2019-12-26',1,15.00),(16,1,3,28,'2019-12-26',2,25.00),(17,3,1,29,'2019-12-26',2,30.00),(18,5,2,29,'2019-12-26',2,25.00),(19,1,3,29,'2019-12-26',2,25.00),(20,3,1,30,'2019-12-26',2,30.00),(21,4,2,30,'2019-12-26',2,20.00),(22,5,3,30,'2019-12-26',2,125.00),(23,2,1,31,'2019-12-27',2,20.00),(24,2,1,34,'2020-01-02',2,20.00),(25,3,2,34,'2020-01-02',2,15.00);
 /*!40000 ALTER TABLE `detalleservicio` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -255,7 +255,7 @@ CREATE TABLE `empleados` (
   CONSTRAINT `fk_empleados_cargos1` FOREIGN KEY (`idcargo`) REFERENCES `cargos` (`idcargo`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_empleados_estadoEmpleado1` FOREIGN KEY (`idEstEmp`) REFERENCES `estadoempleado` (`idEstEmp`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_empleados_personas1` FOREIGN KEY (`DNI`) REFERENCES `personas` (`DNI`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -264,7 +264,7 @@ CREATE TABLE `empleados` (
 
 LOCK TABLES `empleados` WRITE;
 /*!40000 ALTER TABLE `empleados` DISABLE KEYS */;
-INSERT INTO `empleados` VALUES (1,1,1,'12345678'),(2,2,1,'14725836'),(3,2,1,'32165478'),(4,1,1,'57575475');
+INSERT INTO `empleados` VALUES (1,1,1,'12345678'),(2,2,1,'14725836'),(3,2,1,'32165478'),(4,1,1,'57575475'),(5,1,1,'45642121');
 /*!40000 ALTER TABLE `empleados` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -416,7 +416,7 @@ CREATE TABLE `habitaciones` (
 
 LOCK TABLES `habitaciones` WRITE;
 /*!40000 ALTER TABLE `habitaciones` DISABLE KEYS */;
-INSERT INTO `habitaciones` VALUES (1,'201',1,1),(2,'202',2,1),(3,'203',3,2),(4,'204',4,1),(5,'205',5,1),(6,'206',6,1),(7,'207',1,1),(8,'208',4,3),(9,'301',6,1),(10,'302',5,1),(11,'303',4,1),(12,'304',3,2),(13,'305',2,2),(14,'306',3,1),(15,'307',2,1),(16,'308',5,1);
+INSERT INTO `habitaciones` VALUES (1,'201',1,1),(2,'202',2,3),(3,'203',3,1),(4,'204',4,1),(5,'205',5,1),(6,'206',6,1),(7,'207',1,1),(8,'208',4,1),(9,'301',6,1),(10,'302',5,1),(11,'303',4,1),(12,'304',3,1),(13,'305',2,3),(14,'306',3,1),(15,'307',2,1),(16,'308',5,1);
 /*!40000 ALTER TABLE `habitaciones` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -431,7 +431,7 @@ CREATE TABLE `lugaresprocedencia` (
   `idprocedencia` int(11) NOT NULL AUTO_INCREMENT,
   `lugar` varchar(45) NOT NULL,
   PRIMARY KEY (`idprocedencia`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -440,7 +440,7 @@ CREATE TABLE `lugaresprocedencia` (
 
 LOCK TABLES `lugaresprocedencia` WRITE;
 /*!40000 ALTER TABLE `lugaresprocedencia` DISABLE KEYS */;
-INSERT INTO `lugaresprocedencia` VALUES (1,'Rosario - Argentina'),(2,'bgbgbgbg'),(3,'Madeira - Portugal'),(4,'PIURA'),(5,'CARAZ'),(6,'HUARMEY'),(7,'NAZARET'),(8,'LNDFBJB'),(9,'TRUJILLO'),(10,'Lima'),(11,'HUARAZ'),(12,'Chiclayo'),(13,'Arequipa'),(14,'vichay alto'),(15,'gbgb'),(16,'hgfhghgfh'),(17,'cajamarca'),(18,'Pakistan');
+INSERT INTO `lugaresprocedencia` VALUES (1,'Rosario - Argentina'),(2,'bgbgbgbg'),(3,'Madeira - Portugal'),(4,'PIURA'),(5,'CARAZ'),(6,'HUARMEY'),(7,'NAZARET'),(8,'LNDFBJB'),(9,'TRUJILLO'),(10,'Lima'),(11,'HUARAZ'),(12,'Chiclayo'),(13,'Arequipa'),(14,'vichay alto'),(15,'gbgb'),(16,'hgfhghgfh'),(17,'cajamarca'),(18,'Pakistan'),(19,'Iquitos'),(20,'Tangamandapio'),(21,'tahuantinsuyo');
 /*!40000 ALTER TABLE `lugaresprocedencia` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -467,7 +467,7 @@ CREATE TABLE `personas` (
 
 LOCK TABLES `personas` WRITE;
 /*!40000 ALTER TABLE `personas` DISABLE KEYS */;
-INSERT INTO `personas` VALUES ('12345678','Silio','Dextre','Consuelo','consuelo@hotmail.com'),('14725836','Brito','Delgado','Alan','alan@brito.com'),('21212311','bgbgbbgbgbg','bgbgbgbgbgbg','bgbgb','ggbbgb'),('21322323','Messi','Cuccittini','Lionel Andres','cristianoacmp1pt@mskbvf.com'),('32165478','Kuczynski','Godard','Pedro Pablo','ppk@mail.com'),('35325535','luna','lunera','william','sdvdvdvdv'),('43666666','Ocaña','Velasquez','Jesucristo','qwwwwwwwwwww'),('48612131','Humala','tasso','antauro ollanta','lacarcelesmipasion@gmail.xom'),('51121213','Bin Laden','Abdul','Osama Mohammed','osama@mail.com'),('54565656','Crsiete','Bicho','Crsitiano Ronaldo','siuuuuu@gmail.com'),('57575475','Ggnj','Jjgjgj','Gjgjg Gjgjgj','gjgjjgjgjg'),('57676767','Messi','Cuccittini','Lionel Andres','cristianoacmp1pt@gmail.com'),('67686756','ACUÑA','ACUÑA','CESAR','platacomocancha@gmail.com'),('74111112','Gallese','Quiroz','Pedro David','elTrampas@gmail.com'),('74125856','SILVA','ZAPATA','MIGUEL ANGEL','silvatumadre@gmail.com'),('77777765','Love','Shady','Faraon','hibridogang@gmail.com'),('78565666','Bgb','Gbbgb','Bgbgbgb','bgbgbbgb'),('87454544','Fujimori','Garcia','Kenji Alan','kenjicorazon@gmail.com'),('89748611','MDFNJKFF','KNFBJFBNF','QNFBFJBNFNB','fknbjnfbfdkjbnjkfnbjk'),('98746554','Mamani','Quispe','Gonzalo Alexander','jalarGanzosEsMiPasion@gmail.com'),('98794151','Medina','villacorta','alberto martin','correodealbertomartin@yahoo.com');
+INSERT INTO `personas` VALUES ('12345678','Silio','Dextre','Consuelo','consuelo@hotmail.com'),('13467945','Null','Null','Dayanita','trabuco@mail.com'),('14725836','Brito','Delgado','Alan','alan@brito.com'),('21212311','bgbgbbgbgbg','bgbgbgbgbgbg','bgbgb','ggbbgb'),('21322323','Messi','Cuccittini','Lionel Andres','cristianoacmp1pt@mskbvf.com'),('32165478','Kuczynski','Godard','Pedro Pablo','ppk@mail.com'),('35325535','luna','lunera','william','elchipi@mail.com'),('43666666','Ocaña','Velasquez','Jesucristo','qwwwwwwwwwww'),('45642121','Gonzales','Entra','Elver','elvergon@mail.com'),('45646454','toledo','wiracocha','alejandro','wisky@mail.com'),('46464644','Chavez','Cabana','Andre Alexander','elbromas@mail.com'),('48612131','Humala','tasso','antauro ollanta','lacarcelesmipasion@gmail.xom'),('51121213','Bin Laden','Abdul','Osama Mohammed','osama@mail.com'),('54565656','Crsiete','Bicho','Crsitiano Ronaldo','siuuuuu@gmail.com'),('57575475','Ggnj','Jjgjgj','Gjgjg Gjgjgj','gjgjjgjgjg'),('57676767','Messi','Cuccittini','Lionel Andres','cristianoacmp1pt@gmail.com'),('67686756','ACUÑA','ACUÑA','CESAR','platacomocancha@gmail.com'),('74111112','Gallese','Quiroz','Pedro David','elTrampas@gmail.com'),('74125856','SILVA','ZAPATA','MIGUEL ANGEL','silvatumadre@gmail.com'),('77777765','Love','Shady','Faraon','hibridogang@gmail.com'),('78565666','Bgb','Gbbgb','Bgbgbgb','bgbgbbgb'),('79461325','Pizarro','Guerrero','Claudio Paolo','peruano@mail.com'),('87454544','Fujimori','Garcia','Kenji Alan','kenjicorazon@gmail.com'),('89748611','MDFNJKFF','KNFBJFBNF','QNFBFJBNFNB','fknbjnfbfdkjbnjkfnbjk'),('98746554','Mamani','Quispe','Gonzalo Alexander','jalarGanzosEsMiPasion@gmail.com'),('98794151','Medina','villacorta','alberto martin','correodealbertomartin@yahoo.com');
 /*!40000 ALTER TABLE `personas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -536,7 +536,7 @@ CREATE TABLE `usuarios` (
   PRIMARY KEY (`idusuario`),
   KEY `fk_usuarios_empleados1_idx` (`idempleado`),
   CONSTRAINT `fk_usuarios_empleados1` FOREIGN KEY (`idempleado`) REFERENCES `empleados` (`idempleado`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -545,7 +545,7 @@ CREATE TABLE `usuarios` (
 
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` VALUES (1,'consuelo','63a9f0ea7bb98050796b649e85481845',1),(2,'antauro','202cb962ac59075b964b07152d234b70',2),(3,'32165478','631f970f6bc2c019a1cb33106b770e5f',3),(4,'57575475','956bc7e28a63160ceb95a9dc9ac4900a',4);
+INSERT INTO `usuarios` VALUES (1,'consuelo','63a9f0ea7bb98050796b649e85481845',1),(2,'antauro','202cb962ac59075b964b07152d234b70',2),(3,'32165478','631f970f6bc2c019a1cb33106b770e5f',3),(4,'57575475','956bc7e28a63160ceb95a9dc9ac4900a',4),(5,'elver','c6fac1b43c0b97c1a80e11267cca23e9',5);
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -765,6 +765,7 @@ SET character_set_client = utf8;
  1 AS `fechaServicio`,
  1 AS `cantidad`,
  1 AS `descripcion`,
+ 1 AS `servicio`,
  1 AS `precioUnit`,
  1 AS `totalServ`,
  1 AS `estadoServ`,
@@ -793,6 +794,7 @@ SET character_set_client = utf8;
  1 AS `fechaServicio`,
  1 AS `cantidad`,
  1 AS `descripcion`,
+ 1 AS `servicio`,
  1 AS `precioUnit`,
  1 AS `totalServ`,
  1 AS `estadoServ`,
@@ -872,6 +874,7 @@ SET character_set_client = utf8;
  1 AS `fechaServicio`,
  1 AS `cantidad`,
  1 AS `descripcion`,
+ 1 AS `servicio`,
  1 AS `precioUnit`,
  1 AS `totalServ`,
  1 AS `estadoServ`,
@@ -926,6 +929,50 @@ SET character_set_client = @saved_cs_client;
 --
 -- Dumping routines for database 'hotel_lunandina'
 --
+/*!50003 DROP FUNCTION IF EXISTS `func_Abrv` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` FUNCTION `func_Abrv`( txt varchar(45)) RETURNS varchar(45) CHARSET utf8
+BEGIN
+	declare tx_capitalize varchar(45);
+    declare rsta varchar(3);
+    set tx_capitalize = concat(upper(left(txt,1)) , '', lower(substring(txt,2)));
+    set rsta = left(tx_capitalize,3);
+RETURN rsta;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP FUNCTION IF EXISTS `func_Capitalize` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` FUNCTION `func_Capitalize`(txt varchar(45)) RETURNS varchar(45) CHARSET utf8
+BEGIN
+	declare rsta varchar(45);
+	set rsta = concat(upper(left(txt,1)) , '', lower(substring(txt,2)));
+	RETURN rsta;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP FUNCTION IF EXISTS `func_count_Hab` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -973,7 +1020,7 @@ BEGIN
 	set rsta = ( select 
 		count(*) 
 	from vw_alojamientoyreserva 
-    where numHab = numH and
+    where numHab = numH and estadoAloj != 'Concluido' and
     (
 		curdate() between fecha_ent and fecha_sal
     ));
@@ -1663,7 +1710,7 @@ idhabitacion=idhab)=0 then
 if(select count(*) from detallealojamiento where idestadoAloj=1 and (fechsal between fechaEntrada and fechaSalida) and
 idhabitacion=idhab)=0 then
 
-IF(DATEDIFF(fechsal,fechent))>0 and (DATEDIFF(fechent,curdate()-1))>0 THEN
+IF(DATEDIFF(fechsal,fechent))>0 and (DATEDIFF(fechent,curdate()))>0 THEN
  if (select count(DNI) from clientepersona where DNI = dn ) > 0 then
     insert into   detallealojamiento(fechaReserva,fechaEntrada,fechaSalida,idestadoAloj,idhabitacion,idusuario,idclientePersona,RUC)
     values (curdate(),fechent,fechsal,1,idhab,idus,(select idclientePersona from clientepersona where DNI = dn),null);
@@ -1702,7 +1749,7 @@ idhabitacion=idhab)=0 then
 if(select count(*) from detallealojamiento where idestadoAloj=1 and (fechsal between fechaEntrada and fechaSalida) and
 idhabitacion=idhab)=0 then
 
-IF(DATEDIFF(fechsal,fechent))>0 and (DATEDIFF(fechent,curdate()-1))>0 THEN
+IF(DATEDIFF(fechsal,fechent))>0 and (DATEDIFF(fechent,curdate()))>0 THEN
 		update personas set apPat = apellP, apMat = apellM, nomb = nom, email = corrcli where DNI = dn;
 
     if (select count(lugar) from lugaresprocedencia where lugar = lug ) = 0 then
@@ -1757,7 +1804,7 @@ if(select count(*) from detallealojamiento where idestadoAloj=1 and (fechent bet
 idhabitacion=idhab)=0 then
 if(select count(*) from detallealojamiento where idestadoAloj=1 and (fechsal between fechaEntrada and fechaSalida) and
 idhabitacion=idhab)=0 then
-IF(DATEDIFF(fechsal,fechent))>0 and (DATEDIFF(fechent,curdate()-1))>0 THEN
+IF(DATEDIFF(fechsal,fechent))>0 and (DATEDIFF(fechent,curdate()))>0 THEN
   if (select count(RUC) from clienteempresa where RUC = RC ) = 0 then
   if (select count(lugar) from lugaresprocedencia where lugar = lug ) = 0 then
    insert into lugaresprocedencia(idprocedencia,lugar) values (default,lug);
@@ -1795,7 +1842,7 @@ idhabitacion=idhab)=0 then
 if(select count(*) from detallealojamiento where idestadoAloj=1 and (fechsal between fechaEntrada and fechaSalida) and
 idhabitacion=idhab)=0 then
 
-IF(DATEDIFF(fechsal,fechent))>0 and (DATEDIFF(fechent,curdate()-1))>0 THEN
+IF(DATEDIFF(fechsal,fechent))>0 and (DATEDIFF(fechent,curdate()))>0 THEN
   if (select count(lugar) from lugaresprocedencia where lugar = lug ) = 0 then
       insert into lugaresprocedencia(lugar) values (lug);
     end if;
@@ -2246,7 +2293,7 @@ DELIMITER ;
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `vw_boleta` AS select concat('B',lpad(`b`.`numBoleta`,7,'0')) AS `numBoleta`,`dc`.`fechaEmision` AS `fechaEmision`,`dc`.`subtotal` AS `subtotal`,`dc`.`IGV` AS `igv`,`dc`.`total` AS `total`,`ds`.`fechaServicio` AS `fechaServicio`,`ds`.`cantidad` AS `cantidad`,concat('Uso de servicio ',`ts`.`nombreServ`) AS `descripcion`,`ts`.`precioServ` AS `precioUnit`,`ds`.`subtotal` AS `totalServ`,`es`.`estadoServ` AS `estadoServ`,`da`.`fechaEntrada` AS `fechaEntrada`,`da`.`fechaSalida` AS `fechaSalida`,`h`.`numHab` AS `numHab`,`p`.`DNI` AS `dni`,concat(`p`.`apPat`,' ',`p`.`apMat`,' ',`p`.`nomb`) AS `cliente`,`l`.`lugar` AS `lugar` from ((((((((((`boletas` `b` join `detallecomprobante` `dc` on((`dc`.`numBoleta` = `b`.`numBoleta`))) join `clientepersona` `cp` on((`cp`.`idclientePersona` = `b`.`idclientePersona`))) join `personas` `p` on((`p`.`DNI` = `cp`.`DNI`))) join `detalleservicio` `ds` on((`ds`.`idDetServ` = `dc`.`idDetServ`))) join `tiposervicio` `ts` on((`ts`.`idtipoServ` = `ds`.`idtipoServ`))) join `detallealojamiento` `da` on((`da`.`idDetAloj` = `ds`.`idDetAloj`))) join `estadoservicio` `es` on((`es`.`idEstServ` = `ds`.`idEstServ`))) join `habitaciones` `h` on((`h`.`idhabitacion` = `da`.`idhabitacion`))) join `tipohabitacion` `th` on((`th`.`idtipoHab` = `h`.`idtipoHab`))) join `lugaresprocedencia` `l` on((`l`.`idprocedencia` = `cp`.`idprocedencia`))) union select concat('B',lpad(`b`.`numBoleta`,7,'0')) AS `numBoleta`,`dc`.`fechaEmision` AS `fechaEmision`,`dc`.`subtotal` AS `subtotal`,`dc`.`IGV` AS `igv`,`dc`.`total` AS `total`,`da`.`fechaEntrada` AS `fechaServicio`,(to_days(`da`.`fechaSalida`) - to_days(`da`.`fechaEntrada`)) AS `cantidad`,concat('Uso de habitacion N° ',`h`.`numHab`) AS `descripcion`,`th`.`precioTH` AS `precioUnit`,(`th`.`precioTH` * (to_days(`da`.`fechaSalida`) - to_days(`da`.`fechaEntrada`))) AS `totalServ`,concat('Cancelado') AS `estadoServ`,`da`.`fechaEntrada` AS `fechaEntrada`,`da`.`fechaSalida` AS `fechaSalida`,`h`.`numHab` AS `numHab`,`p`.`DNI` AS `dni`,concat(`p`.`apPat`,' ',`p`.`apMat`,' ',`p`.`nomb`) AS `cliente`,`l`.`lugar` AS `lugar` from (((((((`boletas` `b` join `detallecomprobante` `dc` on((`dc`.`numBoleta` = `b`.`numBoleta`))) join `clientepersona` `cp` on((`cp`.`idclientePersona` = `b`.`idclientePersona`))) join `personas` `p` on((`p`.`DNI` = `cp`.`DNI`))) join `lugaresprocedencia` `l` on((`l`.`idprocedencia` = `cp`.`idprocedencia`))) join `detallealojamiento` `da` on((`da`.`idDetAloj` = `dc`.`idDetAloj`))) join `habitaciones` `h` on((`h`.`idhabitacion` = `da`.`idhabitacion`))) join `tipohabitacion` `th` on((`th`.`idtipoHab` = `h`.`idtipoHab`))) */;
+/*!50001 VIEW `vw_boleta` AS select concat('B',lpad(`b`.`numBoleta`,7,'0')) AS `numBoleta`,`dc`.`fechaEmision` AS `fechaEmision`,`dc`.`subtotal` AS `subtotal`,`dc`.`IGV` AS `igv`,`dc`.`total` AS `total`,`ds`.`fechaServicio` AS `fechaServicio`,`ds`.`cantidad` AS `cantidad`,concat('Uso de servicio ',`ts`.`nombreServ`) AS `descripcion`,`ts`.`nombreServ` AS `servicio`,`ts`.`precioServ` AS `precioUnit`,`ds`.`subtotal` AS `totalServ`,`es`.`estadoServ` AS `estadoServ`,`da`.`fechaEntrada` AS `fechaEntrada`,`da`.`fechaSalida` AS `fechaSalida`,`h`.`numHab` AS `numHab`,`p`.`DNI` AS `dni`,concat(`p`.`apPat`,' ',`p`.`apMat`,' ',`p`.`nomb`) AS `cliente`,`l`.`lugar` AS `lugar` from ((((((((((`boletas` `b` join `detallecomprobante` `dc` on((`dc`.`numBoleta` = `b`.`numBoleta`))) join `clientepersona` `cp` on((`cp`.`idclientePersona` = `b`.`idclientePersona`))) join `personas` `p` on((`p`.`DNI` = `cp`.`DNI`))) join `detalleservicio` `ds` on((`ds`.`idDetServ` = `dc`.`idDetServ`))) join `tiposervicio` `ts` on((`ts`.`idtipoServ` = `ds`.`idtipoServ`))) join `detallealojamiento` `da` on((`da`.`idDetAloj` = `ds`.`idDetAloj`))) join `estadoservicio` `es` on((`es`.`idEstServ` = `ds`.`idEstServ`))) join `habitaciones` `h` on((`h`.`idhabitacion` = `da`.`idhabitacion`))) join `tipohabitacion` `th` on((`th`.`idtipoHab` = `h`.`idtipoHab`))) join `lugaresprocedencia` `l` on((`l`.`idprocedencia` = `cp`.`idprocedencia`))) union select concat('B',lpad(`b`.`numBoleta`,7,'0')) AS `numBoleta`,`dc`.`fechaEmision` AS `fechaEmision`,`dc`.`subtotal` AS `subtotal`,`dc`.`IGV` AS `igv`,`dc`.`total` AS `total`,`da`.`fechaEntrada` AS `fechaServicio`,(to_days(`da`.`fechaSalida`) - to_days(`da`.`fechaEntrada`)) AS `cantidad`,concat('Uso de habitacion N° ',`h`.`numHab`,' ') AS `descripcion`,concat('Habitacion') AS `servicio`,`th`.`precioTH` AS `precioUnit`,(`th`.`precioTH` * (to_days(`da`.`fechaSalida`) - to_days(`da`.`fechaEntrada`))) AS `totalServ`,concat('Cancelado') AS `estadoServ`,`da`.`fechaEntrada` AS `fechaEntrada`,`da`.`fechaSalida` AS `fechaSalida`,`h`.`numHab` AS `numHab`,`p`.`DNI` AS `dni`,concat(`p`.`apPat`,' ',`p`.`apMat`,' ',`p`.`nomb`) AS `cliente`,`l`.`lugar` AS `lugar` from (((((((`boletas` `b` join `detallecomprobante` `dc` on((`dc`.`numBoleta` = `b`.`numBoleta`))) join `clientepersona` `cp` on((`cp`.`idclientePersona` = `b`.`idclientePersona`))) join `personas` `p` on((`p`.`DNI` = `cp`.`DNI`))) join `lugaresprocedencia` `l` on((`l`.`idprocedencia` = `cp`.`idprocedencia`))) join `detallealojamiento` `da` on((`da`.`idDetAloj` = `dc`.`idDetAloj`))) join `habitaciones` `h` on((`h`.`idhabitacion` = `da`.`idhabitacion`))) join `tipohabitacion` `th` on((`th`.`idtipoHab` = `h`.`idtipoHab`))) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -2264,7 +2311,7 @@ DELIMITER ;
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `vw_boleta_factura` AS select `vw_boleta`.`numBoleta` AS `serie`,`vw_boleta`.`fechaEmision` AS `fechaEmision`,`vw_boleta`.`subtotal` AS `subtotal`,`vw_boleta`.`igv` AS `igv`,`vw_boleta`.`total` AS `total`,`vw_boleta`.`fechaServicio` AS `fechaServicio`,`vw_boleta`.`cantidad` AS `cantidad`,`vw_boleta`.`descripcion` AS `descripcion`,`vw_boleta`.`precioUnit` AS `precioUnit`,`vw_boleta`.`totalServ` AS `totalServ`,`vw_boleta`.`estadoServ` AS `estadoServ`,`vw_boleta`.`fechaEntrada` AS `fechaEntrada`,`vw_boleta`.`fechaSalida` AS `fechaSalida`,`vw_boleta`.`numHab` AS `numHab`,`vw_boleta`.`dni` AS `doc`,`vw_boleta`.`cliente` AS `cliente`,`vw_boleta`.`lugar` AS `lugar` from `vw_boleta` union select `vw_factura`.`numFactura` AS `serie`,`vw_factura`.`fechaEmision` AS `fechaEmision`,`vw_factura`.`subtotal` AS `subtotal`,`vw_factura`.`igv` AS `igv`,`vw_factura`.`total` AS `total`,`vw_factura`.`fechaServicio` AS `fechaServicio`,`vw_factura`.`cantidad` AS `cantidad`,`vw_factura`.`descripcion` AS `descripcion`,`vw_factura`.`precioUnit` AS `precioUnit`,`vw_factura`.`totalServ` AS `totalServ`,`vw_factura`.`estadoServ` AS `estadoServ`,`vw_factura`.`fechaEntrada` AS `fechaEntrada`,`vw_factura`.`fechaSalida` AS `fechaSalida`,`vw_factura`.`numHab` AS `numHab`,`vw_factura`.`RUC` AS `doc`,`vw_factura`.`cliente` AS `cliente`,`vw_factura`.`lugar` AS `lugar` from `vw_factura` */;
+/*!50001 VIEW `vw_boleta_factura` AS select `vw_boleta`.`numBoleta` AS `serie`,`vw_boleta`.`fechaEmision` AS `fechaEmision`,`vw_boleta`.`subtotal` AS `subtotal`,`vw_boleta`.`igv` AS `igv`,`vw_boleta`.`total` AS `total`,`vw_boleta`.`fechaServicio` AS `fechaServicio`,`vw_boleta`.`cantidad` AS `cantidad`,`vw_boleta`.`descripcion` AS `descripcion`,`vw_boleta`.`servicio` AS `servicio`,`vw_boleta`.`precioUnit` AS `precioUnit`,`vw_boleta`.`totalServ` AS `totalServ`,`vw_boleta`.`estadoServ` AS `estadoServ`,`vw_boleta`.`fechaEntrada` AS `fechaEntrada`,`vw_boleta`.`fechaSalida` AS `fechaSalida`,`vw_boleta`.`numHab` AS `numHab`,`vw_boleta`.`dni` AS `doc`,`vw_boleta`.`cliente` AS `cliente`,`vw_boleta`.`lugar` AS `lugar` from `vw_boleta` union select `vw_factura`.`numFactura` AS `serie`,`vw_factura`.`fechaEmision` AS `fechaEmision`,`vw_factura`.`subtotal` AS `subtotal`,`vw_factura`.`igv` AS `igv`,`vw_factura`.`total` AS `total`,`vw_factura`.`fechaServicio` AS `fechaServicio`,`vw_factura`.`cantidad` AS `cantidad`,`vw_factura`.`descripcion` AS `descripcion`,`vw_factura`.`servicio` AS `servicio`,`vw_factura`.`precioUnit` AS `precioUnit`,`vw_factura`.`totalServ` AS `totalServ`,`vw_factura`.`estadoServ` AS `estadoServ`,`vw_factura`.`fechaEntrada` AS `fechaEntrada`,`vw_factura`.`fechaSalida` AS `fechaSalida`,`vw_factura`.`numHab` AS `numHab`,`vw_factura`.`RUC` AS `doc`,`vw_factura`.`cliente` AS `cliente`,`vw_factura`.`lugar` AS `lugar` from `vw_factura` */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -2336,7 +2383,7 @@ DELIMITER ;
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `vw_factura` AS select concat('F',lpad(`f`.`numFactura`,7,'0')) AS `numFactura`,`dc`.`fechaEmision` AS `fechaEmision`,`dc`.`subtotal` AS `subtotal`,`dc`.`IGV` AS `igv`,`dc`.`total` AS `total`,`ds`.`fechaServicio` AS `fechaServicio`,`ds`.`cantidad` AS `cantidad`,concat('Uso de servicio ',`ts`.`nombreServ`) AS `descripcion`,`ts`.`precioServ` AS `precioUnit`,(`ds`.`cantidad` * `ts`.`precioServ`) AS `totalServ`,`es`.`estadoServ` AS `estadoServ`,`da`.`fechaEntrada` AS `fechaEntrada`,`da`.`fechaSalida` AS `fechaSalida`,`h`.`numHab` AS `numHab`,`ce`.`RUC` AS `RUC`,`ce`.`nombreEmpresa` AS `cliente`,`l`.`lugar` AS `lugar` from (((((((((`facturas` `f` join `detallecomprobante` `dc` on((`dc`.`numFactura` = `f`.`numFactura`))) join `clienteempresa` `ce` on((`ce`.`RUC` = `f`.`RUC`))) join `detalleservicio` `ds` on((`ds`.`idDetServ` = `dc`.`idDetServ`))) join `tiposervicio` `ts` on((`ts`.`idtipoServ` = `ds`.`idtipoServ`))) join `detallealojamiento` `da` on((`da`.`idDetAloj` = `ds`.`idDetAloj`))) join `estadoservicio` `es` on((`es`.`idEstServ` = `ds`.`idEstServ`))) join `habitaciones` `h` on((`h`.`idhabitacion` = `da`.`idhabitacion`))) join `tipohabitacion` `th` on((`th`.`idtipoHab` = `h`.`idtipoHab`))) join `lugaresprocedencia` `l` on((`l`.`idprocedencia` = `ce`.`idprocedencia`))) union select concat('F',lpad(`f`.`numFactura`,7,'0')) AS `numFactura`,`dc`.`fechaEmision` AS `fechaEmision`,`dc`.`subtotal` AS `subtotal`,`dc`.`IGV` AS `igv`,`dc`.`total` AS `total`,`da`.`fechaEntrada` AS `fechaServicio`,(to_days(`da`.`fechaSalida`) - to_days(`da`.`fechaEntrada`)) AS `cantidad`,concat('Uso de habitacion N° ',`h`.`numHab`) AS `descripcion`,`th`.`precioTH` AS `precioUnit`,(`th`.`precioTH` * (to_days(`da`.`fechaSalida`) - to_days(`da`.`fechaEntrada`))) AS `totalServ`,concat('Cancelado') AS `estadoServ`,`da`.`fechaEntrada` AS `fechaEntrada`,`da`.`fechaSalida` AS `fechaSalida`,`h`.`numHab` AS `numHab`,`ce`.`RUC` AS `RUC`,`ce`.`nombreEmpresa` AS `cliente`,`l`.`lugar` AS `lugar` from ((((((`facturas` `f` join `detallecomprobante` `dc` on((`dc`.`numFactura` = `f`.`numFactura`))) join `clienteempresa` `ce` on((`ce`.`RUC` = `f`.`RUC`))) join `lugaresprocedencia` `l` on((`l`.`idprocedencia` = `ce`.`idprocedencia`))) join `detallealojamiento` `da` on((`da`.`idDetAloj` = `dc`.`idDetAloj`))) join `habitaciones` `h` on((`h`.`idhabitacion` = `da`.`idhabitacion`))) join `tipohabitacion` `th` on((`th`.`idtipoHab` = `h`.`idtipoHab`))) */;
+/*!50001 VIEW `vw_factura` AS select concat('F',lpad(`f`.`numFactura`,7,'0')) AS `numFactura`,`dc`.`fechaEmision` AS `fechaEmision`,`dc`.`subtotal` AS `subtotal`,`dc`.`IGV` AS `igv`,`dc`.`total` AS `total`,`ds`.`fechaServicio` AS `fechaServicio`,`ds`.`cantidad` AS `cantidad`,concat('Uso de servicio ',`ts`.`nombreServ`) AS `descripcion`,`ts`.`nombreServ` AS `servicio`,`ts`.`precioServ` AS `precioUnit`,(`ds`.`cantidad` * `ts`.`precioServ`) AS `totalServ`,`es`.`estadoServ` AS `estadoServ`,`da`.`fechaEntrada` AS `fechaEntrada`,`da`.`fechaSalida` AS `fechaSalida`,`h`.`numHab` AS `numHab`,`ce`.`RUC` AS `RUC`,`ce`.`nombreEmpresa` AS `cliente`,`l`.`lugar` AS `lugar` from (((((((((`facturas` `f` join `detallecomprobante` `dc` on((`dc`.`numFactura` = `f`.`numFactura`))) join `clienteempresa` `ce` on((`ce`.`RUC` = `f`.`RUC`))) join `detalleservicio` `ds` on((`ds`.`idDetServ` = `dc`.`idDetServ`))) join `tiposervicio` `ts` on((`ts`.`idtipoServ` = `ds`.`idtipoServ`))) join `detallealojamiento` `da` on((`da`.`idDetAloj` = `ds`.`idDetAloj`))) join `estadoservicio` `es` on((`es`.`idEstServ` = `ds`.`idEstServ`))) join `habitaciones` `h` on((`h`.`idhabitacion` = `da`.`idhabitacion`))) join `tipohabitacion` `th` on((`th`.`idtipoHab` = `h`.`idtipoHab`))) join `lugaresprocedencia` `l` on((`l`.`idprocedencia` = `ce`.`idprocedencia`))) union select concat('F',lpad(`f`.`numFactura`,7,'0')) AS `numFactura`,`dc`.`fechaEmision` AS `fechaEmision`,`dc`.`subtotal` AS `subtotal`,`dc`.`IGV` AS `igv`,`dc`.`total` AS `total`,`da`.`fechaEntrada` AS `fechaServicio`,(to_days(`da`.`fechaSalida`) - to_days(`da`.`fechaEntrada`)) AS `cantidad`,concat('Uso de habitacion N° ',`h`.`numHab`,' ') AS `descripcion`,concat('Habitacion') AS `servicio`,`th`.`precioTH` AS `precioUnit`,(`th`.`precioTH` * (to_days(`da`.`fechaSalida`) - to_days(`da`.`fechaEntrada`))) AS `totalServ`,concat('Cancelado') AS `estadoServ`,`da`.`fechaEntrada` AS `fechaEntrada`,`da`.`fechaSalida` AS `fechaSalida`,`h`.`numHab` AS `numHab`,`ce`.`RUC` AS `RUC`,`ce`.`nombreEmpresa` AS `cliente`,`l`.`lugar` AS `lugar` from ((((((`facturas` `f` join `detallecomprobante` `dc` on((`dc`.`numFactura` = `f`.`numFactura`))) join `clienteempresa` `ce` on((`ce`.`RUC` = `f`.`RUC`))) join `lugaresprocedencia` `l` on((`l`.`idprocedencia` = `ce`.`idprocedencia`))) join `detallealojamiento` `da` on((`da`.`idDetAloj` = `dc`.`idDetAloj`))) join `habitaciones` `h` on((`h`.`idhabitacion` = `da`.`idhabitacion`))) join `tipohabitacion` `th` on((`th`.`idtipoHab` = `h`.`idtipoHab`))) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -2386,4 +2433,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-12-27 20:53:06
+-- Dump completed on 2020-01-06  8:05:30
