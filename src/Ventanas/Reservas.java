@@ -70,12 +70,12 @@ public class Reservas extends javax.swing.JFrame {
     int numval1;
 
     public void reconocer_empresa() {
-        String Rc = txRUC.getText().toString();
+        String Rc = txRUC.getText();
         int contDn = Integer.parseInt(control.DevolverRegistroDto("select count(*) from clienteempresa where RUC='" + Rc + "';", 1));
         if (contDn != 0 && txRUC.getText().length() == 11) {
-            jTextField1.setText(control.DevolverRegistroDto("select  empresa from v_reservaEmp where RUC='" + Rc + "' limit 1;", 1));
-            jTextField2.setText(control.DevolverRegistroDto("select  Procedencia from v_reservaEmp where RUC='" + Rc + "' limit 1;", 1));
-            jTextField3.setText(control.DevolverRegistroDto("select  email from clienteempresa where RUC='" + Rc + "';", 1));
+            jTextField1.setText(control.DevolverRegistroDto("select empresa from vw_empresas where ruc = '"+Rc+"'", 1));
+            jTextField2.setText(control.DevolverRegistroDto("select lugar from vw_empresas where ruc = '"+Rc+"'", 1));
+            jTextField3.setText(control.DevolverRegistroDto("select email from vw_empresas where ruc = '"+Rc+"'", 1));
         }
         if (txRUC.getText().length() != 11) {
             jTextField1.setText("");

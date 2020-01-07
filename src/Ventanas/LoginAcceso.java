@@ -17,7 +17,6 @@ public class LoginAcceso extends javax.swing.JFrame {
     public LoginAcceso() {
         initComponents();
         design.MoverFrame(jPanel1, this);
-        this.setLocationRelativeTo(null);
         username.grabFocus();
     }
 
@@ -152,6 +151,7 @@ public class LoginAcceso extends javax.swing.JFrame {
         getContentPane().add(pnLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 0, 310, 450));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void usernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernameActionPerformed
@@ -173,34 +173,39 @@ public class LoginAcceso extends javax.swing.JFrame {
 
     private void btIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btIngresarActionPerformed
         AlertaError alr = new AlertaError(this, true);
+        
         user = username.getText(); //Recuperamos texto del campo username(TXT)
         password = pwOculto.getText(); //Recuperamos la contraseña del campo pwOculto (PASS)
-
+        String _estado = control.DevolverRegistroDto("SELECT count(*) FROM vw_empleados where estado = 'Activo' and username = '"+user+"'", 1);
         LoginLunandina lgl = new LoginLunandina(user, password);
-
-        if (lgl.VerifUsuario()) { //Vemos si existe usuario
-            if (lgl.VerifCredenciales()) { //Vemos si el usuario y la contraseña coinciden
-                Control.usuario = lgl.getnomEmp(); //Apellidos y nombres del empleado
-                Control.empleado = lgl.getUsuario(); //Nombre de usuario del empleado 
-                Control.cargo = lgl.getCargo();
-                control.CrearRegistro("call proc_UpdateStateDay();"); //Actualizamos el estado de las habitaciones
-                MenuPrincipal mp = new MenuPrincipal();
-                //mp = new MenuPrincipal();
-                mp.setVisible(true);
-                this.dispose();
+        
+        if(!_estado.equals("0")){ // Usuario Activo
+            if (lgl.VerifUsuario()) { //Vemos si existe usuario
+                if (lgl.VerifCredenciales()) { //Vemos si el usuario y la contraseña coinciden
+                    Control.usuario = lgl.getnomEmp(); //Apellidos y nombres del empleado
+                    Control.empleado = lgl.getUsuario(); //Nombre de usuario del empleado 
+                    Control.cargo = lgl.getCargo();
+                    control.CrearRegistro("call proc_UpdateStateDay();"); //Actualizamos el estado de las habitaciones
+                    MenuPrincipal mp = new MenuPrincipal();
+                    //mp = new MenuPrincipal();
+                    mp.setVisible(true);
+                    this.dispose();
+                } else {
+                    rpt = "Credenciales incorrectas";
+                    username.grabFocus();
+                    AlertaError.titulo.setText(rpt);
+                    alr.setVisible(true);
+                }
             } else {
-                rpt = "Credenciales incorrectas";
+                rpt = "Este usuario no existe";
                 username.grabFocus();
-                alr.titulo.setText(rpt);
+                AlertaError.titulo.setText(rpt);
                 alr.setVisible(true);
             }
-        } else {
-            rpt = "Este usuario no existe";
-            username.grabFocus();
-            alr.titulo.setText(rpt);
+        }else{ // El usuario esta Despedido o no esta bien definido el usuario
+            AlertaError.titulo.setText("Usuario no autorizado");
             alr.setVisible(true);
         }
-
     }//GEN-LAST:event_btIngresarActionPerformed
 
     private void lbCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbCerrarMouseClicked
@@ -235,11 +240,7 @@ public class LoginAcceso extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
+        
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -247,21 +248,15 @@ public class LoginAcceso extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(LoginAcceso.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(LoginAcceso.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(LoginAcceso.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(LoginAcceso.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
-                design.Nimbus();
+                //design.Nimbus();
                 new LoginAcceso().setVisible(true);
             }
         });

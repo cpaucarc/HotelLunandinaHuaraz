@@ -57,15 +57,29 @@ public class RegistroEmpleado extends javax.swing.JFrame {
     }
 
     public void MostrarResultados() {
-        String consulta = "select * from vw_empleados where "
+        String consulta = "select * from vw_empleados where estado = 'Activo' and ("
                 + "dni like '%" + txbuscar.getText() + "%' or "
                 + "apellidos like '%" + txbuscar.getText() + "%' or "
                 + "nombres like '%" + txbuscar.getText() + "%' or "
                 + "mail like '%" + txbuscar.getText() + "%' or "
                 + "cargo like '%" + txbuscar.getText() + "%' or "
                 + "estado like '%" + txbuscar.getText() + "%' or "
-                + "username like '%" + txbuscar.getText() + "%'";
+                + "username like '%" + txbuscar.getText() + "%')";
         control.LlenarJtable(modelo, consulta, 7);
+    }
+    public void GetEmploye(String dni){
+        txappat.setText(control.DevolverRegistroDto("SELECT apPat FROM personas  WHERE DNI = '"+dni+"'", 1));
+        txapmat.setText(control.DevolverRegistroDto("SELECT apMat FROM personas  WHERE DNI = '"+dni+"'", 1));
+        txnomb.setText(control.DevolverRegistroDto("SELECT nomb FROM personas  WHERE DNI = '"+dni+"'", 1));
+        txmail.setText(control.DevolverRegistroDto("SELECT email FROM personas  WHERE DNI = '"+dni+"'", 1));
+        
+        cbCargo.setSelectedItem(control.DevolverRegistroDto("SELECT cargo FROM vw_empleados WHERE dni = '"+dni+"'", 1));
+        cbEstado.setSelectedItem(control.DevolverRegistroDto("SELECT estado FROM vw_empleados WHERE dni = '"+dni+"'", 1));
+    }
+    public void Controls(boolean b){
+        cbEstado.setEnabled(b);
+        btModificar.setEnabled(b);
+        btRegistrar.setEnabled(!b);
     }
 
     @SuppressWarnings("unchecked")
@@ -212,6 +226,9 @@ public class RegistroEmpleado extends javax.swing.JFrame {
         txdni.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txdni.setSelectionColor(new java.awt.Color(0, 122, 255));
         txdni.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txdniKeyReleased(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txdniKeyTyped(evt);
             }
@@ -344,10 +361,8 @@ public class RegistroEmpleado extends javax.swing.JFrame {
             Limpiar();
             MostrarResultados();
 
-            cbEstado.setEnabled(false);
             txdni.setEditable(true);
-            btModificar.setEnabled(false);
-            btRegistrar.setEnabled(true);
+            Controls(false);
 
             alsuccess.titulo.setText("<html><center>" + rpt + "</center></html>");
             alsuccess.setVisible(true);
@@ -413,19 +428,23 @@ public class RegistroEmpleado extends javax.swing.JFrame {
 
     private void jLabel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseClicked
         Limpiar();
-        cbEstado.setEnabled(false);
         txdni.setEditable(true);
-        btModificar.setEnabled(false);
-        btRegistrar.setEnabled(true);
+        Controls(false);
     }//GEN-LAST:event_jLabel11MouseClicked
 
     private void tablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMouseClicked
-        cbEstado.setEnabled(true);
         txdni.setEditable(false);
-        btModificar.setEnabled(true);
-        btRegistrar.setEnabled(false);
+        Controls(true);
         Seleccionar();
     }//GEN-LAST:event_tablaMouseClicked
+
+    private void txdniKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txdniKeyReleased
+        String dni = txdni.getText();
+        if(dni.length() == 8){
+            GetEmploye(dni);
+            Controls(true);
+        }
+    }//GEN-LAST:event_txdniKeyReleased
 
     /**
      * @param args the command line arguments

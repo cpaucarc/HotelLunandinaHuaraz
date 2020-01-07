@@ -15,22 +15,10 @@ import javax.swing.table.DefaultTableModel;
 /* fin importaciones para animar label */
 public class MenuPrincipal extends javax.swing.JFrame {
 
-    /* Ventanas externas */
     Design ds=new Design();
     Controlador control=new Controlador();
     DefaultTableModel modelo=new DefaultTableModel();
     
-//    RegistroEmpleado empleado = new RegistroEmpleado();
-//    Reportes reporte = new Reportes();
-//    Habitaciones habitacion=new Habitaciones();
-//    Reservas reserva=new Reservas();
-//    Alojamiento alojamiento=new Alojamiento();
-//    Servicios servicio=new Servicios();
-//    DatosUsuario datosUsuario = new DatosUsuario();
-    
-    
-    /* Fin Ventanas externas */
-
     /*Control de fuente y tamaño del menu */
     String fuente = "Arial";
     int tamP = 12;
