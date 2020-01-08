@@ -13,6 +13,7 @@ import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author CLINTON
+ * 
  */
 public class Reservas extends javax.swing.JFrame {
 
@@ -1382,7 +1383,7 @@ public class Reservas extends javax.swing.JFrame {
     }//GEN-LAST:event_txDNIActionPerformed
 
     private void txDNIKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txDNIKeyReleased
-        reconocer_cliente();
+        reconocer_cliente(); 
     }//GEN-LAST:event_txDNIKeyReleased
 
     private void txRUCKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txRUCKeyReleased
@@ -1401,17 +1402,14 @@ public class Reservas extends javax.swing.JFrame {
     }//GEN-LAST:event_btValidarActionPerformed
 
     private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
-        // TODO add your handling code here:
 //        valHab_Client();
     }//GEN-LAST:event_jComboBox2ActionPerformed
 
     private void jComboBox2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBox2MousePressed
-        // TODO add your handling code here:
 //         valHab_Client();
     }//GEN-LAST:event_jComboBox2MousePressed
 
     private void jComboBox2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox2ItemStateChanged
-        // TODO add your handling code here:
 //        jComboBox2.removeAllItems();
 
         //alHab_Client();

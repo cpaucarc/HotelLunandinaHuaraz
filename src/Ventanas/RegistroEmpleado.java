@@ -22,7 +22,7 @@ public class RegistroEmpleado extends javax.swing.JFrame {
         MostrarResultados();
 
         cbEstado.setEnabled(false);
-        cbEstado.setSelectedIndex(0);
+        cbEstado.setSelectedIndex(1);
         btModificar.setEnabled(false);
     }
 
@@ -443,6 +443,14 @@ public class RegistroEmpleado extends javax.swing.JFrame {
         if(dni.length() == 8){
             GetEmploye(dni);
             Controls(true);
+        }else{
+            txappat.setText("");
+            txapmat.setText("");
+            txnomb.setText("");
+            txmail.setText("");
+            cbCargo.setSelectedIndex(0);
+            cbEstado.setSelectedIndex(1);
+            Controls(false);
         }
     }//GEN-LAST:event_txdniKeyReleased
 

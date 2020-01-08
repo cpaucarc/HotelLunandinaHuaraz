@@ -142,7 +142,6 @@ public class Servicios extends javax.swing.JFrame {
             alError.titulo.setText("<html><center>" + rpt + "</center></html>");
             alError.setVisible(true);
         }
-
     }
 
     public void crearemp() {

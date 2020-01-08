@@ -997,8 +997,16 @@ public class Alojamiento extends javax.swing.JFrame {
     }//GEN-LAST:event_lbCerrarMouseExited
 
     private void txDNIKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txDNIKeyReleased
-        MostrarPersona();
-        reconocer();
+        if(txDNI.getText().length() == 8){
+            MostrarPersona();
+            reconocer();
+        }else{
+            txapPaterno.setText("");
+            txapMaterno.setText("");
+            txNombre.setText("");
+            txProcedencia.setText("");
+            txemail.setText("");
+        }
     }//GEN-LAST:event_txDNIKeyReleased
 
     private void txapPaternoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txapPaternoKeyReleased
@@ -1058,8 +1066,14 @@ public class Alojamiento extends javax.swing.JFrame {
     }//GEN-LAST:event_txRUCKeyTyped
 
     private void txRUCKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txRUCKeyReleased
-        MostrarEmpresa();
-        reconocer();
+        if(txRUC.getText().length() == 11){
+            MostrarEmpresa();
+            reconocer();
+        }else{
+            txNomEmp.setText("");
+            txProcEmp.setText("");
+            txEmailEmp.setText("");
+        }
     }//GEN-LAST:event_txRUCKeyReleased
 
     private void txNomEmpKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txNomEmpKeyTyped
