@@ -27,7 +27,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     /*Fin control de fuente y tamaño del menu */
     /* Variables para controlar animacion de label */
     public int contador = 0;
-    int velocidad = 3; //seconds
+    int velocidad = 5; //seconds
     Timer timer;
     TimerTask tarea;
     int velmil = velocidad * 1000;
