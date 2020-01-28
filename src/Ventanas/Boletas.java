@@ -7,6 +7,7 @@ package Ventanas;
 
 import Clases.Controlador;
 import Clases.Imprimir;
+import Clases.Textos;
 import javax.swing.table.DefaultTableModel;
 /**
  *
@@ -18,6 +19,7 @@ public class Boletas extends javax.swing.JInternalFrame {
     Imprimir imp=new Imprimir();
     Controlador control=new Controlador();
     String _numBol;
+    String _montoTotal;
     
     public Boletas() {
         initComponents();
@@ -46,15 +48,11 @@ public class Boletas extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         txCliente = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
         txNumBoleta = new javax.swing.JTextField();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
         txProc = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
@@ -77,22 +75,17 @@ public class Boletas extends javax.swing.JInternalFrame {
         jLabel1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/nombre.png"))); // NOI18N
         jLabel1.setText("Cliente");
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 30, 120, 30));
-
-        jLabel2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/dinero.png"))); // NOI18N
-        jLabel2.setText("Monto Total   S/.");
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(107, 140, 150, 30));
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 45, 120, 30));
 
         jLabel3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/numero.png"))); // NOI18N
         jLabel3.setText("N° Boleta");
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(414, 30, 120, 30));
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(414, 45, 120, 30));
 
         jLabel4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/calendario.png"))); // NOI18N
         jLabel4.setText("Fecha");
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(414, 85, 120, 30));
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(414, 105, 120, 30));
 
         txCliente.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
         txCliente.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -107,12 +100,7 @@ public class Boletas extends javax.swing.JInternalFrame {
                 txClienteKeyReleased(evt);
             }
         });
-        jPanel2.add(txCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 30, 200, 30));
-
-        jTextField2.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
-        jTextField2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField2.setSelectionColor(new java.awt.Color(0, 122, 255));
-        jPanel2.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(377, 140, 150, 30));
+        jPanel2.add(txCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 45, 200, 30));
 
         txNumBoleta.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
         txNumBoleta.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -122,23 +110,11 @@ public class Boletas extends javax.swing.JInternalFrame {
                 txNumBoletaKeyReleased(evt);
             }
         });
-        jPanel2.add(txNumBoleta, new org.netbeans.lib.awtextra.AbsoluteConstraints(534, 30, 200, 30));
+        jPanel2.add(txNumBoleta, new org.netbeans.lib.awtextra.AbsoluteConstraints(534, 45, 200, 30));
 
         jDateChooser1.setBackground(new java.awt.Color(255, 255, 255));
         jDateChooser1.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
-        jPanel2.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(534, 85, 200, 30));
-
-        jRadioButton1.setBackground(new java.awt.Color(255, 255, 255));
-        gDinero.add(jRadioButton1);
-        jRadioButton1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jRadioButton1.setText("Menor que ...");
-        jPanel2.add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(257, 140, 120, 30));
-
-        jRadioButton2.setBackground(new java.awt.Color(255, 255, 255));
-        gDinero.add(jRadioButton2);
-        jRadioButton2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jRadioButton2.setText("Mayor que ...");
-        jPanel2.add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(527, 140, 120, 30));
+        jPanel2.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(534, 105, 200, 30));
 
         txProc.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
         txProc.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -148,14 +124,14 @@ public class Boletas extends javax.swing.JInternalFrame {
                 txProcKeyReleased(evt);
             }
         });
-        jPanel2.add(txProc, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 85, 200, 30));
+        jPanel2.add(txProc, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 105, 200, 30));
 
         jLabel5.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/procedencia.png"))); // NOI18N
         jLabel5.setText("Procedencia");
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 85, 120, 30));
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 105, 120, 30));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 784, 200));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 784, 180));
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "BOLETAS DE VENTA REGISTRADAS", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 12))); // NOI18N
@@ -180,7 +156,7 @@ public class Boletas extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(tabla);
 
-        jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 724, 214));
+        jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 724, 280));
 
         btImprimirBoleta.setBackground(new java.awt.Color(111, 168, 183));
         btImprimirBoleta.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -192,9 +168,9 @@ public class Boletas extends javax.swing.JInternalFrame {
                 btImprimirBoletaActionPerformed(evt);
             }
         });
-        jPanel3.add(btImprimirBoleta, new org.netbeans.lib.awtextra.AbsoluteConstraints(584, 270, 150, 40));
+        jPanel3.add(btImprimirBoleta, new org.netbeans.lib.awtextra.AbsoluteConstraints(604, 320, 150, 40));
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, 784, 375));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, 784, 385));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 844, 720));
 
@@ -206,11 +182,13 @@ public class Boletas extends javax.swing.JInternalFrame {
 
     private void tablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMouseClicked
         _numBol = tabla.getValueAt(tabla.getSelectedRow(), 0).toString();
+        _montoTotal = tabla.getValueAt(tabla.getSelectedRow(), 2).toString();
     }//GEN-LAST:event_tablaMouseClicked
 
     private void btImprimirBoletaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btImprimirBoletaActionPerformed
         if(_numBol != null){
-            imp.ImprCon1Parametro("boleta", "Boleta N° " + _numBol, "numeroBoleta", _numBol);
+            //imp.ImprCon1Parametro("boleta", "Boleta N° " + _numBol, "numeroBoleta", _numBol);
+            imp.Imp2P("boleta", "Boleta N° "+_numBol, "numeroBoleta", "montoLiteral", _numBol, Textos.montoLiteral(_montoTotal));
         }
     }//GEN-LAST:event_btImprimirBoletaActionPerformed
 
@@ -230,17 +208,13 @@ public class Boletas extends javax.swing.JInternalFrame {
     private javax.swing.ButtonGroup gDinero;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JTable tabla;
     private javax.swing.JTextField txCliente;
     private javax.swing.JTextField txNumBoleta;

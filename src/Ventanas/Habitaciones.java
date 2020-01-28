@@ -179,7 +179,7 @@ public class Habitaciones extends javax.swing.JFrame{
         slider.setMaximum(Integer.parseInt(_NumDias));
         slider.setValue(Integer.parseInt(_transcDias));
         
-        txPrecioTotal.setText(""+Integer.parseInt(_NumDias)*Double.parseDouble(txPrecioUnit.getText()));
+        txPrecioTotal.setText(""+Integer.parseInt(_transcDias)*Double.parseDouble(txPrecioUnit.getText()));
     }
     public String SumarColumna(JTable tb, int column){
         double suma = 0;
@@ -515,6 +515,7 @@ public class Habitaciones extends javax.swing.JFrame{
         slider.setPaintTicks(true);
         slider.setToolTipText("Dias transcuridos del total");
         slider.setValue(3);
+        slider.setEnabled(false);
         pnDatosCliente.add(slider, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 315, 430, 40));
 
         pnInfo.add(pnDatosCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 0, 490, 400));
@@ -650,7 +651,7 @@ public class Habitaciones extends javax.swing.JFrame{
 
     private void txPrecioUnitKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txPrecioUnitKeyReleased
         if(lbNumDias.getText().length()>0 && txPrecioUnit.getText().length()>0){
-            txPrecioTotal.setText(""+Integer.parseInt(lbNumDias.getText())*Double.parseDouble(txPrecioUnit.getText()));
+            txPrecioTotal.setText(""+slider.getValue()*Double.parseDouble(txPrecioUnit.getText()));
         }
     }//GEN-LAST:event_txPrecioUnitKeyReleased
 

@@ -61,11 +61,7 @@ public class ReporteServicios extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
         cbMonth = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
         txCliente = new javax.swing.JTextField();
@@ -81,7 +77,6 @@ public class ReporteServicios extends javax.swing.JInternalFrame {
 
         setBorder(null);
         setClosable(true);
-        setMaximizable(true);
         setTitle("Servicios prestados");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -95,50 +90,26 @@ public class ReporteServicios extends javax.swing.JInternalFrame {
         jLabel1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/nombre.png"))); // NOI18N
         jLabel1.setText("Cliente");
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 30, 120, 30));
-
-        jLabel2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/dinero.png"))); // NOI18N
-        jLabel2.setText("Ingresos   S/.");
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(474, 30, 150, 30));
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, 120, 30));
 
         jLabel4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/servicio_32.png"))); // NOI18N
         jLabel4.setText("Servicio");
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 75, 120, 30));
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(434, 40, 100, 30));
 
-        jTextField2.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
-        jTextField2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField2.setSelectionColor(new java.awt.Color(0, 122, 255));
-        jPanel2.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 75, 150, 30));
-
-        jRadioButton1.setBackground(new java.awt.Color(255, 255, 255));
-        gDinero.add(jRadioButton1);
-        jRadioButton1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jRadioButton1.setText("Menor que ...");
-        jPanel2.add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(414, 60, 120, 30));
-
-        jRadioButton2.setBackground(new java.awt.Color(255, 255, 255));
-        gDinero.add(jRadioButton2);
-        jRadioButton2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jRadioButton2.setText("Mayor que ...");
-        jPanel2.add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(414, 90, 120, 30));
-
-        cbMonth.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
+        cbMonth.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 15)); // NOI18N
         cbMonth.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" }));
-        cbMonth.setSelectedIndex(9);
         cbMonth.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cbMonthItemStateChanged(evt);
             }
         });
-        jPanel2.add(cbMonth, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 120, 110, 30));
+        jPanel2.add(cbMonth, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 100, 130, 30));
 
         jLabel5.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/calendario.png"))); // NOI18N
         jLabel5.setText("Mes");
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 120, 70, 30));
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, 80, 30));
 
         txCliente.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
         txCliente.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -153,15 +124,15 @@ public class ReporteServicios extends javax.swing.JInternalFrame {
                 txClienteKeyReleased(evt);
             }
         });
-        jPanel2.add(txCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 30, 200, 30));
+        jPanel2.add(txCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 40, 200, 30));
 
-        cbYear.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
+        cbYear.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 15)); // NOI18N
         cbYear.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
                 cbYearPropertyChange(evt);
             }
         });
-        jPanel2.add(cbYear, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 120, 80, 30));
+        jPanel2.add(cbYear, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 100, 80, 30));
 
         cbServicio.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
         cbServicio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos los Servicios", "Desayuno", "Lavanderia", "Boleto Turistico" }));
@@ -170,7 +141,7 @@ public class ReporteServicios extends javax.swing.JInternalFrame {
                 cbServicioItemStateChanged(evt);
             }
         });
-        jPanel2.add(cbServicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 75, 200, 30));
+        jPanel2.add(cbServicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(534, 40, 200, 30));
 
         jButton1.setBackground(new java.awt.Color(111, 168, 183));
         jButton1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -182,9 +153,9 @@ public class ReporteServicios extends javax.swing.JInternalFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(584, 115, 150, 40));
+        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(584, 90, 150, 40));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 784, 180));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 784, 170));
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "INGRESOS REGISTRADOS", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 12))); // NOI18N
@@ -208,24 +179,24 @@ public class ReporteServicios extends javax.swing.JInternalFrame {
         tabla.setSelectionBackground(new java.awt.Color(0, 122, 255));
         jScrollPane1.setViewportView(tabla);
 
-        jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(27, 40, 730, 234));
+        jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(27, 40, 730, 310));
 
         jLabel6.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         jLabel6.setText("Total  S/.");
-        jPanel3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 290, 70, 40));
+        jPanel3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 360, 70, 30));
 
         lbTotal.setFont(new java.awt.Font("Leelawadee UI Semilight", 1, 14)); // NOI18N
         lbTotal.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbTotal.setText("80");
         lbTotal.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel3.add(lbTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 290, 150, 40));
+        jPanel3.add(lbTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 360, 150, 30));
 
         lbService.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lbService.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbService.setText("Desayuno");
         jPanel3.add(lbService, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 10, 384, 30));
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, 784, 375));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, 784, 395));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 844, 720));
 
@@ -273,17 +244,13 @@ public class ReporteServicios extends javax.swing.JInternalFrame {
     private javax.swing.ButtonGroup gDinero;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JLabel lbService;
     private javax.swing.JLabel lbTotal;
     private javax.swing.JTable tabla;

@@ -1,15 +1,10 @@
 package Clases;
 
-import java.net.URL;
-import java.sql.Connection;
 import java.util.*;
-import javax.print.DocFlavor;
 import javax.swing.*;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.view.*;
-import net.sf.jasperreports.*;
-import net.sf.jasperreports.engine.*;
 
 public class Imprimir {
 

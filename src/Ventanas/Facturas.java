@@ -40,15 +40,11 @@ public class Facturas extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         txCliente = new javax.swing.JTextField();
-        txMonto = new javax.swing.JTextField();
         txNumFactura = new javax.swing.JTextField();
         txFecha = new com.toedter.calendar.JDateChooser();
-        rbMenor = new javax.swing.JRadioButton();
-        rbMayor = new javax.swing.JRadioButton();
         txProc = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
@@ -71,24 +67,19 @@ public class Facturas extends javax.swing.JInternalFrame {
         jLabel1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/nombre.png"))); // NOI18N
         jLabel1.setText("Cliente");
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 30, 120, 30));
-
-        jLabel2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/dinero.png"))); // NOI18N
-        jLabel2.setText("Monto Total   S/.");
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(107, 140, 150, 30));
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 45, 120, 30));
 
         jLabel3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/numero.png"))); // NOI18N
         jLabel3.setText("N° Factura");
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(414, 30, 120, 30));
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(414, 45, 120, 30));
 
         jLabel4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/calendario.png"))); // NOI18N
         jLabel4.setText("Fecha");
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(414, 85, 120, 30));
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(414, 105, 120, 30));
 
-        txCliente.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
+        txCliente.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 15)); // NOI18N
         txCliente.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txCliente.setSelectionColor(new java.awt.Color(0, 122, 255));
         txCliente.addActionListener(new java.awt.event.ActionListener() {
@@ -104,14 +95,9 @@ public class Facturas extends javax.swing.JInternalFrame {
                 txClienteKeyTyped(evt);
             }
         });
-        jPanel2.add(txCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 30, 200, 30));
+        jPanel2.add(txCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 45, 200, 30));
 
-        txMonto.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
-        txMonto.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txMonto.setSelectionColor(new java.awt.Color(0, 122, 255));
-        jPanel2.add(txMonto, new org.netbeans.lib.awtextra.AbsoluteConstraints(377, 140, 150, 30));
-
-        txNumFactura.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
+        txNumFactura.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 15)); // NOI18N
         txNumFactura.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txNumFactura.setSelectionColor(new java.awt.Color(0, 122, 255));
         txNumFactura.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -122,25 +108,13 @@ public class Facturas extends javax.swing.JInternalFrame {
                 txNumFacturaKeyTyped(evt);
             }
         });
-        jPanel2.add(txNumFactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(534, 30, 200, 30));
+        jPanel2.add(txNumFactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(534, 45, 200, 30));
 
         txFecha.setBackground(new java.awt.Color(255, 255, 255));
-        txFecha.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
-        jPanel2.add(txFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(534, 85, 200, 30));
+        txFecha.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 15)); // NOI18N
+        jPanel2.add(txFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(534, 105, 200, 30));
 
-        rbMenor.setBackground(new java.awt.Color(255, 255, 255));
-        gDinero.add(rbMenor);
-        rbMenor.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        rbMenor.setText("Menor que ...");
-        jPanel2.add(rbMenor, new org.netbeans.lib.awtextra.AbsoluteConstraints(257, 140, 120, 30));
-
-        rbMayor.setBackground(new java.awt.Color(255, 255, 255));
-        gDinero.add(rbMayor);
-        rbMayor.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        rbMayor.setText("Mayor que ...");
-        jPanel2.add(rbMayor, new org.netbeans.lib.awtextra.AbsoluteConstraints(527, 140, 120, 30));
-
-        txProc.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
+        txProc.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 15)); // NOI18N
         txProc.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txProc.setSelectionColor(new java.awt.Color(0, 122, 255));
         txProc.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -151,14 +125,14 @@ public class Facturas extends javax.swing.JInternalFrame {
                 txProcKeyTyped(evt);
             }
         });
-        jPanel2.add(txProc, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 85, 200, 30));
+        jPanel2.add(txProc, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 105, 200, 30));
 
         jLabel5.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/procedencia.png"))); // NOI18N
         jLabel5.setText("Procedencia");
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 85, 120, 30));
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 105, 120, 30));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 784, 200));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 784, 180));
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "FACTURAS REGISTRADAS", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 12))); // NOI18N
@@ -183,7 +157,7 @@ public class Facturas extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(tabla);
 
-        jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 724, 214));
+        jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 724, 280));
 
         btImprimirFactura.setBackground(new java.awt.Color(111, 168, 183));
         btImprimirFactura.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -195,9 +169,9 @@ public class Facturas extends javax.swing.JInternalFrame {
                 btImprimirFacturaActionPerformed(evt);
             }
         });
-        jPanel3.add(btImprimirFactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(584, 270, 150, 40));
+        jPanel3.add(btImprimirFactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(604, 320, 150, 40));
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, 784, 375));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, 784, 385));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 844, 720));
 
@@ -243,7 +217,6 @@ public class Facturas extends javax.swing.JInternalFrame {
     private javax.swing.JButton btImprimirFactura;
     private javax.swing.ButtonGroup gDinero;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -251,12 +224,9 @@ public class Facturas extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JRadioButton rbMayor;
-    private javax.swing.JRadioButton rbMenor;
     private javax.swing.JTable tabla;
     private javax.swing.JTextField txCliente;
     private com.toedter.calendar.JDateChooser txFecha;
-    private javax.swing.JTextField txMonto;
     private javax.swing.JTextField txNumFactura;
     private javax.swing.JTextField txProc;
     // End of variables declaration//GEN-END:variables

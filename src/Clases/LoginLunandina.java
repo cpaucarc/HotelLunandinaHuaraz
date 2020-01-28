@@ -17,7 +17,7 @@ public final class LoginLunandina {
         this.estado = DevolverDato("estado");
         this.cargo = DevolverDato("cargo");
         this.nomEmp = DevolverDato("concat(apellidos,', ', nombres)");
-    }          
+    }
     
     public String getEstado()  { return estado;}
     public String getUsuario() {return usuario;}

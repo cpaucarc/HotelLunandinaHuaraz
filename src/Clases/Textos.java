@@ -6,6 +6,7 @@
 package Clases;
 
 import java.awt.event.*;
+import java.util.regex.Pattern;
 import javax.swing.JComboBox;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -158,5 +159,9 @@ public class Textos {
     //Devuelve el valor literal de un numero (usar en facturas)
     public static String montoLiteral(String monto){
         return "SON: "+ numLit.Convertir(monto, true);
+    }
+    //Verifica si el correo cumple el formato
+    public boolean VerificaCorreo(String txt){
+        return Pattern.matches("^[a-zA-Z0-9]+[@]{1}+[a-zA-Z0-9]+[.]{1}+[a-zA-Z0-9]+$",txt);
     }
 }

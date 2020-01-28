@@ -3,6 +3,7 @@ package Ventanas;
 import Clases.Control;
 import Clases.ControlDate;
 import Clases.Controlador;
+import Clases.Design;
 import Clases.Textos;
 import alertas.Alerta;
 import alertas.AlertaError;
@@ -10,17 +11,13 @@ import java.awt.Color;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author CLINTON
- * 
- */
 public class Reservas extends javax.swing.JFrame {
 
     DefaultTableModel modelo = new DefaultTableModel();
     DefaultTableModel modelo1 = new DefaultTableModel();
     Controlador control = new Controlador();
     ControlDate cd = new ControlDate();
+    Design ds = new Design();
     public String rpt = "";
     int _idusuario;
 
@@ -40,9 +37,9 @@ public class Reservas extends javax.swing.JFrame {
         tabla.getTableHeader().setBackground(new Color(248, 177, 57));
         btValidar.setVisible(false);
 //        control.LlenarCombo(jComboBox1, "select * from habitaciones", 2);
-        control.LlenarCombo(jComboBox2, "select * from tipohabitacion", 2);
-        jComboBox2.removeItemAt(0);
-        jComboBox1.removeAllItems();
+        control.LlenarCombo(cbTipoHab, "select * from tipohabitacion", 2);
+        cbTipoHab.removeItemAt(0);
+        cbNumHab.removeAllItems();
 
         //Ocultamos algunas funciones        
         lbReiniciar.setVisible(false);
@@ -69,6 +66,24 @@ public class Reservas extends javax.swing.JFrame {
     String idres = "";
     int numval;
     int numval1;
+    
+    public void LlenarComboHabitaciones(){
+        if(dcEntrada.getDate() != null && dcSalida.getDate() != null && cbTipoHab.getSelectedIndex() > -1){
+            control.LlenarCombo(cbNumHab,
+                    "CALL proc_show_NumHab('" + cbTipoHab.getSelectedItem() + "', \""
+                    + cd.fecha_AMD(dcEntrada.getDate()) + "\",\""
+                    + cd.fecha_AMD(dcSalida.getDate()) + "\")", 1);
+        }else{
+            cbNumHab.removeAllItems();
+        } 
+        if (cbNumHab.getItemCount() > 0) {
+            cbNumHab.setSelectedIndex(0);
+        }
+        if (cbNumHab.getItemCount() == 1) { //Para cuando solo aparesca la opcion de '--Seleccione--'
+            cbNumHab.removeAllItems();
+            cbNumHab.addItem("--No hay cuartos--");
+        }
+    }
 
     public void reconocer_empresa() {
         String Rc = txRUC.getText();
@@ -120,11 +135,11 @@ public class Reservas extends javax.swing.JFrame {
                 jtxtdni3.setText(control.DevolverRegistroDto("select  nomb from personas where DNI='" + dni + "';", 1));
                 jtxtdni4.setText(modelo1.getValueAt(fila, 8).toString());
                 jtxtdni10.setText(control.DevolverRegistroDto("select  email from personas where DNI='" + dni + "';", 1));
-                jDateChooser5.setDate(cd.Parse_Fecha(modelo1.getValueAt(fila, 2).toString()));
-                jDateChooser4.setDate(cd.Parse_Fecha(modelo1.getValueAt(fila, 3).toString()));
-                jComboBox2.setSelectedItem(modelo1.getValueAt(fila, 5).toString());
-                jComboBox1.removeAllItems();
-                jComboBox1.addItem(modelo1.getValueAt(fila, 4).toString());
+                dcEntrada.setDate(cd.Parse_Fecha(modelo1.getValueAt(fila, 2).toString()));
+                dcSalida.setDate(cd.Parse_Fecha(modelo1.getValueAt(fila, 3).toString()));
+                cbTipoHab.setSelectedItem(modelo1.getValueAt(fila, 5).toString());
+                cbNumHab.removeAllItems();
+                cbNumHab.addItem(modelo1.getValueAt(fila, 4).toString());
 //            jComboBox1.setSelectedItem(modelo1.getValueAt(fila, 4).toString());
                 numval = Integer.parseInt(modelo1.getValueAt(fila, 4).toString());
 //           valHab_Client();
@@ -157,11 +172,11 @@ public class Reservas extends javax.swing.JFrame {
                 jTextField1.setText(modelo.getValueAt(fila, 7).toString());
                 jTextField2.setText(modelo.getValueAt(fila, 8).toString());
                 jTextField3.setText(control.DevolverRegistroDto("select email from clienteempresa where RUC='" + Rc + "';", 1));
-                jDateChooser5.setDate(cd.Parse_Fecha(modelo.getValueAt(fila, 2).toString()));
-                jDateChooser4.setDate(cd.Parse_Fecha(modelo.getValueAt(fila, 3).toString()));
-                jComboBox2.setSelectedItem(modelo.getValueAt(fila, 5).toString());
-                jComboBox1.removeAllItems();
-                jComboBox1.addItem(modelo1.getValueAt(fila, 4).toString());
+                dcEntrada.setDate(cd.Parse_Fecha(modelo.getValueAt(fila, 2).toString()));
+                dcSalida.setDate(cd.Parse_Fecha(modelo.getValueAt(fila, 3).toString()));
+                cbTipoHab.setSelectedItem(modelo.getValueAt(fila, 5).toString());
+                cbNumHab.removeAllItems();
+                cbNumHab.addItem(modelo1.getValueAt(fila, 4).toString());
                 numval1 = Integer.parseInt(modelo.getValueAt(fila, 4).toString());
 //            valHab_Client();
             }
@@ -182,7 +197,7 @@ public class Reservas extends javax.swing.JFrame {
 
         int count = tabla.getRowCount();
 //        JOptionPane.showMessageDialog(null, count);
-        int idest = Integer.parseInt(control.DevolverRegistroDto("select idhabitacion from habitaciones where numHab='" + jComboBox1.getSelectedItem() + "';", 1));
+        int idest = Integer.parseInt(control.DevolverRegistroDto("select idhabitacion from habitaciones where numHab='" + cbNumHab.getSelectedItem() + "';", 1));
         rpt = (control.DevolverRegistroDto("call Proc_ReservaEmp("
                 + "'1',"
                 + "'" + 0 + "',"
@@ -190,8 +205,8 @@ public class Reservas extends javax.swing.JFrame {
                 + "'" + txRUC.getText() + "',"
                 + "'" + jTextField1.getText() + "',"
                 + "'" + jTextField3.getText() + "',"
-                + "'" + cd.fecha_AMD(jDateChooser5.getDate()) + "',"
-                + "'" + cd.fecha_AMD(jDateChooser4.getDate()) + "',"
+                + "'" + cd.fecha_AMD(dcEntrada.getDate()) + "',"
+                + "'" + cd.fecha_AMD(dcSalida.getDate()) + "',"
                 + "'" + idest + "',"
                 + "'" + 0 + "',"
                 + _idusuario + ")", 1));
@@ -210,9 +225,9 @@ public class Reservas extends javax.swing.JFrame {
     public void Editar_Empresa(int numHab) {
         Alerta alr = new Alerta(this, true);
 
-        int val1 = Integer.parseInt(control.DevolverRegistroDto("select DATEDIFF('" + cd.fecha_AMD(jDateChooser4.getDate()) + "','" + cd.fecha_AMD(jDateChooser5.getDate()) + "');", 1));
-        int val2 = Integer.parseInt(control.DevolverRegistroDto("select DATEDIFF('" + cd.fecha_AMD(jDateChooser5.getDate()) + "',(CURDATE()-1));", 1));
-        int idest = Integer.parseInt(control.DevolverRegistroDto("select idhabitacion from habitaciones where numHab='" + jComboBox1.getSelectedItem() + "';", 1));
+        int val1 = Integer.parseInt(control.DevolverRegistroDto("select DATEDIFF('" + cd.fecha_AMD(dcSalida.getDate()) + "','" + cd.fecha_AMD(dcEntrada.getDate()) + "');", 1));
+        int val2 = Integer.parseInt(control.DevolverRegistroDto("select DATEDIFF('" + cd.fecha_AMD(dcEntrada.getDate()) + "',(CURDATE()-1));", 1));
+        int idest = Integer.parseInt(control.DevolverRegistroDto("select idhabitacion from habitaciones where numHab='" + cbNumHab.getSelectedItem() + "';", 1));
         rpt = (control.DevolverRegistroDto("call Proc_ReservaEmp("
                 + "'2',"
                 + "'" + idres + "',"
@@ -220,8 +235,8 @@ public class Reservas extends javax.swing.JFrame {
                 + "'" + txRUC.getText() + "',"
                 + "'" + jTextField1.getText() + "',"
                 + "'" + jTextField3.getText() + "',"
-                + "'" + cd.fecha_AMD(jDateChooser5.getDate()) + "',"
-                + "'" + cd.fecha_AMD(jDateChooser4.getDate()) + "',"
+                + "'" + cd.fecha_AMD(dcEntrada.getDate()) + "',"
+                + "'" + cd.fecha_AMD(dcSalida.getDate()) + "',"
                 + "'" + idest + "',"
                 + "'" + numHab + "',"
                 + _idusuario + ")", 1));
@@ -243,10 +258,10 @@ public class Reservas extends javax.swing.JFrame {
         txRUC.setText("");
         jTextField1.setText("");
         jTextField3.setText("");
-        jDateChooser5.setDate(null);
-        jDateChooser4.setDate(null);
-        jComboBox1.setSelectedIndex(-1);
-        jComboBox2.setSelectedIndex(-1);
+        dcEntrada.setDate(null);
+        dcSalida.setDate(null);
+        cbNumHab.setSelectedIndex(-1);
+        cbTipoHab.setSelectedIndex(-1);
         jtxtdni4.setText("");
         txDNI.setText("");
         jtxtdni1.setText("");
@@ -266,7 +281,7 @@ public class Reservas extends javax.swing.JFrame {
         Alerta alr = new Alerta(this, true);
 
         int count = tabla.getRowCount();
-        int idest = Integer.parseInt(control.DevolverRegistroDto("select idhabitacion from habitaciones where numHab='" + jComboBox1.getSelectedItem() + "';", 1));
+        int idest = Integer.parseInt(control.DevolverRegistroDto("select idhabitacion from habitaciones where numHab='" + cbNumHab.getSelectedItem() + "';", 1));
         rpt = (control.DevolverRegistroDto("call Proc_ReservaClient("
                 + "'1',"
                 + "'" + 0 + "',"
@@ -276,8 +291,8 @@ public class Reservas extends javax.swing.JFrame {
                 + "'" + jtxtdni2.getText() + "',"
                 + "'" + jtxtdni3.getText() + "',"
                 + "'" + jtxtdni10.getText() + "',"
-                + "'" + cd.fecha_AMD(jDateChooser5.getDate()) + "',"
-                + "'" + cd.fecha_AMD(jDateChooser4.getDate()) + "',"
+                + "'" + cd.fecha_AMD(dcEntrada.getDate()) + "',"
+                + "'" + cd.fecha_AMD(dcSalida.getDate()) + "',"
                 + "'" + idest + "',"
                 + "'" + 0 + "',"
                 + _idusuario + ")", 1));
@@ -295,9 +310,9 @@ public class Reservas extends javax.swing.JFrame {
     public void Editar_Persona(int numHab) {
         Alerta alr = new Alerta(this, true);
 
-        int val1 = Integer.parseInt(control.DevolverRegistroDto("select DATEDIFF('" + cd.fecha_AMD(jDateChooser4.getDate()) + "','" + cd.fecha_AMD(jDateChooser5.getDate()) + "');", 1));
-        int val2 = Integer.parseInt(control.DevolverRegistroDto("select DATEDIFF('" + cd.fecha_AMD(jDateChooser5.getDate()) + "',(CURDATE()-1));", 1));
-        int idest = Integer.parseInt(control.DevolverRegistroDto("select idhabitacion from habitaciones where numHab='" + jComboBox1.getSelectedItem() + "';", 1));
+        int val1 = Integer.parseInt(control.DevolverRegistroDto("select DATEDIFF('" + cd.fecha_AMD(dcSalida.getDate()) + "','" + cd.fecha_AMD(dcEntrada.getDate()) + "');", 1));
+        int val2 = Integer.parseInt(control.DevolverRegistroDto("select DATEDIFF('" + cd.fecha_AMD(dcEntrada.getDate()) + "',(CURDATE()-1));", 1));
+        int idest = Integer.parseInt(control.DevolverRegistroDto("select idhabitacion from habitaciones where numHab='" + cbNumHab.getSelectedItem() + "';", 1));
         rpt = (control.DevolverRegistroDto("call Proc_ReservaClient("
                 + "'2',"
                 + "'" + idres + "',"
@@ -307,8 +322,8 @@ public class Reservas extends javax.swing.JFrame {
                 + "'" + jtxtdni2.getText() + "',"
                 + "'" + jtxtdni3.getText() + "',"
                 + "'" + jtxtdni10.getText() + "',"
-                + "'" + cd.fecha_AMD(jDateChooser5.getDate()) + "',"
-                + "'" + cd.fecha_AMD(jDateChooser4.getDate()) + "',"
+                + "'" + cd.fecha_AMD(dcEntrada.getDate()) + "',"
+                + "'" + cd.fecha_AMD(dcSalida.getDate()) + "',"
                 + "'" + idest + "',"
                 + "'" + numHab + "',"
                 + _idusuario + ")", 1));
@@ -353,45 +368,31 @@ public class Reservas extends javax.swing.JFrame {
         } else {
             control.LlenarJtable(modelo1, "select * from v_reservaclient  where "
                     + "DNI like'%" + txtBuscar1.getText() + "%' or Cliente like '%" + txtBuscar1.getText() + "%';", 9);
-        }
-
-//        control.LlenarJtable(modelo1, "select * from v_reservaclient  where "
-//                + "DNI like'%" + txtBuscar1.getText() + "%' or (Fecha_Ent like '%"
-//                +cd.CrearFecha(dcBuscar)+"%' or Fecha_Resv like '%"+cd.CrearFecha(dcBuscar)+"%');", 9);
-//        Seleccionar();   
+        }   
     }
 
+    public void ConfiguracionTabla(){
+        tabla.getColumnModel().getColumn(0).setPreferredWidth(100); //ID
+        tabla.getColumnModel().getColumn(1).setPreferredWidth(95);  //Fecha Reserva
+        tabla.getColumnModel().getColumn(2).setPreferredWidth(90);  //Fecha Entrada
+        tabla.getColumnModel().getColumn(3).setPreferredWidth(87);  //Fecha Salida
+        tabla.getColumnModel().getColumn(4).setPreferredWidth(45);  // N° Habitacion
+        tabla.getColumnModel().getColumn(5).setPreferredWidth(110); // Tipo Habitacion
+        tabla.getColumnModel().getColumn(6).setPreferredWidth(75);  // DNI
+        tabla.getColumnModel().getColumn(7).setPreferredWidth(200); // Cliente
+        tabla.getColumnModel().getColumn(8).setPreferredWidth(75);  //Procedencia
+        ds.OcultarColumna(tabla, 0);
+    }
     public void inicializarJTable_cliente() {
         modelo1.setColumnIdentifiers(new String[]{"ID", "Fecha Reserva", "Fecha Entrada", "Fecha Salida", "N° Habitacion", "Tipo de Habitacion", "DNI", "Cliente", "Procedencia"});
         tabla.setModel(modelo1);
-
-        tabla.getColumnModel().getColumn(0).setPreferredWidth(100);
-        tabla.getColumnModel().getColumn(1).setPreferredWidth(95); //Fecha Reserva
-        tabla.getColumnModel().getColumn(2).setPreferredWidth(90); //Fecha Entrada
-        tabla.getColumnModel().getColumn(3).setPreferredWidth(87); //Fecha Salida
-        tabla.getColumnModel().getColumn(4).setPreferredWidth(45); // N° Habitacion
-        tabla.getColumnModel().getColumn(5).setPreferredWidth(110); // Tipo Habitacion
-        tabla.getColumnModel().getColumn(6).setPreferredWidth(75); // DNI
-        tabla.getColumnModel().getColumn(7).setPreferredWidth(200); // Cliente
-        tabla.getColumnModel().getColumn(8).setPreferredWidth(75); //Procedencia
-
-        tabla.getColumnModel().removeColumn(tabla.getColumnModel().getColumn(0));
+        ConfiguracionTabla();        
     }
 
     public void inicializarJTable_empresa() {
         modelo.setColumnIdentifiers(new String[]{"ID", "Fecha Reserva", "Fecha Entrada", "Fecha Salida", "N° Habitacion", "Tipo de Habitacion", "RUC", "Empresa", "Procedencia"});
         tabla.setModel(modelo);
-
-        tabla.getColumnModel().getColumn(0).setPreferredWidth(100);
-        tabla.getColumnModel().getColumn(1).setPreferredWidth(95);
-        tabla.getColumnModel().getColumn(2).setPreferredWidth(90);
-        tabla.getColumnModel().getColumn(3).setPreferredWidth(87);
-        tabla.getColumnModel().getColumn(4).setPreferredWidth(45);
-        tabla.getColumnModel().getColumn(5).setPreferredWidth(110);
-        tabla.getColumnModel().getColumn(6).setPreferredWidth(75);
-        tabla.getColumnModel().getColumn(7).setPreferredWidth(200);
-        tabla.getColumnModel().getColumn(8).setPreferredWidth(75);
-        tabla.getColumnModel().removeColumn(tabla.getColumnModel().getColumn(0));
+        ConfiguracionTabla();
     }
 
     public void validarcampos_client() {
@@ -403,10 +404,10 @@ public class Reservas extends javax.swing.JFrame {
                     if (jtxtdni3.getText().length() != 0) {
                         if (jtxtdni4.getText().length() != 0) {
                             if (jtxtdni10.getText().length() != 0) {
-                                if (jDateChooser5.getDate() != null) {
-                                    if (jDateChooser4.getDate() != null) {
-                                        if (jComboBox2.getSelectedIndex() != -1) {
-                                            if (jComboBox1.getSelectedIndex() != -1) {
+                                if (dcEntrada.getDate() != null) {
+                                    if (dcSalida.getDate() != null) {
+                                        if (cbTipoHab.getSelectedIndex() != -1) {
+                                            if (cbNumHab.getSelectedIndex() != -1) {
                                                 crear_Persona();
                                                 rpt = "";
                                             } else {
@@ -460,10 +461,10 @@ public class Reservas extends javax.swing.JFrame {
             if (jTextField1.getText().length() != 0) {
                 if (jTextField2.getText().length() != 0) {
                     if (jTextField3.getText().length() != 0) {
-                        if (jDateChooser5.getDate() != null) {
-                            if (jDateChooser4.getDate() != null) {
-                                if (jComboBox2.getSelectedIndex() != -1) {
-                                    if (jComboBox1.getSelectedIndex() != -1) {
+                        if (dcEntrada.getDate() != null) {
+                            if (dcSalida.getDate() != null) {
+                                if (cbTipoHab.getSelectedIndex() != -1) {
+                                    if (cbNumHab.getSelectedIndex() != -1) {
                                         crear_Empresa();
                                         rpt = "";
                                     } else {
@@ -502,11 +503,6 @@ public class Reservas extends javax.swing.JFrame {
         //alertas
     }
 
-    /**
-     * This method is called from within the constructor to initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is always
-     * regenerated by the Form Editor.
-     */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -545,16 +541,16 @@ public class Reservas extends javax.swing.JFrame {
         pnFecha = new javax.swing.JPanel();
         jLabelDNI13 = new javax.swing.JLabel();
         jLabelDNI17 = new javax.swing.JLabel();
-        jDateChooser4 = new com.toedter.calendar.JDateChooser();
-        jDateChooser5 = new com.toedter.calendar.JDateChooser();
+        dcSalida = new com.toedter.calendar.JDateChooser();
+        dcEntrada = new com.toedter.calendar.JDateChooser();
         pnHabitacion = new javax.swing.JPanel();
         jLabelDNI9 = new javax.swing.JLabel();
         jLabelDNI10 = new javax.swing.JLabel();
         jLabelDNI14 = new javax.swing.JLabel();
         jtxtdni8 = new javax.swing.JTextField();
         jLabelDNI15 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        cbNumHab = new javax.swing.JComboBox<>();
+        cbTipoHab = new javax.swing.JComboBox<>();
         btRegistrar1 = new javax.swing.JButton();
         btModificar1 = new javax.swing.JButton();
         btEliminar = new javax.swing.JButton();
@@ -846,14 +842,24 @@ public class Reservas extends javax.swing.JFrame {
         jLabelDNI17.setText("F. Salida");
         pnFecha.add(jLabelDNI17, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 75, 120, 30));
 
-        jDateChooser4.setBackground(new java.awt.Color(255, 255, 255));
-        jDateChooser4.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
-        pnFecha.add(jDateChooser4, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 75, 156, 30));
+        dcSalida.setBackground(new java.awt.Color(255, 255, 255));
+        dcSalida.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
+        dcSalida.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                dcSalidaPropertyChange(evt);
+            }
+        });
+        pnFecha.add(dcSalida, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 75, 156, 30));
 
-        jDateChooser5.setBackground(new java.awt.Color(255, 255, 255));
-        jDateChooser5.setAutoscrolls(true);
-        jDateChooser5.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
-        pnFecha.add(jDateChooser5, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 25, 156, 30));
+        dcEntrada.setBackground(new java.awt.Color(255, 255, 255));
+        dcEntrada.setAutoscrolls(true);
+        dcEntrada.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
+        dcEntrada.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                dcEntradaPropertyChange(evt);
+            }
+        });
+        pnFecha.add(dcEntrada, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 25, 156, 30));
 
         jPanel2.add(pnFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 390, 336, 120));
 
@@ -887,36 +893,38 @@ public class Reservas extends javax.swing.JFrame {
         jLabelDNI15.setText("S/.");
         pnHabitacion.add(jLabelDNI15, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 181, -1, -1));
 
-        jComboBox1.addMouseListener(new java.awt.event.MouseAdapter() {
+        cbNumHab.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
+        cbNumHab.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jComboBox1MouseClicked(evt);
+                cbNumHabMouseClicked(evt);
             }
         });
-        pnHabitacion.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 75, 156, 30));
+        pnHabitacion.add(cbNumHab, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 75, 156, 30));
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Individual", "Doble", "Triple", "Matrimonial", "Matrimonial Lunandina" }));
-        jComboBox2.addItemListener(new java.awt.event.ItemListener() {
+        cbTipoHab.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
+        cbTipoHab.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Individual", "Doble", "Triple", "Matrimonial", "Matrimonial Lunandina" }));
+        cbTipoHab.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jComboBox2ItemStateChanged(evt);
+                cbTipoHabItemStateChanged(evt);
             }
         });
-        jComboBox2.addMouseListener(new java.awt.event.MouseAdapter() {
+        cbTipoHab.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jComboBox2MouseClicked(evt);
+                cbTipoHabMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jComboBox2MouseEntered(evt);
+                cbTipoHabMouseEntered(evt);
             }
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jComboBox2MousePressed(evt);
+                cbTipoHabMousePressed(evt);
             }
         });
-        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+        cbTipoHab.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox2ActionPerformed(evt);
+                cbTipoHabActionPerformed(evt);
             }
         });
-        pnHabitacion.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 25, 156, 30));
+        pnHabitacion.add(cbTipoHab, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 25, 156, 30));
 
         jPanel2.add(pnHabitacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 535, 336, 120));
 
@@ -1154,20 +1162,16 @@ public class Reservas extends javax.swing.JFrame {
 
     private void jtxtdni1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtdni1KeyTyped
         Textos.soloPurasLetras(evt);
-        //Textos.Mayusculas(evt);
         Textos.solo_1_esp(evt, jtxtdni3);
-
     }//GEN-LAST:event_jtxtdni1KeyTyped
 
     private void jtxtdni2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtdni2KeyTyped
         Textos.soloPurasLetras(evt);
-        //Textos.Mayusculas(evt);
         Textos.solo_1_esp(evt, jtxtdni3);
     }//GEN-LAST:event_jtxtdni2KeyTyped
 
     private void jtxtdni3KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtdni3KeyTyped
         Textos.soloPurasLetras(evt);
-        //Textos.Mayusculas(evt);
         Textos.solo_1_esp(evt, jtxtdni3);
     }//GEN-LAST:event_jtxtdni3KeyTyped
 
@@ -1175,12 +1179,10 @@ public class Reservas extends javax.swing.JFrame {
     }//GEN-LAST:event_jtxtdni8KeyTyped
 
     private void btRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRegistrarActionPerformed
-//     crear_Empresa();
         validarcampos_emp();
     }//GEN-LAST:event_btRegistrarActionPerformed
 
     private void btModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btModificarActionPerformed
-
         if (btModificar.getText().equals("Modificar")) {
             btRegistrar1.setEnabled(false);
             btModificar.setText("Actualizar");
@@ -1203,7 +1205,6 @@ public class Reservas extends javax.swing.JFrame {
 
     private void jtxtdni4KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtdni4KeyTyped
         Textos.soloPurasLetras(evt);
-        //Textos.Mayusculas(evt);
         Textos.solo_1_esp(evt, jTextField2);
     }//GEN-LAST:event_jtxtdni4KeyTyped
 
@@ -1212,7 +1213,6 @@ public class Reservas extends javax.swing.JFrame {
         inicializarJTable_cliente();
         MostrarList_Cliente();
         pnTipoCliente.setVisible(true);
-//        jPanel5.setVisible(false);
         pnClienteEmpresa.setVisible(false);
         pnClientePersona.setVisible(false);
         pnFecha.setVisible(false);
@@ -1232,87 +1232,79 @@ public class Reservas extends javax.swing.JFrame {
         txtBuscar.setVisible(false);
         txtBuscar1.setVisible(true);
     }//GEN-LAST:event_lbReiniciarMouseClicked
+    
     public int cambio = 1;
-    private void btClientePersonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btClientePersonaActionPerformed
-        cambio = 1;
-        pnTipoCliente.setVisible(false);
+    public void MostrarComponentes(boolean flag){
+	//flag = TRUE // Se vera personas
+	pnTipoCliente.setVisible(false);
         btValidar.setVisible(true);
-        pnClientePersona.setVisible(true);
+
+        pnClientePersona.setVisible(flag);
+	pnClienteEmpresa.setVisible(!flag);
+
         pnFecha.setVisible(true);
         pnHabitacion.setVisible(true);
         jPanel5.setVisible(true);
-        inicializarJTable_cliente();
-        MostrarList_Cliente();
-        txtBuscar.setVisible(false);
-        txtBuscar1.setVisible(true);
-        txDNI.grabFocus();
+
+        txtBuscar.setVisible(!flag);
+        txtBuscar1.setVisible(flag);
+        if (flag == true){ txDNI.grabFocus();}
+        else { txRUC.grabFocus(); }
 
         lbReiniciar.setVisible(true);
-        btRegistrar1.setVisible(true);
-        btRegistrar.setVisible(false);
-        btModificar.setVisible(true);
-        btModificar1.setVisible(false);
-        btCancelar.setVisible(true);
-        btEliminar.setVisible(true);
-        btEliminar1.setVisible(false);
 
-        dcBuscar.setVisible(true);
-        dcBuscar1.setVisible(false);
+        btRegistrar.setVisible(!flag);
+        btRegistrar1.setVisible(flag);
+
+        btModificar.setVisible(!flag);
+        btModificar1.setVisible(flag);
+
+        btCancelar.setVisible(true);
+
+        btEliminar.setVisible(flag);
+        btEliminar1.setVisible(!flag);
+
+        dcBuscar.setVisible(flag);
+        dcBuscar1.setVisible(!flag);
+    }
+    private void btClientePersonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btClientePersonaActionPerformed
+        cambio = 1;        
+        inicializarJTable_cliente();
+        MostrarList_Cliente();
+        MostrarComponentes(true); // 'true' mnuestra los componentes dedicados a Personas
     }//GEN-LAST:event_btClientePersonaActionPerformed
 
     private void btClienteEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btClienteEmpresaActionPerformed
-        cambio = 2;
-        pnTipoCliente.setVisible(false);
-        btValidar.setVisible(true);
-        pnClienteEmpresa.setVisible(true);
-        pnFecha.setVisible(true);
-        pnHabitacion.setVisible(true);
-        jPanel5.setVisible(true);
+        cambio = 2;        
         inicializarJTable_empresa();
         MostrarList_Empresa();
-        txRUC.grabFocus();
-        txtBuscar1.setVisible(false);
-        txtBuscar.setVisible(true);
-        lbReiniciar.setVisible(true);
-        btRegistrar.setVisible(true);
-        btRegistrar1.setVisible(false);
-        btModificar1.setVisible(true);
-        btModificar.setVisible(false);
-        btEliminar1.setVisible(true);
-        btEliminar.setVisible(false);
-        btCancelar.setVisible(true);
-
-        dcBuscar.setVisible(false);
-        dcBuscar1.setVisible(true);
-
+        MostrarComponentes(false); // 'false' mnuestra los componentes dedicados a Empresas
     }//GEN-LAST:event_btClienteEmpresaActionPerformed
 
+    
     private void lbMinimizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbMinimizarMouseClicked
         this.setExtendedState(ICONIFIED);
     }//GEN-LAST:event_lbMinimizarMouseClicked
-
     private void lbMinimizarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbMinimizarMouseEntered
         lbMinimizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/minimizar2.png")));
     }//GEN-LAST:event_lbMinimizarMouseEntered
-
     private void lbMinimizarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbMinimizarMouseExited
         lbMinimizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/minimizar1.png")));
     }//GEN-LAST:event_lbMinimizarMouseExited
 
+    
     private void lbCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbCerrarMouseClicked
         this.dispose();
     }//GEN-LAST:event_lbCerrarMouseClicked
-
     private void lbCerrarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbCerrarMouseEntered
         lbCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/cerrar2.png")));
     }//GEN-LAST:event_lbCerrarMouseEntered
-
     private void lbCerrarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbCerrarMouseExited
         lbCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/cerrar1.png")));
     }//GEN-LAST:event_lbCerrarMouseExited
 
+    
     private void txtBuscarMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtBuscarMouseReleased
-//        MostrarList();
     }//GEN-LAST:event_txtBuscarMouseReleased
 
     private void txtBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyReleased
@@ -1328,12 +1320,10 @@ public class Reservas extends javax.swing.JFrame {
 
     private void txtBuscar1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscar1KeyTyped
     }//GEN-LAST:event_txtBuscar1KeyTyped
-
-    private void jComboBox1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBox1MouseClicked
-    }//GEN-LAST:event_jComboBox1MouseClicked
+    private void cbNumHabMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbNumHabMouseClicked
+    }//GEN-LAST:event_cbNumHabMouseClicked
 
     private void btRegistrar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRegistrar1ActionPerformed
-//        crear_Persona();
         validarcampos_client();
     }//GEN-LAST:event_btRegistrar1ActionPerformed
 
@@ -1342,17 +1332,13 @@ public class Reservas extends javax.swing.JFrame {
     }//GEN-LAST:event_lbLimpiarMouseClicked
 
     private void btModificar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btModificar1ActionPerformed
-
         if (btModificar1.getText().equals("Modificar")) {
             btRegistrar.setEnabled(false);
             btModificar1.setText("Actualizar");
             Seleccionar_Empresa();
         } else {
             Editar_Empresa(numval1);
-//            btModificar1.setText("Modificar");
-//            btRegistrar.setEnabled(true);
         }
-        //Seleccionar_Empresa();
     }//GEN-LAST:event_btModificar1ActionPerformed
 
     private void txRUCKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txRUCKeyTyped
@@ -1362,13 +1348,11 @@ public class Reservas extends javax.swing.JFrame {
 
     private void jTextField1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyTyped
         Textos.soloPurasLetras(evt);
-        //Textos.Mayusculas(evt);
         Textos.solo_1_esp(evt, jTextField1);
     }//GEN-LAST:event_jTextField1KeyTyped
 
     private void jTextField2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField2KeyTyped
         Textos.soloPurasLetras(evt);
-        //Textos.Mayusculas(evt);
         Textos.solo_1_esp(evt, jTextField2);
     }//GEN-LAST:event_jTextField2KeyTyped
 
@@ -1378,70 +1362,42 @@ public class Reservas extends javax.swing.JFrame {
 
     private void lbMinimizarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_lbMinimizarKeyTyped
     }//GEN-LAST:event_lbMinimizarKeyTyped
-
     private void txDNIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txDNIActionPerformed
     }//GEN-LAST:event_txDNIActionPerformed
 
     private void txDNIKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txDNIKeyReleased
         reconocer_cliente(); 
     }//GEN-LAST:event_txDNIKeyReleased
-
     private void txRUCKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txRUCKeyReleased
         reconocer_empresa();
     }//GEN-LAST:event_txRUCKeyReleased
 
-    private void jComboBox2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBox2MouseClicked
-    }//GEN-LAST:event_jComboBox2MouseClicked
-
-    private void jComboBox2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBox2MouseEntered
-//        valHab_Client();
-    }//GEN-LAST:event_jComboBox2MouseEntered
-
+    private void cbTipoHabMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbTipoHabMouseClicked
+    }//GEN-LAST:event_cbTipoHabMouseClicked
+    private void cbTipoHabMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbTipoHabMouseEntered
+    }//GEN-LAST:event_cbTipoHabMouseEntered
     private void btValidarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btValidarActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_btValidarActionPerformed
+    private void cbTipoHabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTipoHabActionPerformed
+    }//GEN-LAST:event_cbTipoHabActionPerformed
+    private void cbTipoHabMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbTipoHabMousePressed
+    }//GEN-LAST:event_cbTipoHabMousePressed
 
-    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
-//        valHab_Client();
-    }//GEN-LAST:event_jComboBox2ActionPerformed
-
-    private void jComboBox2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBox2MousePressed
-//         valHab_Client();
-    }//GEN-LAST:event_jComboBox2MousePressed
-
-    private void jComboBox2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox2ItemStateChanged
-//        jComboBox2.removeAllItems();
-
-        //alHab_Client();
-        if (jComboBox2.getSelectedIndex() > 0 && jDateChooser5 != null && jDateChooser4 != null) {
-            control.LlenarCombo(jComboBox1,
-                    "call proc_show_NumHab('" + jComboBox2.getSelectedItem() + "', \""
-                    + cd.fecha_AMD(jDateChooser5.getDate()) + "\",\""
-                    + cd.fecha_AMD(jDateChooser4.getDate()) + "\")", 1);
-            if (jComboBox1.getItemCount() > 0) {
-                jComboBox1.setSelectedIndex(0);
-            }
-            if (jComboBox1.getItemCount() == 1) { //Para cuando solo aparesca la opcion de '--Seleccione--'
-                jComboBox1.removeAllItems();
-                jComboBox1.addItem("--No hay cuartos--");
-            }
-        }
-    }//GEN-LAST:event_jComboBox2ItemStateChanged
+    private void cbTipoHabItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbTipoHabItemStateChanged
+        LlenarComboHabitaciones();
+    }//GEN-LAST:event_cbTipoHabItemStateChanged
 
     private void dcBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_dcBuscarKeyReleased
-        // TODO add your handling code here:
     }//GEN-LAST:event_dcBuscarKeyReleased
 
     private void dcBuscarPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dcBuscarPropertyChange
         MostrarList_Cliente();
     }//GEN-LAST:event_dcBuscarPropertyChange
-
     private void dcBuscar1PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dcBuscar1PropertyChange
         MostrarList_Empresa();
     }//GEN-LAST:event_dcBuscar1PropertyChange
 
     private void dcBuscar1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_dcBuscar1KeyReleased
-        // TODO add your handling code here:
     }//GEN-LAST:event_dcBuscar1KeyReleased
 
     private void btEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEliminarActionPerformed
@@ -1451,7 +1407,6 @@ public class Reservas extends javax.swing.JFrame {
             Seleccionar_Cliente();
         } else {
             EliminarReserva(idres);
-
         }
     }//GEN-LAST:event_btEliminarActionPerformed
 
@@ -1466,12 +1421,16 @@ public class Reservas extends javax.swing.JFrame {
     }//GEN-LAST:event_btEliminar1ActionPerformed
 
     private void tablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMouseClicked
-        if (tabla.getSelectedRow() > -1) {
-            btValidar.setEnabled(true);
-        } else {
-            btValidar.setEnabled(false);
-        }
+        if   (tabla.getSelectedRow() > -1) { btValidar.setEnabled(true);  } 
+        else { btValidar.setEnabled(false); }
     }//GEN-LAST:event_tablaMouseClicked
+
+    private void dcEntradaPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dcEntradaPropertyChange
+        LlenarComboHabitaciones();
+    }//GEN-LAST:event_dcEntradaPropertyChange
+    private void dcSalidaPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dcSalidaPropertyChange
+        LlenarComboHabitaciones();
+    }//GEN-LAST:event_dcSalidaPropertyChange
 
 
     /**
@@ -1535,12 +1494,12 @@ public class Reservas extends javax.swing.JFrame {
     private javax.swing.JButton btRegistrar;
     private javax.swing.JButton btRegistrar1;
     private javax.swing.JButton btValidar;
+    private javax.swing.JComboBox<String> cbNumHab;
+    private javax.swing.JComboBox<String> cbTipoHab;
     private com.toedter.calendar.JDateChooser dcBuscar;
     private com.toedter.calendar.JDateChooser dcBuscar1;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private com.toedter.calendar.JDateChooser jDateChooser4;
-    private com.toedter.calendar.JDateChooser jDateChooser5;
+    private com.toedter.calendar.JDateChooser dcEntrada;
+    private com.toedter.calendar.JDateChooser dcSalida;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabelDNI10;

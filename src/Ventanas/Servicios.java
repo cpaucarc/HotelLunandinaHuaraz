@@ -793,8 +793,9 @@ public class Servicios extends javax.swing.JFrame {
             control.CrearRegistro("call proc_InsBolFac(1,0," + total + "," + _id + ",1," + lbDNI.getText() + ")");
             //JOptionPane.showMessageDialog(null, "Se lleno correctamente, mostrando boleta x servicio");
             String _numBol = control.DevolverRegistroDto("select CONCAT('B', LPAD(numBoleta, 7, '0')) from boletas order by numBoleta desc limit 1", 1);
-            imp.ImprCon1Parametro("boleta", "Boleta N° " + _numBol, "numeroBoleta", _numBol);
-
+            //imp.ImprCon1Parametro("boleta", "Boleta N° " + _numBol, "numeroBoleta", _numBol);
+            imp.Imp2P("boleta", "Boleta N° "+_numBol, "numeroBoleta", "montoLiteral", _numBol, Textos.montoLiteral(""+total));
+            
             alr.titulo.setText("<html><center>" + rpt + "</center></html>");
             alr.setVisible(true);
             limpiar();
