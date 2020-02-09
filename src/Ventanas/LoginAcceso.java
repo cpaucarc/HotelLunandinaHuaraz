@@ -1,25 +1,29 @@
 package Ventanas;
 
 import Clases.*;
-import alertas.*;
 import Clases.Design;
 import Clases.LoginLunandina;
+import javax.swing.JOptionPane;
 
 public class LoginAcceso extends javax.swing.JFrame {
 
     public String rpt = "";
-    //MenuPrincipal mp;
     Controlador control = new Controlador();
     static Design design = new Design();
     public boolean psw = false;
     String user, password;// Para hacer la comparacion para el ingreso al sistema  
 
     public LoginAcceso() {
+        long init = System.currentTimeMillis();
         initComponents();
         design.MoverFrame(jPanel1, this);
         username.grabFocus();
+        System.out.println("Time: "+(System.currentTimeMillis()-init)+" millis");
     }
 
+    public boolean FormularioLleno(){
+        return (username.getText() != null && pwOculto.getText() != null);
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -172,40 +176,42 @@ public class LoginAcceso extends javax.swing.JFrame {
     }//GEN-LAST:event_lbVerContraMouseClicked
 
     private void btIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btIngresarActionPerformed
-        AlertaError alr = new AlertaError(this, true);
-        
-        user = username.getText(); //Recuperamos texto del campo username(TXT)
-        password = pwOculto.getText(); //Recuperamos la contraseña del campo pwOculto (PASS)
-        String _estado = control.DevolverRegistroDto("SELECT count(*) FROM vw_empleados where estado = 'Activo' and username = '"+user+"'", 1);
-        LoginLunandina lgl = new LoginLunandina(user, password);
-        
-        if(!_estado.equals("0")){ // Usuario Activo
-            if (lgl.VerifUsuario()) { //Vemos si existe usuario
-                if (lgl.VerifCredenciales()) { //Vemos si el usuario y la contraseña coinciden
-                    Control.usuario = lgl.getnomEmp(); //Apellidos y nombres del empleado
-                    Control.empleado = lgl.getUsuario(); //Nombre de usuario del empleado 
-                    Control.cargo = lgl.getCargo();
-                    control.CrearRegistro("call proc_UpdateStateDay();"); //Actualizamos el estado de las habitaciones
-                    MenuPrincipal mp = new MenuPrincipal();
-                    //mp = new MenuPrincipal();
-                    mp.setVisible(true);
-                    this.dispose();
+        long init = System.currentTimeMillis();
+        if(FormularioLleno()){
+            user = username.getText(); //Recuperamos texto del campo username(TXT)
+            password = pwOculto.getText(); //Recuperamos la contraseña del campo pwOculto (PASS)
+            String _estado = control.DevolverRegistroDto("SELECT count(*) FROM vw_empleados where estado = 'Activo' and username = '"+user+"'", 1);
+            LoginLunandina lgl = new LoginLunandina(user, password);
+
+            if(!_estado.equals("0")){ // Usuario Activo
+                if (lgl.VerifUsuario()) { //Vemos si existe usuario
+                    if (lgl.VerifCredenciales()) { //Vemos si el usuario y la contraseña coinciden
+                        Control.usuario = lgl.getnomEmp(); //Apellidos y nombres del empleado
+                        Control.empleado = lgl.getUsuario(); //Nombre de usuario del empleado                        
+                        Control.cargo = lgl.getCargo();
+                        
+                        control.CrearRegistro("call proc_UpdateStateDay();"); //Actualizamos el estado de las habitaciones
+                        MenuPrincipal mp = new MenuPrincipal();
+                        mp.setVisible(true);
+                        this.dispose();
+                    } else {
+                        rpt = "Credenciales incorrectas";
+                        JOptionPane.showMessageDialog(null, rpt);
+                        username.grabFocus();
+                    }
                 } else {
-                    rpt = "Credenciales incorrectas";
+                    rpt = "Este usuario no existe";
+                    JOptionPane.showMessageDialog(null, rpt);                    
                     username.grabFocus();
-                    AlertaError.titulo.setText(rpt);
-                    alr.setVisible(true);
                 }
-            } else {
-                rpt = "Este usuario no existe";
-                username.grabFocus();
-                AlertaError.titulo.setText(rpt);
-                alr.setVisible(true);
-            }
-        }else{ // El usuario esta Despedido o no esta bien definido el usuario
-            AlertaError.titulo.setText("Usuario no autorizado");
-            alr.setVisible(true);
+            }else{ // El usuario esta Despedido o no esta bien definido el usuario
+                rpt = "Usuario no autorizado";
+                JOptionPane.showMessageDialog(null, rpt);
+            }        
+        }else{
+            rpt="Faltan campos por llenar";
         }
+        System.out.println("Time: "+(System.currentTimeMillis()-init)+"  millis");
     }//GEN-LAST:event_btIngresarActionPerformed
 
     private void lbCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbCerrarMouseClicked

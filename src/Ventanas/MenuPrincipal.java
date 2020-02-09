@@ -45,6 +45,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
             lbReporte.setVisible(false);
         }
 
+        Animaciones();
+        
+        ds.OcultarColumna(tabla, 0);
+    }
+
+    public void Animaciones(){
         /* Controlador de animaciones*/
         tarea = new TimerTask() {
             @Override
@@ -72,11 +78,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         timer.scheduleAtFixedRate(tarea, velmil, velmil);
         /* Fin controlador de animaciones*/  
         
-        
-        ds.OcultarColumna(tabla, 0);
     }
-
-    
     public void inicializarJTable() {
         modelo.setColumnIdentifiers(new String[]{"ID", "Fecha Reserva", "Nombre Cliente", "N° Habitacion"});
         tabla.setModel(modelo);
@@ -423,9 +425,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     /*LABEL DE ADMINISTRACION*/
     private void lbadministracionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbadministracionMouseClicked
+        long init = System.currentTimeMillis();
         RegistroEmpleado empleado = new RegistroEmpleado();
-        //this.setVisible(false);
         empleado.setVisible(true);
+        this.dispose();
+        System.out.println("Administracion: "+(System.currentTimeMillis()-init)+" mil");
     }//GEN-LAST:event_lbadministracionMouseClicked
     private void lbadministracionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbadministracionMouseEntered
         pnAdministracion.setBackground(Control.color_Body);
@@ -440,9 +444,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     /*LABEL DE HABITACIONES */
     private void lbHabMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbHabMouseClicked
+        long init = System.currentTimeMillis();
         Habitaciones habitacion=new Habitaciones();
         habitacion.actualizar();
         habitacion.setVisible(true);
+        this.dispose();
+        System.out.println("Habitaciones: "+(System.currentTimeMillis()-init)+" mil");
     }//GEN-LAST:event_lbHabMouseClicked
     private void lbHabMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbHabMouseEntered
         pnHab.setBackground(Control.color_Body);
@@ -457,8 +464,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     /*LABEL DE RESERVA*/
     private void lbReservaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbReservaMouseClicked
+        long init = System.currentTimeMillis();
         Reservas reserva=new Reservas();    
         reserva.setVisible(true);
+        this.dispose();
+        System.out.println("Reserva: "+(System.currentTimeMillis()-init)+" mil");
     }//GEN-LAST:event_lbReservaMouseClicked
     private void lbReservaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbReservaMouseEntered
         pnReserva.setBackground(Control.color_Body);
@@ -473,8 +483,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     /*LABEL DE REPORTES*/
     private void lbReporteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbReporteMouseClicked
+        long init = System.currentTimeMillis();
         Reportes reporte = new Reportes();
         reporte.setVisible(true);
+        this.dispose();
+        System.out.println("Reportes: "+(System.currentTimeMillis()-init)+" mil");
     }//GEN-LAST:event_lbReporteMouseClicked
     private void lbReporteMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbReporteMouseEntered
         pnReportes.setBackground(Control.color_Body);
@@ -489,9 +502,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     /*LABEL DE LOGOUT*/
     private void lbLogOutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbLogOutMouseClicked
+        long init = System.currentTimeMillis();
         DatosUsuario datosUsuario = new DatosUsuario();
         datosUsuario.setVisible(true);
         this.setVisible(false);
+        System.out.println("Log Out: "+(System.currentTimeMillis()-init)+" mil");
     }//GEN-LAST:event_lbLogOutMouseClicked
     private void lbLogOutMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbLogOutMouseEntered
         pnLogOut.setBackground(Control.color_Body);
@@ -504,8 +519,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     /*LABEL DE SERVICIOS*/
     private void lbServicioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbServicioMouseClicked
+        long init = System.currentTimeMillis();
         Servicios servicio=new Servicios();
         servicio.setVisible(true);
+        this.dispose();
+        System.out.println("Servicio: "+(System.currentTimeMillis()-init)+" mil");
     }//GEN-LAST:event_lbServicioMouseClicked
     private void lbServicioMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbServicioMouseEntered
         pnServicios.setBackground(Control.color_Body);
@@ -540,8 +558,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     /* ALOJAMIENTO */
     private void lbAlojMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbAlojMouseClicked
+        long init = System.currentTimeMillis();
         Alojamiento alojamiento=new Alojamiento();
         alojamiento.setVisible(true);
+        this.dispose();
+        System.out.println("Alojamiennto: "+(System.currentTimeMillis()-init)+" mil");
     }//GEN-LAST:event_lbAlojMouseClicked
     private void lbAlojMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbAlojMouseEntered
         pnAloj.setBackground(Control.color_Body);

@@ -5,9 +5,8 @@ import Clases.ControlDate;
 import Clases.Controlador;
 import Clases.Design;
 import Clases.Textos;
-import alertas.Alerta;
 import alertas.AlertaError;
-import java.awt.Color;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
@@ -29,35 +28,29 @@ public class Reservas extends javax.swing.JFrame {
         txtBuscar.setVisible(false);
         txtBuscar1.setVisible(true);
 
-        //this.getContentPane().setBackground(Color.white);
         btValidar.setEnabled(false);
-        //this.setLocationRelativeTo(null);
-        lbUserActual.setText(Control.usuario);
-        tabla.getTableHeader().setOpaque(true);
-        tabla.getTableHeader().setBackground(new Color(248, 177, 57));
         btValidar.setVisible(false);
-//        control.LlenarCombo(jComboBox1, "select * from habitaciones", 2);
+        lbUserActual.setText(Control.usuario);
         control.LlenarCombo(cbTipoHab, "select * from tipohabitacion", 2);
         cbTipoHab.removeItemAt(0);
         cbNumHab.removeAllItems();
 
         //Ocultamos algunas funciones        
         lbReiniciar.setVisible(false);
-//        pnTipoCliente.setVisible(true);
         pnClienteEmpresa.setVisible(false);
         pnClientePersona.setVisible(false);
         pnFecha.setVisible(false);
         pnHabitacion.setVisible(false);
-        btRegistrar.setVisible(false);
-        btRegistrar1.setVisible(false);
-        btModificar.setVisible(false);
-        btModificar1.setVisible(false);
-        btEliminar.setVisible(false);
+        btRegistrarPersona.setVisible(false);
+        btRegistrarEmpresa.setVisible(false);
+        btModificarPersona.setVisible(false);
+        btModificarEmpresa.setVisible(false);
+        btEliminarPersona.setVisible(false);
 
-        btEliminar1.setVisible(false);
+        btEliminarEmpresa.setVisible(false);
         btCancelar.setVisible(false);
 
-        btEliminar.setVisible(false);
+        btEliminarPersona.setVisible(false);
       
         inicializarJTable_cliente();
         MostrarList_Cliente();
@@ -89,39 +82,37 @@ public class Reservas extends javax.swing.JFrame {
         String Rc = txRUC.getText();
         int contDn = Integer.parseInt(control.DevolverRegistroDto("select count(*) from clienteempresa where RUC='" + Rc + "';", 1));
         if (contDn != 0 && txRUC.getText().length() == 11) {
-            jTextField1.setText(control.DevolverRegistroDto("select empresa from vw_empresas where ruc = '"+Rc+"'", 1));
-            jTextField2.setText(control.DevolverRegistroDto("select lugar from vw_empresas where ruc = '"+Rc+"'", 1));
-            jTextField3.setText(control.DevolverRegistroDto("select email from vw_empresas where ruc = '"+Rc+"'", 1));
+            txNombreEmp.setText(control.DevolverRegistroDto("select empresa from vw_empresas where ruc = '"+Rc+"'", 1));
+            txProcEmp.setText(control.DevolverRegistroDto("select lugar from vw_empresas where ruc = '"+Rc+"'", 1));
+            txMailEmp.setText(control.DevolverRegistroDto("select email from vw_empresas where ruc = '"+Rc+"'", 1));
         }
         if (txRUC.getText().length() != 11) {
-            jTextField1.setText("");
-            jTextField2.setText("");
-            jTextField3.setText("");
+            txNombreEmp.setText("");
+            txProcEmp.setText("");
+            txMailEmp.setText("");
         }
     }
 
     public void reconocer_cliente() {
-        String dni = txDNI.getText().toString();
+        String dni = txDNI.getText();
         int contDn = Integer.parseInt(control.DevolverRegistroDto("select count(*) from personas where DNI='" + dni + "';", 1));
         if (contDn != 0 && txDNI.getText().length() == 8) {
-            jtxtdni1.setText(control.DevolverRegistroDto("select  apPat from personas where DNI='" + dni + "';", 1));
-            jtxtdni2.setText(control.DevolverRegistroDto("select  apMat from personas where DNI='" + dni + "';", 1));
-            jtxtdni3.setText(control.DevolverRegistroDto("select  nomb from personas where DNI='" + dni + "';", 1));
-            jtxtdni4.setText(control.DevolverRegistroDto("select  lugar from vw_clientepersona where DNI='" + dni + "' limit 1;", 1));
-            jtxtdni10.setText(control.DevolverRegistroDto("select  email from personas where DNI='" + dni + "';", 1));
+            txPaterno.setText(control.DevolverRegistroDto("select  apPat from personas where DNI='" + dni + "';", 1));
+            txMaterno.setText(control.DevolverRegistroDto("select  apMat from personas where DNI='" + dni + "';", 1));
+            txNombres.setText(control.DevolverRegistroDto("select  nomb from personas where DNI='" + dni + "';", 1));
+            txProc.setText(control.DevolverRegistroDto("select  lugar from vw_clientepersona where DNI='" + dni + "' limit 1;", 1));
+            txMail.setText(control.DevolverRegistroDto("select  email from personas where DNI='" + dni + "';", 1));
         }
         if (txDNI.getText().length() != 8) {
-            jtxtdni1.setText("");
-            jtxtdni2.setText("");
-            jtxtdni3.setText("");
-            jtxtdni4.setText("");
-            jtxtdni10.setText("");
+            txPaterno.setText("");
+            txMaterno.setText("");
+            txNombres.setText("");
+            txProc.setText("");
+            txMail.setText("");
         }
     }
 
     public void Seleccionar_Cliente() {
-        AlertaError alError = new AlertaError(this, true);
-
         int fila = tabla.getSelectedRow();
         if (fila > -1) {
             idres = modelo1.getValueAt(fila, 0).toString();
@@ -130,37 +121,30 @@ public class Reservas extends javax.swing.JFrame {
             txDNI.setText(modelo1.getValueAt(fila, 6).toString());
             if (contDn != 0) {
 
-                jtxtdni1.setText(control.DevolverRegistroDto("select  apPat from personas where DNI='" + dni + "';", 1));
-                jtxtdni2.setText(control.DevolverRegistroDto("select  apMat from personas where DNI='" + dni + "';", 1));
-                jtxtdni3.setText(control.DevolverRegistroDto("select  nomb from personas where DNI='" + dni + "';", 1));
-                jtxtdni4.setText(modelo1.getValueAt(fila, 8).toString());
-                jtxtdni10.setText(control.DevolverRegistroDto("select  email from personas where DNI='" + dni + "';", 1));
+                txPaterno.setText(control.DevolverRegistroDto("select  apPat from personas where DNI='" + dni + "';", 1));
+                txMaterno.setText(control.DevolverRegistroDto("select  apMat from personas where DNI='" + dni + "';", 1));
+                txNombres.setText(control.DevolverRegistroDto("select  nomb from personas where DNI='" + dni + "';", 1));
+                txProc.setText(modelo1.getValueAt(fila, 8).toString());
+                txMail.setText(control.DevolverRegistroDto("select  email from personas where DNI='" + dni + "';", 1));
                 dcEntrada.setDate(cd.Parse_Fecha(modelo1.getValueAt(fila, 2).toString()));
                 dcSalida.setDate(cd.Parse_Fecha(modelo1.getValueAt(fila, 3).toString()));
                 cbTipoHab.setSelectedItem(modelo1.getValueAt(fila, 5).toString());
                 cbNumHab.removeAllItems();
                 cbNumHab.addItem(modelo1.getValueAt(fila, 4).toString());
-//            jComboBox1.setSelectedItem(modelo1.getValueAt(fila, 4).toString());
                 numval = Integer.parseInt(modelo1.getValueAt(fila, 4).toString());
-//           valHab_Client();
                 tabla.setEnabled(false);
             }
         } else {
-            //alertas
-            rpt = "Fila no <br>seleccionada";
-            alError.titulo.setText("<html><center>" + rpt + "</center></html>");
-            alError.setVisible(true);
-            //alertas
-
-            btModificar.setText("Modificar");
-            btEliminar.setText("Eliminar");
-            btRegistrar1.setEnabled(true);
+            rpt = "Seleccione una fila";
+            JOptionPane.showMessageDialog(null, rpt);
+            btModificarPersona.setText("Modificar");
+            btEliminarPersona.setText("Eliminar");
+            btRegistrarEmpresa.setEnabled(true);
             tabla.setEnabled(true);
         }
     }
 
     public void Seleccionar_Empresa() {
-        AlertaError alError = new AlertaError(this, true);
         int fila = tabla.getSelectedRow();
         if (fila > -1) {
             idres = modelo.getValueAt(fila, 0).toString();
@@ -168,52 +152,43 @@ public class Reservas extends javax.swing.JFrame {
             int contDn = Integer.parseInt(control.DevolverRegistroDto("select count(*) from clienteempresa where RUC='" + Rc + "';", 1));
             txRUC.setText(modelo.getValueAt(fila, 6).toString());
             if (contDn != 0) {
-
-                jTextField1.setText(modelo.getValueAt(fila, 7).toString());
-                jTextField2.setText(modelo.getValueAt(fila, 8).toString());
-                jTextField3.setText(control.DevolverRegistroDto("select email from clienteempresa where RUC='" + Rc + "';", 1));
+                txNombreEmp.setText(modelo.getValueAt(fila, 7).toString());
+                txProcEmp.setText(modelo.getValueAt(fila, 8).toString());
+                txMailEmp.setText(control.DevolverRegistroDto("select email from clienteempresa where RUC='" + Rc + "';", 1));
                 dcEntrada.setDate(cd.Parse_Fecha(modelo.getValueAt(fila, 2).toString()));
                 dcSalida.setDate(cd.Parse_Fecha(modelo.getValueAt(fila, 3).toString()));
                 cbTipoHab.setSelectedItem(modelo.getValueAt(fila, 5).toString());
                 cbNumHab.removeAllItems();
                 cbNumHab.addItem(modelo1.getValueAt(fila, 4).toString());
                 numval1 = Integer.parseInt(modelo.getValueAt(fila, 4).toString());
-//            valHab_Client();
+            } else {
             }
         } else {
-            //alertas
-            rpt = "Fila no <br>seleccionada";
-            alError.titulo.setText("<html><center>" + rpt + "</center></html>");
-            alError.setVisible(true);
-            //alertas
-            btModificar1.setText("Modificar");
-            btEliminar1.setText("Eliminar");
-            btRegistrar.setEnabled(true);
+            rpt = "Seleccione una fila";
+            btModificarEmpresa.setText("Modificar");
+            btEliminarEmpresa.setText("Eliminar");
+            btRegistrarPersona.setEnabled(true);
+            JOptionPane.showMessageDialog(null, rpt);
         }
     }
 
     public void crear_Empresa() {
-        Alerta alr = new Alerta(this, true);
-
         int count = tabla.getRowCount();
-//        JOptionPane.showMessageDialog(null, count);
         int idest = Integer.parseInt(control.DevolverRegistroDto("select idhabitacion from habitaciones where numHab='" + cbNumHab.getSelectedItem() + "';", 1));
         rpt = (control.DevolverRegistroDto("call Proc_ReservaEmp("
                 + "'1',"
                 + "'" + 0 + "',"
-                + "'" + jTextField2.getText() + "',"
+                + "'" + txProcEmp.getText() + "',"
                 + "'" + txRUC.getText() + "',"
-                + "'" + jTextField1.getText() + "',"
-                + "'" + jTextField3.getText() + "',"
+                + "'" + txNombreEmp.getText() + "',"
+                + "'" + txMailEmp.getText() + "',"
                 + "'" + cd.fecha_AMD(dcEntrada.getDate()) + "',"
                 + "'" + cd.fecha_AMD(dcSalida.getDate()) + "',"
                 + "'" + idest + "',"
                 + "'" + 0 + "',"
                 + _idusuario + ")", 1));
-        //alertas
-        alr.titulo.setText("<html><center>" + rpt + "</center></html>");
-        alr.setVisible(true);
-        //alertas
+        
+        JOptionPane.showMessageDialog(null, rpt);
 
         MostrarList_Empresa();
         int count1 = tabla.getRowCount();
@@ -223,7 +198,6 @@ public class Reservas extends javax.swing.JFrame {
     }
 
     public void Editar_Empresa(int numHab) {
-        Alerta alr = new Alerta(this, true);
 
         int val1 = Integer.parseInt(control.DevolverRegistroDto("select DATEDIFF('" + cd.fecha_AMD(dcSalida.getDate()) + "','" + cd.fecha_AMD(dcEntrada.getDate()) + "');", 1));
         int val2 = Integer.parseInt(control.DevolverRegistroDto("select DATEDIFF('" + cd.fecha_AMD(dcEntrada.getDate()) + "',(CURDATE()-1));", 1));
@@ -231,74 +205,69 @@ public class Reservas extends javax.swing.JFrame {
         rpt = (control.DevolverRegistroDto("call Proc_ReservaEmp("
                 + "'2',"
                 + "'" + idres + "',"
-                + "'" + jTextField2.getText() + "',"
+                + "'" + txProcEmp.getText() + "',"
                 + "'" + txRUC.getText() + "',"
-                + "'" + jTextField1.getText() + "',"
-                + "'" + jTextField3.getText() + "',"
+                + "'" + txNombreEmp.getText() + "',"
+                + "'" + txMailEmp.getText() + "',"
                 + "'" + cd.fecha_AMD(dcEntrada.getDate()) + "',"
                 + "'" + cd.fecha_AMD(dcSalida.getDate()) + "',"
                 + "'" + idest + "',"
                 + "'" + numHab + "',"
                 + _idusuario + ")", 1));
-        //alertas
-        alr.titulo.setText("<html><center>" + rpt + "</center></html>");
-        alr.setVisible(true);
-        //alertas
+        
+        JOptionPane.showMessageDialog(null, rpt);
+        
         MostrarList_Empresa();
         if (val1 > 0 && val2 > 0) {
             Limpiar();
-            btModificar1.setText("Modificar");
-            btRegistrar.setEnabled(true);
+            btModificarEmpresa.setText("Modificar");
+            btRegistrarPersona.setEnabled(true);
         }
     }
 
     public void Limpiar() {
         tabla.setEnabled(true);
-        jTextField2.setText("");
+        txProcEmp.setText("");
         txRUC.setText("");
-        jTextField1.setText("");
-        jTextField3.setText("");
+        txNombreEmp.setText("");
+        txMailEmp.setText("");
         dcEntrada.setDate(null);
         dcSalida.setDate(null);
         cbNumHab.setSelectedIndex(-1);
         cbTipoHab.setSelectedIndex(-1);
-        jtxtdni4.setText("");
+        txProc.setText("");
         txDNI.setText("");
-        jtxtdni1.setText("");
-        jtxtdni2.setText("");
-        jtxtdni3.setText("");
-        jtxtdni10.setText("");
-        btModificar.setText("Modificar");
-        btModificar1.setText("Modificar");
-        btEliminar.setText("Eliminar");
-        btEliminar1.setText("Eliminar");
+        txPaterno.setText("");
+        txMaterno.setText("");
+        txNombres.setText("");
+        txMail.setText("");
+        btModificarPersona.setText("Modificar");
+        btModificarEmpresa.setText("Modificar");
+        btEliminarPersona.setText("Eliminar");
+        btEliminarEmpresa.setText("Eliminar");
         tabla.clearSelection();
-        btRegistrar.setEnabled(true);
-        btRegistrar1.setEnabled(true);
+        btRegistrarPersona.setEnabled(true);
+        btRegistrarEmpresa.setEnabled(true);
     }
 
     public void crear_Persona() {
-        Alerta alr = new Alerta(this, true);
-
         int count = tabla.getRowCount();
         int idest = Integer.parseInt(control.DevolverRegistroDto("select idhabitacion from habitaciones where numHab='" + cbNumHab.getSelectedItem() + "';", 1));
         rpt = (control.DevolverRegistroDto("call Proc_ReservaClient("
                 + "'1',"
                 + "'" + 0 + "',"
-                + "'" + jtxtdni4.getText() + "',"
+                + "'" + txProc.getText() + "',"
                 + "'" + txDNI.getText() + "',"
-                + "'" + jtxtdni1.getText() + "',"
-                + "'" + jtxtdni2.getText() + "',"
-                + "'" + jtxtdni3.getText() + "',"
-                + "'" + jtxtdni10.getText() + "',"
+                + "'" + txPaterno.getText() + "',"
+                + "'" + txMaterno.getText() + "',"
+                + "'" + txNombres.getText() + "',"
+                + "'" + txMail.getText() + "',"
                 + "'" + cd.fecha_AMD(dcEntrada.getDate()) + "',"
                 + "'" + cd.fecha_AMD(dcSalida.getDate()) + "',"
                 + "'" + idest + "',"
                 + "'" + 0 + "',"
                 + _idusuario + ")", 1));
-        //alertas
-        alr.titulo.setText("<html><center>" + rpt + "</center></html>");
-        alr.setVisible(true);
+        JOptionPane.showMessageDialog(null, rpt);
         //alertas
         MostrarList_Cliente();
         int count1 = tabla.getRowCount();
@@ -308,42 +277,38 @@ public class Reservas extends javax.swing.JFrame {
     }
 
     public void Editar_Persona(int numHab) {
-        Alerta alr = new Alerta(this, true);
-
         int val1 = Integer.parseInt(control.DevolverRegistroDto("select DATEDIFF('" + cd.fecha_AMD(dcSalida.getDate()) + "','" + cd.fecha_AMD(dcEntrada.getDate()) + "');", 1));
         int val2 = Integer.parseInt(control.DevolverRegistroDto("select DATEDIFF('" + cd.fecha_AMD(dcEntrada.getDate()) + "',(CURDATE()-1));", 1));
         int idest = Integer.parseInt(control.DevolverRegistroDto("select idhabitacion from habitaciones where numHab='" + cbNumHab.getSelectedItem() + "';", 1));
         rpt = (control.DevolverRegistroDto("call Proc_ReservaClient("
                 + "'2',"
                 + "'" + idres + "',"
-                + "'" + jtxtdni4.getText() + "',"
+                + "'" + txProc.getText() + "',"
                 + "'" + txDNI.getText() + "',"
-                + "'" + jtxtdni1.getText() + "',"
-                + "'" + jtxtdni2.getText() + "',"
-                + "'" + jtxtdni3.getText() + "',"
-                + "'" + jtxtdni10.getText() + "',"
+                + "'" + txPaterno.getText() + "',"
+                + "'" + txMaterno.getText() + "',"
+                + "'" + txNombres.getText() + "',"
+                + "'" + txMail.getText() + "',"
                 + "'" + cd.fecha_AMD(dcEntrada.getDate()) + "',"
                 + "'" + cd.fecha_AMD(dcSalida.getDate()) + "',"
                 + "'" + idest + "',"
                 + "'" + numHab + "',"
                 + _idusuario + ")", 1));
-        //alertas
-        alr.titulo.setText("<html><center>" + rpt + "</center></html>");
-        alr.setVisible(true);
-        //alertas
+        
+        JOptionPane.showMessageDialog(null, rpt);
+        
         MostrarList_Cliente();
         if (val1 > 0 && val2 > 0) {
             Limpiar();
-            btModificar.setText("Modificar");
-            btRegistrar1.setEnabled(true);
+            btModificarPersona.setText("Modificar");
+            btRegistrarEmpresa.setEnabled(true);
         }
     }
 
     public void EliminarReserva(String id) {
-        Alerta alr = new Alerta(this, true);
-        rpt = (control.DevolverRegistroDto("call p_eliminar(" + id + ")", 1));
-        alr.titulo.setText("<html><center>" + rpt + "</center></html>");
-        alr.setVisible(true);
+        rpt = (control.DevolverRegistroDto("call p_eliminar(" + id + ")", 1));        
+        JOptionPane.showMessageDialog(null, rpt);
+        
         if (cambio == 1) {
             MostrarList_Cliente();
         } else if (cambio == 2) {
@@ -388,121 +353,21 @@ public class Reservas extends javax.swing.JFrame {
         tabla.setModel(modelo1);
         ConfiguracionTabla();        
     }
-
     public void inicializarJTable_empresa() {
         modelo.setColumnIdentifiers(new String[]{"ID", "Fecha Reserva", "Fecha Entrada", "Fecha Salida", "N° Habitacion", "Tipo de Habitacion", "RUC", "Empresa", "Procedencia"});
         tabla.setModel(modelo);
         ConfiguracionTabla();
     }
-
-    public void validarcampos_client() {
-        AlertaError alError = new AlertaError(this, true);
-
-        if (txDNI.getText().length() != 0 && txDNI.getText().length() > 7) {
-            if (jtxtdni1.getText().length() != 0) {
-                if (jtxtdni2.getText().length() != 0) {
-                    if (jtxtdni3.getText().length() != 0) {
-                        if (jtxtdni4.getText().length() != 0) {
-                            if (jtxtdni10.getText().length() != 0) {
-                                if (dcEntrada.getDate() != null) {
-                                    if (dcSalida.getDate() != null) {
-                                        if (cbTipoHab.getSelectedIndex() != -1) {
-                                            if (cbNumHab.getSelectedIndex() != -1) {
-                                                crear_Persona();
-                                                rpt = "";
-                                            } else {
-                                                rpt = ("Seleccione <br>N° HABITACIÓN");
-                                            }
-                                        } else {
-                                            rpt = ("Seleccione <br>TIPO HABITACIÓN");
-                                        }
-                                    } else {
-                                        rpt = ("Ingrese <br>FECHA DE SALIDA");
-                                    }
-                                } else {
-                                    rpt = ("Ingrese <br>FECHA DE ENTRADA");
-                                }
-                            } else {
-                                rpt = ("Ingrese CORREO");
-                            }
-                        } else {
-                            rpt = ("Ingrese PROCEDENCIA");
-                            jtxtdni4.grabFocus();
-                        }
-                    } else {
-                        rpt = ("Ingrese NOMBRE");
-                        jtxtdni3.grabFocus();
-                    }
-                } else {
-                    rpt = ("Ingrese <br>apellido MATERNO");
-                    jtxtdni2.grabFocus();
-                }
-            } else {
-                rpt = ("Ingrese <br>apellido PATERNO");
-                jtxtdni1.grabFocus();
-            }
-        } else {
-            rpt = ("Ingrese DNI(8 dígitos)");
-            txDNI.grabFocus();
-        }
-        //alertas
-//        
-        if (!rpt.equals("")) {
-            alError.titulo.setText("<html><center>" + rpt + "</center></html>");
-            alError.setVisible(true);
-        }
-        //alertas
+    public boolean FormLlenoPersonas(){ // Retorna TRUE si todos los campos estan llenos
+        return (txDNI.getText()!=null && txPaterno.getText()!=null && txMaterno.getText()!=null  && 
+                txNombres.getText()!=null && txProc.getText()!=null && txMail.getText()!=null && dcEntrada.getDate()!=null &&
+                dcSalida.getDate()!=null && cbTipoHab.getSelectedIndex()>-1 && cbNumHab.getSelectedIndex()>-1);
     }
-
-    public void validarcampos_emp() {
-        AlertaError alError = new AlertaError(this, true);
-
-        if (txRUC.getText().length() != 0 && txRUC.getText().length() > 10) {
-            if (jTextField1.getText().length() != 0) {
-                if (jTextField2.getText().length() != 0) {
-                    if (jTextField3.getText().length() != 0) {
-                        if (dcEntrada.getDate() != null) {
-                            if (dcSalida.getDate() != null) {
-                                if (cbTipoHab.getSelectedIndex() != -1) {
-                                    if (cbNumHab.getSelectedIndex() != -1) {
-                                        crear_Empresa();
-                                        rpt = "";
-                                    } else {
-                                        rpt = ("Seleccione <br>N° HABITACIÓN");
-                                    }
-                                } else {
-                                    rpt = ("Seleccione <br>TIPO HABITACIÓN");
-                                }
-                            } else {
-                                rpt = ("Ingrese <br>FECHA DE SALIDA");
-                            }
-                        } else {
-                            rpt = ("Ingrese <br>FECHA DE ENTRADA");
-                        }
-                    } else {
-                        rpt = ("Ingrese CORREO");
-                        jTextField3.grabFocus();
-                    }
-                } else {
-                    rpt = ("Ingrese PROCEDENCIA");
-                    jTextField2.grabFocus();
-                }
-            } else {
-                rpt = ("Ingrese EMPRESA");
-                jTextField1.grabFocus();
-            }
-        } else {
-            rpt = ("Ingrese RUC(11 dígitos)");
-            txRUC.grabFocus();
-        }
-        //alertas
-        if (!rpt.equals("")) {
-            alError.titulo.setText("<html><center>" + rpt + "</center></html>");
-            alError.setVisible(true);
-        }
-        //alertas
+    public boolean FormLlenoEmpresas(){ // Retorna TRUE si todos los campos estan llenos
+        return (txRUC.getText()!=null && txNombreEmp.getText()!=null && txProcEmp.getText()!=null && 
+                txMailEmp.getText()!=null && dcEntrada.getDate()!=null &&
+                dcSalida.getDate()!=null && cbTipoHab.getSelectedIndex()>-1 && cbNumHab.getSelectedIndex()>-1);
     }
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -517,26 +382,26 @@ public class Reservas extends javax.swing.JFrame {
         jLabelDNI2 = new javax.swing.JLabel();
         txDNI = new javax.swing.JTextField();
         jLabelDNI3 = new javax.swing.JLabel();
-        jtxtdni1 = new javax.swing.JTextField();
-        jtxtdni2 = new javax.swing.JTextField();
+        txPaterno = new javax.swing.JTextField();
+        txMaterno = new javax.swing.JTextField();
         jLabelDNI4 = new javax.swing.JLabel();
         jLabelDNI5 = new javax.swing.JLabel();
-        jtxtdni3 = new javax.swing.JTextField();
-        jtxtdni4 = new javax.swing.JTextField();
+        txNombres = new javax.swing.JTextField();
+        txProc = new javax.swing.JTextField();
         jLabelDNI6 = new javax.swing.JLabel();
         jLabelDNI12 = new javax.swing.JLabel();
-        jtxtdni10 = new javax.swing.JTextField();
+        txMail = new javax.swing.JTextField();
         pnClienteEmpresa = new javax.swing.JPanel();
         jLabelDNI18 = new javax.swing.JLabel();
         jLabelDNI19 = new javax.swing.JLabel();
         jLabelDNI20 = new javax.swing.JLabel();
         jLabelDNI21 = new javax.swing.JLabel();
         txRUC = new javax.swing.JTextField();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        btRegistrar = new javax.swing.JButton();
-        btModificar = new javax.swing.JButton();
+        txNombreEmp = new javax.swing.JTextField();
+        txProcEmp = new javax.swing.JTextField();
+        txMailEmp = new javax.swing.JTextField();
+        btRegistrarPersona = new javax.swing.JButton();
+        btModificarPersona = new javax.swing.JButton();
         btCancelar = new javax.swing.JButton();
         pnFecha = new javax.swing.JPanel();
         jLabelDNI13 = new javax.swing.JLabel();
@@ -551,10 +416,10 @@ public class Reservas extends javax.swing.JFrame {
         jLabelDNI15 = new javax.swing.JLabel();
         cbNumHab = new javax.swing.JComboBox<>();
         cbTipoHab = new javax.swing.JComboBox<>();
-        btRegistrar1 = new javax.swing.JButton();
-        btModificar1 = new javax.swing.JButton();
-        btEliminar = new javax.swing.JButton();
-        btEliminar1 = new javax.swing.JButton();
+        btRegistrarEmpresa = new javax.swing.JButton();
+        btModificarEmpresa = new javax.swing.JButton();
+        btEliminarPersona = new javax.swing.JButton();
+        btEliminarEmpresa = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         lbUserActual = new javax.swing.JLabel();
@@ -660,25 +525,25 @@ public class Reservas extends javax.swing.JFrame {
         jLabelDNI3.setToolTipText("");
         pnClientePersona.add(jLabelDNI3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 120, 30));
 
-        jtxtdni1.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
-        jtxtdni1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jtxtdni1.setSelectionColor(new java.awt.Color(0, 122, 255));
-        jtxtdni1.addKeyListener(new java.awt.event.KeyAdapter() {
+        txPaterno.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
+        txPaterno.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txPaterno.setSelectionColor(new java.awt.Color(0, 122, 255));
+        txPaterno.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                jtxtdni1KeyTyped(evt);
+                txPaternoKeyTyped(evt);
             }
         });
-        pnClientePersona.add(jtxtdni1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 80, 280, 30));
+        pnClientePersona.add(txPaterno, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 80, 280, 30));
 
-        jtxtdni2.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
-        jtxtdni2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jtxtdni2.setSelectionColor(new java.awt.Color(0, 122, 255));
-        jtxtdni2.addKeyListener(new java.awt.event.KeyAdapter() {
+        txMaterno.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
+        txMaterno.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txMaterno.setSelectionColor(new java.awt.Color(0, 122, 255));
+        txMaterno.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                jtxtdni2KeyTyped(evt);
+                txMaternoKeyTyped(evt);
             }
         });
-        pnClientePersona.add(jtxtdni2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 130, 280, 30));
+        pnClientePersona.add(txMaterno, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 130, 280, 30));
 
         jLabelDNI4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabelDNI4.setText("Nombres");
@@ -688,25 +553,25 @@ public class Reservas extends javax.swing.JFrame {
         jLabelDNI5.setText("Procedencia");
         pnClientePersona.add(jLabelDNI5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, 120, 30));
 
-        jtxtdni3.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
-        jtxtdni3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jtxtdni3.setSelectionColor(new java.awt.Color(0, 122, 255));
-        jtxtdni3.addKeyListener(new java.awt.event.KeyAdapter() {
+        txNombres.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
+        txNombres.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txNombres.setSelectionColor(new java.awt.Color(0, 122, 255));
+        txNombres.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                jtxtdni3KeyTyped(evt);
+                txNombresKeyTyped(evt);
             }
         });
-        pnClientePersona.add(jtxtdni3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 180, 280, 30));
+        pnClientePersona.add(txNombres, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 180, 280, 30));
 
-        jtxtdni4.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
-        jtxtdni4.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jtxtdni4.setSelectionColor(new java.awt.Color(0, 122, 255));
-        jtxtdni4.addKeyListener(new java.awt.event.KeyAdapter() {
+        txProc.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
+        txProc.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txProc.setSelectionColor(new java.awt.Color(0, 122, 255));
+        txProc.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                jtxtdni4KeyTyped(evt);
+                txProcKeyTyped(evt);
             }
         });
-        pnClientePersona.add(jtxtdni4, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 230, 280, 30));
+        pnClientePersona.add(txProc, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 230, 280, 30));
 
         jLabelDNI6.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabelDNI6.setText("E-mail");
@@ -718,15 +583,15 @@ public class Reservas extends javax.swing.JFrame {
         jLabelDNI12.setToolTipText("");
         pnClientePersona.add(jLabelDNI12, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 120, 30));
 
-        jtxtdni10.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
-        jtxtdni10.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jtxtdni10.setSelectionColor(new java.awt.Color(0, 122, 255));
-        jtxtdni10.addKeyListener(new java.awt.event.KeyAdapter() {
+        txMail.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
+        txMail.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txMail.setSelectionColor(new java.awt.Color(0, 122, 255));
+        txMail.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                jtxtdni10KeyTyped(evt);
+                txMailKeyTyped(evt);
             }
         });
-        pnClientePersona.add(jtxtdni10, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 280, 280, 30));
+        pnClientePersona.add(txMail, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 280, 280, 30));
 
         jPanel2.add(pnClientePersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 25, 461, 340));
 
@@ -762,60 +627,60 @@ public class Reservas extends javax.swing.JFrame {
         });
         pnClienteEmpresa.add(txRUC, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 45, 280, 30));
 
-        jTextField1.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
-        jTextField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+        txNombreEmp.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
+        txNombreEmp.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txNombreEmp.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTextField1KeyTyped(evt);
+                txNombreEmpKeyTyped(evt);
             }
         });
-        pnClienteEmpresa.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 105, 280, 30));
+        pnClienteEmpresa.add(txNombreEmp, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 105, 280, 30));
 
-        jTextField2.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
-        jTextField2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField2.addKeyListener(new java.awt.event.KeyAdapter() {
+        txProcEmp.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
+        txProcEmp.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txProcEmp.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTextField2KeyTyped(evt);
+                txProcEmpKeyTyped(evt);
             }
         });
-        pnClienteEmpresa.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 170, 280, 30));
+        pnClienteEmpresa.add(txProcEmp, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 170, 280, 30));
 
-        jTextField3.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
-        jTextField3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField3.addKeyListener(new java.awt.event.KeyAdapter() {
+        txMailEmp.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
+        txMailEmp.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txMailEmp.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTextField3KeyTyped(evt);
+                txMailEmpKeyTyped(evt);
             }
         });
-        pnClienteEmpresa.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 235, 280, 30));
+        pnClienteEmpresa.add(txMailEmp, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 235, 280, 30));
 
         jPanel2.add(pnClienteEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 25, 461, 340));
 
-        btRegistrar.setBackground(new java.awt.Color(136, 206, 82));
-        btRegistrar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        btRegistrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/agregar.png"))); // NOI18N
-        btRegistrar.setText("Registrar");
-        btRegistrar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btRegistrar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btRegistrar.addActionListener(new java.awt.event.ActionListener() {
+        btRegistrarPersona.setBackground(new java.awt.Color(136, 206, 82));
+        btRegistrarPersona.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        btRegistrarPersona.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/agregar.png"))); // NOI18N
+        btRegistrarPersona.setText("Registrar");
+        btRegistrarPersona.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btRegistrarPersona.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btRegistrarPersona.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btRegistrarActionPerformed(evt);
+                btRegistrarPersonaActionPerformed(evt);
             }
         });
-        jPanel2.add(btRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 400, 110, 55));
+        jPanel2.add(btRegistrarPersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 400, 110, 55));
 
-        btModificar.setBackground(new java.awt.Color(0, 204, 204));
-        btModificar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        btModificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/modificar.png"))); // NOI18N
-        btModificar.setText("Modificar");
-        btModificar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btModificar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btModificar.addActionListener(new java.awt.event.ActionListener() {
+        btModificarPersona.setBackground(new java.awt.Color(0, 204, 204));
+        btModificarPersona.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        btModificarPersona.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/modificar.png"))); // NOI18N
+        btModificarPersona.setText("Modificar");
+        btModificarPersona.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btModificarPersona.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btModificarPersona.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btModificarActionPerformed(evt);
+                btModificarPersonaActionPerformed(evt);
             }
         });
-        jPanel2.add(btModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 470, 110, 55));
+        jPanel2.add(btModificarPersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 470, 110, 55));
 
         btCancelar.setBackground(new java.awt.Color(234, 82, 62));
         btCancelar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -928,57 +793,57 @@ public class Reservas extends javax.swing.JFrame {
 
         jPanel2.add(pnHabitacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 535, 336, 120));
 
-        btRegistrar1.setBackground(new java.awt.Color(136, 206, 82));
-        btRegistrar1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        btRegistrar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/agregar.png"))); // NOI18N
-        btRegistrar1.setText("Registrar");
-        btRegistrar1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btRegistrar1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btRegistrar1.addActionListener(new java.awt.event.ActionListener() {
+        btRegistrarEmpresa.setBackground(new java.awt.Color(136, 206, 82));
+        btRegistrarEmpresa.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        btRegistrarEmpresa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/agregar.png"))); // NOI18N
+        btRegistrarEmpresa.setText("Registrar");
+        btRegistrarEmpresa.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btRegistrarEmpresa.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btRegistrarEmpresa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btRegistrar1ActionPerformed(evt);
+                btRegistrarEmpresaActionPerformed(evt);
             }
         });
-        jPanel2.add(btRegistrar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 400, 110, 55));
+        jPanel2.add(btRegistrarEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 400, 110, 55));
 
-        btModificar1.setBackground(new java.awt.Color(0, 204, 204));
-        btModificar1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        btModificar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/modificar.png"))); // NOI18N
-        btModificar1.setText("Modificar");
-        btModificar1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btModificar1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btModificar1.addActionListener(new java.awt.event.ActionListener() {
+        btModificarEmpresa.setBackground(new java.awt.Color(0, 204, 204));
+        btModificarEmpresa.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        btModificarEmpresa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/modificar.png"))); // NOI18N
+        btModificarEmpresa.setText("Modificar");
+        btModificarEmpresa.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btModificarEmpresa.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btModificarEmpresa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btModificar1ActionPerformed(evt);
+                btModificarEmpresaActionPerformed(evt);
             }
         });
-        jPanel2.add(btModificar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 470, 110, 55));
+        jPanel2.add(btModificarEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 470, 110, 55));
 
-        btEliminar.setBackground(new java.awt.Color(255, 204, 51));
-        btEliminar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        btEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/eliminar.png"))); // NOI18N
-        btEliminar.setText("Eliminar");
-        btEliminar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btEliminar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btEliminar.addActionListener(new java.awt.event.ActionListener() {
+        btEliminarPersona.setBackground(new java.awt.Color(255, 204, 51));
+        btEliminarPersona.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        btEliminarPersona.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/eliminar.png"))); // NOI18N
+        btEliminarPersona.setText("Eliminar");
+        btEliminarPersona.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btEliminarPersona.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btEliminarPersona.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btEliminarActionPerformed(evt);
+                btEliminarPersonaActionPerformed(evt);
             }
         });
-        jPanel2.add(btEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 530, 110, 55));
+        jPanel2.add(btEliminarPersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 530, 110, 55));
 
-        btEliminar1.setBackground(new java.awt.Color(255, 204, 51));
-        btEliminar1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        btEliminar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/eliminar.png"))); // NOI18N
-        btEliminar1.setText("Eliminar");
-        btEliminar1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btEliminar1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btEliminar1.addActionListener(new java.awt.event.ActionListener() {
+        btEliminarEmpresa.setBackground(new java.awt.Color(255, 204, 51));
+        btEliminarEmpresa.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        btEliminarEmpresa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/eliminar.png"))); // NOI18N
+        btEliminarEmpresa.setText("Eliminar");
+        btEliminarEmpresa.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btEliminarEmpresa.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btEliminarEmpresa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btEliminar1ActionPerformed(evt);
+                btEliminarEmpresaActionPerformed(evt);
             }
         });
-        jPanel2.add(btEliminar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 530, 110, 55));
+        jPanel2.add(btEliminarEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 530, 110, 55));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 46, 521, 700));
 
@@ -1160,37 +1025,41 @@ public class Reservas extends javax.swing.JFrame {
         Textos.Numeros(evt);
     }//GEN-LAST:event_txDNIKeyTyped
 
-    private void jtxtdni1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtdni1KeyTyped
+    private void txPaternoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txPaternoKeyTyped
         Textos.soloPurasLetras(evt);
-        Textos.solo_1_esp(evt, jtxtdni3);
-    }//GEN-LAST:event_jtxtdni1KeyTyped
+        Textos.SinEspacio(evt);
+    }//GEN-LAST:event_txPaternoKeyTyped
 
-    private void jtxtdni2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtdni2KeyTyped
+    private void txMaternoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txMaternoKeyTyped
         Textos.soloPurasLetras(evt);
-        Textos.solo_1_esp(evt, jtxtdni3);
-    }//GEN-LAST:event_jtxtdni2KeyTyped
+        Textos.SinEspacio(evt);
+    }//GEN-LAST:event_txMaternoKeyTyped
 
-    private void jtxtdni3KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtdni3KeyTyped
+    private void txNombresKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txNombresKeyTyped
         Textos.soloPurasLetras(evt);
-        Textos.solo_1_esp(evt, jtxtdni3);
-    }//GEN-LAST:event_jtxtdni3KeyTyped
+    }//GEN-LAST:event_txNombresKeyTyped
 
     private void jtxtdni8KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtdni8KeyTyped
     }//GEN-LAST:event_jtxtdni8KeyTyped
 
-    private void btRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRegistrarActionPerformed
-        validarcampos_emp();
-    }//GEN-LAST:event_btRegistrarActionPerformed
+    private void btRegistrarPersonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRegistrarPersonaActionPerformed
+        if (FormLlenoPersonas()) {
+            crear_Empresa();         
+        } else {
+            rpt = ("Faltan campos por llenar");
+            JOptionPane.showMessageDialog(null, rpt);
+        }
+    }//GEN-LAST:event_btRegistrarPersonaActionPerformed
 
-    private void btModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btModificarActionPerformed
-        if (btModificar.getText().equals("Modificar")) {
-            btRegistrar1.setEnabled(false);
-            btModificar.setText("Actualizar");
+    private void btModificarPersonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btModificarPersonaActionPerformed
+        if (btModificarPersona.getText().equals("Modificar")) {
+            btRegistrarEmpresa.setEnabled(false);
+            btModificarPersona.setText("Actualizar");
             Seleccionar_Cliente();
         } else {
             Editar_Persona(numval);
         }
-    }//GEN-LAST:event_btModificarActionPerformed
+    }//GEN-LAST:event_btModificarPersonaActionPerformed
 
     private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelarActionPerformed
         Limpiar();
@@ -1199,14 +1068,14 @@ public class Reservas extends javax.swing.JFrame {
     private void txtBuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyTyped
     }//GEN-LAST:event_txtBuscarKeyTyped
 
-    private void jtxtdni10KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtdni10KeyTyped
+    private void txMailKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txMailKeyTyped
         Textos.sinesp(evt);
-    }//GEN-LAST:event_jtxtdni10KeyTyped
+    }//GEN-LAST:event_txMailKeyTyped
 
-    private void jtxtdni4KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtdni4KeyTyped
+    private void txProcKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txProcKeyTyped
         Textos.soloPurasLetras(evt);
-        Textos.solo_1_esp(evt, jTextField2);
-    }//GEN-LAST:event_jtxtdni4KeyTyped
+        Textos.solo_1_esp(evt, txProcEmp);
+    }//GEN-LAST:event_txProcKeyTyped
 
     private void lbReiniciarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbReiniciarMouseClicked
         Limpiar();
@@ -1219,13 +1088,13 @@ public class Reservas extends javax.swing.JFrame {
         pnHabitacion.setVisible(false);
         btValidar.setVisible(false);
 
-        btRegistrar.setVisible(false);
-        btRegistrar1.setVisible(false);
-        btModificar.setVisible(false);
-        btModificar1.setVisible(false);
+        btRegistrarPersona.setVisible(false);
+        btRegistrarEmpresa.setVisible(false);
+        btModificarPersona.setVisible(false);
+        btModificarEmpresa.setVisible(false);
         btCancelar.setVisible(false);
-        btEliminar.setVisible(false);
-        btEliminar1.setVisible(false);
+        btEliminarPersona.setVisible(false);
+        btEliminarEmpresa.setVisible(false);
 
         lbReiniciar.setVisible(false);
 
@@ -1253,16 +1122,16 @@ public class Reservas extends javax.swing.JFrame {
 
         lbReiniciar.setVisible(true);
 
-        btRegistrar.setVisible(!flag);
-        btRegistrar1.setVisible(flag);
+        btRegistrarPersona.setVisible(!flag);
+        btRegistrarEmpresa.setVisible(flag);
 
-        btModificar.setVisible(!flag);
-        btModificar1.setVisible(flag);
+        btModificarPersona.setVisible(!flag);
+        btModificarEmpresa.setVisible(flag);
 
         btCancelar.setVisible(true);
 
-        btEliminar.setVisible(flag);
-        btEliminar1.setVisible(!flag);
+        btEliminarPersona.setVisible(flag);
+        btEliminarEmpresa.setVisible(!flag);
 
         dcBuscar.setVisible(flag);
         dcBuscar1.setVisible(!flag);
@@ -1294,6 +1163,8 @@ public class Reservas extends javax.swing.JFrame {
 
     
     private void lbCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbCerrarMouseClicked
+        MenuPrincipal mp=new MenuPrincipal();
+        mp.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_lbCerrarMouseClicked
     private void lbCerrarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbCerrarMouseEntered
@@ -1302,63 +1173,61 @@ public class Reservas extends javax.swing.JFrame {
     private void lbCerrarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbCerrarMouseExited
         lbCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/cerrar1.png")));
     }//GEN-LAST:event_lbCerrarMouseExited
-
-    
+   
     private void txtBuscarMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtBuscarMouseReleased
     }//GEN-LAST:event_txtBuscarMouseReleased
-
     private void txtBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyReleased
         MostrarList_Empresa();
     }//GEN-LAST:event_txtBuscarKeyReleased
-
     private void txtBuscar1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtBuscar1MouseReleased
     }//GEN-LAST:event_txtBuscar1MouseReleased
-
     private void txtBuscar1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscar1KeyReleased
         MostrarList_Cliente();
     }//GEN-LAST:event_txtBuscar1KeyReleased
-
     private void txtBuscar1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscar1KeyTyped
     }//GEN-LAST:event_txtBuscar1KeyTyped
     private void cbNumHabMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbNumHabMouseClicked
     }//GEN-LAST:event_cbNumHabMouseClicked
 
-    private void btRegistrar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRegistrar1ActionPerformed
-        validarcampos_client();
-    }//GEN-LAST:event_btRegistrar1ActionPerformed
+    private void btRegistrarEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRegistrarEmpresaActionPerformed
+        if (FormLlenoEmpresas()) {
+            crear_Empresa();            
+        } else {
+            rpt = ("Faltan campos por llenar");
+            JOptionPane.showMessageDialog(null, rpt);
+        }
+    }//GEN-LAST:event_btRegistrarEmpresaActionPerformed
 
     private void lbLimpiarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbLimpiarMouseClicked
         Limpiar();
     }//GEN-LAST:event_lbLimpiarMouseClicked
 
-    private void btModificar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btModificar1ActionPerformed
-        if (btModificar1.getText().equals("Modificar")) {
-            btRegistrar.setEnabled(false);
-            btModificar1.setText("Actualizar");
+    private void btModificarEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btModificarEmpresaActionPerformed
+        if (btModificarEmpresa.getText().equals("Modificar")) {
+            btRegistrarPersona.setEnabled(false);
+            btModificarEmpresa.setText("Actualizar");
             Seleccionar_Empresa();
         } else {
             Editar_Empresa(numval1);
         }
-    }//GEN-LAST:event_btModificar1ActionPerformed
+    }//GEN-LAST:event_btModificarEmpresaActionPerformed
 
     private void txRUCKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txRUCKeyTyped
         Textos.Condicion(evt, txRUC, 10);
         Textos.Numeros(evt);
     }//GEN-LAST:event_txRUCKeyTyped
 
-    private void jTextField1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyTyped
+    private void txNombreEmpKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txNombreEmpKeyTyped
         Textos.soloPurasLetras(evt);
-        Textos.solo_1_esp(evt, jTextField1);
-    }//GEN-LAST:event_jTextField1KeyTyped
+    }//GEN-LAST:event_txNombreEmpKeyTyped
 
-    private void jTextField2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField2KeyTyped
+    private void txProcEmpKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txProcEmpKeyTyped
         Textos.soloPurasLetras(evt);
-        Textos.solo_1_esp(evt, jTextField2);
-    }//GEN-LAST:event_jTextField2KeyTyped
+    }//GEN-LAST:event_txProcEmpKeyTyped
 
-    private void jTextField3KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField3KeyTyped
+    private void txMailEmpKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txMailEmpKeyTyped
         Textos.sinesp(evt);
-    }//GEN-LAST:event_jTextField3KeyTyped
+    }//GEN-LAST:event_txMailEmpKeyTyped
 
     private void lbMinimizarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_lbMinimizarKeyTyped
     }//GEN-LAST:event_lbMinimizarKeyTyped
@@ -1400,25 +1269,25 @@ public class Reservas extends javax.swing.JFrame {
     private void dcBuscar1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_dcBuscar1KeyReleased
     }//GEN-LAST:event_dcBuscar1KeyReleased
 
-    private void btEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEliminarActionPerformed
-        if (btEliminar.getText().equals("Eliminar")) {
-            btRegistrar1.setEnabled(false);
-            btEliminar.setText("Actualizar");
+    private void btEliminarPersonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEliminarPersonaActionPerformed
+        if (btEliminarPersona.getText().equals("Eliminar")) {
+            btRegistrarEmpresa.setEnabled(false);
+            btEliminarPersona.setText("Actualizar");
             Seleccionar_Cliente();
         } else {
             EliminarReserva(idres);
         }
-    }//GEN-LAST:event_btEliminarActionPerformed
+    }//GEN-LAST:event_btEliminarPersonaActionPerformed
 
-    private void btEliminar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEliminar1ActionPerformed
-        if (btEliminar1.getText().equals("Eliminar")) {
-            btRegistrar.setEnabled(false);
-            btEliminar1.setText("Actualizar");
+    private void btEliminarEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEliminarEmpresaActionPerformed
+        if (btEliminarEmpresa.getText().equals("Eliminar")) {
+            btRegistrarPersona.setEnabled(false);
+            btEliminarEmpresa.setText("Actualizar");
             Seleccionar_Empresa();
         } else {
             EliminarReserva(idres);
         }
-    }//GEN-LAST:event_btEliminar1ActionPerformed
+    }//GEN-LAST:event_btEliminarEmpresaActionPerformed
 
     private void tablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMouseClicked
         if   (tabla.getSelectedRow() > -1) { btValidar.setEnabled(true);  } 
@@ -1459,22 +1328,7 @@ public class Reservas extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Reservas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -1487,12 +1341,12 @@ public class Reservas extends javax.swing.JFrame {
     private javax.swing.JButton btCancelar;
     private javax.swing.JButton btClienteEmpresa;
     private javax.swing.JButton btClientePersona;
-    private javax.swing.JButton btEliminar;
-    private javax.swing.JButton btEliminar1;
-    private javax.swing.JButton btModificar;
-    private javax.swing.JButton btModificar1;
-    private javax.swing.JButton btRegistrar;
-    private javax.swing.JButton btRegistrar1;
+    private javax.swing.JButton btEliminarEmpresa;
+    private javax.swing.JButton btEliminarPersona;
+    private javax.swing.JButton btModificarEmpresa;
+    private javax.swing.JButton btModificarPersona;
+    private javax.swing.JButton btRegistrarEmpresa;
+    private javax.swing.JButton btRegistrarPersona;
     private javax.swing.JButton btValidar;
     private javax.swing.JComboBox<String> cbNumHab;
     private javax.swing.JComboBox<String> cbTipoHab;
@@ -1524,14 +1378,6 @@ public class Reservas extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jtxtdni1;
-    private javax.swing.JTextField jtxtdni10;
-    private javax.swing.JTextField jtxtdni2;
-    private javax.swing.JTextField jtxtdni3;
-    private javax.swing.JTextField jtxtdni4;
     private javax.swing.JTextField jtxtdni8;
     private javax.swing.JLabel lbCerrar;
     private javax.swing.JLabel lbLimpiar;
@@ -1545,6 +1391,14 @@ public class Reservas extends javax.swing.JFrame {
     private javax.swing.JPanel pnTipoCliente;
     private javax.swing.JTable tabla;
     private javax.swing.JTextField txDNI;
+    private javax.swing.JTextField txMail;
+    private javax.swing.JTextField txMailEmp;
+    private javax.swing.JTextField txMaterno;
+    private javax.swing.JTextField txNombreEmp;
+    private javax.swing.JTextField txNombres;
+    private javax.swing.JTextField txPaterno;
+    private javax.swing.JTextField txProc;
+    private javax.swing.JTextField txProcEmp;
     private javax.swing.JTextField txRUC;
     private javax.swing.JTextField txtBuscar;
     private javax.swing.JTextField txtBuscar1;

@@ -1,28 +1,21 @@
 package Ventanas;
 
 import Clases.*;
-import alertas.*;
 import java.awt.Color;
-import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author ANGEL
- */
 public class Alojamiento extends javax.swing.JFrame {
-
-    public String rpt = "";
-
+    
     Controlador control = new Controlador();
     ControlDate controlDT = new ControlDate();
+    Design ds=new Design();
     DefaultTableModel modelo = new DefaultTableModel();
     public int cambio = 1;
-
+    public String rpt = "";
+    
     public Alojamiento() {
         initComponents();
-        this.setLocationRelativeTo(null);
         lbUserActual.setText(Control.usuario);
         tabla.getTableHeader().setOpaque(true);
         tabla.getTableHeader().setBackground(new Color(248, 177, 57));
@@ -40,14 +33,12 @@ public class Alojamiento extends javax.swing.JFrame {
         btModificar.setVisible(false);
         btCancelar.setVisible(false);
 
-        txfentrada.setDate(controlDT.Parse_Fecha(control.DevolverRegistroDto("select curdate()", 1)));
-        txfentrada.setEnabled(false);
+        dcEntrada.setDate(controlDT.Parse_Fecha(control.DevolverRegistroDto("select curdate()", 1)));
+        dcEntrada.setEnabled(false);
     }
 
-    public void inicializarJTable_persona() {
-        modelo.setColumnIdentifiers(new String[]{"ID", "Fecha Entrada", "Fecha Salida", "N° Habitacion", "Tipo de Habitacion", "DNI", "Cliente", "Procedencia"});
+    public void FormatoTabla(){
         tabla.setModel(modelo);
-
         tabla.getColumnModel().getColumn(0).setPreferredWidth(0);
         tabla.getColumnModel().getColumn(1).setPreferredWidth(115);
         tabla.getColumnModel().getColumn(2).setPreferredWidth(110);
@@ -56,47 +47,61 @@ public class Alojamiento extends javax.swing.JFrame {
         tabla.getColumnModel().getColumn(5).setPreferredWidth(100);
         tabla.getColumnModel().getColumn(6).setPreferredWidth(240);
         tabla.getColumnModel().getColumn(7).setPreferredWidth(180);
-
-        tabla.getColumnModel().removeColumn(tabla.getColumnModel().getColumn(0));
+        ds.OcultarColumna(tabla, 0);
     }
-
+    public void inicializarJTable_persona() {
+        modelo.setColumnIdentifiers(new String[]{"ID", "Fecha Entrada", "Fecha Salida", "N° Habitacion", "Tipo de Habitacion", "DNI", "Cliente", "Procedencia"});
+        FormatoTabla();
+    }
     public void inicializarJTable_empresa() {
         modelo.setColumnIdentifiers(new String[]{"ID", "Fecha Entrada", "Fecha Salida", "N° Habitacion", "Tipo de Habitacion", "RUC", "Empresa", "Procedencia"});
-        tabla.setModel(modelo);
-
-        tabla.getColumnModel().getColumn(0).setPreferredWidth(0);
-        tabla.getColumnModel().getColumn(1).setPreferredWidth(115);
-        tabla.getColumnModel().getColumn(2).setPreferredWidth(110);
-        tabla.getColumnModel().getColumn(3).setPreferredWidth(110);
-        tabla.getColumnModel().getColumn(4).setPreferredWidth(150);
-        tabla.getColumnModel().getColumn(5).setPreferredWidth(150);
-        tabla.getColumnModel().getColumn(6).setPreferredWidth(220);
-        tabla.getColumnModel().getColumn(7).setPreferredWidth(200);
-
-        tabla.getColumnModel().removeColumn(tabla.getColumnModel().getColumn(0));
+        FormatoTabla();
     }
-
     public void llenarCombo() {
-        control.LlenarComboHB(cbotipohabitacion, "SELECT * FROM tipohabitacion;", 2);
-        control.LlenarCombo(cbonumhabitacion, "SELECT * FROM habitaciones;", 2);
+        control.LlenarComboHB(cbTipoHab, "SELECT * FROM tipohabitacion;", 2);
+        cbTipoHab.setSelectedIndex(0);
+        control.LlenarCombo(cbNumHab, "SELECT * FROM habitaciones;", 2);
+    }
+    public void LlenarComboHabitaciones(){
+        if(dcEntrada.getDate() != null && dcSalida.getDate() != null && cbTipoHab.getSelectedIndex() > -1){
+            control.LlenarCombo(cbNumHab,
+                    "CALL proc_show_NumHab('" + cbTipoHab.getSelectedItem() + "', \""
+                    + controlDT.fecha_AMD(dcEntrada.getDate()) + "\",\""
+                    + controlDT.fecha_AMD(dcSalida.getDate()) + "\")", 1);
+        }else{
+            cbNumHab.removeAllItems();
+        } 
+        if (cbNumHab.getItemCount() > 0) {
+            cbNumHab.setSelectedIndex(0);
+        }
+        if (cbNumHab.getItemCount() == 1) { //Para cuando solo aparesca la opcion de '--Seleccione--'
+            cbNumHab.removeAllItems();
+            cbNumHab.addItem("--No hay cuartos--");
+        }
     }
 
     private void MostrarPersona() {
-        control.LlenarJtable(modelo, "SELECT * FROM vis_alojamiento_persona where "
-                + "DNI like'%" + txDNI.getText() + "%';", 8);
+        control.LlenarJtable(modelo, "SELECT * FROM vis_alojamiento_persona where DNI like'%" + txDNI.getText() + "%';", 8);
     }
-
     private void MostrarEmpresa() {
-        control.LlenarJtable(modelo, "SELECT * FROM vis_alojamiento_empresa where "
-                + "RUC like'%" + txRUC.getText() + "%';", 8);
+        control.LlenarJtable(modelo, "SELECT * FROM vis_alojamiento_empresa where RUC like'%" + txRUC.getText() + "%';", 8);
+    }
+    
+    public boolean FormLlenoPersonas(){ // Retorna TRUE si todos los campos estan llenos
+        return (txDNI.getText()!=null && txPaterno.getText()!=null && txMaterno.getText()!=null  && 
+                txNombres.getText()!=null && txProc.getText()!=null && txMail.getText()!=null && dcEntrada.getDate()!=null &&
+                dcSalida.getDate()!=null && cbTipoHab.getSelectedIndex()>-1 && cbNumHab.getSelectedIndex()>-1);
+    }
+    public boolean FormLlenoEmpresas(){ // Retorna TRUE si todos los campos estan llenos
+        return (txRUC.getText()!=null && txNombreEmp.getText()!=null && txProcEmp.getText()!=null && 
+                txMailEmp.getText()!=null && dcEntrada.getDate()!=null &&
+                dcSalida.getDate()!=null && cbTipoHab.getSelectedIndex()>-1 && cbNumHab.getSelectedIndex()>-1);
     }
 
-    String id;
-    String DOR;
+    String id, DOR;
     int contDOR;
 
     public void Seleccionar() {
-        AlertaError alError = new AlertaError(this, true);
         DOR = "";
         contDOR = 0;
         int fila = tabla.getSelectedRow();
@@ -108,34 +113,32 @@ public class Alojamiento extends javax.swing.JFrame {
                 contDOR = Integer.parseInt(control.DevolverRegistroDto("select count(*) from personas where DNI='" + DOR + "';", 1));
                 txDNI.setText(DOR);
                 if (contDOR != 0) {
-                    txapPaterno.setText(control.DevolverRegistroDto("select  apPat from personas where DNI='" + DOR + "';", 1));
-                    txapMaterno.setText(control.DevolverRegistroDto("select  apMat from personas where DNI='" + DOR + "';", 1));
-                    txNombre.setText(control.DevolverRegistroDto("select  nomb from personas where DNI='" + DOR + "';", 1));
-                    txProcedencia.setText(modelo.getValueAt(fila, 7).toString());
-                    txemail.setText(control.DevolverRegistroDto("select  email from personas where DNI='" + DOR + "';", 1));
-                    cbotipohabitacion.setSelectedItem(modelo.getValueAt(fila, 4).toString());
-                    cbonumhabitacion.setSelectedItem(modelo.getValueAt(fila, 3).toString());
-                    txfentrada.setDate(controlDT.Parse_Fecha(modelo.getValueAt(fila, 1).toString()));
-                    txfsalida.setDate(controlDT.Parse_Fecha(modelo.getValueAt(fila, 2).toString()));
+                    txPaterno.setText(control.DevolverRegistroDto("select  apPat from personas where DNI='" + DOR + "';", 1));
+                    txMaterno.setText(control.DevolverRegistroDto("select  apMat from personas where DNI='" + DOR + "';", 1));
+                    txNombres.setText(control.DevolverRegistroDto("select  nomb from personas where DNI='" + DOR + "';", 1));
+                    txProc.setText(modelo.getValueAt(fila, 7).toString());
+                    txMail.setText(control.DevolverRegistroDto("select  email from personas where DNI='" + DOR + "';", 1));
+                    cbTipoHab.setSelectedItem(modelo.getValueAt(fila, 4).toString());
+                    cbNumHab.setSelectedItem(modelo.getValueAt(fila, 3).toString());
+                    dcEntrada.setDate(controlDT.Parse_Fecha(modelo.getValueAt(fila, 1).toString()));
+                    dcSalida.setDate(controlDT.Parse_Fecha(modelo.getValueAt(fila, 2).toString()));
                 }
             } else if (cambio == 2) {
                 contDOR = Integer.parseInt(control.DevolverRegistroDto("select count(*) from clienteempresa where RUC='" + DOR + "';", 1));
                 txRUC.setText(DOR);
                 if (contDOR != 0) {
-                    txNomEmp.setText(control.DevolverRegistroDto("select  nombreEmpresa from clienteempresa where RUC='" + DOR + "';", 1));
+                    txNombreEmp.setText(control.DevolverRegistroDto("select  nombreEmpresa from clienteempresa where RUC='" + DOR + "';", 1));
                     txProcEmp.setText(modelo.getValueAt(fila, 7).toString());
-                    txEmailEmp.setText(control.DevolverRegistroDto("select  email from clienteempresa where RUC='" + DOR + "';", 1));
-                    cbotipohabitacion.setSelectedItem(modelo.getValueAt(fila, 4).toString());
-                    cbonumhabitacion.setSelectedItem(modelo.getValueAt(fila, 3).toString());
-                    txfentrada.setDate(controlDT.Parse_Fecha(modelo.getValueAt(fila, 1).toString()));
-                    txfsalida.setDate(controlDT.Parse_Fecha(modelo.getValueAt(fila, 2).toString()));
+                    txMailEmp.setText(control.DevolverRegistroDto("select  email from clienteempresa where RUC='" + DOR + "';", 1));
+                    cbTipoHab.setSelectedItem(modelo.getValueAt(fila, 4).toString());
+                    cbNumHab.setSelectedItem(modelo.getValueAt(fila, 3).toString());
+                    dcEntrada.setDate(controlDT.Parse_Fecha(modelo.getValueAt(fila, 1).toString()));
+                    dcSalida.setDate(controlDT.Parse_Fecha(modelo.getValueAt(fila, 2).toString()));
                 }
             }
 
         } else {
-            rpt = "Fila no <br>seleccionada";
-            alError.titulo.setText("<html><center>" + rpt + "</center></html>");
-            alError.setVisible(true);
+            JOptionPane.showMessageDialog(null, "No hay una fila seleccionada");
         }
 
     }
@@ -145,21 +148,20 @@ public class Alojamiento extends javax.swing.JFrame {
             String dni = txDNI.getText();
             int contD = Integer.parseInt(control.DevolverRegistroDto("select count(*) from personas where DNI='" + dni + "';", 1));
             if (contD != 0) {
-                txapPaterno.setText(control.DevolverRegistroDto("select  apPat from personas where DNI='" + dni + "';", 1));
-                txapMaterno.setText(control.DevolverRegistroDto("select  apMat from personas where DNI='" + dni + "';", 1));
-                txNombre.setText(control.DevolverRegistroDto("select  nomb from personas where DNI='" + dni + "';", 1));
-                txProcedencia.setText(control.DevolverRegistroDto("select  lugar from vis_alojamiento_persona where DNI='" + dni + "' limit 1;", 1));
-                txemail.setText(control.DevolverRegistroDto("select  email from personas where DNI='" + dni + "';", 1));
+                txPaterno.setText(control.DevolverRegistroDto("select  apPat from personas where DNI='" + dni + "';", 1));
+                txMaterno.setText(control.DevolverRegistroDto("select  apMat from personas where DNI='" + dni + "';", 1));
+                txNombres.setText(control.DevolverRegistroDto("select  nomb from personas where DNI='" + dni + "';", 1));
+                txProc.setText(control.DevolverRegistroDto("select  lugar from vis_alojamiento_persona where DNI='" + dni + "' limit 1;", 1));
+                txMail.setText(control.DevolverRegistroDto("select  email from personas where DNI='" + dni + "';", 1));
             }
 
         } else if (cambio == 2) {
             String ruc = txRUC.getText();
             int contD = Integer.parseInt(control.DevolverRegistroDto("select count(*) from clienteempresa where RUC='" + ruc + "';", 1));
             if (contD != 0) {
-                txNomEmp.setText(control.DevolverRegistroDto("select  nombreEmpresa from clienteempresa where RUC='" + ruc + "';", 1));
+                txNombreEmp.setText(control.DevolverRegistroDto("select  nombreEmpresa from clienteempresa where RUC='" + ruc + "';", 1));
                 txProcEmp.setText(control.DevolverRegistroDto("select  lugar from vis_alojamiento_empresa where RUC='" + ruc + "' limit 1;", 1));
-                txEmailEmp.setText(control.DevolverRegistroDto("select  email from clienteempresa where RUC='" + ruc + "';", 1));
-
+                txMailEmp.setText(control.DevolverRegistroDto("select  email from clienteempresa where RUC='" + ruc + "';", 1));
             }
         }
     }
@@ -167,19 +169,19 @@ public class Alojamiento extends javax.swing.JFrame {
     public void limpiar() {
         btModificar.setText("Modificar");
         txDNI.setText(null);
-        txNombre.setText(null);
-        txapPaterno.setText(null);
-        txapMaterno.setText(null);
-        txapMaterno.setText(null);
-        txProcedencia.setText(null);
-        txemail.setText(null);
-        txfsalida.setDate(null);
+        txNombres.setText(null);
+        txPaterno.setText(null);
+        txMaterno.setText(null);
+        txMaterno.setText(null);
+        txProc.setText(null);
+        txMail.setText(null);
+        dcSalida.setDate(null);
         txRUC.setText(null);
-        txNomEmp.setText(null);
+        txNombreEmp.setText(null);
         txProcEmp.setText(null);
-        txEmailEmp.setText(null);
-        cbotipohabitacion.setSelectedIndex(-1);
-        cbonumhabitacion.setSelectedIndex(-1);
+        txMailEmp.setText(null);
+        cbTipoHab.setSelectedIndex(-1);
+        cbNumHab.setSelectedIndex(-1);
         if (cambio == 1) {
             MostrarPersona();
         } else if (cambio == 2) {
@@ -188,139 +190,42 @@ public class Alojamiento extends javax.swing.JFrame {
     }
 
     public void RegistarPesona() {
-        Alerta alr = new Alerta(this, true);
         rpt = (control.DevolverRegistroDto("call proc_alojamiento_persona('" + txDNI.getText()
-                + "','" + Textos.capitalizeText(txapPaterno.getText()) + "','" + Textos.capitalizeText(txapMaterno.getText()) + "','" + Textos.capitalizeText(txNombre.getText())
-                + "','" + Textos.capitalizeText(txProcedencia.getText()) + "','" + txemail.getText() + "','"
-                + controlDT.fecha_AMD(txfentrada.getDate()) + "','" + controlDT.fecha_AMD(txfsalida.getDate())
-                + "','" + cbotipohabitacion.getSelectedItem() + "','" + cbonumhabitacion.getSelectedItem()
+                + "','" + Textos.capitalizeText(txPaterno.getText()) + "','" + Textos.capitalizeText(txMaterno.getText()) + "','" + Textos.capitalizeText(txNombres.getText())
+                + "','" + Textos.capitalizeText(txProc.getText()) + "','" + txMail.getText() + "','"
+                + controlDT.fecha_AMD(dcEntrada.getDate()) + "','" + controlDT.fecha_AMD(dcSalida.getDate())
+                + "','" + cbTipoHab.getSelectedItem() + "','" + cbNumHab.getSelectedItem()
                 + "','" + Control.empleado + "');", 1));
-
-        alr.titulo.setText("<html><center>" + rpt + "</center></html>");
-        alr.setVisible(true);
-
+        JOptionPane.showMessageDialog(null, rpt);
         MostrarPersona();
     }
 
-    public void ValidRegistroPersona() {
-        AlertaError alError = new AlertaError(this, true);
-        if (txDNI.getText().length() != 0 && txDNI.getText().length() > 7) {
-            if (txapPaterno.getText().length() != 0) {
-                if (txapMaterno.getText().length() != 0) {
-                    if (txNombre.getText().length() != 0) {
-                        if (txProcedencia.getText().length() != 0) {
-                            if (txemail.getText().length() != 0) {
-                                if (txfentrada.getDate() != null) {
-                                    if (txfsalida.getDate() != null) {
-                                        if (cbotipohabitacion.getSelectedIndex() != -1) {
-                                            if (cbonumhabitacion.getSelectedIndex() != -1) {
-                                                RegistarPesona();
-                                                rpt = "";
-                                            } else {
-                                                rpt = ("Seleccione <br>N° HABITACIÓN");
-                                            }
-                                        } else {
-                                            rpt = ("Seleccione <br>TIPO HABITACIÓN");
-                                        }
-                                    } else {
-                                        rpt = ("Ingrese <br>FECHA DE SALIDA");
-                                    }
-                                } else {
-                                    rpt = ("Ingrese <br>FECHA DE ENTRADA");
-                                }
-                            } else {
-                                rpt = ("Ingrese CORREO");
-                                txemail.grabFocus();
-                            }
-                        } else {
-                            rpt = ("Ingrese PROCEDENCIA");
-                            txProcedencia.grabFocus();
-                        }
-                    } else {
-                        rpt = ("Ingrese NOMBRE");
-                        txNombre.grabFocus();
-                    }
-                } else {
-                    rpt = ("Ingrese <br>apellido MATERNO");
-                    txapMaterno.grabFocus();
-                }
-            } else {
-                rpt = ("Ingrese <br>apellido PATERNO");
-                txapPaterno.grabFocus();
-            }
-        } else {
-            rpt = ("Ingrese DNI(8 dígitos)");
-            txDNI.grabFocus();
-        }
-
-        if (!rpt.equals("")) {
-            alError.titulo.setText("<html><center>" + rpt + "</center></html>");
-            alError.setVisible(true);
-        }
+    public void ValidRegistroPersona() {        
+        if(FormLlenoPersonas()){
+            RegistarPesona();
+        }else{
+            rpt="Faltan datos por llenar";
+            JOptionPane.showMessageDialog(null, rpt);
+        }        
     }
 
     public void RegistrarEmpresa() {
-        Alerta alr = new Alerta(this, true);
-
         rpt = (control.DevolverRegistroDto("call proc_alojamiento_empresa('" + txRUC.getText()
-                + "','" + txNomEmp.getText() + "','" + txProcEmp.getText() + "','" + txEmailEmp.getText()
-                + "','" + controlDT.fecha_AMD(txfentrada.getDate()) + "','" + controlDT.fecha_AMD(txfsalida.getDate())
-                + "','" + cbotipohabitacion.getSelectedItem() + "'," + cbonumhabitacion.getSelectedItem()
+                + "','" + txNombreEmp.getText() + "','" + txProcEmp.getText() + "','" + txMailEmp.getText()
+                + "','" + controlDT.fecha_AMD(dcEntrada.getDate()) + "','" + controlDT.fecha_AMD(dcSalida.getDate())
+                + "','" + cbTipoHab.getSelectedItem() + "'," + cbNumHab.getSelectedItem()
                 + ",'" + Control.empleado + "');", 1));
-
-        alr.titulo.setText("<html><center>" + rpt + "</center></html>");
-        alr.setVisible(true);
-
+        JOptionPane.showMessageDialog(null, rpt);
         MostrarEmpresa();
-
     }
 
     public void ValidRegistroEmpresa() {
-        AlertaError alError = new AlertaError(this, true);
-
-        if (txRUC.getText().length() != 0 && txRUC.getText().length() > 10) {
-            if (txNomEmp.getText().length() != 0) {
-                if (txProcEmp.getText().length() != 0) {
-                    if (txEmailEmp.getText().length() != 0) {
-                        if (txfentrada.getDate() != null) {
-                            if (txfsalida.getDate() != null) {
-                                if (cbotipohabitacion.getSelectedIndex() != -1) {
-                                    if (cbonumhabitacion.getSelectedIndex() != -1) {
-                                        RegistrarEmpresa();
-                                        rpt = "";
-                                    } else {
-                                        rpt = ("Seleccione <br>N° HABITACIÓN");
-                                    }
-                                } else {
-                                    rpt = ("Seleccione <br>TIPO HABITACIÓN");
-                                }
-                            } else {
-                                rpt = ("Ingrese <br>FECHA DE SALIDA");
-                            }
-                        } else {
-                            rpt = ("Ingrese <br>FECHA DE ENTRADA");
-                        }
-                    } else {
-                        rpt = ("Ingrese CORREO");
-                        txEmailEmp.grabFocus();
-                    }
-                } else {
-                    rpt = ("Ingrese PROCEDENCIA");
-                    txProcEmp.grabFocus();
-                }
-            } else {
-                rpt = ("Ingrese EMPRESA");
-                txNomEmp.grabFocus();
-            }
-        } else {
-            rpt = ("Ingrese RUC(11 dígitos)");
-            txRUC.grabFocus();
-        }
-        //alertas
-        if (!rpt.equals("")) {
-            alError.titulo.setText("<html><center>" + rpt + "</center></html>");
-            alError.setVisible(true);
-        }
+        if(FormLlenoPersonas()){
+            RegistrarEmpresa();
+        }else{
+            rpt="Faltan datos por llenar";
+            JOptionPane.showMessageDialog(null, rpt);
+        }        
     }
 
     @SuppressWarnings("unchecked")
@@ -337,40 +242,40 @@ public class Alojamiento extends javax.swing.JFrame {
         jLabelDNI2 = new javax.swing.JLabel();
         txDNI = new javax.swing.JTextField();
         jLabelDNI3 = new javax.swing.JLabel();
-        txapPaterno = new javax.swing.JTextField();
-        txapMaterno = new javax.swing.JTextField();
+        txPaterno = new javax.swing.JTextField();
+        txMaterno = new javax.swing.JTextField();
         jLabelDNI4 = new javax.swing.JLabel();
         jLabelDNI5 = new javax.swing.JLabel();
-        txNombre = new javax.swing.JTextField();
-        txProcedencia = new javax.swing.JTextField();
+        txNombres = new javax.swing.JTextField();
+        txProc = new javax.swing.JTextField();
         jLabelDNI6 = new javax.swing.JLabel();
         jLabelDNI12 = new javax.swing.JLabel();
-        txemail = new javax.swing.JTextField();
+        txMail = new javax.swing.JTextField();
         pnClienteEmpresa = new javax.swing.JPanel();
         jLabelDNI18 = new javax.swing.JLabel();
         jLabelDNI19 = new javax.swing.JLabel();
         jLabelDNI20 = new javax.swing.JLabel();
         jLabelDNI21 = new javax.swing.JLabel();
         txRUC = new javax.swing.JTextField();
-        txNomEmp = new javax.swing.JTextField();
+        txNombreEmp = new javax.swing.JTextField();
         txProcEmp = new javax.swing.JTextField();
-        txEmailEmp = new javax.swing.JTextField();
+        txMailEmp = new javax.swing.JTextField();
         btRegistrar = new javax.swing.JButton();
         btModificar = new javax.swing.JButton();
         btCancelar = new javax.swing.JButton();
         pnFecha = new javax.swing.JPanel();
         jLabelDNI13 = new javax.swing.JLabel();
         jLabelDNI17 = new javax.swing.JLabel();
-        txfsalida = new com.toedter.calendar.JDateChooser();
-        txfentrada = new com.toedter.calendar.JDateChooser();
+        dcSalida = new com.toedter.calendar.JDateChooser();
+        dcEntrada = new com.toedter.calendar.JDateChooser();
         pnHabitacion = new javax.swing.JPanel();
         jLabelDNI9 = new javax.swing.JLabel();
         jLabelDNI10 = new javax.swing.JLabel();
         jLabelDNI14 = new javax.swing.JLabel();
         jtxtdni8 = new javax.swing.JTextField();
         jLabelDNI15 = new javax.swing.JLabel();
-        cbonumhabitacion = new javax.swing.JComboBox<>();
-        cbotipohabitacion = new javax.swing.JComboBox<>();
+        cbNumHab = new javax.swing.JComboBox<>();
+        cbTipoHab = new javax.swing.JComboBox<>();
         jPanel4 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         lbUserActual = new javax.swing.JLabel();
@@ -438,7 +343,7 @@ public class Alojamiento extends javax.swing.JFrame {
         });
         pnTipoCliente.add(btClienteEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(261, 35, 150, 50));
 
-        jPanel2.add(pnTipoCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 25, 460, 120));
+        jPanel2.add(pnTipoCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(-3000, 25, 460, 120));
 
         pnClientePersona.setBackground(new java.awt.Color(255, 255, 255));
         pnClientePersona.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)), "DATOS DEL CLIENTE", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Leelawadee UI Semilight", 1, 12))); // NOI18N
@@ -467,28 +372,28 @@ public class Alojamiento extends javax.swing.JFrame {
         jLabelDNI3.setToolTipText("");
         pnClientePersona.add(jLabelDNI3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 120, 30));
 
-        txapPaterno.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
-        txapPaterno.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txapPaterno.setSelectionColor(new java.awt.Color(0, 122, 255));
-        txapPaterno.addKeyListener(new java.awt.event.KeyAdapter() {
+        txPaterno.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
+        txPaterno.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txPaterno.setSelectionColor(new java.awt.Color(0, 122, 255));
+        txPaterno.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                txapPaternoKeyReleased(evt);
+                txPaternoKeyReleased(evt);
             }
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                txapPaternoKeyTyped(evt);
+                txPaternoKeyTyped(evt);
             }
         });
-        pnClientePersona.add(txapPaterno, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 80, 280, 30));
+        pnClientePersona.add(txPaterno, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 80, 280, 30));
 
-        txapMaterno.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
-        txapMaterno.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txapMaterno.setSelectionColor(new java.awt.Color(0, 122, 255));
-        txapMaterno.addKeyListener(new java.awt.event.KeyAdapter() {
+        txMaterno.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
+        txMaterno.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txMaterno.setSelectionColor(new java.awt.Color(0, 122, 255));
+        txMaterno.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                txapMaternoKeyTyped(evt);
+                txMaternoKeyTyped(evt);
             }
         });
-        pnClientePersona.add(txapMaterno, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 130, 280, 30));
+        pnClientePersona.add(txMaterno, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 130, 280, 30));
 
         jLabelDNI4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabelDNI4.setText("Nombres");
@@ -498,25 +403,25 @@ public class Alojamiento extends javax.swing.JFrame {
         jLabelDNI5.setText("Procedencia");
         pnClientePersona.add(jLabelDNI5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, 120, 30));
 
-        txNombre.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
-        txNombre.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txNombre.setSelectionColor(new java.awt.Color(0, 122, 255));
-        txNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+        txNombres.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
+        txNombres.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txNombres.setSelectionColor(new java.awt.Color(0, 122, 255));
+        txNombres.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                txNombreKeyTyped(evt);
+                txNombresKeyTyped(evt);
             }
         });
-        pnClientePersona.add(txNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 180, 280, 30));
+        pnClientePersona.add(txNombres, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 180, 280, 30));
 
-        txProcedencia.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
-        txProcedencia.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txProcedencia.setSelectionColor(new java.awt.Color(0, 122, 255));
-        txProcedencia.addKeyListener(new java.awt.event.KeyAdapter() {
+        txProc.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
+        txProc.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txProc.setSelectionColor(new java.awt.Color(0, 122, 255));
+        txProc.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                txProcedenciaKeyTyped(evt);
+                txProcKeyTyped(evt);
             }
         });
-        pnClientePersona.add(txProcedencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 230, 280, 30));
+        pnClientePersona.add(txProc, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 230, 280, 30));
 
         jLabelDNI6.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabelDNI6.setText("E-mail");
@@ -528,17 +433,17 @@ public class Alojamiento extends javax.swing.JFrame {
         jLabelDNI12.setToolTipText("");
         pnClientePersona.add(jLabelDNI12, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 120, 30));
 
-        txemail.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
-        txemail.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txemail.setSelectionColor(new java.awt.Color(0, 122, 255));
-        txemail.addKeyListener(new java.awt.event.KeyAdapter() {
+        txMail.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
+        txMail.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txMail.setSelectionColor(new java.awt.Color(0, 122, 255));
+        txMail.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                txemailKeyTyped(evt);
+                txMailKeyTyped(evt);
             }
         });
-        pnClientePersona.add(txemail, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 280, 280, 30));
+        pnClientePersona.add(txMail, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 280, 280, 30));
 
-        jPanel2.add(pnClientePersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 25, 460, 340));
+        jPanel2.add(pnClientePersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(-3000, 25, 460, 340));
 
         pnClienteEmpresa.setBackground(new java.awt.Color(255, 255, 255));
         pnClienteEmpresa.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)), "DATOS DE LA EMPRESA", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 12))); // NOI18N
@@ -572,14 +477,14 @@ public class Alojamiento extends javax.swing.JFrame {
         });
         pnClienteEmpresa.add(txRUC, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 45, 280, 30));
 
-        txNomEmp.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
-        txNomEmp.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txNomEmp.addKeyListener(new java.awt.event.KeyAdapter() {
+        txNombreEmp.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
+        txNombreEmp.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txNombreEmp.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                txNomEmpKeyTyped(evt);
+                txNombreEmpKeyTyped(evt);
             }
         });
-        pnClienteEmpresa.add(txNomEmp, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 105, 280, 30));
+        pnClienteEmpresa.add(txNombreEmp, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 105, 280, 30));
 
         txProcEmp.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
         txProcEmp.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -590,14 +495,14 @@ public class Alojamiento extends javax.swing.JFrame {
         });
         pnClienteEmpresa.add(txProcEmp, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 170, 280, 30));
 
-        txEmailEmp.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
-        txEmailEmp.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txEmailEmp.addKeyListener(new java.awt.event.KeyAdapter() {
+        txMailEmp.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
+        txMailEmp.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txMailEmp.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                txEmailEmpKeyTyped(evt);
+                txMailEmpKeyTyped(evt);
             }
         });
-        pnClienteEmpresa.add(txEmailEmp, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 235, 280, 30));
+        pnClienteEmpresa.add(txMailEmp, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 235, 280, 30));
 
         jPanel2.add(pnClienteEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 25, 461, 340));
 
@@ -652,14 +557,24 @@ public class Alojamiento extends javax.swing.JFrame {
         jLabelDNI17.setText("F. Salida");
         pnFecha.add(jLabelDNI17, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 75, 120, 30));
 
-        txfsalida.setBackground(new java.awt.Color(255, 255, 255));
-        txfsalida.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
-        pnFecha.add(txfsalida, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 75, 156, 30));
+        dcSalida.setBackground(new java.awt.Color(255, 255, 255));
+        dcSalida.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
+        dcSalida.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                dcSalidaPropertyChange(evt);
+            }
+        });
+        pnFecha.add(dcSalida, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 75, 156, 30));
 
-        txfentrada.setBackground(new java.awt.Color(255, 255, 255));
-        txfentrada.setAutoscrolls(true);
-        txfentrada.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
-        pnFecha.add(txfentrada, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 25, 156, 30));
+        dcEntrada.setBackground(new java.awt.Color(255, 255, 255));
+        dcEntrada.setAutoscrolls(true);
+        dcEntrada.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
+        dcEntrada.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                dcEntradaPropertyChange(evt);
+            }
+        });
+        pnFecha.add(dcEntrada, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 25, 156, 30));
 
         jPanel2.add(pnFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 390, 336, 120));
 
@@ -693,16 +608,16 @@ public class Alojamiento extends javax.swing.JFrame {
         jLabelDNI15.setText("S/.");
         pnHabitacion.add(jLabelDNI15, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 181, -1, -1));
 
-        cbonumhabitacion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "205", "207", "305", "306" }));
-        pnHabitacion.add(cbonumhabitacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 75, 156, 30));
+        cbNumHab.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "205", "207", "305", "306" }));
+        pnHabitacion.add(cbNumHab, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 75, 156, 30));
 
-        cbotipohabitacion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Indivudual", "Doble", "Triple", "Matrimonial", "Matrimonial Lunandina" }));
-        cbotipohabitacion.addItemListener(new java.awt.event.ItemListener() {
+        cbTipoHab.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Indivudual", "Doble", "Triple", "Matrimonial", "Matrimonial Lunandina" }));
+        cbTipoHab.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cbotipohabitacionItemStateChanged(evt);
+                cbTipoHabItemStateChanged(evt);
             }
         });
-        pnHabitacion.add(cbotipohabitacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 25, 156, 30));
+        pnHabitacion.add(cbTipoHab, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 25, 156, 30));
 
         jPanel2.add(pnHabitacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 535, 336, 120));
 
@@ -764,6 +679,7 @@ public class Alojamiento extends javax.swing.JFrame {
         jPanel6.setForeground(new java.awt.Color(255, 255, 255));
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        tabla.setAutoCreateRowSorter(true);
         tabla.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 13)); // NOI18N
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -786,7 +702,7 @@ public class Alojamiento extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tabla);
 
-        jPanel6.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 849, 490));
+        jPanel6.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(29, 90, 800, 490));
 
         jLabelDNI16.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabelDNI16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -819,38 +735,32 @@ public class Alojamiento extends javax.swing.JFrame {
         Textos.LimitarCaracter(evt, txDNI, 8);
     }//GEN-LAST:event_txDNIKeyTyped
 
-    private void txapPaternoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txapPaternoKeyTyped
-        //Textos.Mayusculas(evt);
-        Textos.LimitarCaracter(evt, txapPaterno, 50);
-    }//GEN-LAST:event_txapPaternoKeyTyped
+    private void txPaternoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txPaternoKeyTyped
+        Textos.LimitarCaracter(evt, txPaterno, 50);
+        Textos.SinEspacio(evt);
+    }//GEN-LAST:event_txPaternoKeyTyped
 
-    private void txapMaternoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txapMaternoKeyTyped
-        //Textos.Mayusculas(evt);
-        Textos.LimitarCaracter(evt, txapMaterno, 50);
-    }//GEN-LAST:event_txapMaternoKeyTyped
+    private void txMaternoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txMaternoKeyTyped
+        Textos.LimitarCaracter(evt, txMaterno, 50);
+        Textos.SinEspacio(evt);
+    }//GEN-LAST:event_txMaternoKeyTyped
 
-    private void txNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txNombreKeyTyped
-        //Textos.Mayusculas(evt);
-        Textos.LimitarCaracter(evt, txNombre, 50);
-    }//GEN-LAST:event_txNombreKeyTyped
+    private void txNombresKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txNombresKeyTyped
+        Textos.LimitarCaracter(evt, txNombres, 50);
+    }//GEN-LAST:event_txNombresKeyTyped
 
     private void jtxtdni8KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtdni8KeyTyped
-        // TODO add your handling code here:
     }//GEN-LAST:event_jtxtdni8KeyTyped
 
     private void btRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRegistrarActionPerformed
-
         if (cambio == 1) {
             ValidRegistroPersona();
         } else if (cambio == 2) {
             ValidRegistroEmpresa();
         }
-
     }//GEN-LAST:event_btRegistrarActionPerformed
 
     private void btModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btModificarActionPerformed
-
-        Alerta alr = new Alerta(this, true);
 
         if (btModificar.getText().equals("Modificar")) {
             btRegistrar.setEnabled(false);
@@ -862,25 +772,18 @@ public class Alojamiento extends javax.swing.JFrame {
         } else if (btModificar.getText().equals("Actualizar")) {
             if (cambio == 1) {
                 rpt = (control.DevolverRegistroDto("call proc_alojamiento_persona_editar(" + id + ",'" + txDNI.getText() + "','"
-                        + Textos.capitalizeText(txapPaterno.getText()) + "','" + Textos.capitalizeText(txapMaterno.getText()) + "','" + Textos.capitalizeText(txNombre.getText()) + "','" + Textos.capitalizeText(txProcedencia.getText()) + "','"
-                        + txemail.getText() + "','" + controlDT.fecha_AMD(txfsalida.getDate()) + "');", 1));
+                        + Textos.capitalizeText(txPaterno.getText()) + "','" + Textos.capitalizeText(txMaterno.getText()) + "','" + Textos.capitalizeText(txNombres.getText()) + "','" + Textos.capitalizeText(txProc.getText()) + "','"
+                        + txMail.getText() + "','" + controlDT.fecha_AMD(dcSalida.getDate()) + "');", 1));
 
                 MostrarPersona();
             } else if (cambio == 2) {
                 rpt = (control.DevolverRegistroDto("call proc_alojamiento_empresa_editar(" + id + ",'" + txRUC.getText() + "','"
-                        + Textos.capitalizeText(txProcEmp.getText()) + "','" + Textos.capitalizeText(txNomEmp.getText()) + "','" + Textos.capitalizeText(txEmailEmp.getText()) + "','"
-                        + controlDT.fecha_AMD(txfsalida.getDate()) + "');", 1));
+                        + Textos.capitalizeText(txProcEmp.getText()) + "','" + Textos.capitalizeText(txNombreEmp.getText()) + "','" + Textos.capitalizeText(txMailEmp.getText()) + "','"
+                        + controlDT.fecha_AMD(dcSalida.getDate()) + "');", 1));
                 MostrarEmpresa();
             }
+            JOptionPane.showMessageDialog(null, rpt);
         }
-
-        if (!rpt.equals("")) {
-            alr.titulo.setText("<html><center>" + rpt + "</center></html>");
-            alr.setVisible(true);
-            rpt="";
-        }
-
-
     }//GEN-LAST:event_btModificarActionPerformed
 
     private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelarActionPerformed
@@ -892,16 +795,15 @@ public class Alojamiento extends javax.swing.JFrame {
     }//GEN-LAST:event_btCancelarActionPerformed
 
     private void txBuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txBuscarKeyTyped
-        // TODO add your handling code here:
     }//GEN-LAST:event_txBuscarKeyTyped
 
-    private void txemailKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txemailKeyTyped
-        Textos.LimitarCaracter(evt, txemail, 100);
-    }//GEN-LAST:event_txemailKeyTyped
+    private void txMailKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txMailKeyTyped
+        Textos.LimitarCaracter(evt, txMail, 100);
+    }//GEN-LAST:event_txMailKeyTyped
 
-    private void txProcedenciaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txProcedenciaKeyTyped
-        Textos.LimitarCaracter(evt, txProcedencia, 100);
-    }//GEN-LAST:event_txProcedenciaKeyTyped
+    private void txProcKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txProcKeyTyped
+        Textos.LimitarCaracter(evt, txProc, 100);
+    }//GEN-LAST:event_txProcKeyTyped
 
     private void lbReiniciarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbReiniciarMouseClicked
         pnTipoCliente.setVisible(true);
@@ -916,7 +818,6 @@ public class Alojamiento extends javax.swing.JFrame {
         btCancelar.setVisible(false);
 
         lbReiniciar.setVisible(false);
-
         //Habilitar 
         btRegistrar.setEnabled(true);
         txDNI.setEditable(true);
@@ -946,7 +847,7 @@ public class Alojamiento extends javax.swing.JFrame {
         btModificar.setVisible(true);
         btCancelar.setVisible(true);
 
-        txfentrada.setDate(controlDT.Parse_Fecha(control.DevolverRegistroDto("select curdate()", 1)));
+        dcEntrada.setDate(controlDT.Parse_Fecha(control.DevolverRegistroDto("select curdate()", 1)));
     }//GEN-LAST:event_btClientePersonaActionPerformed
 
     private void btClienteEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btClienteEmpresaActionPerformed
@@ -969,29 +870,26 @@ public class Alojamiento extends javax.swing.JFrame {
         btModificar.setVisible(true);
         btCancelar.setVisible(true);
 
-        txfentrada.setDate(controlDT.Parse_Fecha(control.DevolverRegistroDto("select curdate()", 1)));
+        dcEntrada.setDate(controlDT.Parse_Fecha(control.DevolverRegistroDto("select curdate()", 1)));
     }//GEN-LAST:event_btClienteEmpresaActionPerformed
 
     private void lbMinimizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbMinimizarMouseClicked
         this.setExtendedState(ICONIFIED);
     }//GEN-LAST:event_lbMinimizarMouseClicked
-
     private void lbMinimizarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbMinimizarMouseEntered
         lbMinimizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/minimizar2.png")));
     }//GEN-LAST:event_lbMinimizarMouseEntered
-
     private void lbMinimizarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbMinimizarMouseExited
         lbMinimizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/minimizar1.png")));
     }//GEN-LAST:event_lbMinimizarMouseExited
-
     private void lbCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbCerrarMouseClicked
+        MenuPrincipal mp=new MenuPrincipal();
+        mp.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_lbCerrarMouseClicked
-
     private void lbCerrarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbCerrarMouseEntered
         lbCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/cerrar2.png")));
     }//GEN-LAST:event_lbCerrarMouseEntered
-
     private void lbCerrarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbCerrarMouseExited
         lbCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/cerrar1.png")));
     }//GEN-LAST:event_lbCerrarMouseExited
@@ -1001,20 +899,18 @@ public class Alojamiento extends javax.swing.JFrame {
             MostrarPersona();
             reconocer();
         }else{
-            txapPaterno.setText("");
-            txapMaterno.setText("");
-            txNombre.setText("");
-            txProcedencia.setText("");
-            txemail.setText("");
+            txPaterno.setText("");
+            txMaterno.setText("");
+            txNombres.setText("");
+            txProc.setText("");
+            txMail.setText("");
         }
     }//GEN-LAST:event_txDNIKeyReleased
 
-    private void txapPaternoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txapPaternoKeyReleased
-
-    }//GEN-LAST:event_txapPaternoKeyReleased
+    private void txPaternoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txPaternoKeyReleased
+    }//GEN-LAST:event_txPaternoKeyReleased
 
     private void tablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMouseClicked
-
     }//GEN-LAST:event_tablaMouseClicked
 
     private void lbLimpiarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbLimpiarMouseClicked
@@ -1022,41 +918,18 @@ public class Alojamiento extends javax.swing.JFrame {
         btRegistrar.setEnabled(true);
         txDNI.setEditable(true);
         txRUC.setEditable(true);
-        txfentrada.setDate(controlDT.Parse_Fecha(control.DevolverRegistroDto("select curdate()", 1)));
+        dcEntrada.setDate(controlDT.Parse_Fecha(control.DevolverRegistroDto("select curdate()", 1)));
     }//GEN-LAST:event_lbLimpiarMouseClicked
 
-    private void cbotipohabitacionItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbotipohabitacionItemStateChanged
-
-        if (cbotipohabitacion.getSelectedIndex() > 0 && txfentrada != null && txfsalida != null) {
-            control.LlenarCombo(cbonumhabitacion,
-                    "call proc_show_NumHab('" + cbotipohabitacion.getSelectedItem() + "', \""
-                    + controlDT.fecha_AMD(txfentrada.getDate()) + "\",\""
-                    + controlDT.fecha_AMD(txfentrada.getDate()) + "\")", 1);
-            if (cbonumhabitacion.getItemCount() > 0) {
-                cbonumhabitacion.setSelectedIndex(0);
-            }
-            if (cbonumhabitacion.getItemCount() == 1) { //Para cuando solo aparesca la opcion de '--Seleccione--'
-                cbonumhabitacion.removeAllItems();
-                cbonumhabitacion.addItem("--No hay cuartos--");
-            }
-        }
-
-//        if (cbotipohabitacion.getSelectedIndex() > 0) {
-//            control.LlenarCombo(cbonumhabitacion, "select numero from vw_habitacion where tipo = '"
-//                    + cbotipohabitacion.getSelectedItem() + "' and estado='Disponible';", 1);
-//        }
-        if (cbotipohabitacion.getSelectedItem() == ("--Seleccione--")) {
-            cbonumhabitacion.removeAllItems();
-        }
-    }//GEN-LAST:event_cbotipohabitacionItemStateChanged
+    private void cbTipoHabItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbTipoHabItemStateChanged
+        LlenarComboHabitaciones();
+    }//GEN-LAST:event_cbTipoHabItemStateChanged
 
     private void txBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txBuscarKeyReleased
         if (cambio == 1) {
-            control.LlenarJtable(modelo, "SELECT * FROM vis_alojamiento_persona where "
-                    + "DNI like'%" + txBuscar.getText() + "%';", 8);
+            control.LlenarJtable(modelo, "SELECT * FROM vis_alojamiento_persona where DNI like'%" + txBuscar.getText() + "%';", 8);
         } else if (cambio == 2) {
-            control.LlenarJtable(modelo, "SELECT * FROM vis_alojamiento_empresa where "
-                    + "RUC like'%" + txBuscar.getText() + "%';", 8);
+            control.LlenarJtable(modelo, "SELECT * FROM vis_alojamiento_empresa where RUC like'%" + txBuscar.getText() + "%';", 8);
         }
     }//GEN-LAST:event_txBuscarKeyReleased
 
@@ -1070,23 +943,28 @@ public class Alojamiento extends javax.swing.JFrame {
             MostrarEmpresa();
             reconocer();
         }else{
-            txNomEmp.setText("");
+            txNombreEmp.setText("");
             txProcEmp.setText("");
-            txEmailEmp.setText("");
+            txMailEmp.setText("");
         }
     }//GEN-LAST:event_txRUCKeyReleased
 
-    private void txNomEmpKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txNomEmpKeyTyped
-        Textos.LimitarCaracter(evt, txNomEmp, 100);
-    }//GEN-LAST:event_txNomEmpKeyTyped
-
+    private void txNombreEmpKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txNombreEmpKeyTyped
+        Textos.LimitarCaracter(evt, txNombreEmp, 100);
+    }//GEN-LAST:event_txNombreEmpKeyTyped
     private void txProcEmpKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txProcEmpKeyTyped
         Textos.LimitarCaracter(evt, txProcEmp, 100);
     }//GEN-LAST:event_txProcEmpKeyTyped
+    private void txMailEmpKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txMailEmpKeyTyped
+        Textos.LimitarCaracter(evt, txMailEmp, 100);
+    }//GEN-LAST:event_txMailEmpKeyTyped
 
-    private void txEmailEmpKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txEmailEmpKeyTyped
-        Textos.LimitarCaracter(evt, txEmailEmp, 100);
-    }//GEN-LAST:event_txEmailEmpKeyTyped
+    private void dcEntradaPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dcEntradaPropertyChange
+        LlenarComboHabitaciones();
+    }//GEN-LAST:event_dcEntradaPropertyChange
+    private void dcSalidaPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dcSalidaPropertyChange
+        LlenarComboHabitaciones();
+    }//GEN-LAST:event_dcSalidaPropertyChange
 
     /**
      * @param args the command line arguments
@@ -1114,22 +992,7 @@ public class Alojamiento extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Alojamiento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -1144,8 +1007,10 @@ public class Alojamiento extends javax.swing.JFrame {
     private javax.swing.JButton btClientePersona;
     private javax.swing.JButton btModificar;
     private javax.swing.JButton btRegistrar;
-    private javax.swing.JComboBox<String> cbonumhabitacion;
-    private javax.swing.JComboBox<String> cbotipohabitacion;
+    private javax.swing.JComboBox<String> cbNumHab;
+    private javax.swing.JComboBox<String> cbTipoHab;
+    private com.toedter.calendar.JDateChooser dcEntrada;
+    private com.toedter.calendar.JDateChooser dcSalida;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabelDNI10;
@@ -1184,16 +1049,14 @@ public class Alojamiento extends javax.swing.JFrame {
     private javax.swing.JTable tabla;
     private javax.swing.JTextField txBuscar;
     private javax.swing.JTextField txDNI;
-    private javax.swing.JTextField txEmailEmp;
-    private javax.swing.JTextField txNomEmp;
-    private javax.swing.JTextField txNombre;
+    private javax.swing.JTextField txMail;
+    private javax.swing.JTextField txMailEmp;
+    private javax.swing.JTextField txMaterno;
+    private javax.swing.JTextField txNombreEmp;
+    private javax.swing.JTextField txNombres;
+    private javax.swing.JTextField txPaterno;
+    private javax.swing.JTextField txProc;
     private javax.swing.JTextField txProcEmp;
-    private javax.swing.JTextField txProcedencia;
     private javax.swing.JTextField txRUC;
-    private javax.swing.JTextField txapMaterno;
-    private javax.swing.JTextField txapPaterno;
-    private javax.swing.JTextField txemail;
-    private com.toedter.calendar.JDateChooser txfentrada;
-    private com.toedter.calendar.JDateChooser txfsalida;
     // End of variables declaration//GEN-END:variables
 }

@@ -12,7 +12,6 @@ import Clases.Textos;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -133,7 +132,6 @@ public class Habitaciones extends javax.swing.JFrame{
             
             label_Hab[i].addMouseListener(listener);
             
-            //label_Hab[i].setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
             panel_Hab[i].add(label_Hab[i], new org.netbeans.lib.awtextra.AbsoluteConstraints(10,10,78,70));
         }
     }
@@ -582,6 +580,8 @@ public class Habitaciones extends javax.swing.JFrame{
     }//GEN-LAST:event_lbMinimizarMouseExited
 
     private void lbCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbCerrarMouseClicked
+        MenuPrincipal mp=new MenuPrincipal();
+        mp.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_lbCerrarMouseClicked
     private void lbCerrarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbCerrarMouseEntered
@@ -645,8 +645,7 @@ public class Habitaciones extends javax.swing.JFrame{
             //Actualizamos el panel de las habitaciones
             actualizar();
             Limpiar();
-        }
-        
+        }        
     }//GEN-LAST:event_btComprobanteActionPerformed
 
     private void txPrecioUnitKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txPrecioUnitKeyReleased
@@ -671,19 +670,12 @@ public class Habitaciones extends javax.swing.JFrame{
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Habitaciones.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Habitaciones.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Habitaciones.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Habitaciones.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new Habitaciones().setVisible(true);
             }

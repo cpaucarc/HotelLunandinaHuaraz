@@ -1,17 +1,15 @@
 package Ventanas;
 
 import Clases.*;
-import alertas.*;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class Servicios extends javax.swing.JFrame {
 
     public String rpt = "";
     Imprimir imp = new Imprimir();
+    Design ds=new Design();
     Controlador control = new Controlador();
-    Conexion cnn = new Conexion();
-    Textos txt = new Textos();
-    ServiciosFisico sFisico = new ServiciosFisico();
     DefaultTableModel modelo = new DefaultTableModel();
     int _cliente = 0;
 
@@ -44,7 +42,6 @@ public class Servicios extends javax.swing.JFrame {
     }
 
     public void modcli() {
-        Alerta alr = new Alerta(this, true);
         int id = Integer.parseInt(control.DevolverRegistroDto("select idDetServ from detalleservicio where idtipoServ=(select idtipoServ from tiposervicio where nombreServ= '" + cboservicio.getSelectedItem() + "')\n"
                 + "and idDetAloj=(select idDetAloj from detallealojamiento where idclientePersona=(select idclientePersona from clientepersona\n"
                 + "where DNI='" + lbDNI.getText() + "')and idhabitacion=(select idhabitacion from habitaciones where numHab='" + txNumHabP.getText() + "'));", 1));
@@ -54,15 +51,13 @@ public class Servicios extends javax.swing.JFrame {
 
         rpt = (control.DevolverRegistroDto("call p_modserv('" + id + "'," + txtcant.getText() + "," + tip + "," + iddet + ");", 1));
 
-        alr.titulo.setText("<html><center>" + rpt + "</center></html>");
-        alr.setVisible(true);
+        JOptionPane.showMessageDialog(null, rpt);
 
         control.LlenarJtable(modelo, "SELECT * FROM vista_ds", 9);
         limpiar();
     }
 
     public void modemp() {
-        Alerta alr = new Alerta(this, true);
         int id = Integer.parseInt(control.DevolverRegistroDto("select idDetServ from detalleservicio where idtipoServ=(select idtipoServ from tiposervicio where nombreServ= '" + cboservicio.getSelectedItem() + "')\n"
                 + "and idDetAloj=(select idDetAloj from detallealojamiento where (RUC = '" + lbRUC.getText() + "') and idhabitacion=(select idhabitacion from habitaciones where numHab='" + txNumHabE.getText() + "'));", 1));
         int iddet = Integer.parseInt(control.DevolverRegistroDto("select idDetAloj from detallealojamiento where RUC=('" + lbRUC.getText() + "') and idhabitacion=(select idhabitacion from habitaciones where numHab=" + txNumHabE.getText() + ");", 1));
@@ -70,8 +65,7 @@ public class Servicios extends javax.swing.JFrame {
 
         rpt = (control.DevolverRegistroDto("call p_modserv('" + id + "'," + txtcant.getText() + "," + tip + "," + iddet + ");", 1));
 
-        alr.titulo.setText("<html><center>" + rpt + "</center></html>");
-        alr.setVisible(true);
+        JOptionPane.showMessageDialog(null, rpt);
 
         control.LlenarJtable(modelo, "SELECT * FROM vista_dse", 9);
         limpiar();
@@ -79,92 +73,61 @@ public class Servicios extends javax.swing.JFrame {
     }
 
     public void eliminarCli() {
-        Alerta alr = new Alerta(this, true);
         int id = Integer.parseInt(control.DevolverRegistroDto("select idDetServ from detalleservicio where idtipoServ=(select idtipoServ from tiposervicio where nombreServ= '" + cboservicio.getSelectedItem() + "')\n"
                 + "and idDetAloj=(select idDetAloj from detallealojamiento where idclientePersona=(select idclientePersona from clientepersona\n"
                 + "where DNI='" + lbDNI.getText() + "')and idhabitacion=(select idhabitacion from habitaciones where numHab='" + txNumHabP.getText() + "'));", 1));
-
         rpt = (control.DevolverRegistroDto("call p_eliminar(" + id + ");", 1));
-
-        alr.titulo.setText("<html><center>" + rpt + "</center></html>");
-        alr.setVisible(true);
+        JOptionPane.showMessageDialog(null, rpt); 
         control.LlenarJtable(modelo, "SELECT * FROM vista_ds", 9);
         limpiar();
     }
 
     public void eliminarEmp() {
-        Alerta alr = new Alerta(this, true);
         int id = Integer.parseInt(control.DevolverRegistroDto("select idDetServ from detalleservicio where idtipoServ=(select idtipoServ from tiposervicio where nombreServ= '" + cboservicio.getSelectedItem() + "')\n"
                 + "and idDetAloj=(select idDetAloj from detallealojamiento where (RUC = '" + lbRUC.getText() + "') and idhabitacion=(select idhabitacion from habitaciones where numHab='" + txNumHabE.getText() + "'));", 1));
 
         rpt = (control.DevolverRegistroDto("call p_eliminar(" + id + ");", 1));
 
-        alr.titulo.setText("<html><center>" + rpt + "</center></html>");
-        alr.setVisible(true);
+        JOptionPane.showMessageDialog(null, rpt); 
         control.LlenarJtable(modelo, "SELECT * FROM vista_dse", 9);
         limpiar();
-
     }
 
     public boolean ValidarCamposLlenosP() { // Para persona
-        if (lbDNI.getText().length() > 0 && txtpreciounit1.getText().length() > 0 && txtcant.getText().length() > 0) {
-            return true;// Significa que los campos estan llenos
-        } else {
-            return false;// Significa que los campos NO estan llenos        
-        }
+        return lbDNI.getText().length() > 0 && txtpreciounit1.getText().length() > 0 && txtcant.getText().length() > 0;
     }
-
     public boolean ValidarCamposLlenosE() { // Para empresa
-        if (lbRUC.getText().length() > 0 && txtpreciounit1.getText().length() > 0 && txtcant.getText().length() > 0) {
-            return true;   // Significa que los campos estan llenos
-        } else {
-            return false; // Significa que los campos NO estan llenos       
-        }
+        return lbRUC.getText().length() > 0 && txtpreciounit1.getText().length() > 0 && txtcant.getText().length() > 0;
     }
 
     public void crear() {
-        Alerta alr = new Alerta(this, true);
-        AlertaError alError = new AlertaError(this, true);
-
         if (ValidarCamposLlenosP()) {
             int iddet = Integer.parseInt(control.DevolverRegistroDto("select idDetAloj from detallealojamiento where idclientePersona=(select idclientePersona from clientepersona where DNI='" + lbDNI.getText() + "') and idhabitacion=(select idhabitacion from habitaciones where numHab=" + txNumHabP.getText() + ");", 1));
             int tip = Integer.parseInt(control.DevolverRegistroDto("select idtipoServ from tiposervicio where nombreServ='" + cboservicio.getSelectedItem() + "';", 1));
             rpt = (control.DevolverRegistroDto("call p_servicios('" + txtcant.getText() + "'," + tip + "," + iddet + ",1);", 1));
-
-            alr.titulo.setText("<html><center>" + rpt + "</center></html>");
-            alr.setVisible(true);
-
             control.LlenarJtable(modelo, "SELECT * FROM vista_ds", 9);
             limpiar();
         } else {
             rpt = ("Faltan campos por llenar");
-            alError.titulo.setText("<html><center>" + rpt + "</center></html>");
-            alError.setVisible(true);
         }
+        JOptionPane.showMessageDialog(null, rpt);
     }
 
     public void crearemp() {
-        Alerta alr = new Alerta(this, true);
-        AlertaError alError = new AlertaError(this, true);
         if (ValidarCamposLlenosE()) {
             int iddet = Integer.parseInt(control.DevolverRegistroDto("select idDetAloj from detallealojamiento where RUC=('" + lbRUC.getText() + "') and idhabitacion=(select idhabitacion from habitaciones where numHab=" + txNumHabE.getText() + ");", 1));
             int tip = Integer.parseInt(control.DevolverRegistroDto("select idtipoServ from tiposervicio where nombreServ='" + cboservicio.getSelectedItem() + "';", 1));
             rpt = (control.DevolverRegistroDto("call p_servicios('" + txtcant.getText() + "'," + tip + "," + iddet + ",1);", 1));
 
-            alr.titulo.setText("<html><center>" + rpt + "</center></html>");
-            alr.setVisible(true);
             control.LlenarJtable(modelo, "SELECT * FROM vista_dse", 9);
             limpiar();
         } else {
             rpt = ("Faltan campos por llenar");
-            alError.titulo.setText("<html><center>" + rpt + "</center></html>");
-            alError.setVisible(true);
         }
+        JOptionPane.showMessageDialog(null, rpt);
     }
 
-    public void inicializarJTable1() {
-        modelo.setColumnIdentifiers(new String[]{"ID", "Servicio", "Cantidad", "Precio", "Habitación", "DNI",
-            "Cliente", "Fecha", "Usuario"});
+    public void FormatoTabla(){
         tbServicio.setModel(modelo);
         tbServicio.getColumnModel().getColumn(0).setPreferredWidth(100);
         tbServicio.getColumnModel().getColumn(1).setPreferredWidth(200);
@@ -175,28 +138,16 @@ public class Servicios extends javax.swing.JFrame {
         tbServicio.getColumnModel().getColumn(6).setPreferredWidth(350);
         tbServicio.getColumnModel().getColumn(7).setPreferredWidth(150);
         tbServicio.getColumnModel().getColumn(8).setPreferredWidth(200);
-
-        tbServicio.getColumnModel().removeColumn(tbServicio.getColumnModel().getColumn(0));
-
+        ds.OcultarColumna(tbServicio, 0);
+    }
+    public void inicializarJTable1() {
+        modelo.setColumnIdentifiers(new String[]{"ID", "Servicio", "Cantidad", "Precio", "Habitación", "DNI","Cliente", "Fecha", "Usuario"});
+        FormatoTabla();
         control.LlenarJtable(modelo, "SELECT * FROM vista_ds", 9);
     }
-
     public void inicializarJTable_empresa() {
         modelo.setColumnIdentifiers(new String[]{"ID", "Servicio", "Cantidad", "Precio", "Habitación", "RUC", "Empresa", "Fecha", "Usuario"});
-        tbServicio.setModel(modelo);
-        tbServicio.getColumnModel().getColumn(0).setPreferredWidth(50);
-        tbServicio.getColumnModel().getColumn(1).setPreferredWidth(200);
-        tbServicio.getColumnModel().getColumn(2).setPreferredWidth(150);
-        tbServicio.getColumnModel().getColumn(3).setPreferredWidth(150);
-        tbServicio.getColumnModel().getColumn(4).setPreferredWidth(150);
-        tbServicio.getColumnModel().getColumn(5).setPreferredWidth(150);
-        tbServicio.getColumnModel().getColumn(6).setPreferredWidth(350);
-        tbServicio.getColumnModel().getColumn(7).setPreferredWidth(150);
-        tbServicio.getColumnModel().getColumn(8).setPreferredWidth(200);
-//        tbServicio.getColumnModel().getColumn(9).setPreferredWidth(200);
-
-        tbServicio.getColumnModel().removeColumn(tbServicio.getColumnModel().getColumn(0));
-
+        FormatoTabla();
         control.LlenarJtable(modelo, "SELECT * FROM vista_dse", 9);
     }
 
@@ -214,7 +165,6 @@ public class Servicios extends javax.swing.JFrame {
         cboservicio.setSelectedIndex(-1);
         jLabel22.setText(null);
         lbRUC.setText(null);
-
     }
 
     @SuppressWarnings("unchecked")
@@ -776,11 +726,10 @@ public class Servicios extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txbuscarKeyReleased
     private void txtcantKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtcantKeyTyped
-        txt.Numeros(evt);
+        Textos.Numeros(evt);
     }//GEN-LAST:event_txtcantKeyTyped
     private void btFisicoPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btFisicoPActionPerformed
-        Alerta alr = new Alerta(this, true);
-        AlertaError alError = new AlertaError(this, true);
+        
         if (ValidarCamposLlenosP()) {
             int iddet = Integer.parseInt(control.DevolverRegistroDto("select idDetAloj from detallealojamiento where idclientePersona=(select idclientePersona from clientepersona where DNI='" + lbDNI.getText() + "') and idhabitacion=(select idhabitacion from habitaciones where numHab=" + txNumHabP.getText() + ");", 1));
             int tip = Integer.parseInt(control.DevolverRegistroDto("select idtipoServ from tiposervicio where nombreServ='" + cboservicio.getSelectedItem() + "';", 1));
@@ -789,25 +738,22 @@ public class Servicios extends javax.swing.JFrame {
             control.LlenarJtable(modelo, "SELECT * FROM vista_ds", 9);
             int _id = Integer.parseInt(control.DevolverRegistroDto("select idDetServ from detalleservicio order by idDetServ desc limit 1", 1));
             double total = Double.parseDouble(txtpreciounit1.getText()) * Integer.parseInt(txtcant.getText());
-//proc_InsBolFac(tipoCompr{1:Bol,2:Fac},numBF{0:crear nuevo, Otro: añadir a existente}, total, idmotivo{idServ, idAloj}, motivo{1:Serv, 2:Hab}, documento)
+
             control.CrearRegistro("call proc_InsBolFac(1,0," + total + "," + _id + ",1," + lbDNI.getText() + ")");
-            //JOptionPane.showMessageDialog(null, "Se lleno correctamente, mostrando boleta x servicio");
+
             String _numBol = control.DevolverRegistroDto("select CONCAT('B', LPAD(numBoleta, 7, '0')) from boletas order by numBoleta desc limit 1", 1);
-            //imp.ImprCon1Parametro("boleta", "Boleta N° " + _numBol, "numeroBoleta", _numBol);
+
             imp.Imp2P("boleta", "Boleta N° "+_numBol, "numeroBoleta", "montoLiteral", _numBol, Textos.montoLiteral(""+total));
             
-            alr.titulo.setText("<html><center>" + rpt + "</center></html>");
-            alr.setVisible(true);
             limpiar();
         } else {
             rpt = ("Falta campos por llenar");
-            alError.titulo.setText("<html><center>" + rpt + "</center></html>");
-            alError.setVisible(true);
         }
+        JOptionPane.showMessageDialog(null, rpt);
     }//GEN-LAST:event_btFisicoPActionPerformed
     private void txNumHabPKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txNumHabPKeyTyped
         Textos.LimiteCaracter(evt, txNumHabP, 3);
-        txt.Numeros(evt);
+        Textos.Numeros(evt);
     }//GEN-LAST:event_txNumHabPKeyTyped
     private void btEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEliminarActionPerformed
         eliminarCli();
@@ -822,7 +768,6 @@ public class Servicios extends javax.swing.JFrame {
         btEliminar.setEnabled(false);
     }//GEN-LAST:event_btEditarActionPerformed
     private void btGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btGuardarActionPerformed
-        // TODO add your handling code here:
         crear();
     }//GEN-LAST:event_btGuardarActionPerformed
     private void btPersonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPersonaActionPerformed
@@ -845,7 +790,6 @@ public class Servicios extends javax.swing.JFrame {
         btEditar1.setVisible(false);
         btEliminar1.setVisible(false);
         btFisicoE.setVisible(false);
-        // btGuardar.setVisible(true);
         txNumHabP.grabFocus();
         _cliente = 1;
     }//GEN-LAST:event_btPersonaActionPerformed
@@ -869,8 +813,6 @@ public class Servicios extends javax.swing.JFrame {
         btEditar1.setVisible(true);
         btEliminar1.setVisible(true);
         btFisicoE.setVisible(true);
-        //btGuardar.setVisible(false);
-        // btGuardar1.setVisible(true);
         txNumHabE.grabFocus();
         _cliente = 2;
     }//GEN-LAST:event_btEmpresaActionPerformed
@@ -904,6 +846,8 @@ public class Servicios extends javax.swing.JFrame {
         lbMinimizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/minimizar1.png")));
     }//GEN-LAST:event_lbMinimizarMouseExited
     private void lbCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbCerrarMouseClicked
+        MenuPrincipal mp=new MenuPrincipal();
+        mp.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_lbCerrarMouseClicked
     private void lbCerrarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbCerrarMouseEntered
@@ -913,9 +857,6 @@ public class Servicios extends javax.swing.JFrame {
         lbCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/cerrar1.png")));
     }//GEN-LAST:event_lbCerrarMouseExited
     private void cboservicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboservicioActionPerformed
-        // TODO add your handling code here:
-        //txtcant.setText(null);
-        //llenarprecio();
     }//GEN-LAST:event_cboservicioActionPerformed
     private void lbLimpiarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbLimpiarMouseClicked
         limpiar();
@@ -951,9 +892,7 @@ public class Servicios extends javax.swing.JFrame {
     }//GEN-LAST:event_btEditar1ActionPerformed
 
     private void btEliminar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEliminar1ActionPerformed
-        // TODO add your handling code here:
         eliminarEmp();
-        //limpiar();
         btGuardar1.setEnabled(true);
         btEditar1.setEnabled(false);
         btEliminar1.setEnabled(false);
@@ -984,8 +923,7 @@ public class Servicios extends javax.swing.JFrame {
     }//GEN-LAST:event_txNumHabEKeyReleased
 
     private void btFisicoEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btFisicoEActionPerformed
-        Alerta alr = new Alerta(this, true);
-        AlertaError alError = new AlertaError(this, true);
+        
         if (ValidarCamposLlenosE()) {
             int iddet = Integer.parseInt(control.DevolverRegistroDto("select idDetAloj from detallealojamiento where RUC=('" + lbRUC.getText() + "') and idhabitacion=(select idhabitacion from habitaciones where numHab=" + txNumHabE.getText() + ");", 1));
             int tip = Integer.parseInt(control.DevolverRegistroDto("select idtipoServ from tiposervicio where nombreServ='" + cboservicio.getSelectedItem() + "';", 1));
@@ -994,31 +932,24 @@ public class Servicios extends javax.swing.JFrame {
 
             int _id = Integer.parseInt(control.DevolverRegistroDto("select idDetServ from detalleservicio order by idDetServ desc limit 1", 1));
             double total = Double.parseDouble(txtpreciounit1.getText()) * Integer.parseInt(txtcant.getText());
-//proc_InsBolFac(tipoCompr{1:Bol,2:Fac},numBF{0:crear nuevo, Otro: añadir a existenete}, total, idmotivo{idServ, idAloj}, motivo{1:Serv, 2:Hab}, documento)
+
             control.CrearRegistro("call proc_InsBolFac(2,0," + total + "," + _id + ",1," + lbRUC.getText() + ")");
-            //JOptionPane.showMessageDialog(null, "Se lleno correctamente, mostrando boleta x servicio");
+
             String _numFac = control.DevolverRegistroDto("select CONCAT('F', LPAD(numFactura, 7, '0')) from facturas order by numFactura desc limit 1;", 1);
-            //imp.ImprCon1Parametro("factura", "Factura N° " + _numFac, "numeroFactura", _numFac);
+
             imp.Imp2P("factura", "Factura N° "+_numFac, "numeroFactura", "montoLiteral", _numFac, Textos.montoLiteral(""+total));
-            alr.titulo.setText("<html><center>" + rpt + "</center></html>");
-            alr.setVisible(true);
             limpiar();
         } else {
             rpt=( "Falta campos por llenar");
-            alError.titulo.setText("<html><center>" + rpt + "</center></html>");
-            alError.setVisible(true);
         }
+        JOptionPane.showMessageDialog(null, rpt);
     }//GEN-LAST:event_btFisicoEActionPerformed
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
+        
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -1026,18 +957,13 @@ public class Servicios extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Servicios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Servicios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Servicios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Servicios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new Servicios().setVisible(true);
             }

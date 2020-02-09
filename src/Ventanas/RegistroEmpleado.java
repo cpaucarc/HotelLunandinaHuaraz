@@ -1,7 +1,7 @@
 package Ventanas;
 
 import Clases.*;
-import alertas.*;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class RegistroEmpleado extends javax.swing.JFrame {
@@ -67,7 +67,7 @@ public class RegistroEmpleado extends javax.swing.JFrame {
                 + "username like '%" + txbuscar.getText() + "%')";
         control.LlenarJtable(modelo, consulta, 7);
     }
-    public void GetEmploye(String dni){
+    public void ObtEmpleado(String dni){
         txappat.setText(control.DevolverRegistroDto("SELECT apPat FROM personas  WHERE DNI = '"+dni+"'", 1));
         txapmat.setText(control.DevolverRegistroDto("SELECT apMat FROM personas  WHERE DNI = '"+dni+"'", 1));
         txnomb.setText(control.DevolverRegistroDto("SELECT nomb FROM personas  WHERE DNI = '"+dni+"'", 1));
@@ -76,10 +76,15 @@ public class RegistroEmpleado extends javax.swing.JFrame {
         cbCargo.setSelectedItem(control.DevolverRegistroDto("SELECT cargo FROM vw_empleados WHERE dni = '"+dni+"'", 1));
         cbEstado.setSelectedItem(control.DevolverRegistroDto("SELECT estado FROM vw_empleados WHERE dni = '"+dni+"'", 1));
     }
-    public void Controls(boolean b){
+    public void Controles(boolean b){
         cbEstado.setEnabled(b);
         btModificar.setEnabled(b);
         btRegistrar.setEnabled(!b);
+    }
+    public boolean FormularioLleno(){
+        return txdni.getText().length() == 8 && txappat.getText() != null && txapmat.getText() != null && 
+                txnomb.getText() != null && txmail.getText() != null && cbCargo.getSelectedIndex() > -1 &&
+                cbEstado.getSelectedIndex() > -1 && Textos.VerificaCorreo(txmail.getText());
     }
 
     @SuppressWarnings("unchecked")
@@ -113,7 +118,7 @@ public class RegistroEmpleado extends javax.swing.JFrame {
         cbCargo = new javax.swing.JComboBox<>();
         jLabel9 = new javax.swing.JLabel();
         cbEstado = new javax.swing.JComboBox<>();
-        jLabel11 = new javax.swing.JLabel();
+        lbLimpiar = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -281,15 +286,15 @@ public class RegistroEmpleado extends javax.swing.JFrame {
 
         jPanel5.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 409, 461, 141));
 
-        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/limpiar.png"))); // NOI18N
-        jLabel11.setToolTipText("Limpiar formularios");
-        jLabel11.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel11.addMouseListener(new java.awt.event.MouseAdapter() {
+        lbLimpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/limpiar.png"))); // NOI18N
+        lbLimpiar.setToolTipText("Limpiar formularios");
+        lbLimpiar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lbLimpiar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel11MouseClicked(evt);
+                lbLimpiarMouseClicked(evt);
             }
         });
-        jPanel5.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(461, 5, -1, -1));
+        jPanel5.add(lbLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(461, 5, -1, -1));
 
         getContentPane().add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 46, 521, 700));
 
@@ -346,10 +351,7 @@ public class RegistroEmpleado extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btModificarActionPerformed
-        AlertaError alerror = new AlertaError(this, true);
-        AlertaSuccess alsuccess = new AlertaSuccess(this, true);
-        if (txdni.getText().length() == 8 && txappat.getText() != null && txapmat.getText() != null && txnomb.getText() != null 
-                && txmail.getText() != null && cbCargo.getSelectedIndex() > -1 && cbEstado.getSelectedIndex() > -1) {
+        if (FormularioLleno()) {
             rpt = (control.DevolverRegistroDto("call proc_empleado(2,'"
                     + txdni.getText() + "','"
                     + Textos.capitalizeText(txappat.getText()) + "','"
@@ -362,15 +364,9 @@ public class RegistroEmpleado extends javax.swing.JFrame {
             MostrarResultados();
 
             txdni.setEditable(true);
-            Controls(false);
-
-            alsuccess.titulo.setText("<html><center>" + rpt + "</center></html>");
-            alsuccess.setVisible(true);
-        } else {
-            rpt = "Faltan datos por rellenar";
-            alerror.titulo.setText("<html><center>" + rpt + "</center></html>");
-            alerror.setVisible(true);
-        }
+            Controles(false);
+        } else { rpt = "Faltan campos por llenar";}
+        JOptionPane.showMessageDialog(null, rpt);
     }//GEN-LAST:event_btModificarActionPerformed
 
     private void lbMinimizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbMinimizarMouseClicked
@@ -384,7 +380,9 @@ public class RegistroEmpleado extends javax.swing.JFrame {
     }//GEN-LAST:event_lbMinimizarMouseExited
 
     private void lbCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbCerrarMouseClicked
-        this.dispose();
+        MenuPrincipal mp=new MenuPrincipal();
+        mp.setVisible(true);
+        this.dispose();        
     }//GEN-LAST:event_lbCerrarMouseClicked
     private void lbCerrarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbCerrarMouseEntered
         lbCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/cerrar2.png")));
@@ -394,8 +392,6 @@ public class RegistroEmpleado extends javax.swing.JFrame {
     }//GEN-LAST:event_lbCerrarMouseExited
 
     private void btRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRegistrarActionPerformed
-        AlertaError alerror = new AlertaError(this, true);
-        AlertaSuccess alsuccess = new AlertaSuccess(this, true);
         if (txdni.getText().length() == 8 && txappat.getText() != null && txapmat.getText() != null
                 && txnomb.getText() != null && txmail.getText() != null && cbCargo.getSelectedIndex() > -1) {
             rpt = (control.DevolverRegistroDto("call proc_empleado(1,'"
@@ -406,43 +402,37 @@ public class RegistroEmpleado extends javax.swing.JFrame {
                     + txmail.getText() + "','"
                     + cbCargo.getSelectedItem().toString() + "','"
                     + cbEstado.getItemAt(1) + "')", 1));
-            MostrarResultados();
-            alsuccess.titulo.setText("<html><center>" + rpt + "</center></html>");
-            alsuccess.setVisible(true);
+            MostrarResultados();            
             Limpiar();
-        } else {
-            rpt = "Faltan datos por rellenar";
-            alerror.titulo.setText("<html><center>" + rpt + "</center></html>");
-            alerror.setVisible(true);
-        }
+        } else { rpt = "Faltan datos por rellenar"; }
+        JOptionPane.showMessageDialog(null, rpt);
     }//GEN-LAST:event_btRegistrarActionPerformed
 
     private void txbuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txbuscarKeyTyped
         MostrarResultados();
     }//GEN-LAST:event_txbuscarKeyTyped
-
     private void txdniKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txdniKeyTyped
         Textos.Numeros(evt);
         Textos.LimiteCaracter(evt, txdni, 8);
     }//GEN-LAST:event_txdniKeyTyped
 
-    private void jLabel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseClicked
+    private void lbLimpiarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbLimpiarMouseClicked
         Limpiar();
         txdni.setEditable(true);
-        Controls(false);
-    }//GEN-LAST:event_jLabel11MouseClicked
+        Controles(false);
+    }//GEN-LAST:event_lbLimpiarMouseClicked
 
     private void tablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMouseClicked
         txdni.setEditable(false);
-        Controls(true);
+        Controles(true);
         Seleccionar();
     }//GEN-LAST:event_tablaMouseClicked
 
     private void txdniKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txdniKeyReleased
         String dni = txdni.getText();
         if(dni.length() == 8){
-            GetEmploye(dni);
-            Controls(true);
+            ObtEmpleado(dni);
+            Controles(true);
         }else{
             txappat.setText("");
             txapmat.setText("");
@@ -450,7 +440,7 @@ public class RegistroEmpleado extends javax.swing.JFrame {
             txmail.setText("");
             cbCargo.setSelectedIndex(0);
             cbEstado.setSelectedIndex(1);
-            Controls(false);
+            Controles(false);
         }
     }//GEN-LAST:event_txdniKeyReleased
 
@@ -495,7 +485,6 @@ public class RegistroEmpleado extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbCargo;
     private javax.swing.JComboBox<String> cbEstado;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
@@ -515,6 +504,7 @@ public class RegistroEmpleado extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JLabel lbCerrar;
     private javax.swing.JLabel lbEstado;
+    private javax.swing.JLabel lbLimpiar;
     private javax.swing.JLabel lbMinimizar;
     private javax.swing.JLabel lbUserActual;
     private javax.swing.JTable tabla;

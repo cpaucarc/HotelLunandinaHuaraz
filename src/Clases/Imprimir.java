@@ -49,8 +49,7 @@ public class Imprimir {
             } else {
                 JOptionPane.showMessageDialog(null, "No hay datos");
             }
-        } catch (Exception E) {
-        }
+        } catch (Exception E) {}
     }
     //Impresion para 2 Parametro
     public void Imp2P(String Nomrep, String Titulo, String prm1, String prm2, String vlrprm1, String vlrprm2) {

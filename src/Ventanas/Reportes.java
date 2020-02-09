@@ -504,6 +504,8 @@ public class Reportes extends javax.swing.JFrame {
     }//GEN-LAST:event_lbMinimizarMouseExited
 
     private void lbCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbCerrarMouseClicked
+        MenuPrincipal mp=new MenuPrincipal();
+        mp.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_lbCerrarMouseClicked
 

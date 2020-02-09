@@ -161,7 +161,12 @@ public class Textos {
         return "SON: "+ numLit.Convertir(monto, true);
     }
     //Verifica si el correo cumple el formato
-    public boolean VerificaCorreo(String txt){
+    public static boolean VerificaCorreo(String txt){
         return Pattern.matches("^[a-zA-Z0-9]+[@]{1}+[a-zA-Z0-9]+[.]{1}+[a-zA-Z0-9]+$",txt);
+    }
+    public static void SinEspacio(KeyEvent e){
+        if (e.getKeyChar() == 32) {
+                e.consume();
+        }
     }
 }
