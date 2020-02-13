@@ -7,7 +7,7 @@ import Clases.Imprimir;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-public class ReporteServicios extends javax.swing.JInternalFrame {
+public final class ReporteServicios extends javax.swing.JInternalFrame {
 
     Imprimir imp=new Imprimir();
     DefaultTableModel modelo=new DefaultTableModel();
@@ -126,7 +126,6 @@ public class ReporteServicios extends javax.swing.JInternalFrame {
         });
         jPanel2.add(txCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 40, 200, 30));
 
-        cbYear.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 15)); // NOI18N
         cbYear.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
                 cbYearPropertyChange(evt);
@@ -161,6 +160,7 @@ public class ReporteServicios extends javax.swing.JInternalFrame {
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "INGRESOS REGISTRADOS", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 12))); // NOI18N
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        tabla.setAutoCreateRowSorter(true);
         tabla.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

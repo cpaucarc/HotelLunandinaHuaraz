@@ -6,17 +6,22 @@ import Clases.Imprimir;
 import Clases.Textos;
 import javax.swing.table.DefaultTableModel;
 
-public class Facturas extends javax.swing.JInternalFrame {
+public final class Facturas extends javax.swing.JInternalFrame {
     
     DefaultTableModel modelo=new DefaultTableModel();
     Imprimir imp=new Imprimir();
     Controlador control=new Controlador();
     String _numFac;
     String _montoTotal;
+    boolean rowSelect = false;
     
     public Facturas() {
         initComponents();
         LlenarTabla();
+        ActivarBoton();
+    }
+    public void ActivarBoton(){
+        btImprimirFactura.setEnabled(rowSelect);
     }
     public void LlenarTabla(){
         modelo.setColumnIdentifiers(new String[]{"N° Factura", "Fecha", "Monto Total", "Cliente", "Procedencia"});
@@ -188,12 +193,13 @@ public class Facturas extends javax.swing.JInternalFrame {
             //imp.ImprCon1Parametro("factura", "Factura N° " + _numFac, "numeroFactura", _numFac);
             imp.Imp2P("factura", "Factura N° "+_numFac, "numeroFactura", "montoLiteral", _numFac, Textos.montoLiteral(_montoTotal));
         }
+        rowSelect = false; ActivarBoton();
     }//GEN-LAST:event_btImprimirFacturaActionPerformed
 
     private void tablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMouseClicked
         _numFac = tabla.getValueAt(tabla.getSelectedRow(), 0).toString();
-        _montoTotal = tabla.getValueAt(tabla.getSelectedRow(), 2).toString();
-        txCliente.setText(_numFac + " mt: "+ _montoTotal);
+        _montoTotal = tabla.getValueAt(tabla.getSelectedRow(), 2).toString();        
+        rowSelect = true; ActivarBoton();
     }//GEN-LAST:event_tablaMouseClicked
 
     private void txClienteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txClienteKeyTyped

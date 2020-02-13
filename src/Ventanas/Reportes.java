@@ -1,19 +1,9 @@
 package Ventanas;
 
-import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
-import javax.swing.plaf.basic.BasicInternalFrameUI;
 import Clases.Control;
 
 public class Reportes extends javax.swing.JFrame {
 
-//    Facturas factura=new Facturas();
-//    Boletas boleta=new Boletas();
-//    IngresosMensuales inMensual=new IngresosMensuales();
-//    IngresosAnuales inAnual =new IngresosAnuales();
-//    LugarProcedencia lugar=new LugarProcedencia();
-//    ReporteServicios servicio=new ReporteServicios();
-//    ReporteClientes cliente=new ReporteClientes();
-//    ReporteAloj alojamiento=new ReporteAloj();
     
     int ancho = 844;
     int alto = 750;
@@ -49,8 +39,6 @@ public class Reportes extends javax.swing.JFrame {
         lbLugar = new javax.swing.JLabel();
         pnServicio = new javax.swing.JPanel();
         lbServicio = new javax.swing.JLabel();
-        pnCliente = new javax.swing.JPanel();
-        lbCliente = new javax.swing.JLabel();
         pnAlojamiento = new javax.swing.JPanel();
         lbAlojamiento = new javax.swing.JLabel();
         desktop = new javax.swing.JDesktopPane();
@@ -282,32 +270,6 @@ public class Reportes extends javax.swing.JFrame {
 
         pnOtros.add(pnServicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(261, 35, 150, 80));
 
-        pnCliente.setBackground(new java.awt.Color(204, 204, 204));
-        pnCliente.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(23, 23, 23)));
-        pnCliente.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        lbCliente.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        lbCliente.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/userLog_B.png"))); // NOI18N
-        lbCliente.setText("CLIENTE");
-        lbCliente.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lbCliente.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        lbCliente.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        lbCliente.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lbClienteMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                lbClienteMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                lbClienteMouseExited(evt);
-            }
-        });
-        pnCliente.add(lbCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 150, 80));
-
-        pnOtros.add(pnCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, 150, 80));
-
         pnAlojamiento.setBackground(new java.awt.Color(204, 204, 204));
         pnAlojamiento.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(23, 23, 23)));
         pnAlojamiento.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -332,7 +294,7 @@ public class Reportes extends javax.swing.JFrame {
         });
         pnAlojamiento.add(lbAlojamiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 150, 80));
 
-        pnOtros.add(pnAlojamiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(261, 150, 150, 80));
+        pnOtros.add(pnAlojamiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(155, 150, 150, 80));
 
         jPanel2.add(pnOtros, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 385, 460, 265));
 
@@ -351,12 +313,7 @@ public class Reportes extends javax.swing.JFrame {
         desktop.add(factura);
         factura.setSize(ancho,alto);
         factura.show();
-        
-        //BasicInternalFrameUI bi = (BasicInternalFrameUI)facturas.getUI();
-        //bi.setNorthPane(null);
-        
-        //BasicInternalFrameTitlePane titlePane = (BasicInternalFrameTitlePane) ((BasicInternalFrameUI) facturas.getUI()).getNorthPane();
-        //facturas.remove(titlePane);
+
     }//GEN-LAST:event_lbFacturaMouseClicked
     private void lbFacturaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbFacturaMouseEntered
         pnFactura.setBackground(new java.awt.Color(248, 177, 57));
@@ -455,24 +412,6 @@ public class Reportes extends javax.swing.JFrame {
         pnLugar.setBackground(new java.awt.Color(204,204,204));
     }//GEN-LAST:event_lbLugarMouseExited
 
-    /* CLIENTES */
-    private void lbClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbClienteMouseClicked
-        
-        ReporteClientes cliente=new ReporteClientes();
-        
-        desktop.removeAll();
-        desktop.repaint();
-        desktop.add(cliente);
-        cliente.setSize(ancho,alto);
-        cliente.show();
-    }//GEN-LAST:event_lbClienteMouseClicked
-    private void lbClienteMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbClienteMouseEntered
-        pnCliente.setBackground(new java.awt.Color(248, 177, 57));
-    }//GEN-LAST:event_lbClienteMouseEntered
-    private void lbClienteMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbClienteMouseExited
-        pnCliente.setBackground(new java.awt.Color(204,204,204));
-    }//GEN-LAST:event_lbClienteMouseExited
-
     /* ALOJAMIENTOS */
     private void lbAlojamientoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbAlojamientoMouseClicked
         
@@ -562,7 +501,6 @@ public class Reportes extends javax.swing.JFrame {
     private javax.swing.JLabel lbAnual;
     private javax.swing.JLabel lbBoleta;
     private javax.swing.JLabel lbCerrar;
-    private javax.swing.JLabel lbCliente;
     private javax.swing.JLabel lbFactura;
     private javax.swing.JLabel lbLugar;
     private javax.swing.JLabel lbMensual;
@@ -572,7 +510,6 @@ public class Reportes extends javax.swing.JFrame {
     private javax.swing.JPanel pnAlojamiento;
     private javax.swing.JPanel pnAnual;
     private javax.swing.JPanel pnBoleta;
-    private javax.swing.JPanel pnCliente;
     private javax.swing.JPanel pnComprobante;
     private javax.swing.JPanel pnFactura;
     private javax.swing.JPanel pnIngresos;

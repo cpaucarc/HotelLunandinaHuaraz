@@ -525,6 +525,7 @@ public class Habitaciones extends javax.swing.JFrame{
         pnServicios.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "SERVICIOS RECIBIDOS", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 12))); // NOI18N
         pnServicios.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        tabla.setAutoCreateRowSorter(true);
         tabla.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

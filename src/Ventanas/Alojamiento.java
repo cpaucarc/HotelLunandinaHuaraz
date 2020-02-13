@@ -5,7 +5,7 @@ import java.awt.Color;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-public class Alojamiento extends javax.swing.JFrame {
+public final class Alojamiento extends javax.swing.JFrame {
     
     Controlador control = new Controlador();
     ControlDate controlDT = new ControlDate();
@@ -271,9 +271,6 @@ public class Alojamiento extends javax.swing.JFrame {
         pnHabitacion = new javax.swing.JPanel();
         jLabelDNI9 = new javax.swing.JLabel();
         jLabelDNI10 = new javax.swing.JLabel();
-        jLabelDNI14 = new javax.swing.JLabel();
-        jtxtdni8 = new javax.swing.JTextField();
-        jLabelDNI15 = new javax.swing.JLabel();
         cbNumHab = new javax.swing.JComboBox<>();
         cbTipoHab = new javax.swing.JComboBox<>();
         jPanel4 = new javax.swing.JPanel();
@@ -343,7 +340,7 @@ public class Alojamiento extends javax.swing.JFrame {
         });
         pnTipoCliente.add(btClienteEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(261, 35, 150, 50));
 
-        jPanel2.add(pnTipoCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(-3000, 25, 460, 120));
+        jPanel2.add(pnTipoCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 25, 460, 120));
 
         pnClientePersona.setBackground(new java.awt.Color(255, 255, 255));
         pnClientePersona.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)), "DATOS DEL CLIENTE", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Leelawadee UI Semilight", 1, 12))); // NOI18N
@@ -376,9 +373,6 @@ public class Alojamiento extends javax.swing.JFrame {
         txPaterno.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txPaterno.setSelectionColor(new java.awt.Color(0, 122, 255));
         txPaterno.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txPaternoKeyReleased(evt);
-            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txPaternoKeyTyped(evt);
             }
@@ -443,7 +437,7 @@ public class Alojamiento extends javax.swing.JFrame {
         });
         pnClientePersona.add(txMail, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 280, 280, 30));
 
-        jPanel2.add(pnClientePersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(-3000, 25, 460, 340));
+        jPanel2.add(pnClientePersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 25, 460, 340));
 
         pnClienteEmpresa.setBackground(new java.awt.Color(255, 255, 255));
         pnClienteEmpresa.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)), "DATOS DE LA EMPRESA", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 12))); // NOI18N
@@ -590,24 +584,6 @@ public class Alojamiento extends javax.swing.JFrame {
         jLabelDNI10.setText("Tipo Habitacion");
         pnHabitacion.add(jLabelDNI10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 25, 120, 30));
 
-        jLabelDNI14.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
-        jLabelDNI14.setText("COSTO:");
-        pnHabitacion.add(jLabelDNI14, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 184, -1, -1));
-
-        jtxtdni8.setBackground(new java.awt.Color(255, 255, 204));
-        jtxtdni8.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
-        jtxtdni8.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jtxtdni8KeyTyped(evt);
-            }
-        });
-        pnHabitacion.add(jtxtdni8, new org.netbeans.lib.awtextra.AbsoluteConstraints(116, 183, 105, 22));
-
-        jLabelDNI15.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
-        jLabelDNI15.setForeground(new java.awt.Color(51, 51, 51));
-        jLabelDNI15.setText("S/.");
-        pnHabitacion.add(jLabelDNI15, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 181, -1, -1));
-
         cbNumHab.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "205", "207", "305", "306" }));
         pnHabitacion.add(cbNumHab, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 75, 156, 30));
 
@@ -695,11 +671,6 @@ public class Alojamiento extends javax.swing.JFrame {
         tabla.setGridColor(new java.awt.Color(0, 0, 0));
         tabla.setRowHeight(30);
         tabla.setSelectionBackground(new java.awt.Color(0, 122, 255));
-        tabla.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tablaMouseClicked(evt);
-            }
-        });
         jScrollPane1.setViewportView(tabla);
 
         jPanel6.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(29, 90, 800, 490));
@@ -716,9 +687,6 @@ public class Alojamiento extends javax.swing.JFrame {
         txBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txBuscarKeyReleased(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txBuscarKeyTyped(evt);
             }
         });
         jPanel6.add(txBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(232, 40, 350, 30));
@@ -748,9 +716,6 @@ public class Alojamiento extends javax.swing.JFrame {
     private void txNombresKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txNombresKeyTyped
         Textos.LimitarCaracter(evt, txNombres, 50);
     }//GEN-LAST:event_txNombresKeyTyped
-
-    private void jtxtdni8KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtdni8KeyTyped
-    }//GEN-LAST:event_jtxtdni8KeyTyped
 
     private void btRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRegistrarActionPerformed
         if (cambio == 1) {
@@ -793,9 +758,6 @@ public class Alojamiento extends javax.swing.JFrame {
         txDNI.setEnabled(true);
         txRUC.setEnabled(true);
     }//GEN-LAST:event_btCancelarActionPerformed
-
-    private void txBuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txBuscarKeyTyped
-    }//GEN-LAST:event_txBuscarKeyTyped
 
     private void txMailKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txMailKeyTyped
         Textos.LimitarCaracter(evt, txMail, 100);
@@ -907,12 +869,6 @@ public class Alojamiento extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txDNIKeyReleased
 
-    private void txPaternoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txPaternoKeyReleased
-    }//GEN-LAST:event_txPaternoKeyReleased
-
-    private void tablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMouseClicked
-    }//GEN-LAST:event_tablaMouseClicked
-
     private void lbLimpiarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbLimpiarMouseClicked
         limpiar();
         btRegistrar.setEnabled(true);
@@ -1016,8 +972,6 @@ public class Alojamiento extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelDNI10;
     private javax.swing.JLabel jLabelDNI12;
     private javax.swing.JLabel jLabelDNI13;
-    private javax.swing.JLabel jLabelDNI14;
-    private javax.swing.JLabel jLabelDNI15;
     private javax.swing.JLabel jLabelDNI16;
     private javax.swing.JLabel jLabelDNI17;
     private javax.swing.JLabel jLabelDNI18;
@@ -1035,7 +989,6 @@ public class Alojamiento extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jtxtdni8;
     private javax.swing.JLabel lbCerrar;
     private javax.swing.JLabel lbLimpiar;
     private javax.swing.JLabel lbMinimizar;

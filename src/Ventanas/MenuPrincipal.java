@@ -20,6 +20,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
     Controlador control=new Controlador();
     DefaultTableModel modelo=new DefaultTableModel();
     
+    int id = 0;
+    
     /*Control de fuente y tamaño del menu */
     String fuente = "Arial";
     int tamP = 12;
@@ -46,10 +48,17 @@ public class MenuPrincipal extends javax.swing.JFrame {
         }
 
         Animaciones();
-        
+        ActivarBoton();
         ds.OcultarColumna(tabla, 0);
     }
 
+    public void ActivarBoton(){
+        if(id != 0){
+            btValidar1.setEnabled(true);
+        }else{
+            btValidar1.setEnabled(false);
+        }
+    }
     public void Animaciones(){
         /* Controlador de animaciones*/
         tarea = new TimerTask() {
@@ -355,6 +364,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "RESERVACIONES  PARA  HOY", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 12), new java.awt.Color(23, 23, 23))); // NOI18N
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
+
+        tabla.setAutoCreateRowSorter(true);
         tabla.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -364,8 +376,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 "Fecha Reserva", "Nombre Cliente", "N° Habitacion"
             }
         ));
+        tabla.setGridColor(new java.awt.Color(255, 255, 255));
         tabla.setRowHeight(30);
         tabla.setSelectionBackground(new java.awt.Color(0, 122, 255));
+        tabla.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tabla);
 
         jPanel4.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 460, 360));
@@ -542,7 +560,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
             String rpt = "¿Desea validar la reserva de "+tabla.getValueAt(tabla.getSelectedRow(), 2)+"?";
             String _idAloj = tabla.getValueAt(tabla.getSelectedRow(), 0).toString();
             String _idHab = null;
-            aq.titulo.setText("<html><center>" + rpt + "</center></html>");
+            AlertQuestion.titulo.setText("<html><center>" + rpt + "</center></html>");
             aq.setVisible(true);
             if(aq._rsta){ // Cuando la respuesta es 'SI'
                 // Actualizamos el estado del alojamiento a Alojado {2}
@@ -553,6 +571,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 control.CrearRegistro("update habitaciones set idestadoHab = 3 where idhabitacion = "+_idHab);
                 Mostrar();
             }
+            id = 0; ActivarBoton();
         }
     }//GEN-LAST:event_btValidar1ActionPerformed
 
@@ -598,6 +617,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private void txBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txBuscarKeyReleased
         Mostrar();
     }//GEN-LAST:event_txBuscarKeyReleased
+
+    private void tablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMouseClicked
+        ActivarBoton();
+    }//GEN-LAST:event_tablaMouseClicked
 
     /**
      * @param args the command line arguments

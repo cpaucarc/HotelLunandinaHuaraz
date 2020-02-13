@@ -305,6 +305,7 @@ public class RegistroEmpleado extends javax.swing.JFrame {
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0))), "EMPLEADOS REGISTRADOS", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 12), new java.awt.Color(23, 23, 23))); // NOI18N
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        tabla.setAutoCreateRowSorter(true);
         tabla.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 13)); // NOI18N
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -365,6 +366,7 @@ public class RegistroEmpleado extends javax.swing.JFrame {
 
             txdni.setEditable(true);
             Controles(false);
+            cbEstado.setSelectedIndex(1);
         } else { rpt = "Faltan campos por llenar";}
         JOptionPane.showMessageDialog(null, rpt);
     }//GEN-LAST:event_btModificarActionPerformed

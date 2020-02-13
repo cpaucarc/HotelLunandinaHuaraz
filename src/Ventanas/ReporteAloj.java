@@ -6,7 +6,7 @@ import Clases.Design;
 import Clases.Imprimir;
 import javax.swing.table.DefaultTableModel;
 
-public class ReporteAloj extends javax.swing.JInternalFrame {
+public final class ReporteAloj extends javax.swing.JInternalFrame {
 
     Imprimir imp=new Imprimir();
     Controlador control=new Controlador();
@@ -52,7 +52,6 @@ public class ReporteAloj extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        gDinero = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
@@ -91,7 +90,6 @@ public class ReporteAloj extends javax.swing.JInternalFrame {
         });
         jPanel2.add(cbMonth, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 45, 160, 30));
 
-        cbYear.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 15)); // NOI18N
         cbYear.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
                 cbYearPropertyChange(evt);
@@ -117,6 +115,7 @@ public class ReporteAloj extends javax.swing.JInternalFrame {
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "INGRESOS REGISTRADOS", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 12))); // NOI18N
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        tabla.setAutoCreateRowSorter(true);
         tabla.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -172,7 +171,6 @@ public class ReporteAloj extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> cbMonth;
     private com.toedter.calendar.JYearChooser cbYear;
-    private javax.swing.ButtonGroup gDinero;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;

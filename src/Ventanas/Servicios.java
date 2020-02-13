@@ -105,7 +105,7 @@ public class Servicios extends javax.swing.JFrame {
             int iddet = Integer.parseInt(control.DevolverRegistroDto("select idDetAloj from detallealojamiento where idclientePersona=(select idclientePersona from clientepersona where DNI='" + lbDNI.getText() + "') and idhabitacion=(select idhabitacion from habitaciones where numHab=" + txNumHabP.getText() + ");", 1));
             int tip = Integer.parseInt(control.DevolverRegistroDto("select idtipoServ from tiposervicio where nombreServ='" + cboservicio.getSelectedItem() + "';", 1));
             rpt = (control.DevolverRegistroDto("call p_servicios('" + txtcant.getText() + "'," + tip + "," + iddet + ",1);", 1));
-            control.LlenarJtable(modelo, "SELECT * FROM vista_ds", 9);
+            control.LlenarJtable(modelo, "SELECT * FROM vista_ds", 8);
             limpiar();
         } else {
             rpt = ("Faltan campos por llenar");
@@ -119,7 +119,7 @@ public class Servicios extends javax.swing.JFrame {
             int tip = Integer.parseInt(control.DevolverRegistroDto("select idtipoServ from tiposervicio where nombreServ='" + cboservicio.getSelectedItem() + "';", 1));
             rpt = (control.DevolverRegistroDto("call p_servicios('" + txtcant.getText() + "'," + tip + "," + iddet + ",1);", 1));
 
-            control.LlenarJtable(modelo, "SELECT * FROM vista_dse", 9);
+            control.LlenarJtable(modelo, "SELECT * FROM vista_dse", 8);
             limpiar();
         } else {
             rpt = ("Faltan campos por llenar");
@@ -137,18 +137,18 @@ public class Servicios extends javax.swing.JFrame {
         tbServicio.getColumnModel().getColumn(5).setPreferredWidth(150);
         tbServicio.getColumnModel().getColumn(6).setPreferredWidth(350);
         tbServicio.getColumnModel().getColumn(7).setPreferredWidth(150);
-        tbServicio.getColumnModel().getColumn(8).setPreferredWidth(200);
+//        tbServicio.getColumnModel().getColumn(8).setPreferredWidth(200);
         ds.OcultarColumna(tbServicio, 0);
     }
     public void inicializarJTable1() {
-        modelo.setColumnIdentifiers(new String[]{"ID", "Servicio", "Cantidad", "Precio", "Habitación", "DNI","Cliente", "Fecha", "Usuario"});
+        modelo.setColumnIdentifiers(new String[]{"ID", "Servicio", "Cantidad", "Precio", "Habitación", "DNI","Cliente", "Fecha"});
         FormatoTabla();
-        control.LlenarJtable(modelo, "SELECT * FROM vista_ds", 9);
+        control.LlenarJtable(modelo, "SELECT * FROM vista_ds where Estado <> 'Cancelado'", 9);
     }
     public void inicializarJTable_empresa() {
-        modelo.setColumnIdentifiers(new String[]{"ID", "Servicio", "Cantidad", "Precio", "Habitación", "RUC", "Empresa", "Fecha", "Usuario"});
+        modelo.setColumnIdentifiers(new String[]{"ID", "Servicio", "Cantidad", "Precio", "Habitación", "RUC", "Empresa", "Fecha"});
         FormatoTabla();
-        control.LlenarJtable(modelo, "SELECT * FROM vista_dse", 9);
+        control.LlenarJtable(modelo, "SELECT * FROM vista_dse where Estado <> 'Cancelado'", 9);
     }
 
     public void limpiar() {
@@ -165,6 +165,25 @@ public class Servicios extends javax.swing.JFrame {
         cboservicio.setSelectedIndex(-1);
         jLabel22.setText(null);
         lbRUC.setText(null);
+    }
+    public void EvtBoton(boolean b){
+        // b = true empresa
+        pnTipo.setVisible(false);
+        lbReiniciar.setVisible(true);
+
+        pnEmpresa.setVisible(!b); //false = !b
+        pnClientePersona.setVisible(b);
+        pnServicio.setVisible(true);
+
+        btGuardar.setVisible(b);
+        btEditar.setVisible(b);
+        btEliminar.setVisible(b);
+        btFisicoP.setVisible(b);
+
+        btGuardar1.setVisible(!b);
+        btEditar1.setVisible(!b);
+        btEliminar1.setVisible(!b);
+        btFisicoE.setVisible(!b);
     }
 
     @SuppressWarnings("unchecked")
@@ -355,11 +374,6 @@ public class Servicios extends javax.swing.JFrame {
         txNumHabP.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
         txNumHabP.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txNumHabP.setSelectionColor(new java.awt.Color(0, 122, 255));
-        txNumHabP.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txNumHabPActionPerformed(evt);
-            }
-        });
         txNumHabP.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txNumHabPKeyReleased(evt);
@@ -468,11 +482,6 @@ public class Servicios extends javax.swing.JFrame {
                 cboservicioItemStateChanged(evt);
             }
         });
-        cboservicio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cboservicioActionPerformed(evt);
-            }
-        });
         pnServicio.add(cboservicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 20, 200, 30));
 
         jLabel5.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -490,11 +499,6 @@ public class Servicios extends javax.swing.JFrame {
         txtpreciounit1.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
         txtpreciounit1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtpreciounit1.setSelectionColor(new java.awt.Color(0, 122, 255));
-        txtpreciounit1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtpreciounit1KeyTyped(evt);
-            }
-        });
         pnServicio.add(txtpreciounit1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 70, 200, 30));
 
         txtcant.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
@@ -636,6 +640,7 @@ public class Servicios extends javax.swing.JFrame {
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "SERVICIOS CARGADOS A HABITACION", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial", 1, 12))); // NOI18N
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        tbServicio.setAutoCreateRowSorter(true);
         tbServicio.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
         tbServicio.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -672,11 +677,6 @@ public class Servicios extends javax.swing.JFrame {
 
         txbuscar.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
         txbuscar.setSelectionColor(new java.awt.Color(0, 122, 255));
-        txbuscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txbuscarActionPerformed(evt);
-            }
-        });
         txbuscar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txbuscarKeyReleased(evt);
@@ -771,48 +771,14 @@ public class Servicios extends javax.swing.JFrame {
         crear();
     }//GEN-LAST:event_btGuardarActionPerformed
     private void btPersonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPersonaActionPerformed
-        pnTipo.setVisible(false);
-
         inicializarJTable1();
-
-        lbReiniciar.setVisible(true);
-
-        pnEmpresa.setVisible(false);
-        pnClientePersona.setVisible(true);
-        pnServicio.setVisible(true);
-
-        btGuardar.setVisible(true);
-        btEditar.setVisible(true);
-        btEliminar.setVisible(true);
-        btFisicoP.setVisible(true);
-
-        btGuardar1.setVisible(false);
-        btEditar1.setVisible(false);
-        btEliminar1.setVisible(false);
-        btFisicoE.setVisible(false);
+        EvtBoton(true);
         txNumHabP.grabFocus();
         _cliente = 1;
     }//GEN-LAST:event_btPersonaActionPerformed
     private void btEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEmpresaActionPerformed
-        pnTipo.setVisible(false);
-
         inicializarJTable_empresa();
-
-        lbReiniciar.setVisible(true);
-
-        pnEmpresa.setVisible(true);
-        pnClientePersona.setVisible(false);
-        pnServicio.setVisible(true);
-
-        btGuardar.setVisible(false);
-        btEditar.setVisible(false);
-        btEliminar.setVisible(false);
-        btFisicoP.setVisible(false);
-
-        btGuardar1.setVisible(true);
-        btEditar1.setVisible(true);
-        btEliminar1.setVisible(true);
-        btFisicoE.setVisible(true);
+        EvtBoton(false);
         txNumHabE.grabFocus();
         _cliente = 2;
     }//GEN-LAST:event_btEmpresaActionPerformed
@@ -856,8 +822,6 @@ public class Servicios extends javax.swing.JFrame {
     private void lbCerrarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbCerrarMouseExited
         lbCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/cerrar1.png")));
     }//GEN-LAST:event_lbCerrarMouseExited
-    private void cboservicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboservicioActionPerformed
-    }//GEN-LAST:event_cboservicioActionPerformed
     private void lbLimpiarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbLimpiarMouseClicked
         limpiar();
     }//GEN-LAST:event_lbLimpiarMouseClicked
@@ -874,15 +838,10 @@ public class Servicios extends javax.swing.JFrame {
             lbDNI.setText("");
         }
     }//GEN-LAST:event_txNumHabPKeyReleased
-    private void txNumHabPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txNumHabPActionPerformed
-    }//GEN-LAST:event_txNumHabPActionPerformed
 
     private void btGuardar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btGuardar1ActionPerformed
         crearemp();
     }//GEN-LAST:event_btGuardar1ActionPerformed
-
-    private void txbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txbuscarActionPerformed
-    }//GEN-LAST:event_txbuscarActionPerformed
 
     private void btEditar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEditar1ActionPerformed
         modemp();
@@ -897,9 +856,6 @@ public class Servicios extends javax.swing.JFrame {
         btEditar1.setEnabled(false);
         btEliminar1.setEnabled(false);
     }//GEN-LAST:event_btEliminar1ActionPerformed
-
-    private void txtpreciounit1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtpreciounit1KeyTyped
-    }//GEN-LAST:event_txtpreciounit1KeyTyped
 
     private void cboservicioItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboservicioItemStateChanged
         if (cboservicio.getSelectedIndex() > 0) {

@@ -13,17 +13,22 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author PAUCAR
  */
-public class Boletas extends javax.swing.JInternalFrame {
+public final class Boletas extends javax.swing.JInternalFrame {
 
     DefaultTableModel modelo=new DefaultTableModel();
     Imprimir imp=new Imprimir();
     Controlador control=new Controlador();
     String _numBol;
     String _montoTotal;
+    boolean rowSelect = false;
     
     public Boletas() {
         initComponents();
         LlenarTabla();
+        ActivarBoton();
+    }
+    public void ActivarBoton(){
+        btImprimirBoleta.setEnabled(rowSelect);
     }
     public void LlenarTabla(){
         modelo.setColumnIdentifiers(new String[]{"N° Boleta", "Fecha", "Monto Total", "Cliente", "Procedencia"});
@@ -184,6 +189,7 @@ public class Boletas extends javax.swing.JInternalFrame {
     private void tablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMouseClicked
         _numBol = tabla.getValueAt(tabla.getSelectedRow(), 0).toString();
         _montoTotal = tabla.getValueAt(tabla.getSelectedRow(), 2).toString();
+        rowSelect = true; ActivarBoton();
     }//GEN-LAST:event_tablaMouseClicked
 
     private void btImprimirBoletaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btImprimirBoletaActionPerformed
@@ -191,6 +197,7 @@ public class Boletas extends javax.swing.JInternalFrame {
             //imp.ImprCon1Parametro("boleta", "Boleta N° " + _numBol, "numeroBoleta", _numBol);
             imp.Imp2P("boleta", "Boleta N° "+_numBol, "numeroBoleta", "montoLiteral", _numBol, Textos.montoLiteral(_montoTotal));
         }
+        rowSelect = false; ActivarBoton();
     }//GEN-LAST:event_btImprimirBoletaActionPerformed
 
     private void txClienteKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txClienteKeyReleased

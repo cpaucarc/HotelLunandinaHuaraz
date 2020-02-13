@@ -5,12 +5,11 @@ import Clases.ControlDate;
 import Clases.Controlador;
 import Clases.Design;
 import Clases.Textos;
-import alertas.AlertaError;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
-public class Reservas extends javax.swing.JFrame {
+public final class Reservas extends javax.swing.JFrame {
 
     DefaultTableModel modelo = new DefaultTableModel();
     DefaultTableModel modelo1 = new DefaultTableModel();
@@ -349,12 +348,12 @@ public class Reservas extends javax.swing.JFrame {
         ds.OcultarColumna(tabla, 0);
     }
     public void inicializarJTable_cliente() {
-        modelo1.setColumnIdentifiers(new String[]{"ID", "Fecha Reserva", "Fecha Entrada", "Fecha Salida", "N° Habitacion", "Tipo de Habitacion", "DNI", "Cliente", "Procedencia"});
+        modelo1.setColumnIdentifiers(new String[]{"ID", "Fecha Reserva", "Fecha Entrada", "Fecha Salida", "N° Habitacion", "Tipo", "DNI", "Cliente", "Procedencia"});
         tabla.setModel(modelo1);
         ConfiguracionTabla();        
     }
     public void inicializarJTable_empresa() {
-        modelo.setColumnIdentifiers(new String[]{"ID", "Fecha Reserva", "Fecha Entrada", "Fecha Salida", "N° Habitacion", "Tipo de Habitacion", "RUC", "Empresa", "Procedencia"});
+        modelo.setColumnIdentifiers(new String[]{"ID", "Fecha Reserva", "Fecha Entrada", "Fecha Salida", "N° Habitacion", "Tipo", "RUC", "Empresa", "Procedencia"});
         tabla.setModel(modelo);
         ConfiguracionTabla();
     }
@@ -411,9 +410,6 @@ public class Reservas extends javax.swing.JFrame {
         pnHabitacion = new javax.swing.JPanel();
         jLabelDNI9 = new javax.swing.JLabel();
         jLabelDNI10 = new javax.swing.JLabel();
-        jLabelDNI14 = new javax.swing.JLabel();
-        jtxtdni8 = new javax.swing.JTextField();
-        jLabelDNI15 = new javax.swing.JLabel();
         cbNumHab = new javax.swing.JComboBox<>();
         cbTipoHab = new javax.swing.JComboBox<>();
         btRegistrarEmpresa = new javax.swing.JButton();
@@ -504,11 +500,6 @@ public class Reservas extends javax.swing.JFrame {
         txDNI.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
         txDNI.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txDNI.setSelectionColor(new java.awt.Color(0, 122, 255));
-        txDNI.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txDNIActionPerformed(evt);
-            }
-        });
         txDNI.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txDNIKeyReleased(evt);
@@ -586,11 +577,6 @@ public class Reservas extends javax.swing.JFrame {
         txMail.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
         txMail.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txMail.setSelectionColor(new java.awt.Color(0, 122, 255));
-        txMail.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txMailKeyTyped(evt);
-            }
-        });
         pnClientePersona.add(txMail, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 280, 280, 30));
 
         jPanel2.add(pnClientePersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 25, 461, 340));
@@ -667,7 +653,7 @@ public class Reservas extends javax.swing.JFrame {
                 btRegistrarPersonaActionPerformed(evt);
             }
         });
-        jPanel2.add(btRegistrarPersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 400, 110, 55));
+        jPanel2.add(btRegistrarPersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 400, 110, 55));
 
         btModificarPersona.setBackground(new java.awt.Color(0, 204, 204));
         btModificarPersona.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -680,7 +666,7 @@ public class Reservas extends javax.swing.JFrame {
                 btModificarPersonaActionPerformed(evt);
             }
         });
-        jPanel2.add(btModificarPersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 470, 110, 55));
+        jPanel2.add(btModificarPersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 470, 110, 55));
 
         btCancelar.setBackground(new java.awt.Color(234, 82, 62));
         btCancelar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -740,30 +726,7 @@ public class Reservas extends javax.swing.JFrame {
         jLabelDNI10.setText("Tipo Habitacion");
         pnHabitacion.add(jLabelDNI10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 25, 120, 30));
 
-        jLabelDNI14.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
-        jLabelDNI14.setText("COSTO:");
-        pnHabitacion.add(jLabelDNI14, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 184, -1, -1));
-
-        jtxtdni8.setBackground(new java.awt.Color(255, 255, 204));
-        jtxtdni8.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
-        jtxtdni8.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jtxtdni8KeyTyped(evt);
-            }
-        });
-        pnHabitacion.add(jtxtdni8, new org.netbeans.lib.awtextra.AbsoluteConstraints(116, 183, 105, 22));
-
-        jLabelDNI15.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
-        jLabelDNI15.setForeground(new java.awt.Color(51, 51, 51));
-        jLabelDNI15.setText("S/.");
-        pnHabitacion.add(jLabelDNI15, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 181, -1, -1));
-
         cbNumHab.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
-        cbNumHab.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                cbNumHabMouseClicked(evt);
-            }
-        });
         pnHabitacion.add(cbNumHab, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 75, 156, 30));
 
         cbTipoHab.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
@@ -771,22 +734,6 @@ public class Reservas extends javax.swing.JFrame {
         cbTipoHab.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cbTipoHabItemStateChanged(evt);
-            }
-        });
-        cbTipoHab.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                cbTipoHabMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                cbTipoHabMouseEntered(evt);
-            }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                cbTipoHabMousePressed(evt);
-            }
-        });
-        cbTipoHab.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbTipoHabActionPerformed(evt);
             }
         });
         pnHabitacion.add(cbTipoHab, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 25, 156, 30));
@@ -830,7 +777,7 @@ public class Reservas extends javax.swing.JFrame {
                 btEliminarPersonaActionPerformed(evt);
             }
         });
-        jPanel2.add(btEliminarPersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 530, 110, 55));
+        jPanel2.add(btEliminarPersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 530, 110, 55));
 
         btEliminarEmpresa.setBackground(new java.awt.Color(255, 204, 51));
         btEliminarEmpresa.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -876,11 +823,6 @@ public class Reservas extends javax.swing.JFrame {
                 lbMinimizarMouseExited(evt);
             }
         });
-        lbMinimizar.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                lbMinimizarKeyTyped(evt);
-            }
-        });
         jPanel4.add(lbMinimizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1280, 8, 30, 30));
 
         lbCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/cerrar1.png"))); // NOI18N
@@ -908,6 +850,7 @@ public class Reservas extends javax.swing.JFrame {
         jPanel6.setForeground(new java.awt.Color(255, 255, 255));
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        tabla.setAutoCreateRowSorter(true);
         tabla.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 13)); // NOI18N
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -930,7 +873,7 @@ public class Reservas extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tabla);
 
-        jPanel6.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 790, 440));
+        jPanel6.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 750, 440));
 
         jLabelDNI16.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabelDNI16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -941,17 +884,9 @@ public class Reservas extends javax.swing.JFrame {
         txtBuscar.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
         txtBuscar.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtBuscar.setSelectionColor(new java.awt.Color(0, 122, 255));
-        txtBuscar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                txtBuscarMouseReleased(evt);
-            }
-        });
         txtBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtBuscarKeyReleased(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtBuscarKeyTyped(evt);
             }
         });
         jPanel6.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(147, 40, 350, 30));
@@ -961,11 +896,6 @@ public class Reservas extends javax.swing.JFrame {
         dcBuscar.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
                 dcBuscarPropertyChange(evt);
-            }
-        });
-        dcBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                dcBuscarKeyReleased(evt);
             }
         });
         jPanel6.add(dcBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(527, 40, 200, 30));
@@ -984,17 +914,9 @@ public class Reservas extends javax.swing.JFrame {
         txtBuscar1.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
         txtBuscar1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtBuscar1.setSelectionColor(new java.awt.Color(0, 122, 255));
-        txtBuscar1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                txtBuscar1MouseReleased(evt);
-            }
-        });
         txtBuscar1.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtBuscar1KeyReleased(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtBuscar1KeyTyped(evt);
             }
         });
         jPanel6.add(txtBuscar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(147, 40, 350, 30));
@@ -1004,11 +926,6 @@ public class Reservas extends javax.swing.JFrame {
         dcBuscar1.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
                 dcBuscar1PropertyChange(evt);
-            }
-        });
-        dcBuscar1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                dcBuscar1KeyReleased(evt);
             }
         });
         jPanel6.add(dcBuscar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(527, 40, 200, 30));
@@ -1039,9 +956,6 @@ public class Reservas extends javax.swing.JFrame {
         Textos.soloPurasLetras(evt);
     }//GEN-LAST:event_txNombresKeyTyped
 
-    private void jtxtdni8KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtdni8KeyTyped
-    }//GEN-LAST:event_jtxtdni8KeyTyped
-
     private void btRegistrarPersonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRegistrarPersonaActionPerformed
         if (FormLlenoPersonas()) {
             crear_Empresa();         
@@ -1064,13 +978,6 @@ public class Reservas extends javax.swing.JFrame {
     private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelarActionPerformed
         Limpiar();
     }//GEN-LAST:event_btCancelarActionPerformed
-
-    private void txtBuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyTyped
-    }//GEN-LAST:event_txtBuscarKeyTyped
-
-    private void txMailKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txMailKeyTyped
-        Textos.sinesp(evt);
-    }//GEN-LAST:event_txMailKeyTyped
 
     private void txProcKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txProcKeyTyped
         Textos.soloPurasLetras(evt);
@@ -1174,20 +1081,12 @@ public class Reservas extends javax.swing.JFrame {
         lbCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Recursos/cerrar1.png")));
     }//GEN-LAST:event_lbCerrarMouseExited
    
-    private void txtBuscarMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtBuscarMouseReleased
-    }//GEN-LAST:event_txtBuscarMouseReleased
     private void txtBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyReleased
         MostrarList_Empresa();
     }//GEN-LAST:event_txtBuscarKeyReleased
-    private void txtBuscar1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtBuscar1MouseReleased
-    }//GEN-LAST:event_txtBuscar1MouseReleased
     private void txtBuscar1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscar1KeyReleased
         MostrarList_Cliente();
     }//GEN-LAST:event_txtBuscar1KeyReleased
-    private void txtBuscar1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscar1KeyTyped
-    }//GEN-LAST:event_txtBuscar1KeyTyped
-    private void cbNumHabMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbNumHabMouseClicked
-    }//GEN-LAST:event_cbNumHabMouseClicked
 
     private void btRegistrarEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRegistrarEmpresaActionPerformed
         if (FormLlenoEmpresas()) {
@@ -1229,11 +1128,6 @@ public class Reservas extends javax.swing.JFrame {
         Textos.sinesp(evt);
     }//GEN-LAST:event_txMailEmpKeyTyped
 
-    private void lbMinimizarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_lbMinimizarKeyTyped
-    }//GEN-LAST:event_lbMinimizarKeyTyped
-    private void txDNIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txDNIActionPerformed
-    }//GEN-LAST:event_txDNIActionPerformed
-
     private void txDNIKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txDNIKeyReleased
         reconocer_cliente(); 
     }//GEN-LAST:event_txDNIKeyReleased
@@ -1241,23 +1135,12 @@ public class Reservas extends javax.swing.JFrame {
         reconocer_empresa();
     }//GEN-LAST:event_txRUCKeyReleased
 
-    private void cbTipoHabMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbTipoHabMouseClicked
-    }//GEN-LAST:event_cbTipoHabMouseClicked
-    private void cbTipoHabMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbTipoHabMouseEntered
-    }//GEN-LAST:event_cbTipoHabMouseEntered
     private void btValidarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btValidarActionPerformed
     }//GEN-LAST:event_btValidarActionPerformed
-    private void cbTipoHabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTipoHabActionPerformed
-    }//GEN-LAST:event_cbTipoHabActionPerformed
-    private void cbTipoHabMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbTipoHabMousePressed
-    }//GEN-LAST:event_cbTipoHabMousePressed
 
     private void cbTipoHabItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbTipoHabItemStateChanged
         LlenarComboHabitaciones();
     }//GEN-LAST:event_cbTipoHabItemStateChanged
-
-    private void dcBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_dcBuscarKeyReleased
-    }//GEN-LAST:event_dcBuscarKeyReleased
 
     private void dcBuscarPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dcBuscarPropertyChange
         MostrarList_Cliente();
@@ -1265,9 +1148,6 @@ public class Reservas extends javax.swing.JFrame {
     private void dcBuscar1PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dcBuscar1PropertyChange
         MostrarList_Empresa();
     }//GEN-LAST:event_dcBuscar1PropertyChange
-
-    private void dcBuscar1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_dcBuscar1KeyReleased
-    }//GEN-LAST:event_dcBuscar1KeyReleased
 
     private void btEliminarPersonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEliminarPersonaActionPerformed
         if (btEliminarPersona.getText().equals("Eliminar")) {
@@ -1359,8 +1239,6 @@ public class Reservas extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelDNI10;
     private javax.swing.JLabel jLabelDNI12;
     private javax.swing.JLabel jLabelDNI13;
-    private javax.swing.JLabel jLabelDNI14;
-    private javax.swing.JLabel jLabelDNI15;
     private javax.swing.JLabel jLabelDNI16;
     private javax.swing.JLabel jLabelDNI17;
     private javax.swing.JLabel jLabelDNI18;
@@ -1378,7 +1256,6 @@ public class Reservas extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jtxtdni8;
     private javax.swing.JLabel lbCerrar;
     private javax.swing.JLabel lbLimpiar;
     private javax.swing.JLabel lbMinimizar;
