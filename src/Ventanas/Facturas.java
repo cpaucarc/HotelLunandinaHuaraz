@@ -30,7 +30,7 @@ public final class Facturas extends javax.swing.JInternalFrame {
         String _condicion = " where numFactura like '%"+txNumFactura.getText()
                 +"%' and  cliente like '%"+txCliente.getText()+"%' and lugar like '%"+txProc.getText()+"%' ";
         
-        control.LlenarJtable(modelo, "select numFactura,fechaEmision,sum(totalServ),cliente,lugar from vw_factura "+_condicion+" group by numFactura", 5);
+        control.LlenarJtable(modelo, "select numFactura,fechaEmision,sum(total),cliente,lugar from vw_factura "+_condicion+" group by numFactura", 5);
         tabla.getColumnModel().getColumn(0).setPreferredWidth(85);
         tabla.getColumnModel().getColumn(1).setPreferredWidth(85);
         tabla.getColumnModel().getColumn(2).setPreferredWidth(100);

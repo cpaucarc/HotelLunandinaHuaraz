@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="factura" language="groovy" pageWidth="595" pageHeight="842" columnWidth="571" leftMargin="12" rightMargin="12" topMargin="12" bottomMargin="12" uuid="99a96748-2688-4d2b-8207-b25a7acec3e4">
-	<property name="ireport.zoom" value="1.2100000000000097"/>
-	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.zoom" value="1.6500000000000001"/>
+	<property name="ireport.x" value="183"/>
+	<property name="ireport.y" value="384"/>
 	<parameter name="numeroFactura" class="java.lang.String"/>
 	<parameter name="montoLiteral" class="java.lang.String"/>
 	<queryString>
@@ -10,18 +10,19 @@
 numFactura,
 fechaEmision,
 adddate(fechaEmision, interval 1 month) as fechaVenc,
-subtotal,
-igv,
-total,
-totalServ,
-cantidad,
+sum(subtotal),
+sum(igv),
+sum(total),
+sum(totalServ),
+sum(cantidad),
 descripcion,
 precioUnit,
 RUC,
 cliente,
 um,
 lugar
-FROM vw_factura where numFactura = $P{numeroFactura};]]>
+FROM vw_factura where numFactura = $P{numeroFactura}
+ group by descripcion;]]>
 	</queryString>
 	<field name="numFactura" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
@@ -30,21 +31,11 @@ FROM vw_factura where numFactura = $P{numeroFactura};]]>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="fechaVenc" class="java.sql.Date"/>
-	<field name="subtotal" class="java.math.BigDecimal">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="igv" class="java.math.BigDecimal">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="total" class="java.math.BigDecimal">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="totalServ" class="java.math.BigDecimal">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="cantidad" class="java.lang.Long">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
+	<field name="sum(subtotal)" class="java.math.BigDecimal"/>
+	<field name="sum(igv)" class="java.math.BigDecimal"/>
+	<field name="sum(total)" class="java.math.BigDecimal"/>
+	<field name="sum(totalServ)" class="java.math.BigDecimal"/>
+	<field name="sum(cantidad)" class="java.math.BigDecimal"/>
 	<field name="descripcion" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
@@ -64,16 +55,16 @@ FROM vw_factura where numFactura = $P{numeroFactura};]]>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<variable name="_igv" class="java.math.BigDecimal" calculation="Sum">
-		<variableExpression><![CDATA[$F{igv}]]></variableExpression>
+		<variableExpression><![CDATA[$F{sum(igv)}]]></variableExpression>
 	</variable>
 	<variable name="_valor_venta" class="java.math.BigDecimal" calculation="Sum">
-		<variableExpression><![CDATA[$F{subtotal}]]></variableExpression>
+		<variableExpression><![CDATA[$F{sum(subtotal)}]]></variableExpression>
 	</variable>
 	<variable name="_total" class="java.math.BigDecimal" calculation="Sum">
-		<variableExpression><![CDATA[$F{total}]]></variableExpression>
+		<variableExpression><![CDATA[$F{sum(total)}]]></variableExpression>
 	</variable>
 	<variable name="_totalReal" class="java.math.BigDecimal" calculation="Sum">
-		<variableExpression><![CDATA[$F{totalServ}]]></variableExpression>
+		<variableExpression><![CDATA[$F{sum(totalServ)}]]></variableExpression>
 	</variable>
 	<variable name="_descuento" class="java.math.BigDecimal">
 		<variableExpression><![CDATA[$V{_totalReal}-$V{_total}]]></variableExpression>
@@ -288,13 +279,6 @@ FROM vw_factura where numFactura = $P{numeroFactura};]]>
 	<detail>
 		<band height="25" splitType="Stretch">
 			<textField>
-				<reportElement x="10" y="0" width="55" height="25" forecolor="#171717" uuid="efae42d9-cdfa-44e5-b473-80ce9a9643d5"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="12"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{cantidad}]]></textFieldExpression>
-			</textField>
-			<textField>
 				<reportElement x="415" y="0" width="70" height="25" forecolor="#171717" uuid="e48c46be-6290-43aa-99c5-80a72dedd531"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Arial" size="12"/>
@@ -333,6 +317,13 @@ FROM vw_factura where numFactura = $P{numeroFactura};]]>
 					<font fontName="Arial" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{um}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="10" y="0" width="55" height="25" uuid="48881544-6a68-4696-be64-d07214e56dc5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{sum(cantidad)}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
@@ -431,13 +422,6 @@ FROM vw_factura where numFactura = $P{numeroFactura};]]>
 				</textElement>
 				<text><![CDATA[Importe Total]]></text>
 			</staticText>
-			<textField>
-				<reportElement x="457" y="7" width="92" height="20" forecolor="#171717" uuid="060ded56-4584-45f9-813d-d4d4aa219f80"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font fontName="Arial" size="12"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$V{_valor_venta}]]></textFieldExpression>
-			</textField>
 			<staticText>
 				<reportElement x="457" y="27" width="92" height="20" forecolor="#171717" uuid="51628b05-065f-4dae-80f8-6f70fc31c218"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
@@ -445,20 +429,6 @@ FROM vw_factura where numFactura = $P{numeroFactura};]]>
 				</textElement>
 				<text><![CDATA[0.00]]></text>
 			</staticText>
-			<textField>
-				<reportElement x="457" y="47" width="92" height="20" forecolor="#171717" uuid="4a54aa3d-fe0f-4e99-b1c2-474ebeba8a4d"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font fontName="Arial" size="12"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$V{_descuento}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="457" y="67" width="92" height="20" forecolor="#171717" uuid="faf7e6bd-8b75-4f55-bef8-6e8c61fa1aaf"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font fontName="Arial" size="12"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$V{_valor_venta}]]></textFieldExpression>
-			</textField>
 			<staticText>
 				<reportElement x="457" y="87" width="92" height="20" forecolor="#171717" uuid="9e813622-9479-45f8-957a-ee1e9f41319b"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
@@ -466,13 +436,6 @@ FROM vw_factura where numFactura = $P{numeroFactura};]]>
 				</textElement>
 				<text><![CDATA[0.00]]></text>
 			</staticText>
-			<textField>
-				<reportElement x="457" y="107" width="92" height="20" forecolor="#171717" uuid="52c3f67a-cf89-4eef-b9b8-bf93b460372c"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font fontName="Arial" size="12"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$V{_igv}]]></textFieldExpression>
-			</textField>
 			<staticText>
 				<reportElement x="457" y="127" width="92" height="20" forecolor="#171717" uuid="799d8d24-f811-443f-87b8-7b8701697d0b"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
@@ -487,13 +450,6 @@ FROM vw_factura where numFactura = $P{numeroFactura};]]>
 				</textElement>
 				<text><![CDATA[0.00]]></text>
 			</staticText>
-			<textField>
-				<reportElement x="457" y="167" width="92" height="20" forecolor="#171717" uuid="46c7f175-6859-479b-a941-dec70538df77"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font fontName="Arial" size="12"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$V{_total}]]></textFieldExpression>
-			</textField>
 			<staticText>
 				<reportElement x="10" y="45" width="175" height="20" forecolor="#171717" uuid="63036f6d-3633-44fe-bd92-4baddbb4efc4"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
@@ -530,6 +486,41 @@ FROM vw_factura where numFactura = $P{numeroFactura};]]>
 			<line>
 				<reportElement x="570" y="0" width="1" height="220" forecolor="#0D2746" uuid="977456c5-a919-4d95-b69c-9e5b2acac8bd"/>
 			</line>
+			<textField>
+				<reportElement x="457" y="9" width="92" height="18" uuid="d7fa814d-27f3-4ddb-9181-9471b8da62f2"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{_valor_venta}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="459" y="49" width="90" height="18" uuid="fc5c72e3-db76-42dc-8c47-853f1cc0bdcd"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{_descuento}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="460" y="109" width="89" height="16" uuid="a68aec3d-e1e4-4a53-bd11-f5bbdfcd98ae"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{_igv}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="459" y="169" width="90" height="18" uuid="c04273b0-3773-4a1f-9d1b-b9f58073d423"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{_total}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="458" y="71" width="91" height="16" uuid="a9a17a16-ab70-46fc-a0a3-3888b0fc7448"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{_valor_venta}]]></textFieldExpression>
+			</textField>
 		</band>
 	</summary>
 </jasperReport>

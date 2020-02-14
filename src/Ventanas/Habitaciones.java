@@ -428,6 +428,11 @@ public class Habitaciones extends javax.swing.JFrame{
         txPrecioTotal.setFont(new java.awt.Font("Leelawadee UI Semilight", 1, 14)); // NOI18N
         txPrecioTotal.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txPrecioTotal.setSelectionColor(new java.awt.Color(0, 122, 255));
+        txPrecioTotal.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txPrecioTotalKeyReleased(evt);
+            }
+        });
         pnDatosHab.add(txPrecioTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 205, 200, 30));
 
         jLabel2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -629,13 +634,14 @@ public class Habitaciones extends javax.swing.JFrame{
             String _idAloj = control.DevolverRegistroDto(__sql, 1);
             // insertar en detComp la habitacion
             // tipoCliente es --> {1: persona} y {2: empresa}
-            control.CrearRegistro("call proc_InsBolFac("+tipoCliente+",0,"+Double.parseDouble(txPrecioTotal.getText())+","+_idAloj+",2,'"+lbDoc.getText()+"')");
+            //tipoComp int,numC int, tot  decimal(9,2), idmotivo int, motivo int, doc varchar(11))
+            control.CrearRegistro("call proc_InsBolFac("+tipoCliente+",0,"+Double.parseDouble(lbTotal.getText())+","+_idAloj+",2,'"+lbDoc.getText()+"')");
            
             // Proceso para obtener el numero de boleta o factura
             String __numComprobante = control.DevolverRegistroDto("select numBoleta, numFactura from detallecomprobante order by idcomprobante desc limit 1", tipoCliente); // Si es persona sera 1 (Boleta) y si esempresa sera 2 (factura)
                        
             // insertar los servicios en detComp y cambia su estado a Cancelado{2}
-            if(tabla.getRowCount()>0){ // Si hay algun Servicio a cuneta de la habitacion
+            if(tabla.getRowCount()>0){ // Si hay algun Servicio a cuenta de la habitacion
                 for(int i=0; i<tabla.getRowCount();i++){
                     //tipoComp int,numC int, tot  decimal(9,2), idmotivo int, motivo int, doc varchar(11)
                     //modelo.setColumnIdentifiers(new String[]{"ID", "SERVICIO", "PRECIO", "CANTIDAD", "TOTAL", "FECHA"});
@@ -675,6 +681,12 @@ public class Habitaciones extends javax.swing.JFrame{
             txPrecioTotal.setText(""+slider.getValue()*Double.parseDouble(txPrecioUnit.getText()));
         }
     }//GEN-LAST:event_txPrecioUnitKeyReleased
+
+    private void txPrecioTotalKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txPrecioTotalKeyReleased
+        if(txPrecioTotal.getText().length()>0){
+            lbTotal.setText(""+(Double.parseDouble(txPrecioTotal.getText())+Double.parseDouble(lbTotServicio.getText())));
+        }
+    }//GEN-LAST:event_txPrecioTotalKeyReleased
 
     /**
      * @param args the command line arguments

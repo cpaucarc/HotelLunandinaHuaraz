@@ -22,8 +22,8 @@ public class Conexion {
  
   public Conexion() {
     try{ 
-       usu="lunandinahotel";
-       contraseña="@Un@s@m20Is¡"; //1234
+       usu="root";
+       contraseña="1234"; //1234 @UnAs@mIs¡
        host="localhost";
        db="hotel_lunandina";    
         String url="jdbc:mysql://"+host+"/"+db;       

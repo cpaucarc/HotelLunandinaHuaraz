@@ -37,7 +37,7 @@ public final class Boletas extends javax.swing.JInternalFrame {
         String _condicion = " where numBoleta like '%"+txNumBoleta.getText()
                 +"%' and  cliente like '%"+txCliente.getText()+"%' and lugar like '%"+txProc.getText()+"%' ";
         
-        control.LlenarJtable(modelo, "select numBoleta,fechaEmision,sum(totalServ),cliente,lugar from vw_boleta "+_condicion+" group by numBoleta", 5);
+        control.LlenarJtable(modelo, "select numBoleta,fechaEmision,sum(total),cliente,lugar from vw_boleta "+_condicion+" group by numBoleta", 5);
         tabla.getColumnModel().getColumn(0).setPreferredWidth(85);
         tabla.getColumnModel().getColumn(1).setPreferredWidth(85);
         tabla.getColumnModel().getColumn(2).setPreferredWidth(100);
