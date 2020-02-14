@@ -12,6 +12,7 @@ import Clases.Textos;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -170,6 +171,7 @@ public class Habitaciones extends javax.swing.JFrame{
         String _transcDias = control.DevolverRegistroDto("select datediff(curdate(),'"+_fechaEntrada+"')", 1);
         
         lbNumDias.setText(_NumDias);
+        lbDiasTranc.setText(_transcDias);
         lbFechaEntrada.setText(_fechaEntrada);
         lbFechaSalida.setText(_fechaSalida);
         
@@ -195,6 +197,17 @@ public class Habitaciones extends javax.swing.JFrame{
         pnDatosCliente.setVisible(false);
         pnServ.setVisible(false);
         habOcupado = false;
+    }
+    public void SalidaPrevia(){
+        if(Integer.parseInt(lbDiasTranc.getText()) < slider.getMaximum()){
+            try {
+                String _t = JOptionPane.showInputDialog(null, "La salida se produce antes de la fecha \n¿Cuanto desea agregar de recargo?", "Advertencia", JOptionPane.WARNING_MESSAGE);
+                double _pt = Double.parseDouble(lbTotal.getText())+Integer.parseInt(_t);
+                lbTotal.setText(""+_pt);
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Ingrese una cantidad valida");
+            }
+        }
     }
     
     @SuppressWarnings("unchecked")
@@ -239,6 +252,7 @@ public class Habitaciones extends javax.swing.JFrame{
         lbFechaEntrada = new javax.swing.JLabel();
         lbFechaSalida = new javax.swing.JLabel();
         slider = new javax.swing.JSlider();
+        lbDiasTranc = new javax.swing.JLabel();
         pnServ = new javax.swing.JPanel();
         pnServicios = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -431,7 +445,7 @@ public class Habitaciones extends javax.swing.JFrame{
         lbTotal.setFont(new java.awt.Font("Leelawadee UI Semilight", 1, 16)); // NOI18N
         lbTotal.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbTotal.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        pnDatosHab.add(lbTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 264, 190, 30));
+        pnDatosHab.add(lbTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 264, 200, 30));
 
         jLabel3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel3.setText("Precio Total");
@@ -516,6 +530,10 @@ public class Habitaciones extends javax.swing.JFrame{
         slider.setEnabled(false);
         pnDatosCliente.add(slider, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 315, 430, 40));
 
+        lbDiasTranc.setForeground(new java.awt.Color(255, 255, 255));
+        lbDiasTranc.setText("Dias Transciridos");
+        pnDatosCliente.add(lbDiasTranc, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 290, 40, 10));
+
         pnInfo.add(pnDatosCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 0, 490, 400));
 
         pnServ.setBackground(new java.awt.Color(255, 255, 255));
@@ -568,6 +586,7 @@ public class Habitaciones extends javax.swing.JFrame{
         getContentPane().add(pnInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 346, 1366, 400));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void lbMinimizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbMinimizarMouseClicked
@@ -603,6 +622,8 @@ public class Habitaciones extends javax.swing.JFrame{
                 
         if(lbNumHab.getText().length()>0 && habOcupado && tipoCliente!=0){ // Si hay un numero en lbNumHab y la habitacion esta Ocupado
             // Proceso para obtener el idAloj
+            SalidaPrevia();
+            
             String __numHab = lbNumHab.getText();
             String __sql = "select id from vw_alojamientoyreserva where (curdate() between fecha_ent and fecha_sal) and numHab = "+__numHab;
             String _idAloj = control.DevolverRegistroDto(__sql, 1);
@@ -628,9 +649,9 @@ public class Habitaciones extends javax.swing.JFrame{
             
             String _aux_lpadNumC = "";
             if(tipoCliente == 1){ //Persona
-                _aux_lpadNumC = control.DevolverRegistroDto("select CONCAT('B', LPAD(" + __numComprobante+ ", 7, '0'))", 1);
+                _aux_lpadNumC = control.DevolverRegistroDto("select concat('EB',lpad(serieb,2,0),'-',lpad(numB,2,0)) from boletas where numBoleta = " + __numComprobante+ ";", 1);
             }else if(tipoCliente == 2 ){// Empresa
-                _aux_lpadNumC = control.DevolverRegistroDto("select CONCAT('F', LPAD(" + __numComprobante+ ", 7, '0'))", 1);
+                _aux_lpadNumC = control.DevolverRegistroDto("select CONCAT('E', LPAD(serieF, 3, 0), '-', LPAD(numF, 2, 0)) from facturas where numFactura = " + __numComprobante+ ";", 1);
             }
             // mostrar boleta/factura
             if(tipoCliente == 1){// Boleta
@@ -703,6 +724,7 @@ public class Habitaciones extends javax.swing.JFrame{
     private javax.swing.JLabel lbActualizar2;
     private javax.swing.JLabel lbCerrar;
     private javax.swing.JLabel lbCliente;
+    private javax.swing.JLabel lbDiasTranc;
     private javax.swing.JLabel lbDoc;
     private javax.swing.JLabel lbFechaEntrada;
     private javax.swing.JLabel lbFechaSalida;

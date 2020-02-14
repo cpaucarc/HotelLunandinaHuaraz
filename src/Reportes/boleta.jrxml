@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="boleta" language="groovy" pageWidth="595" pageHeight="842" columnWidth="571" leftMargin="12" rightMargin="12" topMargin="12" bottomMargin="12" uuid="2a51d70c-e599-4678-9ebc-f084ab06115f">
-	<property name="ireport.zoom" value="1.100000000000005"/>
+	<property name="ireport.zoom" value="1.4641000000000068"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="213"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="numeroBoleta" class="java.lang.String"/>
 	<parameter name="montoLiteral" class="java.lang.String"/>
 	<queryString>
@@ -105,35 +105,28 @@ um
 				<text><![CDATA[RESERVAS@LUNANDINAHOTEL.COM]]></text>
 			</staticText>
 			<rectangle>
-				<reportElement x="351" y="10" width="200" height="60" uuid="2ca35fde-d4b0-4bab-b8e6-c07c3c3ab265"/>
+				<reportElement x="351" y="10" width="200" height="62" uuid="2ca35fde-d4b0-4bab-b8e6-c07c3c3ab265"/>
 			</rectangle>
 			<staticText>
-				<reportElement x="351" y="10" width="200" height="20" forecolor="#171717" uuid="0f69481d-bd4e-4757-b2d1-1b600878a240"/>
+				<reportElement x="351" y="12" width="200" height="15" forecolor="#171717" uuid="0f69481d-bd4e-4757-b2d1-1b600878a240"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="11" isBold="true"/>
+					<font fontName="Arial" size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[BOLETA DE VENTA ELECTRONICA]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="351" y="30" width="200" height="20" forecolor="#171717" uuid="6e7c5ef3-ae29-41df-89db-8ae9bd6aae4e"/>
+				<reportElement x="351" y="27" width="200" height="18" forecolor="#171717" uuid="6e7c5ef3-ae29-41df-89db-8ae9bd6aae4e"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="12"/>
+					<font fontName="Arial" size="11"/>
 				</textElement>
 				<text><![CDATA[RUC: 20603815816]]></text>
 			</staticText>
-			<staticText>
-				<reportElement x="351" y="50" width="67" height="20" forecolor="#171717" uuid="876f5412-332a-4307-bd3f-e2bc93fd9646"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font fontName="Arial" size="14" isBold="true"/>
-				</textElement>
-				<text><![CDATA[N°]]></text>
-			</staticText>
 			<textField>
-				<reportElement x="430" y="50" width="121" height="20" forecolor="#171717" uuid="e87a39db-c3d0-4281-9239-23604ddd5b23"/>
-				<textElement verticalAlignment="Middle">
-					<font size="14" isBold="true"/>
+				<reportElement x="351" y="45" width="200" height="25" forecolor="#171717" uuid="e87a39db-c3d0-4281-9239-23604ddd5b23"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="16" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{numBoleta}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["N° " + $F{numBoleta}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="24" y="110" width="100" height="20" forecolor="#171717" uuid="27e9428e-43d6-4355-aa57-eee03ee388bc"/>
@@ -328,9 +321,6 @@ Medida]]></text>
 	</detail>
 	<summary>
 		<band height="382" splitType="Stretch">
-			<rectangle>
-				<reportElement x="451" y="50" width="110" height="20" uuid="28b9bd9c-ce6c-4804-8bd3-f267cf803090"/>
-			</rectangle>
 			<staticText>
 				<reportElement x="340" y="10" width="100" height="20" forecolor="#171717" uuid="a7979bf4-42e5-4b0e-a90e-174228c5aaf2"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
@@ -416,7 +406,7 @@ Medida]]></text>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Arial" size="11"/>
 				</textElement>
-				<text><![CDATA[----]]></text>
+				<text><![CDATA[Descuento]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="355" y="195" width="90" height="20" forecolor="#171717" uuid="14c54a0b-4d22-4cda-aef6-4c27bd32ba72"/>
@@ -562,9 +552,6 @@ Medida]]></text>
 			<line>
 				<reportElement x="0" y="100" width="570" height="1" forecolor="#CCCCCC" uuid="633997a5-638f-46de-8b39-3b69fcf77117"/>
 			</line>
-			<rectangle>
-				<reportElement x="10" y="334" width="551" height="38" forecolor="#0D2746" uuid="446d2254-db46-4079-ab21-de268ac1f23a"/>
-			</rectangle>
 			<line>
 				<reportElement x="1" y="381" width="570" height="1" forecolor="#0D2746" uuid="fc332531-a20f-4687-aecf-ed40c9c88762"/>
 			</line>

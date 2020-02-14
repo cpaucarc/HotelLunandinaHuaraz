@@ -20,7 +20,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     Controlador control=new Controlador();
     DefaultTableModel modelo=new DefaultTableModel();
     
-    int id = 0;
+    int idRow = 0;
     
     /*Control de fuente y tamaño del menu */
     String fuente = "Arial";
@@ -53,7 +53,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }
 
     public void ActivarBoton(){
-        if(id != 0){
+        if(idRow != 0){
             btValidar1.setEnabled(true);
         }else{
             btValidar1.setEnabled(false);
@@ -439,6 +439,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         getContentPane().add(panelImagenes, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 46, 790, 700));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     /*LABEL DE ADMINISTRACION*/
@@ -571,7 +572,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 control.CrearRegistro("update habitaciones set idestadoHab = 3 where idhabitacion = "+_idHab);
                 Mostrar();
             }
-            id = 0; ActivarBoton();
+            idRow = 0; ActivarBoton();
         }
     }//GEN-LAST:event_btValidar1ActionPerformed
 
@@ -619,6 +620,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_txBuscarKeyReleased
 
     private void tablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMouseClicked
+        idRow = 1;
         ActivarBoton();
     }//GEN-LAST:event_tablaMouseClicked
 

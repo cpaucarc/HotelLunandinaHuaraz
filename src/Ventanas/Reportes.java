@@ -302,6 +302,7 @@ public class Reportes extends javax.swing.JFrame {
         getContentPane().add(desktop, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 46, 844, 700));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     /* FACTURA */

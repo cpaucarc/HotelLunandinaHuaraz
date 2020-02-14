@@ -358,14 +358,26 @@ public final class Reservas extends javax.swing.JFrame {
         ConfiguracionTabla();
     }
     public boolean FormLlenoPersonas(){ // Retorna TRUE si todos los campos estan llenos
-        return (txDNI.getText()!=null && txPaterno.getText()!=null && txMaterno.getText()!=null  && 
-                txNombres.getText()!=null && txProc.getText()!=null && txMail.getText()!=null && dcEntrada.getDate()!=null &&
-                dcSalida.getDate()!=null && cbTipoHab.getSelectedIndex()>-1 && cbNumHab.getSelectedIndex()>-1);
+        return txDNI.getText().length() == 8 && 
+                txPaterno.getText().trim().length()>0 &&
+                txMaterno.getText().trim().length()>0 &&
+                txNombres.getText().trim().length()>0 &&
+                txProc.getText().trim().length()>0 &&
+                Textos.VerificaCorreo(txMail.getText()) && 
+                dcEntrada.getDate() != null &&
+                dcSalida.getDate()!=null &&
+                cbTipoHab.getSelectedIndex()>-1 &&
+                cbNumHab.getSelectedIndex()>-1;
     }
     public boolean FormLlenoEmpresas(){ // Retorna TRUE si todos los campos estan llenos
-        return (txRUC.getText()!=null && txNombreEmp.getText()!=null && txProcEmp.getText()!=null && 
-                txMailEmp.getText()!=null && dcEntrada.getDate()!=null &&
-                dcSalida.getDate()!=null && cbTipoHab.getSelectedIndex()>-1 && cbNumHab.getSelectedIndex()>-1);
+        return txRUC.getText().trim().length()==11 && 
+                txNombreEmp.getText().trim().length()>0 && 
+                txProcEmp.getText().trim().length()>0 && 
+                Textos.VerificaCorreo(txMailEmp.getText()) && 
+                dcEntrada.getDate()!=null &&
+                dcSalida.getDate()!=null && 
+                cbTipoHab.getSelectedIndex()>-1 && 
+                cbNumHab.getSelectedIndex()>-1;
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -935,6 +947,7 @@ public final class Reservas extends javax.swing.JFrame {
         getContentPane().add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(521, 46, 845, 700));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void txDNIKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txDNIKeyTyped
@@ -957,12 +970,14 @@ public final class Reservas extends javax.swing.JFrame {
     }//GEN-LAST:event_txNombresKeyTyped
 
     private void btRegistrarPersonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRegistrarPersonaActionPerformed
+        
         if (FormLlenoPersonas()) {
-            crear_Empresa();         
+            crear_Persona();         
         } else {
             rpt = ("Faltan campos por llenar");
             JOptionPane.showMessageDialog(null, rpt);
         }
+        System.out.println("Respuesta "+FormLlenoPersonas());
     }//GEN-LAST:event_btRegistrarPersonaActionPerformed
 
     private void btModificarPersonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btModificarPersonaActionPerformed
@@ -1022,18 +1037,18 @@ public final class Reservas extends javax.swing.JFrame {
         pnHabitacion.setVisible(true);
         jPanel5.setVisible(true);
 
-        txtBuscar.setVisible(!flag);
-        txtBuscar1.setVisible(flag);
+        txtBuscar.setVisible(flag);
+        txtBuscar1.setVisible(!flag);
         if (flag == true){ txDNI.grabFocus();}
         else { txRUC.grabFocus(); }
 
         lbReiniciar.setVisible(true);
 
-        btRegistrarPersona.setVisible(!flag);
-        btRegistrarEmpresa.setVisible(flag);
+        btRegistrarPersona.setVisible(flag);
+        btRegistrarEmpresa.setVisible(!flag);
 
-        btModificarPersona.setVisible(!flag);
-        btModificarEmpresa.setVisible(flag);
+        btModificarPersona.setVisible(flag);
+        btModificarEmpresa.setVisible(!flag);
 
         btCancelar.setVisible(true);
 
@@ -1095,6 +1110,7 @@ public final class Reservas extends javax.swing.JFrame {
             rpt = ("Faltan campos por llenar");
             JOptionPane.showMessageDialog(null, rpt);
         }
+        
     }//GEN-LAST:event_btRegistrarEmpresaActionPerformed
 
     private void lbLimpiarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbLimpiarMouseClicked

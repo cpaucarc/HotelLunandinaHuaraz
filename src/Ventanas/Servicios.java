@@ -689,6 +689,7 @@ public class Servicios extends javax.swing.JFrame {
         getContentPane().add(pnB, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 46, 916, 720));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
     private void tbServicioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbServicioMouseClicked
         int fila = tbServicio.getSelectedRow();
@@ -741,7 +742,7 @@ public class Servicios extends javax.swing.JFrame {
 
             control.CrearRegistro("call proc_InsBolFac(1,0," + total + "," + _id + ",1," + lbDNI.getText() + ")");
 
-            String _numBol = control.DevolverRegistroDto("select CONCAT('B', LPAD(numBoleta, 7, '0')) from boletas order by numBoleta desc limit 1", 1);
+            String _numBol = control.DevolverRegistroDto("select CONCAT('EB', LPAD(serieB, 2, 0), '-', LPAD(numB, 2, 0)) from boletas order by numBoleta desc limit 1;", 1);
 
             imp.Imp2P("boleta", "Boleta N° "+_numBol, "numeroBoleta", "montoLiteral", _numBol, Textos.montoLiteral(""+total));
             
@@ -891,7 +892,7 @@ public class Servicios extends javax.swing.JFrame {
 
             control.CrearRegistro("call proc_InsBolFac(2,0," + total + "," + _id + ",1," + lbRUC.getText() + ")");
 
-            String _numFac = control.DevolverRegistroDto("select CONCAT('F', LPAD(numFactura, 7, '0')) from facturas order by numFactura desc limit 1;", 1);
+            String _numFac = control.DevolverRegistroDto("select CONCAT('E', LPAD(serieF, 3, 0), '-', LPAD(numF, 2, 0)) from facturas order by numFactura desc limit 1", 1);
 
             imp.Imp2P("factura", "Factura N° "+_numFac, "numeroFactura", "montoLiteral", _numFac, Textos.montoLiteral(""+total));
             limpiar();
